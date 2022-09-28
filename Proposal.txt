@@ -1,0 +1,23 @@
+Associates
+Gabriel Camacho
+Aidan Mulcahey
+Jonathan Palmieri
+
+
+
+
+
+**Specifications** 
+We are going to create a game featuring a log in system and a leaderboard. 
+The highest game score per user will be stored on the user account and on a global leaderboard. 
+The game itself will be completely clientside, with the scores being sent to a mongDB instance at the end of the game. 
+We are going to create a 2D platforming game where the objective is for your player sprite to get from point A to point B 
+There will be collision obstacles. You get timed and score is based on time. 
+
+Key technologies:
+MongoDB - Store user info & leaderboard
+Express - For backend 
+Authentication for login - An authentication library or with cookies
+Mongoose for mongoDB - easier interaction with database
+NodeJS - for obvious reasons
+Game engine (in JS) to create game - experimenting with game engines and game design
