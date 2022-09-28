@@ -1,0 +1,22 @@
+{
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "*Due before the start of class, October 13th (final day of the term)*",
+  "main": "s.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabestuf/final_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabestuf/final_project/issues"
+  },
+  "homepage": "https://github.com/gabestuf/final_project#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
