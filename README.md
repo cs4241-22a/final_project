@@ -27,7 +27,7 @@ Endorsements:
 -Oprah
 
 “This competition will decimate my business.”
--M*rk Z*ckerberg
+-M * rk  Z * ckerberg
 
 **The story, all names, characters, and incidents portrayed in these quotes are fictitious. No identification with actual persons (living or deceased), places, buildings, and products is intended or should be inferred.
 
