@@ -7,7 +7,7 @@ Project Name: The diary group
 **Pages**: 
   There will be 2 main pages for this project, simply enough, the first one will be a simple login page, and the second one will be the application page with functionalities that users can interact with.
  
-![Schema and scratch for application pages](https://github.com/AIex05/final_project/edit/main/scratch.jpg?raw=true)
+![Schema and scratch for application pages](https://github.com/AIex05/final_project/edit/main/scratch.jpeg?raw=true)
 
 **Technology**: 
   In this project, the team will be using:
