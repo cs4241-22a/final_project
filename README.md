@@ -1,49 +1,41 @@
-# Final Project
-*Due before the start of class, October 13th (final day of the term)*
+Final Project Proposal: Raccoon-it 
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+For our final project, we will be creating a web app that allows users to generate raccoon memes with edit, comment, and rate functionalities. Our app provides users with a fun and entertaining outlet to interact with popular raccoon memes found across the internet currently. 
+Users will be able to upload an image, add a caption, download or share the meme in a social media platform. Users will be able to rate each other's memes using an upvote or downvote rating system. The cumulative average of all user’s ratings will be shown on the corresponding meme. The web app will sort memes based on rating average on the front page, with the highest rated memes being featured at the top of the front page of the social media platform. We will model some features of our app off of Reddit.
+ We will use MongoDB to handle database management, hosting the images, user data, and ratings for each meme. When a user rates a meme, the score will be updated in the corresponding MongoDB document. Once the meme is posted to the social media platform, the order of the memes will be updated showing the highest rated items first. Express will be used to handle encryption and server/client communication. 
+We will use ReactJS to handle the front-end of our web app. React has the most online documentation and seems the best fit for our use cases. To design the user interface prior to development with ReactJS, we will create a prototype for our app in Figma. This will aid in improving the user flow and interface design of our app for a better user experience. After designing a prototype, we will develop the user interface using Bootstrap in combination with ReactJS. Based on research, Bootstrap components and classes seem very compatible with the ReactJS framework.
+The purpose of our web app is to rate and comment on raccoon memes created by users. Memes are an integral aspect of our global community, as it aids in the culture and communication exchange in our modern world. The point of the app is to bring a community of raccoon memes together. It is a safe space that engenders the creativity of its users. Memes bring together users of all genders, races and backgrounds, and unite us. Our website is an ethical platform that does not sell the souls of its users (cough cough, Facebook). Not only can our app be used by anyone (any time, any place) but it also updates in real-time. You can also edit and delete your raccoon memes as you see fit or just keep creating more!
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+The technologies/libraries we will use to complete the project are the following:
+MongoDB
+ReactJS
+Bootstrap 
+Express middleware packages:
+Body-parser
+Passport
+Express-session
+Serve-favicon
+Timeout 
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+![image](https://user-images.githubusercontent.com/30932390/192666884-a9a91d55-fa6c-44ef-9bb0-a64caf4c683c.png)
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+Proposed Logo
+-------------------------------------------------
+Endorsements:
 
-### Deliverables
+“This website is EXACTLY what america needs in a time of deep division and turmoil”
+-Barack Obama
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+“Ethical social media is hard to find, this seems like a great idea!l”
+-Oprah
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
+“This competition will decimate my business.”
+-M * rk  Z * ckerberg
 
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+**The story, all names, characters, and incidents portrayed in these quotes are fictitious. No identification with actual persons (living or deceased), places, buildings, and products is intended or should be inferred.
 
-There are no other scheduled checkpoints for your project. 
+Works Cited
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+“‘MEMES: What they are and why they’re important”. University of Illinois Urbana-Champaign lol 
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
-
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+“Comparing raccoon major histocompatibility complex diversity in native and introduced ranges: Evidence for the importance of functional immune diversity for adaptation and survival in novel environments”. National Institutes of Health 
