@@ -17,6 +17,9 @@ Express-session
 Serve-favicon
 Timeout 
 
+![image](https://user-images.githubusercontent.com/30932390/192666884-a9a91d55-fa6c-44ef-9bb0-a64caf4c683c.png)
+
+Proposed Logo
 
 Endorsements:
 
@@ -25,12 +28,6 @@ Endorsements:
 
 “Ethical social media is hard to find, this seems like a great idea!l”
 -Oprah
-
-
-![image](https://user-images.githubusercontent.com/30932390/192666884-a9a91d55-fa6c-44ef-9bb0-a64caf4c683c.png)
-
-Proposed Logo
-
 
 “This competition will decimate my business.”
 -M * rk  Z * ckerberg
