@@ -22,7 +22,8 @@ const config = {
   devServer: {
     'static': {
       directory: './dist'
-    }
+    },
+    allowedHosts: 'all'
   }
 };
 
