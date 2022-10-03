@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Resource = new mongoose.Schema({
-  type: String,
+  resourceType: String,
   resourceID: Number,
   filePath: String,
   unlockLevel: Number,
