@@ -1,1 +1,3 @@
-alert(test);
+window.addEventListener('load',function(){
+    alert("Hello, world!");
+});
