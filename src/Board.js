@@ -1,96 +1,148 @@
-import Game from "chess-node";
-import React from "react";
-import Sketch from "react-p5";
+import React, { useState } from "react";
+import { Stage, Layer, Rect, Image } from "react-konva";
+
+const size = 500;
+
+function getPieceImage(piece) {
+  let url = "./pieces/";
+
+  switch (piece) {
+    case "r":
+      url += "r";
+      break;
+    case "n":
+      url += "n";
+      break;
+    case "b":
+      url += "b";
+      break;
+    case "k":
+      url += "k";
+      break;
+    case "q":
+      url += "q";
+      break;
+    case "p":
+      url += "p";
+      break;
+    case "R":
+      url += "wr";
+      break;
+    case "N":
+      url += "wn";
+      break;
+    case "B":
+      url += "wb";
+      break;
+    case "K":
+      url += "wk";
+      break;
+    case "Q":
+      url += "wq";
+      break;
+    case "P":
+      url += "wp";
+      break;
+  }
+  url += ".png";
+  console.log(url);
+  return url;
+}
 
 export default function Board(props) {
-  const size = 500;
-
-  let blPawn, blBishop, blKnight, blQueen, blKing, blRook;
-  let wPawn, wBishop, wKnight, wQueen, wKing, wRook;
-
-  const setup = (p5, canvasParentRef) => {
-    blPawn = p5.loadImage("./pieces/p.png");
-    blBishop = p5.loadImage("./pieces/b.png");
-    blKnight = p5.loadImage("./pieces/n.png");
-    blQueen = p5.loadImage("./pieces/q.png");
-    blKing = p5.loadImage("./pieces/k.png");
-    blRook = p5.loadImage("./pieces/r.png");
-
-    wPawn = p5.loadImage("./pieces/wp.png");
-    wBishop = p5.loadImage("./pieces/wb.png");
-    wKnight = p5.loadImage("./pieces/wn.png");
-    wQueen = p5.loadImage("./pieces/wq.png");
-    wKing = p5.loadImage("./pieces/wk.png");
-    wRook = p5.loadImage("./pieces/wr.png");
-
-
-    p5.createCanvas(size, size).parent(canvasParentRef);
-    p5.background(0);
-  };
-
-  const fen = props.position.split(" ");
-  const position = fen[0].split("/");
-
-  const draw = (p5) => {
+  function generateChessBoard(sRow, sCol) {
+    const squares = [];
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
-        var color =
-          (row + col) % 2 == 0 ? p5.color(255, 169, 2) : p5.color(112, 79, 13);
-        p5.fill(color);
-        p5.rect(row * (size / 8), col * (size / 8), size / 8, size / 8);
-      }
-    }
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const piece = position[row][col];
-        if (piece.match("[1-9]")) {
-          col += piece;
+        let color;
+        if (sCol === col && sRow === row) {
+          color = "blue";
         } else {
-          let img;
-          switch (piece) {
-            case "P":
-              img = blPawn;
-              break;
-            case "B":
-              img = blBishop;
-              break;
-            case "N":
-              img = blKnight;
-              break;
-            case "Q":
-              img = blQueen;
-              break;
-            case "K":
-              img = blKing;
-              break;
-            case "R":
-              img = blRook;
-              break;
-            case "p":
-              img = wPawn;
-              break;
-            case "b":
-              img = wBishop;
-              break;
-            case "n":
-              img = wKnight;
-              break;
-            case "q":
-              img = wQueen;
-              break;
-            case "k":
-              img = wKing;
-              break;
-            case "r":
-              img = wRook;
-              break;
-          }
-          p5.image(img, col * (size / 8), row * (size / 8));
+          color = (row + col) % 2 === 0 ? "brown" : "green";
         }
+        squares.push({
+          id: `S(${row},${col})`,
+          x: row * (size / 8),
+          y: col * (size / 8),
+          width: size / 8,
+          height: size / 8,
+          fill: color,
+          row: row,
+          col: col,
+        });
       }
     }
-  };
+    return squares;
+  }
 
-  return <Sketch setup={setup} draw={draw} />;
+  function generatePieces(position) {
+    const pieces = [];
+    const rows = position.split("/");
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = rows[row][col];
+        if (piece.match("[1-9]") !== null) {
+          col += piece;
+        }
+        const img = new window.Image(size / 8, size / 8);
+        img.src = getPieceImage(piece);
+        pieces.push({
+          id: `P(${row},${col})`,
+          x: row * (size / 8),
+          y: col * (size / 8),
+          width: size / 8,
+          height: size / 8,
+          image: getPieceImage(piece),
+        });
+      }
+    }
+    return pieces;
+  }
+
+  const [squares, setSquares] = useState(generateChessBoard(-1, -1));
+  console.log(props);
+  return (
+    <Stage width={size} height={size}>
+      <Layer>
+        {squares.map((entry) => (
+          <Rect
+            x={entry.x}
+            y={entry.y}
+            id={entry.id}
+            width={entry.width}
+            height={entry.height}
+            fill={entry.fill}
+            onClick={() => {
+              console.log(`Clicked: Row ${entry.row} Col ${entry.col}`);
+              setSquares(generateChessBoard(entry.row, entry.col));
+            }}
+            key={entry.id}
+          ></Rect>
+        ))}
+        {generatePieces(props.position).map((piece) => (
+          <img
+            x={piece.x}
+            y={piece.y}
+            width={piece.width}
+            height={piece.height}
+            src={piece.image}
+            id={piece.id}
+          />
+        ))}
+      </Layer>
+    </Stage>
+  );
 }
+
+/*
+        {generatePieces(props.position).map((piece) => (
+          <Image
+            x={piece.x}
+            y={piece.y}
+            width={piece.width}
+            height={piece.height}
+            url={piece.url}
+            id={piece.id}
+          />
+        ))}
+*/
