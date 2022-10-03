@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/gabestuf/final_project#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.3",
     "nodemon": "^2.0.20"
   }
 }
