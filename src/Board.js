@@ -1,55 +1,55 @@
 import React, { useState } from "react";
 import { Stage, Layer, Rect, Image } from "react-konva";
+import useImage from "use-image";
 
-const size = 500;
-
-function getPieceImage(piece) {
-  let url = "./pieces/";
-
-  switch (piece) {
-    case "r":
-      url += "r";
-      break;
-    case "n":
-      url += "n";
-      break;
-    case "b":
-      url += "b";
-      break;
-    case "k":
-      url += "k";
-      break;
-    case "q":
-      url += "q";
-      break;
-    case "p":
-      url += "p";
-      break;
-    case "R":
-      url += "wr";
-      break;
-    case "N":
-      url += "wn";
-      break;
-    case "B":
-      url += "wb";
-      break;
-    case "K":
-      url += "wk";
-      break;
-    case "Q":
-      url += "wq";
-      break;
-    case "P":
-      url += "wp";
-      break;
-  }
-  url += ".png";
-  console.log(url);
-  return url;
-}
+const size = 500.0;
 
 export default function Board(props) {
+  const [blPawn] = useImage("./pieces/p.png");
+  const [blRook] = useImage("./pieces/r.png");
+  const [blBishop] = useImage("./pieces/b.png");
+  const [blKnight] = useImage("./pieces/n.png");
+  const [blQueen] = useImage("./pieces/q.png");
+  const [blKing] = useImage("./pieces/k.png");
+
+  const [wPawn] = useImage("./pieces/wp.png");
+  const [wRook] = useImage("./pieces/wr.png");
+  const [wBishop] = useImage("./pieces/wb.png");
+  const [wKnight] = useImage("./pieces/wn.png");
+  const [wQueen] = useImage("./pieces/wq.png");
+  const [wKing] = useImage("./pieces/wk.png");
+
+  function getPieceImage(piece) {
+    switch (piece) {
+      case "p":
+        return blPawn;
+      case "r":
+        return blRook;
+      case "b":
+        return blBishop;
+      case "n":
+        return blKnight;
+      case "q":
+        return blQueen;
+      case "k":
+        return blKing;
+      case "P":
+        return wPawn;
+      case "R":
+        return wRook;
+      case "B":
+        return wBishop;
+      case "N":
+        return wKnight;
+      case "Q":
+        return wQueen;
+      case "K":
+        return wKing;
+      default:
+        return null;
+    }
+  }
+
   function generateChessBoard(sRow, sCol) {
     const squares = [];
     for (let row = 0; row < 8; row++) {
@@ -88,19 +88,24 @@ export default function Board(props) {
         img.src = getPieceImage(piece);
         pieces.push({
           id: `P(${row},${col})`,
-          x: row * (size / 8),
-          y: col * (size / 8),
+          x: col * (size / 8),
+          y: row * (size / 8),
           width: size / 8,
           height: size / 8,
           image: getPieceImage(piece),
+          row: row,
+          col: col,
         });
       }
     }
     return pieces;
   }
 
+  function log(x1, y1, x2, y2) {
+    console.log(`Moved from (${x1},${y1}) to (${x2},${y2}) `);
+  }
+
   const [squares, setSquares] = useState(generateChessBoard(-1, -1));
-  console.log(props);
   return (
     <Stage width={size} height={size}>
       <Layer>
@@ -120,13 +125,27 @@ export default function Board(props) {
           ></Rect>
         ))}
         {generatePieces(props.position).map((piece) => (
-          <img
+          <Image
             x={piece.x}
             y={piece.y}
             width={piece.width}
             height={piece.height}
-            src={piece.image}
+            image={piece.image}
             id={piece.id}
+            draggable={true}
+            onDragEnd={(e) => {
+              console.log(e.target)
+              const newX = Math.floor((e.target.attrs.x + (size / 16)) / (size / 8));
+              const newY = Math.floor((e.target.attrs.y + (size / 16)) / (size / 8));
+
+
+              log(piece.row, piece.col, newX, newY);
+
+
+              e.target.x(newX * (size / 8));
+              e.target.y(newY * (size / 8));
+
+            }}
           />
         ))}
       </Layer>
