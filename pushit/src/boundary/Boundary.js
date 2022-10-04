@@ -47,8 +47,6 @@ export class Rectangle {
         ctx.font = "30px Arial";
         ctx.fillText("Congrats! You have won the puzzle!",40,220);
     }
-    
-
 }
 
 
@@ -61,25 +59,18 @@ export function drawPuzzle(ctx, puzzle) {
 
     puzzle.squares.forEach(square => {
         let rect = computeRectangle(square);
-        if (square.color === "actor") {
-            img.onload = function() {
-                ctx.drawImage(img, 400, 150, 1200, 1200, rect.x, rect.y, rect.width, rect.height);
-            }
-            
-            //ctx.fillStyle = "black";
-            //ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-        } 
-        else {
-            ctx.fillStyle = square.color;
-            ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-        }
+        ctx.fillStyle = square.color;
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
     })
+
+    let rect = computeRectangle(puzzle.player);
+    img.onload = function() {
+        ctx.drawImage(img, 400, 150, 1200, 1200, rect.x, rect.y, rect.width, rect.height);
+    }
 }
 
 export function computeRectangle(square) {
     let c = square.location();
-
     let rect = new Rectangle(BOXSIZE*c.column + OFFSET + LEVELOFFSETH, BOXSIZE*c.row + OFFSET + LEVELOFFSETH, BOXSIZE-2*OFFSET, BOXSIZE-2*OFFSET);
-
     return rect;
 }

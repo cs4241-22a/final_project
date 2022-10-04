@@ -35,15 +35,34 @@ export class Square {
         return s;
     }
 
+
 }
 
+export class Player {
+    constructor (row, col) {
+        this.row = row;
+        this.column = col;
+    }
 
+    location() {
+        return new Coordinate(this.row, this.column);
+    }
+    copy() {
+        let s = new Player(this.row, this.column)
+        return s;
+    }
+    move(dir) {
+        this.row = this.row + dir.deltar;
+        this.column = this.column + dir.deltac;
+    }
+}
 
 export class Puzzle {
     constructor(rowNum, colNum) {
         this.rowNum = rowNum;
         this.colNum = colNum;
         this.squares = this.init();
+        this.player = new Player(0, 0);
     }
 
     init() {
@@ -55,6 +74,25 @@ export class Puzzle {
         }
         return allSquares;
     }
+
+    setPlayer(row, col) {
+        this.player.row = row;
+        this.player.column = col;
+    }
+
+    clone() {
+        let copy = new Puzzle(this.rowNum, this.colNum);
+        copy.squares = [];
+        for (let s of this.squares) {
+            let dup = s.copy();
+            copy.squares.push(dup);
+            if (s === this.selected) {
+                copy.selected = dup;
+            }
+        }
+        copy.player = this.player.copy();
+        return copy;
+    }
 }
 
 
@@ -64,10 +102,20 @@ export default class Model {
         this.info = info;
     }
 
+    copy() {
+        let m = new Model(this.info);
+        m.puzzle = this.puzzle.clone();
+        m.victory = this.victory;
+        m.level = this.level;
+        return m;
+    }
     
     initialize(info) {
         let numRows = parseInt(info.numRows);
         let numCols = parseInt(info.numCols);
+
+        let arow = parseInt(info.actor.row);
+        let acol = parseInt(info.actor.column);
         
         this.puzzle = new Puzzle(numRows, numCols);
         
@@ -76,7 +124,9 @@ export default class Model {
             let c = parseInt(s.column);
             this.puzzle.squares[r*numCols+c].color = s.color;
         }
+        this.puzzle.setPlayer(arow, acol);
         this.victory = false;
         this.level = parseInt(info.level);
+        //console.log(this);
     }
 }

@@ -6,6 +6,7 @@ import { redrawCanvas } from './boundary/Boundary.js'
 import Model from './model/Model.js';
 import {configuration_1} from './model/Puzzle.js';
 import {Up, Down, Left, Right} from './model/Model.js';
+import {move} from './controller/Controller.js';
 
 var level1 = JSON.parse(JSON.stringify(configuration_1));
 
@@ -20,6 +21,10 @@ function App() {
     redrawCanvas(model, canvasRef.current, appRef.current);
   }, [model]);
 
+  const moveHandler = (direction) => {
+    let newModel = move(model, direction);
+    setModel(newModel);
+  }
   /*
   const handleClick = (e) => {
     let newModel = selectSquare(model, canvasRef.current, e);
@@ -49,27 +54,27 @@ function App() {
 
       <div style={layout.buttons}>
           <button style={layout.upbutton} 
-                  //onClick={(e) => extendHandler(Up)} 
+                  onClick={(e) => moveHandler(Up)} 
                   //</div>disabled={!model.puzzle.canExtend(Up)}
                   >^
           </button>
 
           <button style={layout.leftbutton} 
-                  //onClick={(e) => extendHandler(Left)} 
+                  onClick={(e) => moveHandler(Left)} 
                   //</div>disabled={!model.puzzle.canExtend(Left)}
                   >&lt;
           </button>
 
           <button style={layout.rightbutton}
                   //data-testid="rightbutton" 
-                  //onClick={(e) => extendHandler(Right)} 
+                  onClick={(e) => moveHandler(Right)} 
                   //disabled={!model.puzzle.canExtend(Right)} 
                   >&gt;
           </button>
 
           <button style={layout.downbutton} 
                   data-testid="downbutton"
-                  //onClick={(e) => extendHandler(Down)} 
+                  onClick={(e) => moveHandler(Down)} 
                   //disabled={!model.puzzle.canExtend(Down)} 
                   >v
           </button>
