@@ -129,7 +129,12 @@ export default function Board(props) {
               fill={entry.fill}
               key={entry.id}
             ></Rect>
-            <Text key={`T${entry.square}`} x={entry.x} y={entry.y} text={entry.square}></Text>
+            <Text
+              key={`T${entry.square}`}
+              x={entry.x}
+              y={entry.y}
+              text={entry.square}
+            ></Text>
           </>
         ))}
         {generatePieces(makeFen(props.game.toSetup())).map((piece) => (
@@ -192,6 +197,8 @@ export default function Board(props) {
                 e.target.y(piece.y);
               }
             }}
+            scaleX={dragging === piece.square ? 1.2 : 1}
+            scaleY={dragging === piece.square ? 1.2 : 1}
           />
         ))}
         {getHover().map((sq) => {
