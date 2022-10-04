@@ -1,5 +1,5 @@
 # Final Project
-yeee
+
 *Jacob Chlebowski - jachlebowski@wpi.edu, Miles Gregg - mgregg@wpi.edu, Zaq Humphrey - zihumphrey@wpi.edu*
 
 
