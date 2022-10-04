@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { Stage, Layer, Rect, Image } from "react-konva";
+import { Stage, Layer, Rect, Image, Text, Ellipse } from "react-konva";
 import useImage from "use-image";
+import FenParser from "@chess-fu/fen-parser";
+import { makeFen } from "chessops/fen";
+
+function getPosition(index) {
+  return [index % 8, 7 - Math.floor(index / 8)];
+}
 
 const size = 500.0;
 
 export default function Board(props) {
+  const [dragging, setDragging] = useState(-1);
   const [blPawn] = useImage("./pieces/p.png");
   const [blRook] = useImage("./pieces/r.png");
   const [blBishop] = useImage("./pieces/b.png");
@@ -18,6 +25,14 @@ export default function Board(props) {
   const [wKnight] = useImage("./pieces/wn.png");
   const [wQueen] = useImage("./pieces/wq.png");
   const [wKing] = useImage("./pieces/wk.png");
+
+  function getHover() {
+    if (dragging === -1) {
+      return [];
+    } else {
+      return [...props.game.dests(dragging)[Symbol.iterator]()];
+    }
+  }
 
   function getPieceImage(piece) {
     switch (piece) {
@@ -50,81 +65,74 @@ export default function Board(props) {
     }
   }
 
-  function generateChessBoard(sRow, sCol) {
+  function generateChessBoard() {
     const squares = [];
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        let color;
-        if (sCol === col && sRow === row) {
-          color = "blue";
-        } else {
-          color = (row + col) % 2 === 0 ? "brown" : "green";
-        }
-        squares.push({
-          id: `S(${row},${col})`,
-          x: row * (size / 8),
-          y: col * (size / 8),
-          width: size / 8,
-          height: size / 8,
-          fill: color,
-          row: row,
-          col: col,
-        });
-      }
+    for (let square = 0; square < 64; square++) {
+      const [row, col] = getPosition(square);
+      const color = (row + col) % 2 === 0 ? "#f0d9b5" : "#b58863";
+      squares.push({
+        id: `S(${square}})`,
+        x: row * (size / 8),
+        y: col * (size / 8),
+        width: size / 8,
+        height: size / 8,
+        fill: color,
+        square: square,
+      });
     }
     return squares;
   }
 
   function generatePieces(position) {
+    const fen = new FenParser(position);
+    const ranks = fen.ranks;
     const pieces = [];
-    const rows = position.split("/");
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const piece = rows[row][col];
-        if (piece.match("[1-9]") !== null) {
-          col += piece;
-        }
-        const img = new window.Image(size / 8, size / 8);
-        img.src = getPieceImage(piece);
-        pieces.push({
-          id: `P(${row},${col})`,
-          x: col * (size / 8),
-          y: row * (size / 8),
-          width: size / 8,
-          height: size / 8,
-          image: getPieceImage(piece),
-          row: row,
-          col: col,
-        });
+
+    for (let square = 0; square < 64; square++) {
+      const [row, col] = getPosition(square);
+      const piece = ranks[col][row];
+      if (piece === "-") {
+        continue;
       }
+
+      pieces.push({
+        id: `P(${square})`,
+        x: row * (size / 8),
+        y: col * (size / 8),
+        width: size / 8,
+        height: size / 8,
+        image: getPieceImage(piece),
+        square: square,
+      });
     }
+
     return pieces;
   }
 
-  function log(x1, y1, x2, y2) {
-    console.log(`Moved from (${x1},${y1}) to (${x2},${y2}) `);
+  function log(from, to) {
+    console.log(`Moved from Square ${from} to ${to}`);
   }
 
-  const [squares, setSquares] = useState(generateChessBoard(-1, -1));
+  const [squares, setSquares] = useState(generateChessBoard());
+
   return (
     <Stage width={size} height={size}>
       <Layer>
         {squares.map((entry) => (
-          <Rect
-            x={entry.x}
-            y={entry.y}
-            id={entry.id}
-            width={entry.width}
-            height={entry.height}
-            fill={entry.fill}
-            onClick={() => {
-              console.log(`Clicked: Row ${entry.row} Col ${entry.col}`);
-              setSquares(generateChessBoard(entry.row, entry.col));
-            }}
-            key={entry.id}
-          ></Rect>
+          <>
+            <Rect
+              x={entry.x}
+              y={entry.y}
+              id={entry.id}
+              width={entry.width}
+              height={entry.height}
+              fill={entry.fill}
+              key={entry.id}
+            ></Rect>
+            <Text key={`T${entry.square}`} x={entry.x} y={entry.y} text={entry.square}></Text>
+          </>
         ))}
-        {generatePieces(props.position).map((piece) => (
+        {generatePieces(makeFen(props.game.toSetup())).map((piece) => (
           <Image
             x={piece.x}
             y={piece.y}
@@ -132,36 +140,77 @@ export default function Board(props) {
             height={piece.height}
             image={piece.image}
             id={piece.id}
+            key={piece.id}
             draggable={true}
+            onDragStart={(e) => {
+              setDragging(piece.square);
+            }}
             onDragEnd={(e) => {
-              console.log(e.target)
-              const newX = Math.floor((e.target.attrs.x + (size / 16)) / (size / 8));
-              const newY = Math.floor((e.target.attrs.y + (size / 16)) / (size / 8));
+              setDragging(-1);
+              let cancelled = false;
 
+              const newX = Math.floor(
+                (e.target.attrs.x + size / 16) / (size / 8)
+              );
+              const newY =
+                7 - Math.floor((e.target.attrs.y + size / 16) / (size / 8));
 
-              log(piece.row, piece.col, newX, newY);
+              if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+                cancelled = true;
+              }
 
+              const newSquare = 8 * newY + newX;
 
-              e.target.x(newX * (size / 8));
-              e.target.y(newY * (size / 8));
+              const move = {
+                from: piece.square,
+                to: newSquare,
+              };
 
+              if (props.game.board.get(piece.square).role === "pawn") {
+                const [row, col] = getPosition(newSquare);
+                if (col === 0 || col === 7) {
+                  move.promotion = "queen";
+                }
+              }
+
+              const context = props.game.ctx();
+
+              const legal = props.game.isLegal(move, context);
+              if (!legal) {
+                cancelled = true;
+              }
+
+              if (!cancelled) {
+                log(piece.square, newSquare);
+                e.target.x(newX * (size / 8));
+                e.target.y((7 - newY) * (size / 8));
+                props.game.play(move);
+                piece.square = newSquare;
+                props.update();
+              } else {
+                e.target.x(piece.x);
+                e.target.y(piece.y);
+              }
             }}
           />
         ))}
+        {getHover().map((sq) => {
+          const [row, col] = getPosition(sq);
+          const x = row * (size / 8) + size / 16;
+          const y = col * (size / 8) + size / 16;
+          return (
+            <Ellipse
+              x={x}
+              y={y}
+              radiusX={size / 32}
+              radiusY={size / 32}
+              fill={"#78afe3"}
+              opacity={0.5}
+              key={`H${sq}`}
+            ></Ellipse>
+          );
+        })}
       </Layer>
     </Stage>
   );
 }
-
-/*
-        {generatePieces(props.position).map((piece) => (
-          <Image
-            x={piece.x}
-            y={piece.y}
-            width={piece.width}
-            height={piece.height}
-            url={piece.url}
-            id={piece.id}
-          />
-        ))}
-*/
