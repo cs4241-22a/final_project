@@ -3,12 +3,15 @@ import { Stage, Layer, Rect, Image, Text, Ellipse } from "react-konva";
 import useImage from "use-image";
 import FenParser from "@chess-fu/fen-parser";
 import { makeFen } from "chessops/fen";
+import { makeSanAndPlay } from "chessops/san";
 
 function getPosition(index) {
   return [index % 8, 7 - Math.floor(index / 8)];
 }
 
+
 const size = 500.0;
+
 
 export default function Board(props) {
   const [dragging, setDragging] = useState(-1);
@@ -27,7 +30,7 @@ export default function Board(props) {
   const [wKing] = useImage("./pieces/wk.png");
 
   function getHover() {
-    if (dragging === -1) {
+    if (!canMove() || dragging === -1) {
       return [];
     } else {
       return [...props.game.dests(dragging)[Symbol.iterator]()];
@@ -113,6 +116,14 @@ export default function Board(props) {
     console.log(`Moved from Square ${from} to ${to}`);
   }
 
+  function canMove() {
+    if (props.game.turn !== props.playAs) {
+      return false;
+    }
+
+    return true;
+  }
+
   const [squares, setSquares] = useState(generateChessBoard());
 
   return (
@@ -154,6 +165,10 @@ export default function Board(props) {
               setDragging(-1);
               let cancelled = false;
 
+              if (!canMove()) {
+                cancelled = true;
+              }
+
               const newX = Math.floor(
                 (e.target.attrs.x + size / 16) / (size / 8)
               );
@@ -179,7 +194,6 @@ export default function Board(props) {
               }
 
               const context = props.game.ctx();
-
               const legal = props.game.isLegal(move, context);
               if (!legal) {
                 cancelled = true;
@@ -189,9 +203,9 @@ export default function Board(props) {
                 log(piece.square, newSquare);
                 e.target.x(newX * (size / 8));
                 e.target.y((7 - newY) * (size / 8));
-                props.game.play(move);
+                const san = makeSanAndPlay(props.game, move)
                 piece.square = newSquare;
-                props.update();
+                props.onMove(san)
               } else {
                 e.target.x(piece.x);
                 e.target.y(piece.y);
@@ -221,3 +235,6 @@ export default function Board(props) {
     </Stage>
   );
 }
+
+
+

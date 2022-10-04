@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Engine } = require("node-uci");
+const cors = require('cors')
 
 const engines = [
   {
@@ -25,8 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Server Endpoints(
-app.get("/bestmove", async (req, res) => {
-  console.log(req.query);
+app.get("/bestmove", cors(), async (req, res) => {
   const fen = req.query.position;
   const engineName = req.query.engine;
   const movetime = req.query.movetime;
