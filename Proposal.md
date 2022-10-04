@@ -1,5 +1,5 @@
 # Final Project Proposal (due 9/27) 
-# By Sean McMillan, Liliana Foucault, JR Kim, and Jacob Van Steyn
+# By Sean McMillan, Liliana Foucault, Jin Ryoul Kim, and Jacob Van Steyn
 
 For our project, we are planning on creating a webpage with three seperate clicking games. There will be a main page with a login option along with buttons to move to different games. The three games we are planning on creating are a clicks per second test, reaction time test, and a mouse accuracy test. The clicks per second test will have a single button that the user will click for 10 seconds. During this time, we will record the number of clicks to calculate their clicks per second. For the reaction time test, three buttons will show up with only one of them being green. The overall score for this test will be calculated by overall time plus extra time for clicking the wrong button. And for the mouse accuracy test, a button will randomly appear somewhere on a screen and, once it is clicked, another will appear in a different location. This games score will be calculated by overall time it takes to click 10 buttons. Along with these games, there will be a leaderboard with the best scored from each of the games which users can be added to once logged in.
 
