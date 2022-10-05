@@ -79,17 +79,17 @@ app.post( '/login', (req,res)=> {
           // cancel session login in case it was previously set to true
           req.session.login = false
           // password incorrect, send back to login page
-          res.sendFile( __dirname + '/build/login' )
+          res.sendFile( __dirname + '/build/login.html' )
         }
       })
 })
 
 app.get( '/index', ( req, res) => {
-    res.sendFile( __dirname + '/build/index' )
+    res.sendFile( __dirname + '/build/index.html' )
 })
 
 app.get( '/', (req,res) => {
-    res.sendFile( __dirname + '/build/login' )
+    res.sendFile( __dirname + '/build/login.html' )
 })
 
 //recipe db interaction
