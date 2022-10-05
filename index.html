@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>GitHub Dating</title>
+    <title>GetHub Express</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
     <script src="js/scripts.js"></script>
   </head>
   <body>
-    <h1>GitHub Dating</h1>
-    <div style="border: 2px solid turquoise; border-radius: 5px; padding: 20px;" class="container-box">
-        <h2 style="text-align: center;">Let's Get Started</h2>
+    <h1 style="background-color: rgba(245, 245, 220, 0.8)">GetHub Express</h1>
+    <div class="float-container">
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+          <h2 style="text-align: center;">Personal Information</h2>
+          <form>
+              <label for="fName">First Name:</label>
+              <input type="text" id="fName" name="fName" required><br><br>
+              <label for="lName">Last Name:</label>
+              <input type="text" id="lName" name="lName" required><br><br>
+              <label for="addr">Address:</label>
+              <input type="text" id="addr" name="addr"><br><br>
+              <label for="email">Email:</label>
+              <input type="text" id="email" name="email"><br><br>
+              <label for="ageSlider">Age (between 0 and 60+):</label><br><br>
+              <input type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
+          </form>
+      </div>
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+        <h2 style="text-align: center;">Tell us about yourself!</h2>
         <form>
-            <label for="fName">First Name:</label>
-            <input type="text" id="fName" name="fName" required><br><br>
-            <label for="lName">Last Name:</label>
-            <input type="text" id="lName" name="lName" required><br><br>
-            <label for="addr">Address:</label>
-            <input type="text" id="addr" name="addr"><br><br>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email"><br><br>
-            <label for="ageSlider">Age (between 0 and 60+):</label>
-            <input type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
-            <input style="text-align: center; position: relative; left: 40%;"type="submit" id="submitBtn">
+            <label for="hobbies">Hobbies:</label>
+            <input type="text" id="hobbies" name="hobbies" required><br><br>
+            <label for="fProject">First Project:</label>
+            <input type="text" id="fProject" name="fProject" required><br><br>
+            <label for="currProject">Current Project:</label>
+            <input type="text" id="currProject" name="currProject"><br><br>
+            <p style="text-align: center;">Mingle or Looking to Date?</p>
+            <input style="margin-left: 25%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle">
+            <label for="mingleStatus">Mingle</label>
+            <input type="radio" id="toDateStatus" name="Date" value="Date">
+            <label for="toDateStatus">Date</label><br><br>
         </form>
+      </div>
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+        <h2 style="text-align: center;">Preferences</h2>
+        <form>
+          <label for="hobbies">Hobbies:</label>
+          <input type="text" id="hobbies" name="hobbies" required><br><br>
+          <label for="fProject">First Project:</label>
+          <input type="text" id="fProject" name="fProject" required><br><br>
+          <label for="currProject">Current Project:</label>
+          <input type="text" id="currProject" name="currProject"><br><br>
+          <p style="text-align: center;">Mingle or Looking to Date?</p>
+          <input style="margin-left: 25%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle">
+          <label for="mingleStatus">Mingle</label>
+          <input type="radio" id="toDateStatus" name="Date" value="Date">
+          <label for="toDateStatus">Date</label><br><br>
+      </form>
+      </div>
     </div>
+    <input style="text-align: center;" type="submit" id="submitBtn">      
   </body>
 </html>
