@@ -43,6 +43,7 @@ passport.use(
 */
 
 // Middleware
+/*
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -50,11 +51,9 @@ app.use(
     saveUninitialized: true,
   })
 );
-/*
 app.use(passport.initialize());
 app.use(passport.session());
 */
 app.use(routes);
-//app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
