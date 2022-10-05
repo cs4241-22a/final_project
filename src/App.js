@@ -11,6 +11,7 @@ import Shop from './pages/shop.js';
 import Messages from './pages/messages';
 import Signin from "./components/Login/Login"
 import Create from "./components/Login/Create"
+import Goal from "./pages/goal"
 
 function App() {
 return (
@@ -25,6 +26,7 @@ return (
 		  <Route path='/listings' element={<Listings />} />
 		  <Route path='/signin' element={<Signin />} />
       <Route path='/create-an-account' element={<Create />} />
+      <Route path='/goal' element={<Goal />} />
 	  </Routes>
 	</Router>
 );

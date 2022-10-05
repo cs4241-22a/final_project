@@ -5,9 +5,10 @@ return (
 	<div
 	style={{
 		display: 'flex',
-		justifyContent: 'Right',
-		alignItems: 'Right',
-		height: '100vh'
+		justifyContent: 'Left',
+		alignItems: 'Left',
+		height: '100vh',
+		padding: '2%'
 	}}
 	>
 	<h1>Viewing Your Messages</h1>

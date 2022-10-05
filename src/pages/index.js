@@ -3,13 +3,15 @@ const Home = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'Right',
-        alignItems: 'Right',
-        height: '100vh'
+        display: 'absolute',
+        justifyContent: 'Left',
+        alignItems: 'Left',
+        height: '100vh',
+        padding: '2%'
       }}
     >
-      <h1>Welcome to GoatAShop</h1>
+      <h1>Welcome to GoataShop</h1>
+      <h2>For when you really GoataShop</h2>
     </div>
   );
 };

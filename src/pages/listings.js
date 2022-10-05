@@ -4,13 +4,15 @@ const Listings = () => {
 return (
 	<div
 	style={{
-		display: 'flex',
-		justifyContent: 'Right',
-		alignItems: 'Right',
-		height: '100vh'
+		display: 'absolute',
+		justifyContent: 'Left',
+		alignItems: 'Left',
+		height: '100vh',
+		padding: '2%'
 	}}
 	>
 	<h1>Viewing Your Current Listings</h1>
+	<button>Add a product</button>
 	</div>
 );
 };

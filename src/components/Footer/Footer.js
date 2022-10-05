@@ -17,7 +17,7 @@ const Footer = () => {
           <Column>
             <Heading>About Us</Heading>
             <FooterLink href="https://github.com/cs4241-22a/final_project">Assignment</FooterLink>
-            <FooterLink href="#">Goal</FooterLink>
+            <FooterLink href="/goal">Goal</FooterLink>
           </Column>
           <Column>
             <Heading>Contact Us</Heading>
