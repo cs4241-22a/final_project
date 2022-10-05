@@ -7,10 +7,8 @@ const http = require( 'http' ),
       port = 3000
 
 const express = require('express'),
-      app     = express(),
-      cors    = require('cors')
+      app     = express()
 
-app.use( cors() )
 app.use( express.static('./') )
 
 const server = http.createServer( function( request,response ) {
@@ -23,9 +21,9 @@ const server = http.createServer( function( request,response ) {
     const filename = dir + request.url.slice( 1 ) 
   
     if( request.url === '/' ) {
-      sendFile( response, 'pages/index.jsx' )
+      sendFile( response, 'components/Login/Login.jsx' )
     }else{
-      sendFile( response, 'pages/index.jsx' )
+      sendFile( response, 'components/Login/Login.jsx' )
     }
   }
 

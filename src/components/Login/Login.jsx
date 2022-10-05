@@ -31,7 +31,7 @@ export default function (props) {
             </button>
           </div>
           <p className="no-account text-right mt-2">
-            Don't have an account? <Link to="/create-an-account" element= {<Create />}>Create one</Link>
+            Don't have an account? <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Too bad</a>
           </p>
         </div>
       </form>
