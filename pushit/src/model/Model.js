@@ -35,6 +35,9 @@ export class Square {
         return s;
     }
 
+    remove() {
+        this.color = "white";
+    }
 
 }
 
@@ -93,6 +96,28 @@ export class Puzzle {
         copy.player = this.player.copy();
         return copy;
     }
+
+    getSquare(row, col) {
+        return this.squares[row*this.colNum+col];
+    }
+
+    canMove(dir) {
+        let player = this.player;
+        let newRow = player.row + dir.deltar;
+        let newCol = player.column + dir.deltac;
+        console.log(dir);
+        console.log(newRow + " " + newCol);
+        if ((newRow >= 0 && newRow < this.rowNum) && (newCol >= 0 && newCol < this.colNum)) {
+            let adjSquare = this.getSquare(newRow, newCol);
+            let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
+            if (farSquare === null) return false;
+            if (adjSquare.color === "white") return true;
+            if (adjSquare.color === farSquare.color) return true;
+            else return false;
+        } 
+        else return false;
+
+    }
 }
 
 
@@ -127,6 +152,6 @@ export default class Model {
         this.puzzle.setPlayer(arow, acol);
         this.victory = false;
         this.level = parseInt(info.level);
-        //console.log(this);
+        
     }
 }

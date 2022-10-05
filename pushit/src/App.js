@@ -55,27 +55,27 @@ function App() {
       <div style={layout.buttons}>
           <button style={layout.upbutton} 
                   onClick={(e) => moveHandler(Up)} 
-                  //</div>disabled={!model.puzzle.canExtend(Up)}
+                  disabled={!model.puzzle.canMove(Up)}
                   >^
           </button>
 
           <button style={layout.leftbutton} 
                   onClick={(e) => moveHandler(Left)} 
-                  //</div>disabled={!model.puzzle.canExtend(Left)}
+                  disabled={!model.puzzle.canMove(Left)}
                   >&lt;
           </button>
 
           <button style={layout.rightbutton}
                   //data-testid="rightbutton" 
                   onClick={(e) => moveHandler(Right)} 
-                  //disabled={!model.puzzle.canExtend(Right)} 
+                  disabled={!model.puzzle.canMove(Right)} 
                   >&gt;
           </button>
 
           <button style={layout.downbutton} 
                   data-testid="downbutton"
                   onClick={(e) => moveHandler(Down)} 
-                  //disabled={!model.puzzle.canExtend(Down)} 
+                  disabled={!model.puzzle.canMove(Down)} 
                   >v
           </button>
       </div>
