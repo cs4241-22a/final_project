@@ -3,7 +3,7 @@ const Home = () => {
   return (
     <div
       style={{
-        display: 'absolute',
+        display: 'block',
         justifyContent: 'Left',
         alignItems: 'Left',
         height: '100vh',

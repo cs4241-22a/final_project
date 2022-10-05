@@ -5,7 +5,7 @@ const Shop = () => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'block',
         justifyContent: 'Left',
         alignItems: 'Left',
         height: '100vh',

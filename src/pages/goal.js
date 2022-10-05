@@ -3,7 +3,7 @@ const Goal = () => {
   return (
     <div
       style={{
-        display: 'absolute',
+        display: 'block',
         justifyContent: 'Right',
         alignItems: 'Right',
         height: '100vh',

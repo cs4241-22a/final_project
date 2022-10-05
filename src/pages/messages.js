@@ -4,7 +4,7 @@ const Messages = () => {
 return (
 	<div
 	style={{
-		display: 'flex',
+		display: 'block',
 		justifyContent: 'Left',
 		alignItems: 'Left',
 		height: '100vh',
@@ -12,6 +12,7 @@ return (
 	}}
 	>
 	<h1>Viewing Your Messages</h1>
+	<button>Send Message</button>
 	</div>
 );
 };
