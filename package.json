@@ -8,12 +8,13 @@
   "license": "ISC",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "start": "snowpack dev",
-    "build": "snowpack build"
+    "build": "snowpack build",
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.1",
     "react": "^18.2.0",
+    "react-calendar": "^3.9.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
