@@ -14,7 +14,8 @@
     float: right;
 }
 
-#addr, #fName, #lName, #email{
+#yAgeRange, #oAgeRange, #distSlider, #email{
+    margin-left: 5px;
     float: right;
 }
 
@@ -52,7 +53,7 @@ input[type=submit] {
     width: 25%;
     font-size: larger;
     background-color: cadetblue;
-    color: white;
+    color: rgb(12, 12, 12);
     padding: 14px 20px;
     border: none;
     border-radius: 4px;

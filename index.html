@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>GetHub Express</title>
+    <title>GitHub(by) Express</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
     <script src="js/scripts.js"></script>
   </head>
   <body>
-    <h1 style="background-color: rgba(245, 245, 220, 0.8)">GetHub Express</h1>
+    <h1 style="background-color: rgba(245, 245, 220, 0.8)">GitHub(by) Express</h1>
     <div class="float-container">
       <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
           <h2 style="text-align: center;">Personal Information</h2>
@@ -43,17 +43,22 @@
       <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
         <h2 style="text-align: center;">Preferences</h2>
         <form>
-          <label for="hobbies">Hobbies:</label>
-          <input type="text" id="hobbies" name="hobbies" required><br><br>
-          <label for="fProject">First Project:</label>
-          <input type="text" id="fProject" name="fProject" required><br><br>
-          <label for="currProject">Current Project:</label>
-          <input type="text" id="currProject" name="currProject"><br><br>
-          <p style="text-align: center;">Mingle or Looking to Date?</p>
-          <input style="margin-left: 25%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle">
-          <label for="mingleStatus">Mingle</label>
-          <input type="radio" id="toDateStatus" name="Date" value="Date">
-          <label for="toDateStatus">Date</label><br><br>
+          <label for="yAgeRange">Lowest Age Preference:</label>
+          <input type="text" id="yAgeRange" required><br><br>
+          <label for="oAgeRange">Oldest Age Preference:</label>
+          <input type="text" id="oAgeRange" required><br><br>
+          <label for="distSlider">Distance (between 0 and 20000+):</label><br><br>
+          <input type="range" id="ageSlider" name="Age" min="0" max="20000" step="50" required /><br><br>
+          <label for="sexualOrientation">Sexual Orientation:</label>
+          <select name="sexualOrientation" id="sexualOrientation">
+            <option value="Gay">Gay</option>
+            <option value="Lesbian">Lesbian</option>
+            <option value="Heterosexual">Heterosexual</option>
+            <option value="Bisexual">Bisexual</option>
+            <option value="Pansexual">Pansexual</option>
+            <option value="Asexual">Asexual</option>
+            <option value="Other">Other</option>
+          </select>
       </form>
       </div>
     </div>
