@@ -1,0 +1,12 @@
+label{
+    padding-left: 20px;
+}
+
+#addr, #fName, #lName, #email{
+    float: right;
+}
+
+div.container-box {
+    margin-left: auto;
+    margin-right: 75%;
+}

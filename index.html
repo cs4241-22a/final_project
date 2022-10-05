@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GitHub Dating</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css">
+    <script src="js/scripts.js"></script>
+  </head>
+  <body>
+    <h1>GitHub Dating</h1>
+    <div style="border: 2px solid turquoise; border-radius: 5px; padding: 20px;" class="container-box">
+        <h2 style="text-align: center;">Let's Get Started</h2>
+        <form>
+            <label for="fName">First Name:</label>
+            <input type="text" id="fName" name="fName" required><br><br>
+            <label for="lName">Last Name:</label>
+            <input type="text" id="lName" name="lName" required><br><br>
+            <label for="addr">Address:</label>
+            <input type="text" id="addr" name="addr"><br><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
+            <label for="ageSlider">Age (between 0 and 60+):</label>
+            <input type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
+            <input style="text-align: center; position: relative; left: 40%;"type="submit" id="submitBtn">
+        </form>
+    </div>
+  </body>
+</html>
