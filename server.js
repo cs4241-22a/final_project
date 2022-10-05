@@ -18,18 +18,18 @@ let account = null;
 client.connect()
     .then( () => {
         // will only create collection if it doesn't exist
-        return client.db( 'A3' ).collection( 'Activity Logs' )
+        return client.db( 'Final' ).collection( 'Activity Logs' )
     })
     .then( __collection => {
         collection = __collection;
         // blank query returns all documents
         return collection.find({ }).toArray()
     })
-
+    // .then( client.db( 'Final' ).collection( 'Activity Logs' ).insertOne({test: 12, testing: 13}))
     .then( console.log )
 
     .then( () => {
-        return (client.db("A3").collection("accounts"));
+        return (client.db("Final").collection("accounts"));
     })
     .then( __account => {
         account = __account;
@@ -50,4 +50,4 @@ app.get( '/', (req, res) => {
 
 
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 9030);
