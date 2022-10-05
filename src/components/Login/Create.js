@@ -1,14 +1,13 @@
 import React from "react"
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Signin from "./Login"
 import { Link } from 'react-router-dom';
-import Create from "./Create"
 
 export default function (props) {
   return (
-    <div className="login-container">
-      <form className="login-form">
-        <div className="login-content">
-          <h3 className="login-title">Sign In</h3>
+    <div className="create-container">
+      <form className="create-form">
+        <div className="create-content">
+          <h3 className="create-title">Create an Account</h3>
           <div className="form-group mt-3">
             <label>Email address</label>
             <input
@@ -31,7 +30,7 @@ export default function (props) {
             </button>
           </div>
           <p className="no-account text-right mt-2">
-            Don't have an account? <Link to="/create-an-account" element= {<Create />}>Create one</Link>
+            Already have an account? <Link to="/signin" element= {<Signin />}>Signin</Link>
           </p>
         </div>
       </form>

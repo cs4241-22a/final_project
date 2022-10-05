@@ -9,8 +9,8 @@ import Profile from './pages/profile.js';
 import Listings from './pages/listings';
 import Shop from './pages/shop.js';
 import Messages from './pages/messages';
-import Login from './pages/login';
-import Auth from "./components/Login/Login"
+import Signin from "./components/Login/Login"
+import Create from "./components/Login/Create"
 
 function App() {
 return (
@@ -23,7 +23,8 @@ return (
 		  <Route path='/messages' element={<Messages />} />
 		  <Route path='/shop' element={<Shop />} />
 		  <Route path='/listings' element={<Listings />} />
-		  <Route path='/login' element={<Auth />} />
+		  <Route path='/signin' element={<Signin />} />
+      <Route path='/create-an-account' element={<Create />} />
 	  </Routes>
 	</Router>
 );
