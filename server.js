@@ -95,8 +95,8 @@ app.get('/', function(req, res) {
     if (req.hasOwnProperty('user')) {
         console.log('A user is logged in!');
         console.log(req.user);
-    }
-  res.sendFile(path.join(__dirname, '/build/index.html'));
+    } else console.log('no user logged in.');
+    res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
 app.get('/login', function (req, res) {
