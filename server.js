@@ -42,8 +42,5 @@ client.connect()
 
 
 app.get( '/', (req,res) => {
-  if( collection !== null ) {
-    // get array and pass to res.json
-    collection.find({ }).toArray().then( result => res.json( result ) )
-  }
+  res.sendFile(__dirname + "index.html")
 })
