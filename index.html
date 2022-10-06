@@ -8,8 +8,8 @@
   </head>
   <body>
     <h1 style="background-color: rgba(245, 245, 220, 0.8)">GitHub(by) Express</h1>
-    <div class="float-container">
-      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+    <div class="row">
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
           <h2 style="text-align: center;">Personal Information</h2>
           <form>
               <label for="fName">First Name:</label>
@@ -20,11 +20,11 @@
               <input type="text" id="addr" name="addr"><br><br>
               <label for="email">Email:</label>
               <input type="text" id="email" name="email"><br><br>
-              <label for="ageSlider">Age (between 0 and 60+):</label><br><br>
-              <input type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
+              <label for="ageSlider">Age (between 0 and 60+):</label>
+              <input style="float: right;" type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
           </form>
       </div>
-      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
         <h2 style="text-align: center;">Tell us about yourself!</h2>
         <form>
             <label for="hobbies">Hobbies:</label>
@@ -34,23 +34,24 @@
             <label for="currProject">Current Project:</label>
             <input type="text" id="currProject" name="currProject"><br><br>
             <p style="text-align: center;">Mingle or Looking to Date?</p>
-            <input style="margin-left: 25%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle">
+            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle">
             <label for="mingleStatus">Mingle</label>
-            <input type="radio" id="toDateStatus" name="Date" value="Date">
+            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="Date" value="Date">
             <label for="toDateStatus">Date</label><br><br>
         </form>
       </div>
-      <div style="background-color: rgba(245, 245, 220, 0.8);" class="float-child">
+      <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
         <h2 style="text-align: center;">Preferences</h2>
         <form>
           <label for="yAgeRange">Lowest Age Preference:</label>
           <input type="text" id="yAgeRange" required><br><br>
           <label for="oAgeRange">Oldest Age Preference:</label>
           <input type="text" id="oAgeRange" required><br><br>
-          <label for="distSlider">Distance (between 0 and 20000+):</label><br><br>
-          <input type="range" id="ageSlider" name="Age" min="0" max="20000" step="50" required /><br><br>
+          <label for="distSlider">Distance (0 and 20k+ miles):</label>
+          <input style="float: right;" type="range" id="ageSlider" name="Age" min="0" max="20000" step="50" required /><br><br>
           <label for="sexualOrientation">Sexual Orientation:</label>
-          <select name="sexualOrientation" id="sexualOrientation">
+          <select name="sexualOrientation" id="sexualOrientation" >
+            <option value="" disabled selected hidden>Choose an option</option>
             <option value="Gay">Gay</option>
             <option value="Lesbian">Lesbian</option>
             <option value="Heterosexual">Heterosexual</option>
@@ -62,6 +63,6 @@
       </form>
       </div>
     </div>
-    <input style="text-align: center;" type="submit" id="submitBtn">      
+    <div class="submitButton-container" style="text-align: center;"><input style="text-align: center;" type="submit" id="submitBtn"></div>     
   </body>
 </html>
