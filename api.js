@@ -1,4 +1,4 @@
-//Task for AIDAN: Research authentication
+
 
 const api = {
     'GET': [

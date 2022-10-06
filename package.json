@@ -4,7 +4,7 @@
   "description": "*Due before the start of class, October 13th (final day of the term)*",
   "main": "s.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,17 @@
   },
   "homepage": "https://github.com/gabestuf/final_project#readme",
   "dependencies": {
+    "argon2": "^0.29.1",
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
-    "mongoose": "^6.6.3",
+    "mongoose": "^6.6.3"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": "14.16.0"
   }
 }
