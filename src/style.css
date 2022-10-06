@@ -1,53 +1,66 @@
 * {
-    font-family: 'Open Sans';
-  }
-  
-  .customizations {
-    position: fixed;
-    left: 0;
-    top: 0;
-    text-align: center;
-    width: 25%;
-    height: 100%;
-    background-color: lightgray;
-  }
-  
-  .customizations img{
-    width: 10%;
-  }
-  
-  .selectBtnLeft {
-    margin-right: 15px;
-  }
-  
-  
-  .selectBtnRight {
-    margin-left: 15px;
-  }
-  
-  .game {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-    margin-left: 25%;
-  }
-  
-  .level {
-    width: 50%;
-  }
-  
-  .progress {
-    margin-top: 15px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: gray;
-  }
-  
-  .progress .progressBar{
-    height: 20px;
-    width: 40%;
-    border-radius: 10px;
-    background-color: limegreen;
-  }
+  font-family: 'Open Sans';
+}
+
+.login {
+  height: 100%
+}
+
+/* Game Specific CSS*/
+.customizations {
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: center;
+  width: 25%;
+  height: 100%;
+  background-color: lightgray;
+}
+
+.customizations img{
+  width: 10%;
+}
+
+.selectBtnLeft {
+  margin-right: 15px;
+}
+
+
+.selectBtnRight {
+  margin-left: 15px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  margin-left: 25%;
+}
+
+.level {
+  width: 50%;
+}
+
+.progress {
+  margin-top: 15px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: gray;
+}
+
+.progress .progressBar{
+  height: 20px;
+  width: 40%;
+  border-radius: 10px;
+  background-color: limegreen;
+}
+
+#totalXP {
+  margin-right: auto;
+}
+
+#nextLevelXP {
+  margin-left: auto;
+}
