@@ -207,4 +207,12 @@ export default class Model {
         this.level = parseInt(info.level);
         
     }
+
+    isWin() {
+        for (let s of this.puzzle.squares) {
+            if (!(s.color === "white"))
+                return false;
+        }
+        return true;
+    }
 }
