@@ -41,8 +41,7 @@ app.use(express.static('./client/build'))
 app.get('/auth/error', (req, res) => res.send('Unknown Error'))
 app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }))
 app.get('/auth/github/callback',
- passport.authenticate('github', { failureRedirect: '/auth/error' }),
- (req, res) => {
+ passport.authenticate('github', { failureRedirect: '/auth/error' }), (req, res) => {
   console.log('redirecting to main webpage')
   res.redirect('/')
 })
