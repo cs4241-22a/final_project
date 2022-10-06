@@ -19,6 +19,11 @@ let CALLBACK_URL = `${process.env.CALLBACK_URL}`;
 // Middleware
 // ---
 
+app.use( (req,res,next) => {
+    console.log( 'url:', req.url )
+    next()
+})
+
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
