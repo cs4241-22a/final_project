@@ -97,26 +97,79 @@ export class Puzzle {
         return copy;
     }
 
+    move(dir) {
+        let player = this.player;
+        let newRow = player.row + dir.deltar;
+        let newCol = player.column + dir.deltac;
+        let adjSquare = this.getSquare(newRow, newCol);
+        if (this.canRemove(dir)) {
+            let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
+            adjSquare.color = "white";
+            farSquare.color = "white";
+            this.setPlayer(newRow, newCol);
+        }
+        else if (this.canPush(dir)) {
+            let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
+            farSquare.color = adjSquare.color;
+            adjSquare.color = "white";
+            this.setPlayer(newRow, newCol);
+        }
+        else if (this.canMoveToEmpty(dir)) {
+            this.setPlayer(newRow, newCol);
+        }
+    }
+
     getSquare(row, col) {
         return this.squares[row*this.colNum+col];
     }
 
     canMove(dir) {
+        return this.canMoveToEmpty(dir) || this.canPush(dir) || this.canRemove(dir);
+    }
+
+    canMoveToEmpty(dir) {
         let player = this.player;
         let newRow = player.row + dir.deltar;
         let newCol = player.column + dir.deltac;
-        console.log(dir);
-        console.log(newRow + " " + newCol);
+
         if ((newRow >= 0 && newRow < this.rowNum) && (newCol >= 0 && newCol < this.colNum)) {
             let adjSquare = this.getSquare(newRow, newCol);
-            let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
-            if (farSquare === null) return false;
             if (adjSquare.color === "white") return true;
-            if (adjSquare.color === farSquare.color) return true;
-            else return false;
         } 
         else return false;
 
+    }
+
+    canPush(dir) {
+        let player = this.player;
+        let newRow = player.row + dir.deltar;
+        let newCol = player.column + dir.deltac;
+
+        if ((newRow >= 0 && newRow < this.rowNum) && (newCol >= 0 && newCol < this.colNum)) {
+            let adjSquare = this.getSquare(newRow, newCol);
+            if ((newRow + dir.deltar>= 0 && newRow+ dir.deltar < this.rowNum) && (newCol+ dir.deltac >= 0 && newCol+ dir.deltac < this.colNum)) {
+                let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
+                if (!(adjSquare.color === "white") && farSquare.color === "white") return true;
+            }
+            else return false;
+        } 
+        else return false;
+    }
+
+    canRemove(dir) {
+        let player = this.player;
+        let newRow = player.row + dir.deltar;
+        let newCol = player.column + dir.deltac;
+
+        if ((newRow >= 0 && newRow < this.rowNum) && (newCol >= 0 && newCol < this.colNum)) {
+            let adjSquare = this.getSquare(newRow, newCol);
+            if ((newRow + dir.deltar>= 0 && newRow+ dir.deltar < this.rowNum) && (newCol+ dir.deltac >= 0 && newCol+ dir.deltac < this.colNum)) {
+                let farSquare = this.getSquare(newRow + dir.deltar, newCol + dir.deltac);
+                if (adjSquare.color === farSquare.color) return true;
+            }
+            else return false;
+        } 
+        else return false;
     }
 }
 
