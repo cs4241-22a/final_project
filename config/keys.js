@@ -8,8 +8,8 @@ module.exports={
         clientSecret: 'e55cb851e6469d736960b2e80646f790ef4be5ca'
     },
     google: {
-        clientID: '',
-        clientSecret: ''
+        clientID: '491086014428-s13c4i8vc71q07q32fsn3d34u0ni9dig.apps.googleusercontent.com',
+        clientSecret: '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'
     },
     Cookie: {
         key: 'Final_project'
