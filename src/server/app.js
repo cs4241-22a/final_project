@@ -35,7 +35,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://localhost:${port}/auth/github/callback`,
+      callbackURL: `${process.env.SERVER}/auth/github/callback`,
     }, (accessToken, refreshToken, profile, done) => {
       return done(null, profile)
     }
