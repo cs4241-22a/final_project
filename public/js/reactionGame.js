@@ -1,3 +1,3 @@
-const gameCanvas = document.getElementById('GameCanvas')
 
+//this is a test
 console.log("Hello")

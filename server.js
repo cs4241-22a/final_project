@@ -6,56 +6,47 @@ const path = require('path')
 const UserRouter = require('./api/User')
 const connectDB = require('./config/dbConn')
 
+// INIT
 app.use(express.json())
-
-//use ejs
+// bodyParser
+const bodyParser = require('express').json;
+app.use(bodyParser())
+// use ejs
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '/public')))
 
 
 
-app.get('/login', (req, res) => {
-    res.render('login')
+//Routes
+// home page
+app.get('/', (req, res) => {
+    res.render('home')
 })
-
 app.get('/home', (req, res) => {
     res.render('home')
 })
-
-app.get('/', (req, res) => {
-    res.render('home')
+// login page
+app.get('/login', (req, res) => {
+    res.render('login')
 })
-
-app.get('/createaccount', (req, res) => {
+// signup page
+app.get('/signup', (req, res) => { // changed createaccount to signup, cause shorter
     res.render('signup')
 })
-
-// bodyParser
-const bodyParser = require('express').json;
-app.use(bodyParser())
-
-//Routes
-// Home page 
-app.get('/', (req, res) => {
-    res.render('index') // will change when these pages exist
-
-})
-// Sign up
-app.get('/signup', (req, res) => {
-    res.render('index') // will change when these pages exist
-})
-// Sign in
-app.get('/signin', (req, res) => {
-    res.render('index') // will change when these pages exist
-})
-// leaderboard
+// leaderboard page
 app.get('/leaderboard', (req, res) => {
-    res.render('index') // will change when these pages exist
+    res.render('leaderboard') // will change when these pages exist
+})
+// game page
+app.get('/game', (req, res) => {
+    res.render('game') // will change when these pages exist
 })
 // Users route
 app.use('/user', UserRouter)
 
-
+// connect to database, ASK ME FOR THE ENV VARIABLES OR THIS WILL NOT WORK!!, 
+// if you do not need to test w/ database then comment out this code
+// uncomment last comment
 connectDB();
 
 const db = mongoose.connection
@@ -64,3 +55,5 @@ db.once('open', () => {
     console.log("Connected to database");
     app.listen(process.env.PORT || 3000, () => console.log(`Server Started on Port ${process.env.PORT || 3000}`));
 })
+
+//     app.listen(3000, () => console.log('Server Started on Port 3000'));
