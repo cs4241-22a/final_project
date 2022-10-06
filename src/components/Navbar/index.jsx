@@ -20,18 +20,15 @@ const Navbar = () => {
           <NavLink to='/shop'>
             Shop
           </NavLink>
-          <NavLink to='/profile'>
-            Profile
-          </NavLink>
           <NavLink to='/listings'>
-            Listings
+            My Listings
           </NavLink>
           <NavLink to='/messages'>
-            Messages
+            My Messages
           </NavLink>
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+          <NavBtnLink to='/logout'>Log Out</NavBtnLink>
         </NavBtn>
       </Nav>
     </>
