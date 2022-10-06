@@ -6,6 +6,13 @@ app.use(express.static("views"));
 
 app.use(express.json());
 
+const clientId = '903729e701c50a0a540c';
+const clientSecret = 'OMITTED';
+
+app.get('/github', (req, res) => {
+    res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
+});
+
 
 
 
