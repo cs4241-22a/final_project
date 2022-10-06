@@ -3,13 +3,15 @@ require('dotenv').config()
 const http = require( 'http' ),
       fs   = require( 'fs' ),
       mime = require( 'mime' ),
+      mongodb = require("mongodb"),
       dir  = 'pages/',
       port = 3000
 
 const express = require('express'),
       app     = express()
 
-app.use( express.static('./') )
+app.use( express.static('/components') )
+app.use( express.static('/pages') )
 
 const server = http.createServer( function( request,response ) {
     if( request.method === 'GET' ) {
@@ -21,9 +23,9 @@ const server = http.createServer( function( request,response ) {
     const filename = dir + request.url.slice( 1 ) 
   
     if( request.url === '/' ) {
-      sendFile( response, 'components/Login/Login.jsx' )
+      sendFile( response, 'public/index.html' )
     }else{
-      sendFile( response, 'components/Login/Login.jsx' )
+      //Send to login
     }
   }
 
@@ -53,24 +55,32 @@ server.listen( process.env.PORT || port )
 
 // ----------------- Database --------------
 const { MongoClient, ServerApiVersion, MongoDBNamespace, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`
+const uri = `mongodb+srv://admin:${process.env.PASS}@${process.env.HOST}`
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-let collection = client.db( '' ).collection( '' );
-let userCollection = client.db( '' ).collection( '' );
+let userCollection = client.db( 'GoataShop' ).collection( 'Users' );
+let productCollection = client.db( 'GoataShop' ).collection( 'Products' );
 
 client.connect()
   .then( () => {
     // will only create collection if it doesn't exist
-    return client.db( '' ).collection( '' )
+    return client.db( 'GoataShop' ).collection( 'Users' )
   })
-  .then( __collection => {
+  .then( __userCollection => {
     // store reference to collection
-    collection = __collection
+    userCollection = __userCollection
     // blank query returns all documents
-    return collection.find({}).toArray()
   })
-  .then( console.log )
-  // route to get all docs
+  .then( () => {
+    return client.db( 'GoataShop' ).collection( 'Products' )
+   })
+   .then(_productCollection => {
+     productCollection = _productCollection
+     console.log(productCollection.find({}).toArray()) 
+     console.log('hi') 
+
+  })
+
+
 app.get( '/', (req,res) => {
   if( collection !== null ) {
     // get array and pass to res.json
