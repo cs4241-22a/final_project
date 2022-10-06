@@ -7,6 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
+    "start": "node server.js",
     "clean": "rm dist/bundle.js",
     "dev": "snowpack dev",
     "build": "snowpack build"
