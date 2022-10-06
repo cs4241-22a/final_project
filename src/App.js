@@ -6,15 +6,23 @@ import { makeFen } from "chessops/fen";
 import { makePgn } from "chessops/pgn";
 import GameViewer from "./PGNViewer";
 import { makeSan, makeSanAndPlay } from "chessops/san";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import NavBar from "./components/Navbar/NavBar";
+import GameHistory from "./pages/GameHistory";
+import About from "./pages/About";
+import Stats from "./pages/Stats";
+import Container from 'react-bootstrap/Container';
+
+
 
 async function getBestMove(pos, engine, movetime) {
   const response = await fetch(
-    "/bestmove?" +
-      new URLSearchParams({
-        position: pos,
-        engine: engine,
-        movetime: movetime,
-      })
+    "http://mc.craftsteamg.com:4000/bestmove?" +
+    new URLSearchParams({
+      position: pos,
+      engine: engine,
+      movetime: movetime,
+    })
   );
   const json = await response.json();
   return json.bestmove;
@@ -51,12 +59,22 @@ export default function App(props) {
 
   return (
     <>
-      <Board game={game} playAs={"white"} turn={turn} onMove={onMove} />
-      <GameViewer history={history}></GameViewer>
+      <BrowserRouter>
+        <NavBar />
+        <Container fluid>
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/gamehistory" element={<GameHistory />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+
     </>
   );
 }
 
 /*
-
+        <Board game={game} playAs={"white"} turn={turn} onMove={onMove} />
+        <GameViewer history={history}></GameViewer>
 */
