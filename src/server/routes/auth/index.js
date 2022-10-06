@@ -1,5 +1,5 @@
 const router = require("express").Router();
 
-router.route("/github").use(require("./github"));
+router.use("/github", require("./github"));
 
 module.exports = router;

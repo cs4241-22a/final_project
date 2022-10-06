@@ -6,6 +6,8 @@ const session = require("express-session");
 const GitHubStrategy = require("passport-github2").Strategy;
 require("dotenv").config({ path: path.join(__dirname, "../../.env") });
 const routes = require("./routes");
+const morgan = require("morgan");
+const isLoggedIn = require('./middleware/isLoggedIn');
 
 const app = express();
 const port = process.env.PORT | 3000;
@@ -21,29 +23,26 @@ const port = process.env.PORT | 3000;
 })();
 
 // Passport setup
-/*
-passport.serializeUser(function (user, done) {
-  done(null, user);
+passport.serializeUser((user, done) => {
+  done(null, user)
 });
-passport.deserializeUser(function (user, done) {
-  done(null, user);
+passport.deserializeUser((user, done) => {
+  done(null, user)
 });
+
 passport.use(
   new GitHubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: `http://localhost:${port}/auth/github/callback`,
-    },
-    function (accessToken, refreshToken, profile, done) {
-      return done(null, profile);
+    }, (accessToken, refreshToken, profile, done) => {
+      return done(null, profile)
     }
   )
 );
-*/
 
 // Middleware
-/*
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -53,7 +52,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-*/
+app.use(morgan("tiny"))
+app.use(isLoggedIn);
 app.use(routes);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
