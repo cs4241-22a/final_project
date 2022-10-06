@@ -29,7 +29,7 @@ The outline should have enough detail so that staff can determine if it meets th
 There are no other scheduled checkpoints for your project. 
 
 #### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.1
 
 Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
 
