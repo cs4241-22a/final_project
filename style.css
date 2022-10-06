@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Fredoka";
+    src: url(FredokaOne-Regular.ttf)
+      format("truetype");
+  }
+
+@font-face {
+    font-family: "InterTight";
+    src: url(InterTight-VariableFont_wght.ttf)
+      format("truetype");
+  }
+
+#addr, #fName, #lName, #email{
+    margin-left: 5px;
+    float: right;
+}
+
+#hobbies, #fProject, #currProject{
+    margin-left: 5px;
+    float: right;
+}
+
+#yAgeRange, #oAgeRange, #distSlider, #email{
+    margin-left: 5px;
+    float: right;
+}
+
+label{
+    font-family: "InterTight";
+}
+
+.row {
+    width: auto;
+    border: 2px solid #fff;
+    display: flex;
+}
+
+.col {
+    flex: 1;
+    margin: 10px;
+    padding: 40px;
+    border: 2px solid palevioletred;
+    border-radius: 5px;
+}  
+
+body {
+    background-image: url(unsplash-7rXu_HJO9D8-unsplash.jpg);
+    background-size: cover;
+}
+
+h1 {
+    font-family: "Fredoka";
+    color: cadetblue;
+    text-align: center;
+    border: 2px solid #fff;
+    border-color: rgb(105, 182, 250);
+    border-radius: 5px;
+}
+
+h2 {
+    font-family: "InterTight";
+    text-align: center;
+    text-decoration: underline;
+}
+
+p {
+    font-family: "InterTight";
+}
+
+input[type=submit] {
+    width: 25%;
+    margin-top: 10%;
+    font-size: larger;
+    font-family: "InterTight";
+    background-color: cadetblue;
+    color: rgb(12, 12, 12);
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+input[type=submit]:hover {
+    background-color: #2e6768;
+  }
