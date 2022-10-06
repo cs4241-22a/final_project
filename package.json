@@ -8,15 +8,23 @@
   "license": "ISC",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "start": "snowpack dev",
+    "start": "node server.js",
+    "startSnow": "snowpack dev",
     "build": "snowpack build"
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "jquery": "^3.6.1",
+    "mime": "^3.0.0",
+    "mongodb": "^4.10.0",
+    "node": "^18.10.0",
+    "passport": "^0.6.0",
+    "popper.js": "^1.16.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "bootstrap": "^5.2.2",
-    "jquery": "^3.6.1",
-    "popper.js": "^1.16.1"
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "snowpack": "^3.8.8"
