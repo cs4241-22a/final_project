@@ -1,10 +1,9 @@
-import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React from 'react'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
 import { LinkContainer } from 'react-router-bootstrap'
-import Container from 'react-bootstrap/Container';
+import Container from 'react-bootstrap/Container'
 
-  
 const NavBar = () => {
   return (
     <>
@@ -22,12 +21,15 @@ const NavBar = () => {
               <LinkContainer to="/stats">
                 <Nav.Link>Stats</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/gamehistory">
+                <Nav.Link>Game History</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
-  );
-};
-  
-export default NavBar;
+  )
+}
+
+export default NavBar
