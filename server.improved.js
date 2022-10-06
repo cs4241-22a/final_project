@@ -21,7 +21,7 @@ passport.deserializeUser((user, done) => {
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUBCLIENTID,
     clientSecret: process.env.GITHUBCLIENTSECRET,
-    callbackURL: "https://a4-miles-gregg.herokuapp.com/auth/github/callback"
+    callbackURL: "http://localhost:3000/auth/github/callback"
 }, (accessToken, refreshToken, profile, done) => {
   return done(null, profile)
 }))
@@ -37,11 +37,6 @@ app.use(passport.session())
 app.use(express.json())
 app.use(compression())
 app.use(express.static('./client/build'))
-
-app.get('/auth/login', (req, res) => {
-  console.log('in auth login')
-  res.sendFile(path.join(__dirname, '/public/login.html'))
-})
 
 app.get('/auth/error', (req, res) => res.send('Unknown Error'))
 app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }))
