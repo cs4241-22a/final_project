@@ -3,12 +3,20 @@ const app = express()
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const cookie = require('cookie-session')
 require('dotenv').config()
+const path = require('path')
 
 const uri = 'mongodb+srv://'+process.env.USER1+':'+process.env.PASS+'@'+process.env.HOST+'/?retryWrites=true&w=majority'
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 let recipecollection = null
 let usercollection = null
+
+// cookie middleware
+app.use(express.json())
+app.use( cookie({
+  name: 'session',
+  keys: [process.env.KEY1, process.env.KEY2]
+}))
 
 //connect to the db
 client.connect()
@@ -31,22 +39,6 @@ client.connect()
         usercollection = __collection
         // blank query returns all documents
     })
-
-//middleware
-app.use(express.static("public"))
-app.use(express.json())
-app.use( cookie({
-  name: 'session',
-  keys: [process.env.KEY1, process.env.KEY2]
-}))
-app.use( (req,res,next) => {
-  if( recipecollection !== null && usercollection !== null ) {
-    next()
-  }else{
-    res.status( 503 ).send()
-  }
-})
-app.use( express.urlencoded({ extended:true }) )
 
 //login area
 app.post( '/login', (req,res)=> {
@@ -79,18 +71,32 @@ app.post( '/login', (req,res)=> {
           // cancel session login in case it was previously set to true
           req.session.login = false
           // password incorrect, send back to login page
-          res.sendFile( __dirname + '/build/login.html' )
+          res.sendFile( __dirname + '/build/pages/login.html' )
         }
       })
 })
 
 app.get( '/index', ( req, res) => {
-    res.sendFile( __dirname + '/build/index.html' )
+    res.sendFile( __dirname + '/build/pages/index.html' )
 })
 
 app.get( '/', (req,res) => {
-    res.sendFile( __dirname + '/build/login.html' )
+    res.sendFile( __dirname + '/build/pages/index.html' )
 })
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+//middleware - sends unauthenticated users an error
+app.use( (req,res,next) => {
+  if( recipecollection !== null && usercollection !== null ) {
+    next()
+  }else{
+    res.status( 503 ).send()
+  }
+})
+app.use( express.urlencoded({ extended:true }) )
+
+
 
 //recipe db interaction
 
