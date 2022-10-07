@@ -22,8 +22,25 @@ let collection = null;
 let user; //need to figure out when to set username of logged in user
 let events = [];
 
+const connect = async function () {
+	await client.connect()
+	collection = await client.db('A4').collection('collection')
+	const results = await collection.find({}).toArray()
+	console.log(results)
+}
 
-client.connect();
+const handleAddEvent = async function (req, res) {
+	if (collection !== null) {
+		await collection.updateOne(
+			{ User: user },
+			{ $set: { events: events } }
+		)
+	}
+}
+
+
+connect();
+
 
 
 app.get( "/", (req, res) => {
@@ -48,13 +65,5 @@ app.post("/addEvent", (req, res) => {
 }) */
 
 
+app.listen(process.env.PORT || 3000)
 
-
-const handleAddEvent = async function (req,res) {
-	if (collection !== null) {
-		await collection.updateOne(
-			{ User: user },
-			{ $set: {events: events}}
-		)
-	}
-}

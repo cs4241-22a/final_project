@@ -34,14 +34,10 @@
 
 const add = function( e ) {
 
-
-    // prevent default form action from being carried out
     e.preventDefault()
 
     const TaskBase = document.querySelector("#TaskBase")
 
-    // // clears values on client side each time submit is pressed
-    // TaskBase.innerText = " "
 
     const input = document.querySelector( '#newTask' ) 
     const field1 = document.querySelector( '#TypeOfTask')
@@ -58,14 +54,8 @@ const add = function( e ) {
           Difficulty: field2.value,
            Semester: field3.value
           }
-      // body = JSON.stringify( json )
 
-      // add JSON to client side
-
-
-      // tr.addEventListener('dblclick',function(){
-      // TaskBase.removeChild(tr); })
-    fetch( '/add', {
+    fetch( '/addEvent', {
       method:'POST',
       headers: { 'Content-Type': 'application/json'}, // needed for MongoDB and/or the server to know you are using JSON data?
       body:JSON.stringify({json})
@@ -83,17 +73,7 @@ const add = function( e ) {
      TaskBase.appendChild(tr)
     
     })
-    //
-      // .then(json=> console.log(json)) 
-      // .then( json => {
-      //   console.log(json)
-      //   json.forEach( item =>{
-      //     //////////MAKE initial elements in a div clear before adding new data
-      //     let tr = document.createElement('tr')
-      //     tr.innerText = JSON.stringify(item)
-      //     TaskBase.appendChild(tr)
-      //   })
-      // })
+
     return false
     } 
   }
