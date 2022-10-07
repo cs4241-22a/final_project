@@ -2,6 +2,7 @@ import React from 'react';
 
 const Messages = () => {
 return (
+	
 	<div
 	style={{
 		display: 'block',
