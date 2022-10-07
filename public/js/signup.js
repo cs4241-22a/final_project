@@ -33,6 +33,9 @@ signupForm.addEventListener('submit', async e => {
             alert(responseJSON.message)
             clearFormPassword()
         }
+        if (responseJSON.status == "SUCCESS") {
+            window.location.replace('/login')
+        }
 
     } else {
         alert("passwords Don't match!")
