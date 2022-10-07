@@ -23,6 +23,7 @@ let user; //need to figure out when to set username of logged in user
 let events = [];
 
 const connect = async function () {
+	console.log("tring to connect to db");
 	await client.connect()
 	collection = await client.db('A4').collection('collection')
 	const results = await collection.find({}).toArray()
@@ -44,8 +45,11 @@ connect();
 
 
 app.get( "/", (req, res) => {
+	console.log("retrieving data");
 	if(collection !== null){
+		console.log("connected");
 		let cData = JSON.stringify(collection.find({User:user}).toArray());
+		console.log(cData);
 		response.end(cData);
 	}
 });
@@ -65,5 +69,8 @@ app.post("/addEvent", (req, res) => {
 }) */
 
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT|| 3000, function(){
+	console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+
+});
 
