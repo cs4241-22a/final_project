@@ -11,13 +11,14 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const uri = `mongodb+srv:${process.env.USER}:${process.env.PASS}@${process.env.HOST}`;
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`;
 
-const client = new MongoClient(uri, {
+const client = new mongodb.MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
+
 let collection = null;
 let user; //need to figure out when to set username of logged in user
 let events = [];
