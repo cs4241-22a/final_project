@@ -1,14 +1,16 @@
 
  // getting the username from the browser's sessionStorage
 // https://www.youtube.com/watch?v=x0VcigW9kN0&ab_channel=OpenJavaScript
- const usernameVal = sessionStorage.getItem('usernameKey')
-  console.log(usernameVal)
+
+//  const usernameVal = sessionStorage.getItem('usernameKey')
+
+//   console.log(usernameVal)
 
   
   window.onload = function() {
 
 
-    username = document.querySelector("#userName")
+    // username = document.querySelector("#userName")
    
     const button = document.querySelector( '#addButton' )
     button.onclick = add
@@ -39,20 +41,21 @@ const add = function( e ) {
     const TaskBase = document.querySelector("#TaskBase")
 
 
-    const input = document.querySelector( '#newTask' ) 
-    const field1 = document.querySelector( '#TypeOfTask')
-    const field2 = document.querySelector('#Difficulty')
-    const field3= document.querySelector("#Semester")
-    if ( input.value === "" || field1.value === "Default" || field2.value === "Default" || field3.value === "Default"){
-      alert('Error: Task is missing a field')
-    }
-    else{
+    // const input = document.querySelector( '#newTask' ) 
+    // const field1 = document.querySelector( '#TypeOfTask')
+    // const field2 = document.querySelector('#Difficulty')
+    // const field3= document.querySelector("#Semester")
+    // if ( input.value === "" || field1.value === "Default" || field2.value === "Default" || field3.value === "Default"){
+    //   alert('Error: Task is missing a field')
+    // }
+    // else{
       json  = { 
-        User: usernameVal,
-        Task: input.value,
-         TypeOfTask: field1.value,
-          Difficulty: field2.value,
-           Semester: field3.value
+        // User: usernameVal,
+        Task: input.value
+        
+        //  ,TypeOfTask: field1.value,
+        //   Difficulty: field2.value,
+        //    Semester: field3.value
           }
 
     fetch( '/addEvent', {
@@ -74,8 +77,8 @@ const add = function( e ) {
     
     })
 
-    return false
-    } 
+    // return false
+    // } 
   }
 
 const results = function(e)
