@@ -7,28 +7,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/scripts.js"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A simple node.js app with various reaction testing games. Built with express, passport, and mongodb.">
 </head>
-<body class="bg-light">
-<header class="p-3 mb-3 border-bottom bg-white">
+<body style="background-color: rgb(19, 20, 23)">
+<header class="p-3 mb-3" style="background-color: rgb(30, 31, 38)">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <%= title %>
             </a>
             
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/reaction" class="nav-link px-2 link-secondary">Reaction Time</a></li>
+                <li><a href="/reaction" class="nav-link px-2 text-white-80 link-secondary">Reaction Time</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/cps" class="nav-link px-2 link-secondary">Clicks Per Second</a></li>
+                <li><a href="/cps" class="nav-link px-2 text-white-80 link-secondary">Clicks Per Second</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/accuracy" class="nav-link px-2 link-secondary">Accuracy</a></li>
+                <li><a href="/accuracy" class="nav-link px-2 text-white-80 link-secondary">Accuracy</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/leaderboard" class="nav-link px-2 link-secondary">Leaderboard</a></li>
+                <li><a href="/leaderboard" class="nav-link px-2 text-white-80 link-secondary">Leaderboard</a></li>
             </ul>
 
             <%if (user) {%>

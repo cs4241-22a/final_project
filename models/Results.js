@@ -26,7 +26,6 @@ ResultsSchema.statics.getResultsForUserId = function(user_id) {
 }
 
 ResultsSchema.statics.getRankforScore = function(game, score) {
-    
     var numGreaterThan = this.distinct({game_type: game, score: { $gt: score}}).count();
     return null;
 }
