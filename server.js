@@ -11,8 +11,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+require("dotenv").config();
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`;
+console.log(uri)
 
 const client = new mongodb.MongoClient(uri, {
   useNewUrlParser: true,
