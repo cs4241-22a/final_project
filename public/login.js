@@ -12,7 +12,7 @@ form.addEventListener('submit', function(e){
     // this will be put in the local storage for your browser
     sessionStorage.setItem('usernameKey', usernameVal)
     // sessionStorage.clear
-    window.location.href = "main.html";
+    window.location.href = "calendar.html";
   }
   else{
     alert("Error: You entered the wrong credentials")
