@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, Toolbar, Grid, Button, Box, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
 
-class Reminders extends React.Component {
+class Reminders extends React.Component{
     constructor(props) {
         super(props)
         this.state = { 
