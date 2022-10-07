@@ -16,8 +16,35 @@ const style = {
     p: 4,
   };
 
+  export default function Reminders() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+    return (
+      <div>
+        <Button onClick={handleOpen}>Open modal</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+            <Button onClick={handleClose}>Open modal</Button>
+          </Box>
+        </Modal>
+      </div>
+    );
+  }
 
-
+/*
 class Reminders extends React.Component {
     constructor(props) {
         super(props)
@@ -42,17 +69,9 @@ class Reminders extends React.Component {
             table: [],
             open:false
             // setOpen:{open:true},
-            
         }
-        
-        this.handleOpen = () => this.state.open = true;
-        this.handleClose = () => this.state.open = false;
     
     }
-
-
-
-
 
     async componentDidMount() {
         console.log('on page load')
@@ -245,7 +264,7 @@ class Reminders extends React.Component {
                         </Modal>
                     </div>
                 
-                    {/* <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                         <Typography variant="h6" color="inherit" component="div">
                             Add a new reminder
                         </Typography>
@@ -256,9 +275,8 @@ class Reminders extends React.Component {
                         <TextField onChange={(e) => this.onAddFormChange("time", e)} value={this.state.add.time} label={"Time"} InputLabelProps={{ shrink: true }} type="time" style={{paddingBottom: 10}}/>
                         <TextField onChange={(e) => this.onAddFormChange("location", e)} value={this.state.add.location} label={"Location"} style={{paddingBottom: 10}}/>
                         <Button variant="contained" onClick={(e) => this.submitButton("add", e)}>Submit</Button>
-                    </Box> */}
-
-                    {/* <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                         <Typography variant="h6" color="inherit" component="div">
                             Edit a reminder
                         </Typography>
@@ -269,10 +287,7 @@ class Reminders extends React.Component {
                         <TextField onChange={(e) => this.onEditFormChange("time", e)} value={this.state.edit.time} label={"Time"} InputLabelProps={{ shrink: true }} type="time" style={{paddingBottom: 10}}/>
                         <TextField onChange={(e) => this.onEditFormChange("location", e)} value={this.state.edit.location} label={"Location"} style={{paddingBottom: 10}}/>
                         <Button variant="contained" onClick={(e) => this.submitButton("edit", e)}>Submit</Button>
-                    </Box> */}
-
-
-
+                    </Box>
                     <Box>
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 650 }}>
@@ -317,4 +332,4 @@ class Reminders extends React.Component {
     }
 }
 
-export default Reminders;
+export default Reminders;*/
