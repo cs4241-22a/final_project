@@ -19,7 +19,7 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 let collection = null;
-let user; //need to figure out when to set username of logged in user
+let user = "user1"; //need to figure out when to set username of logged in user
 let events = [];
 
 const connect = async function () {
@@ -45,7 +45,7 @@ connect();
 
 app.get( "/", (req, res) => {
 	if(collection !== null){
-		let cData = JSON.stringify(collection.find({User:User}).toArray());
+		let cData = JSON.stringify(collection.find({User:user}).toArray());
 		response.end(cData);
 	}
 });
