@@ -1,6 +1,13 @@
 const express = require('express')
 const userRouter = express.Router()
 
+// INIT
+require('dotenv').config()
+userRouter.use(express.json())
+
+
+// authorization
+const jwt = require('jsonwebtoken')
 // Password handler
 const argon2 = require('argon2')
 //mongoDB User model
@@ -97,14 +104,18 @@ userRouter.post('/signin', (req, res) => {
                     const hashedPassword = data[0].password;
                     argon2.verify(hashedPassword, password)
                         .then(result => {
-                            if (result) {
-
+                            if (result) { // User authenticated
+                                const user = {
+                                    name: username
+                                }
+                                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                                 res.json({
                                     status: "SUCCESS",
                                     message: "Logged in",
                                     username: data[0].username,
                                     //userpass: data[0].password, // if you wanted to return the hashed password
-                                    data: result
+                                    data: result,
+                                    accessToken: accessToken
                                 })
                             } else {
                                 console.error("invalid password")
