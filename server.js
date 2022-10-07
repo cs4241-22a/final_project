@@ -6,6 +6,7 @@ const AppRoute = require("./routes/app-route");
 const AuthRoute = require("./routes/auth-route");
 const cookieSession = require("cookie-session");
 const client = require("./config/mongodbSetup");
+const FriendsRoute = require('./routes/firends-route')
 const keys = require('./config/keys');
 const path = require("path");
 const app = express();
@@ -34,11 +35,12 @@ app.use(passport.session());
 
 //app.use(express.static(path.join(__dirname, "public")));
 app.get('/', (req,res)=> {
-  res.render('index');
+  res.render('index', {msg: ''});
 })
 
 app.use("/auth", AuthRoute);
 app.use("/app", AppRoute);
+app.use('/friends', FriendsRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

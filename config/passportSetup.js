@@ -35,6 +35,7 @@ passport.use(
                 google_id: "",
                 Local_user_id: "",
                 Local_password: "",
+                Friends: []
               })
               .then((newUser) => {
                 newUser._id = newUser.insertedId;
@@ -58,7 +59,6 @@ const customFields = {
   usernameField: "uname",
   passwordField: "pw",
 };
-
 const verifyCallback = function (username, password, done) {
   console.log("Try to login with", username, password);
   collection
@@ -95,11 +95,9 @@ passport.use(
         .findOne({ google_id: profile.id })
         .then((result) => {
           if (result) {
-            console.log("user is: ", result.username);
-            console.log("user id is: ", result._id);
             done(null, result);
           } else {
-            const username = profile.username;
+            const username = profile.displayName;
             const google_id = profile.id;
             collection
               .insertOne({
@@ -108,6 +106,7 @@ passport.use(
                 google_id: google_id,
                 Local_user_id: "",
                 Local_password: "",
+                Friends: []
               })
               .then((newUser) => {
                 newUser._id = newUser.insertedId;

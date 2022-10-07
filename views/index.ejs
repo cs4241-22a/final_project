@@ -7,10 +7,18 @@
   <a href="http://localhost:3000/auth/google">Google login</a>
   <h1>Login Page</h1>
   <form method="POST" action="/auth/local">
-    \ Enter Username:<br /><input type="text" name="uname" />\ <br />Enter
-    Password:<br /><input type="password" name="pw" />\ <br /><br /><input
+    Enter Username:<br /><input type="text" name="uname" /><br />Enter
+    Password:<br /><input type="password" name="pw" /><br /><br /><input
       type="submit"
       value="Submit"
     />
   </form>
+  <form method="POST" action="/auth/register">
+    Enter Username:<br /><input type="text" name="uname" /><br />Enter
+    Password:<br /><input type="password" name="pw" />\ <br /><br /><input
+      type="submit"
+      value="Register"
+    />
+  </form>
+  <p> <%= msg %> </p>
 </body>

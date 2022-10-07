@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <h1>This is the application</h1>
+    <a href="/friends">See friends</a>
+    <form method = 'POST' action = '/app/add_plan' >
+        Enter Todo: <input type = 'text' name = 'note'></input> <br />
+        Enter Time Slot: <input type = 'text' name = 'time'></input> <br />
+        <input
+      type="submit"
+      value="Add plan"
+    />
+    </form>
+    <p><%= msg %></p>
+    <h3><%= body %></h3>
+</body>
