@@ -11,6 +11,7 @@ import Shop from './pages/shop.js';
 import Messages from './pages/messages';
 import Goal from "./pages/goal";
 import Logout from "./pages/logout";
+import Login from "./pages/login"
 
 function App() {
   return (
@@ -18,11 +19,12 @@ function App() {
       <Navbar />
       <Footer />
       <Routes>
-        <Route path='/index' exact element={<Home />} />
+        <Route path='/home' exact element={<Home />} />
         <Route path='/messages' element={<Messages />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/listings' element={<Listings />} />
         <Route path='/goal' element={<Goal />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
     </Router>
