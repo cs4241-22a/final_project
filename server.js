@@ -12,7 +12,7 @@ require('dotenv').config()
 let GITHUB_CLIENT_ID = `${process.env.GITHUB_CLIENT_ID}`;
 let GITHUB_CLIENT_SECRET = `${process.env.GITHUB_CLIENT_SECRET}`;
 let CALLBACK_URL = `${process.env.CALLBACK_URL}`;
-
+let SESSION_SECRET="literally-whatever";
 
 
 // ---
@@ -21,7 +21,8 @@ let CALLBACK_URL = `${process.env.CALLBACK_URL}`;
 
 app.use( (req,res,next) => {
     console.log( 'url:', req.url )
-    next()
+    //console.log("firstreqfunc");
+	next()
 })
 
 // Passport session setup.
@@ -62,7 +63,7 @@ passport.use(new GitHubStrategy({
 ));
 
 // passportjs + express-session middleware
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(session({ secret: "aas", resave: false, saveUninitialized: false }));
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
@@ -83,16 +84,17 @@ app.use( express.json() )
 //not in crome apparently
 app.use(favicon(path.join(__dirname, 'public/factorio.ico')))
 
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/build'));
+
 
 
 
 // ---
 // ROUTES
 // ---
+
+  
 app.get('/', function(req, res) {
-    if (req.hasOwnProperty('user')) {
+	if (req.hasOwnProperty('user')) {
         console.log('A user is logged in!');
         console.log(req.user);
     } else console.log('no user logged in.');
@@ -132,5 +134,8 @@ app.get('/auth/github/callback',
     function(req, res) {
         res.redirect('/');
     });
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/build'));
 
 app.listen(process.env.PORT || 3000 )
