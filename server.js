@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`;
 
 const client = new mongodb.MongoClient(uri, {
@@ -51,7 +52,7 @@ app.get( "/", (req, res) => {
 		console.log("connected");
 		let cData = JSON.stringify(collection.find({User:user}).toArray());
 		console.log(cData);
-		response.end(cData);
+		res.end(cData);
 	}
 });
 
