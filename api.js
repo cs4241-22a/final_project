@@ -7,11 +7,15 @@ const api = {
             desc: 'serves home page to user, this page will have login/signup buttons'
         },
         {
+            '/home': 'home.html',
+            desc: 'serves home page to user, this page will have login/signup buttons'
+        },
+        {
             '/signup': 'signup.html',
             desc: 'serves signup page'
         },
         {
-            '/signin': 'signin.html',
+            '/login': 'signin.html',
             desc: 'serves signin page'
         },
         {
@@ -34,9 +38,42 @@ const api = {
     ],
     'POST': [
         {
-            '/updateLeaderboard': { req: { username: username, authentication: authentication, score: score } },
-            desc: 'Finds username, finds max score of that user, if this is higher, set user max score and replace users high score with this high score, resort list and send to mongo'
-        }
+            '/user/signin': {
+                req: {
+                    body: {
+                        username: String,
+                        password: String
+                    }
+                },
+                res: {
+                    status: "SUCCESS / FAILED",
+                    message: String,
+                    username: String, // on success
+                    data: String, // on success
+                    accessToken: String // on success
+                }
+            },
+            desc: 'used for logging in, authenticates user and creates an auth token'
+        },
+        {
+            '/user/signup': {
+                req: {
+                    body: {
+                        username: String,
+                        password: String,
+                        userdata: String
+                    }
+                },
+                res: {
+                    body: {
+                        status: "SUCCESS / FAILED",
+                        message: String,
+                        data: String // on success
+                    }
+                },
+            },
+            desc: 'used for logging in, authenticates user and creates an auth token'
+        },
     ]
 
 }
