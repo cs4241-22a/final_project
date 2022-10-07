@@ -16,7 +16,7 @@ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env
 const client = new mongodb.MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
+ 
 });
 
 let collection = null;
