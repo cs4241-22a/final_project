@@ -20,8 +20,8 @@ let SESSION_SECRET="literally-whatever";
 // ---
 
 app.use( (req,res,next) => {
-    console.log( 'url:', req.url )
-    //console.log("firstreqfunc");
+    //console.log( 'url:', req.url )
+    console.log("firstreqfunc");
 	next()
 })
 
@@ -85,15 +85,11 @@ app.use( express.json() )
 app.use(favicon(path.join(__dirname, 'public/factorio.ico')))
 
 
-
-
-
 // ---
 // ROUTES
 // ---
-
-  
 app.get('/', function(req, res) {
+    console.log("functionworx");
 	if (req.hasOwnProperty('user')) {
         console.log('A user is logged in!');
         console.log(req.user);
@@ -134,6 +130,7 @@ app.get('/auth/github/callback',
     function(req, res) {
         res.redirect('/');
     });
+
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/build'));
