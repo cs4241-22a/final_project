@@ -4,18 +4,29 @@
     <!--    <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
         <h1 class="display-5 fw-bold text-light">INDEX</h1>
         <div class="col-lg-auto mx-auto">
-            <p class="lead mb-4 text-muted">Test your reaction time, accuracy and more!</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <p class="lead mb-5 text-muted">Test your reaction time, accuracy and more!</p>
+            <div class="container text-center justify-content-sm-center">
                 <%if (user) {%>
-                    <p class="lead mb-4 text-muted">Play games by going to a page above.</p>
-                    <div class="card" style="margin-top: 4rem;">
-                        <div class="card-title">
-                            Your Scores:
-                        </div>
-                        <div class="card-body">
-                            <!-- TODO: -->
-                            Display past scores here
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="lead mb-4 text-muted">Play games by going to a page above.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-5 align-self-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Your Scores:
+                                </h5>
+                                <!-- TODO: -->
+                                <p class="card-text">
+                                    Display past scores here
+                                </p>
+                            </div>
+                    </div>
+                </div>
+                    
                 <% } else { %>
                     <p class="lead mb-4 text-muted">Please login above to continue.</p>
                 <% } %>
