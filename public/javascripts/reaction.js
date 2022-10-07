@@ -27,7 +27,7 @@ window.onload = function() {
             setTimeout(function() {countdown(i)}, 1100)
         }
         else{
-            statusText.innerText = ""
+            statusText.innerText = "Wait for green!"
             playGame()
         } 
     }
