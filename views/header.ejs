@@ -35,8 +35,8 @@
             <%if (user) {%>
             <div class="dropdown text-end">
                 <input type="hidden" value="<%= user.id %>" id="user">
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src=<%= user.profilePhoto %> alt="mdo" width="32" height="32" class="rounded-circle">
+                <a href="#" class="d-block link-light text-muted text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src=<%= user.profilePhoto %> alt="mdo" width="32" height="32" class="rounded-circle me-2">
                     <%= user.username %>
                 </a>
                 <ul class="dropdown-menu text-small" style="">
