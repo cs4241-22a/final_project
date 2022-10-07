@@ -42,6 +42,17 @@ form.onsubmit = function(event) {
 
     }
 
+    const body = JSON.stringify(input);
+    fetch( '/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+    })
+        .then(response => response.json())
+        .then( console.log)
+
+    form.reset();
+
     console.log(input);
 
 }

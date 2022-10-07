@@ -47,17 +47,30 @@ app.get('/oauth-callback', (req, res) => {
 });
 
 app.get('/loggedIn', (req, res) => {
-    const header = { headers: { Authorization: "token " + token } };
+    const header = {headers: {Authorization: "token " + token}};
     axios.get("https://api.github.com/user", header)
         .then(response => {
 
             req.session.login = true;
             req.session.user = response.data.login;
             console.log(req.session.user);
-            res.redirect("/main.html");
+            client.db("Final").collection("profiles").find({user: req.session.user}).toArray(function (err, result) {
+                if (err) throw err;
+                if (result.length > 0) {
+                    res.redirect("/profile.html");
+                } else {
+                    res.redirect("/main.html");
+                }
+            })
         })
 })
 
+app.post('/submit', (req, res) => {
+    let newLog = (req.body);
+    newLog.user = req.session.user;
+    console.log(collection);
+    client.db("Final").collection("profiles").insertOne(req.body).then(result => res.json(result))
+})
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const {response} = require("express");
@@ -81,7 +94,7 @@ client.connect()
     .then( console.log )
 
     .then( () => {
-        return (client.db("Final").collection("accounts"));
+        return (client.db("Final").collection("profiles"));
     })
     .then( __account => {
         account = __account;
