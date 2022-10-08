@@ -38,7 +38,24 @@ function Topbar() {
 function Sections() {
   return (
     <div className="home-page-sections">
-
+      <HomePageSection title="Canned / Jarred Goods" />
+      <HomePageSection title="Dairy" />
+      <HomePageSection title="Dry / Baking Goods" />
+      <HomePageSection title="Frozen" />
+      <HomePageSection title="Grains" />
+      <HomePageSection title="Meat" />
+      <HomePageSection title="Produce" />
+      <HomePageSection title="Other" />
     </div>
+  )
+}
+
+function HomePageSection({title}) {
+  return (
+    <section>
+      <button className="m-2 btn btn-secondary section-header">
+        {title}
+      </button>
+    </section>
   )
 }

@@ -2455,14 +2455,14 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: rgba(140, 140, 140, 1);
+  border-color: rgba(140, 140, 140, 1);
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5a6268;
-  border-color: #545b62;
+  background-color: rgb(173, 173, 173);
+  border-color: rgb(173, 173, 173);
 }
 
 .btn-secondary:focus, .btn-secondary.focus {

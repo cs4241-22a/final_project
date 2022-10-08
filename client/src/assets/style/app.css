@@ -36,3 +36,25 @@
 .navbar {
     height: var(--topbar-height);
 }
+
+.home-page-sections {
+    height: calc(100vh - var(--topbar-height));
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, calc(100vw / 4));
+}
+
+.home-page-sections section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.home-page-sections section.red {
+    background-color: red;
+}
+
+.home-page-sections section.black {
+    background-color: black;
+}
