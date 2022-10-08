@@ -11,7 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>How to Survive CS@WPI</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <!--Needed to run the opening page-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
     </head>
     <body>
         <container class="is-fixed-top">
@@ -41,7 +43,7 @@
         <br>
         <container>
             <!-- Start Carousel -->
-            <div id="carousel-demo" class="carousel">
+            <div id="opening-slideshow" class="carousel">
                 <div class="item-1">
                     <img src="./resources/bird_placeholder1.jpg">
                 </div>
@@ -51,14 +53,20 @@
                 <div class="item-3">
                     <img src="./resources/bird_placeholder3.jpg">
                 </div>
+                <div class="item-4">
+                    <img src="./resources/bird_placeholder4.jpg">
+                </div>
+                <div class="item-5">
+                    <img src="./resources/bird_placeholder5.jpg">
+                </div>
             </div>
             <!-- End Carousel -->
         </container>
-        <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
 		<script>
-            bulmaCarousel.attach('#carousel-demo', {
+            bulmaCarousel.attach('#opening-slideshow', {
                 slidesToScroll: 1,
-                slidesToShow: 3
+                slidesToShow: 1,
+                autoplay: true
             });
 		</script>
         <br>
