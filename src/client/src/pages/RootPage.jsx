@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
+import Sidebar from '../components/Sidebar';
 
 const RootPage = () => {
     const [xp, setXP] = React.useState(50);
@@ -72,15 +73,7 @@ const RootPage = () => {
 
     return (
         <div className="min-h-screen flex flex-row bg-gray-100">
-            <div className="flex flex-col w-1/6 bg-gray-100 overflow-hidden">
-                <div className="flex items-center justify-center h-20 shadow-md">
-                    <h1 className="text-3xl uppercase text-gray-700">Pet the JPEG</h1>
-                </div>
-                <div className="flex flex-col items-center h-full shadow-md">
-                    <h2 className='font-bold text-2xl'>{petName}</h2>
-                    <h3 className='text-xl'>Level: {level}</h3>
-                </div>
-            </div>
+            <Sidebar petName={petName} level={level} />
             <div className='flex justify-center items-center flex-col w-full gap-4 bg-gray-800'>
                 <img onClick={() => handleClick()} src="https://clipartix.com/wp-content/uploads/2019/02/black-cat-clipart-2-2019-9.png" alt="Pet" width="200px" />
                 <progress id="file" value={xp} max={xpToNextLevel}> {xp} </progress>
