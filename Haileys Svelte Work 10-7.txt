@@ -8,3 +8,6 @@ This further breaks down sveltes front end use
 https://enlear.academy/5-reasons-why-you-should-use-svelte-for-front-end-development-in-2021-c9e84db4f55c
 
 
+Different Svelte File
+https://svelte.dev/tutorial/declaring-props
+
