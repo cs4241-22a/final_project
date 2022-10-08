@@ -1,5 +1,23 @@
 <%- include('header', { title: 'ReactionTests' }) -%>
 <div class="main-content">
-    <h1>CPS</h1>
+    <div class="px-2 py-2 my-2 text-center mx-auto" style="max-width: 70vw">
+        <!--    <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
+        <h1 class="display-5 fw-bold text-light">Clicks Per Second</h1>
+        <div class="col-lg-auto mx-auto vh-80">
+            <p class="lead mb-4 text-muted">Start the test below and after a 3 second countdown you'll have 10 seconds to perform as many clicks as possible!</p>
+            <button id="startBtn" class="btn btn-success mb-4">Start Test</button>
+            <p id="statusText" class="text-muted"> </p>
+        </div>
+        <!--        <div class="container-md text-center">-->
+        <div id="clickwindow" class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vw; width: 60vw">
+            <div class="container-md">
+                <div class="row justify-content-evenly">
+                    <h1 id="timer" class="user-select-none text-light"></h1>
+                </div>
+            </div>
+        </div>
+        <!--        </div>-->
+    </div>
 </div>
+<script src="/javascripts/cps.js"></script>
 <%- include('footer') -%>
