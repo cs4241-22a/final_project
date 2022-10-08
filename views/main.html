@@ -21,8 +21,9 @@
             <input type="text" id="addr" name="addr" required><br><br>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required><br><br>
-            <label for="ageSlider">Age (between 0 and 60+):</label>
-            <input style="float: right;" type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
+            <label for="ageSlider">Age:</label>
+            <label id="ageValue"></label>
+            <input style="float: right;" type="range" id="ageSlider" name="Age" min="18" max="200" step="1" oninput="document.getElementById('ageValue').innerHTML = this.value" required /><br><br>
 <!--        </form>-->
     </div>
     <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
@@ -35,9 +36,9 @@
             <label for="currProject">Current Project:</label>
             <input type="text" id="currProject" name="currProject" required><br><br>
             <p style="text-align: center;">Mingle or Looking to Date?</p>
-            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="Mingle" value="Mingle" required>
+            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="status" value="Mingle" required>
             <label for="mingleStatus">Mingle</label>
-            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="Date" value="Date" required>
+            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="status" value="Date" required>
             <label for="toDateStatus">Date</label><br><br>
 <!--        </form>-->
     </div>
@@ -48,8 +49,9 @@
             <input type="text" id="yAgeRange" name="yAgeRange" required><br><br>
             <label for="oAgeRange">Oldest Age Preference:</label>
             <input type="text" id="oAgeRange" name="oAgeRange" required><br><br>
-            <label for="distSlider">Distance (0 and 20k+ miles):</label>
-            <input style="float: right;" type="range" id="distSlider" name="Distance" min="0" max="20000" step="50" required /><br><br>
+            <label for="distSlider">Distance (0 and 20k+ miles): </label>
+            <label id="distValue"></label>
+            <input style="float: right;" type="range" id="distSlider" name="Distance" min="0" max="20000" step="50" oninput="document.getElementById('distValue').innerHTML = this.value" required /><br><br>
             <label for="sexualOrientation">Sexual Orientation:</label>
             <select name="sexualOrientation" id="sexualOrientation" required>
                 <option value="" disabled selected hidden>Choose an option</option>
@@ -64,7 +66,7 @@
 <!--        </form>-->
     </div>
 </div>
-    <button id = "formSubmit">Submit</button>
+    <div style="text-align: center;"><button id = "formSubmit" class="submitButton-container">Submit</button></div>
 <!--<div class="submitButton-container" style="text-align: center;"><input style="text-align: center;" type="submit" id="submitBtn" onclick="submit()"></div>-->
 </form>
 <script src="/main.js"></script>
