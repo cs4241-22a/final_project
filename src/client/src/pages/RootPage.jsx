@@ -51,6 +51,10 @@ const RootPage = () => {
         }).then((response) => {
             response.json().then((data) => {
                 setXP(data.xp);
+                if(data.level != level){
+                    setLevel(data.level);
+                    setXPToNextLevel(data.xpToNextLevel);
+                }
             }).catch((error) => {
                 const mockData = {
                     name: "Richard",

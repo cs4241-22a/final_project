@@ -5,6 +5,12 @@ module.exports = async (req, res, next) => {
     const initialPet = await Pet.findOne({ githubUsername });
     initialPet.xp += 1;
 
+    if(initialPet.xp >= initialPet.xpToNextLevel) {
+        initialPet.level += 1;
+        initialPet.xp = 0;
+        initialPet.xpToNextLevel = Math.floor(initialPet.xpToNextLevel * 1.5);
+    }
+
     const resultPet = await Pet.findOneAndUpdate({ githubUsername }, initialPet);
     res.send(resultPet);
 };
