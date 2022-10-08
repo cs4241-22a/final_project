@@ -6,12 +6,24 @@ const RootPage = () => {
     const [level, setLevel] = React.useState(1);
     const [xpToNextLevel, setXPToNextLevel] = React.useState(100);
     const [petName, setPetName] = React.useState("Pet Name");
+    const [githubUsername, setGithubUsername] = React.useState("Github Username");
+    const [hat, setHat] = React.useState(0);
+    const [color, setColor] = React.useState(0);
+    const [species, setSpecies] = React.useState(0);
 
     useEffect(() => {
         fetch("/api/pet").then((response) => {
             //Parse the data from response, then update state
             response.json().then((data) => {
-                console.log(data)
+                console.log(data);
+                setXP(data.xp);
+                setLevel(data.level);
+                setXPToNextLevel(data.xpToNextLevel);
+                setPetName(data.name);
+                setGithubUsername(data.githubUsername);
+                setHat(data.hat);
+                setColor(data.color);
+                setSpecies(data.species);
             }).catch((error) => {
                 //Mock data for now
                 const mockData = {
@@ -31,24 +43,14 @@ const RootPage = () => {
     }, [])
 
     const handleClick = () => {
-
-        setXP(xp + 1);
-        if (xp + 1 >= xpToNextLevel) {
-            setLevel(level + 1);
-            setXPToNextLevel(xpToNextLevel * 2);
-        }
-
-        fetch("/api/pet", {
+        fetch("/api/pet/click", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                xp: xp
-            })
+            }
         }).then((response) => {
             response.json().then((data) => {
-                console.log(data)
+                setXP(data.xp);
             }).catch((error) => {
                 const mockData = {
                     name: "Richard",
@@ -58,10 +60,10 @@ const RootPage = () => {
                     hat: 1,
                     color: 3,
                 }
-
                 //Verify?
             })
         })
+        
     }
 
     return (

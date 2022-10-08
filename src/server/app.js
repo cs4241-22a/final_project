@@ -11,6 +11,7 @@ const isLoggedIn = require("./middleware/isLoggedIn");
 const connectionChecker = require("./middleware/connectionChecker");
 const Pet = require("./models/Pet");
 const getRandomName = require("./models/Utility");
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT | 3000;
@@ -45,7 +46,13 @@ passport.use(
                 console.log("Saving new default pet for " + profile._json.login);
                 const defaultPet = new Pet({
                     githubUsername: profile._json.login,
-                    name: getRandomName()
+                    name: getRandomName(),
+                    color:0,
+                    hat:0,
+                    level:1,
+                    xp:0,
+                    species:0,
+                    xpToNextLevel:100,
                 });
                 await defaultPet.save();
             }
@@ -62,6 +69,7 @@ app.use(
         saveUninitialized: true,
     })
 );
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(morgan("tiny"))
