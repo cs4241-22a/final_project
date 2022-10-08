@@ -13,19 +13,17 @@ const verifyInfo = function() {
     }  
 
     const confirmPw = document.getElementById("confirmpassword").value;
-    if(pw != confirmPw) {
+    if(pw !== confirmPw) {
         document.getElementById("message").innerHTML = "**Passwords do not match";  
        return false;
-    }
-
-    else {
+    } else {
         // all good, try to make account
         const json = { 
           "username": username, 
           "password": pw
-        }
-        const data = JSON.stringify(json)
-        console.log("my data: " + data)
+        };
+        const data = JSON.stringify(json);
+        console.log("my data: " + data);
 
         fetch("/register", {
             method: "POST",
@@ -33,19 +31,15 @@ const verifyInfo = function() {
             headers: {
             "Content-Type": "application/json"
             }
-        })
-
-        .then (response => {
+        }).then (response => {
             if (!response.ok) {
               throw new Error(`HTTP error, status = ${response.status}`);
             }
             return response.json();
-        })
-        
-        .then(data => {
-            console.log(data)
+        }).then(data => {
+            console.log(data);
             document.getElementById("message").innerHTML = data;
             return false;
-        })
+        });
     }
 }

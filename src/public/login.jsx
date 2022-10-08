@@ -1,3 +1,3 @@
 const submit = function() {
-    console.log("submit")
+    console.log("submit");
 }
