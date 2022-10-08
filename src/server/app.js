@@ -12,6 +12,7 @@ const connectionChecker = require("./middleware/connectionChecker");
 const Pet = require("./models/Pet");
 const getRandomName = require("./models/Utility");
 const cors = require("cors");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 const port = process.env.PORT | 3000;
@@ -66,7 +67,8 @@ app.use(
     session({
         secret: process.env.SESSION_SECRET,
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
+        store: MongoStore.create({client: mongoose.connection.getClient()}),
     })
 );
 app.use(cors());
