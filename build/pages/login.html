@@ -5,7 +5,15 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <div id="app"></div>
-        <script type="module" src="public/login.js"></script>
+        <form action="/login" method="POST">
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username" autocomplete="off" />
+            <label for="password">password:</label>
+            <input type="password" id="password" name="password" />
+            <button name="login" type="submit">login</button>
+        </form>
+        
+        <p>or, <a href="register">register an account</a></p>
+        <p id="message"></p>
     </body>
 </html>

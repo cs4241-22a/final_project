@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>register</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script src="public/register.js"></script>
+        <form onsubmit="return false" method="POST">
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username" autocomplete="off" />
+            <label for="password">password:</label>
+            <input type="password" id="password" name="password" />
+            <label for="confirmpassword">confirm password:</label>
+            <input type="password" id="confirmpassword" name="password" />
+            <button onclick="verifyInfo()"">create account</button>
+        </form>
+
+        <p>if you already have an account, <a href="login">login</a></p>
+        <p id="message"></p>
+    </body>
+</html>

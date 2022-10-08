@@ -11,6 +11,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 let recipecollection = null
 let usercollection = null
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+
 // cookie middleware
 app.use(express.json())
 app.use( cookie({
@@ -41,26 +44,13 @@ client.connect()
     })
 
 //login area
-app.post( '/login', (req,res)=> {
+app.post('/login', (req, res)=> {
   const user = req.body.username
   const password = req.body.password
   //check user database for user
   usercollection.find({ $and: [ { password: { $exists: true } }, { username: user } ] }).toArray()
-      .then( result => {
-        if(result.length === 0) {
-          //if username not found create new user and login
-          let user_login = {
-            username: user,
-            password: password
-          }
-          usercollection.insertOne( user_login )
-              .then( function() {
-                req.session.login = true
-                //set the username that was successful
-                req.session.username = req.body.username
-                res.redirect( 'index' )
-              })
-        } else if(password === result[0].password) { //only one user/password combo should exist for each user
+      .then(result => {
+        if(password === result[0].password) { //only one user/password combo should exist for each user
           //good login
           req.session.login = true
           //set the username that was successful
@@ -76,12 +66,47 @@ app.post( '/login', (req,res)=> {
       })
 })
 
+app.post('/register', (req, res) => {
+  const user = req.body.username
+  const password = req.body.password
+
+  usercollection.find({ username: user }).toArray()
+    .then(result => {
+      if (result.length === 0) {
+        //if username not found create new user and login
+        let user_login = {
+          username: user,
+          password: password
+        }
+        usercollection.insertOne( user_login )
+            .then(function() {
+              req.session.login = true
+              //set the username that was successful
+              req.session.username = req.body.username
+              res.redirect('index')
+            })
+      } 
+      
+      else {
+        // username found, can't make account
+        res.end(JSON.stringify("username already in use"))
+      }
+})})
+
 app.get( '/index', ( req, res) => {
     res.sendFile( __dirname + '/build/pages/index.html' )
 })
 
 app.get( '/', (req,res) => {
     res.sendFile( __dirname + '/build/pages/index.html' )
+})
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/build/pages/login.html')
+})
+
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/build/pages/register.html')
 })
 
 app.use(express.static(path.join(__dirname, 'build')))

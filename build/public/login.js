@@ -1,1 +1,3 @@
-import React from "../_snowpack/pkg/react.js";
+const submit = function() {
+  console.log("submit");
+};
