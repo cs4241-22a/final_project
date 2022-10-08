@@ -1,7 +1,6 @@
 <!--
     TODO: 
-    - fix icon to link to homepage
-    - add in content for the slideshow
+    - actually get this functioning lmao
 -->
 
 <!DOCTYPE html>
@@ -20,6 +19,7 @@
         <container class="is-fixed-top">
             <br>
             <h1 class="title has-text-centered">HOW TO SURVIVE CS@WPI</h1>
+            <!-- svelte-ignore a11y-no-redundant-roles -->
             <nav class="navbar" role="navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="https://www.pictureofhotdog.com/">
