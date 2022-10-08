@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 router.use("/assets", static("public/assets"));
 
 router.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 router.post("/logout", (req, res, next) => {
