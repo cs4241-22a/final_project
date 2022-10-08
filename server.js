@@ -116,7 +116,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-
+    
     usercollection.find({ username: user }).toArray()
         .then(result => {
             if (result.length === 0) {
@@ -129,7 +129,7 @@ app.post('/register', (req, res) => {
                     .then(function () {
                         req.session.login = true;
                         req.session.username = req.body.username;
-                        res.redirect('index');
+                        res.redirect('/');
                     })
             } else {
                 res.end(JSON.stringify("username already in use"));

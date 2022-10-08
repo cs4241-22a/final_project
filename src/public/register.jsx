@@ -23,7 +23,6 @@ const verifyInfo = function() {
           "password": pw
         };
         const data = JSON.stringify(json);
-        console.log("my data: " + data);
 
         fetch("/register", {
             method: "POST",
@@ -35,10 +34,17 @@ const verifyInfo = function() {
             if (!response.ok) {
               throw new Error(`HTTP error, status = ${response.status}`);
             }
-            return response.json();
+            else if (!response.redirected) {
+                return response.json();
+            }
+            else {
+                window.location.replace(response.url);
+                return false;
+            }
         }).then(data => {
-            console.log(data);
-            document.getElementById("message").innerHTML = data;
+            if (data != false) {
+                document.getElementById("message").innerHTML = data;
+            }
             return false;
         });
     }
