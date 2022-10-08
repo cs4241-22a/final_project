@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Tabs, Tab, TabList, TabPanel } from 'react-tabs'
+import Resource from './Resource';
 
-const Sidebar = ({ petName, level }) => {
+const Sidebar = ({ petName, level, onResourceClick }) => {
 
     const [hats, setHats] = React.useState([]);
     const [colors, setColors] = React.useState([]);
@@ -39,21 +40,21 @@ const Sidebar = ({ petName, level }) => {
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {hats.map((hat) => {
                             return (
-                                <img className="w-full h-full" src={hat.filePath} />
+                                <Resource key={hat.resourceID} onClick={() => onResourceClick({ filePath: hat.filePath, resourceType: hat.resourceType })} filePath={hat.filePath} />
                             )
                         })}
                     </TabPanel>
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {colors.map((color) => {
                             return (
-                                <img className="w-full h-full" src={color.filePath} />
+                                <Resource key={color.resourceID} onClick={() => onResourceClick({ filePath: color.filePath, resourceType: color.resourceType })} filePath={color.filePath} />
                             )
                         })}
                     </TabPanel>
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {species.map((species) => {
                             return (
-                                <img className="w-full h-full" src={species.filePath} />
+                                <Resource key={species.resourceID} onClick={() => onResourceClick({ filePath: species.filePath, resourceType: species.resourceType })} filePath={species.filePath} />
                             )
                         })}
                     </TabPanel>
