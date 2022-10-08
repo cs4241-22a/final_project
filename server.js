@@ -53,7 +53,8 @@ app.get('/loggedIn', (req, res) => {
 
             req.session.login = true;
             req.session.user = response.data.login;
-            console.log(req.session.user);
+            req.session.pic = response.data.avatar_url;
+            console.log(req.session.pic);
             client.db("Final").collection("profiles").find({user: req.session.user}).toArray(function (err, result) {
                 if (err) throw err;
                 if (result.length > 0) {
@@ -65,11 +66,23 @@ app.get('/loggedIn', (req, res) => {
         })
 })
 
+app.get('/profilepic', (req, res) => {
+    res.send(req.session.pic);
+})
+
+app.get('/getprofile', (req, res) => {
+    client.db("Final").collection("profiles").find({user: req.session.user}).toArray().then(result => res.json(result));
+})
+
 app.post('/submit', (req, res) => {
     let newLog = (req.body);
     newLog.user = req.session.user;
     console.log(collection);
     client.db("Final").collection("profiles").insertOne(req.body).then(result => res.json(result))
+})
+
+app.get('/getUser', (req, res) => {
+    res.send(req.session.user);
 })
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
