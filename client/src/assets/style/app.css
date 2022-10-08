@@ -1,0 +1,38 @@
+:root {
+    --topbar-height: 10vh;
+}
+
+.home-page-container {
+    background-image: url("../../assets/images/iStock-grocery-store.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.input-text {
+    color: rgba(140, 140, 140, 1);
+}
+
+.home-page-container {
+    background-image: url("../../assets/images/iStock-grocery-store.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.input-text {
+    color: rgba(140, 140, 140, 1);
+}
+
+.topbar-logo {
+    height: 100%;
+    width: auto;
+}
+
+.navbar {
+    height: var(--topbar-height);
+}

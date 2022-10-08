@@ -1,9 +1,13 @@
+// Style imports
+import './assets/style/bootstrap.css';
+import './assets/style/app.css';
+
 // Library Imports
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Component Imports
-import LoginPage from "./components/loginPage/LoginPage";
-import HomePage from "./components/homePage/HomePage";
+import LoginPage from "./components/LoginPage";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
