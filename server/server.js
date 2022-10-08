@@ -1,6 +1,6 @@
 import express from "express";
 const port = '3000';
-// Setup static express
+// Setup static express server
 const app = express();
 app.use(express.static('build'));
 const listenPort = process.env.PORT || port;
