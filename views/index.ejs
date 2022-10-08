@@ -1,0 +1,62 @@
+<%- include('header', { title: 'ReactionTests' }) -%>
+<div class="main-content">
+    <div class="px-2 py-2 my-2 text-center">
+    <!--    <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
+        <h1 class="display-5 fw-bold text-light">INDEX</h1>
+        <div class="col-lg-auto mx-auto">
+            <p class="lead mb-5 text-muted">Test your reaction time, accuracy and more!</p>
+            <div class="container text-center justify-content-sm-center">
+                <%if (user) {%>
+                <div class="row">
+                    <div class="col">
+                        <p class="lead mb-4 text-muted">Play games by going to a page above.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-5 align-self-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Your Scores:
+                                </h5>
+                                <!-- TODO: -->
+                                <p class="card-text">
+                                    Display past scores here
+                                </p>
+                            </div>
+                    </div>
+                </div>
+                    
+                <% } else { %>
+                    <p class="lead mb-4 text-muted">Please login above to continue.</p>
+                <% } %>
+            </div>
+        <!--        <p class="lead mb-lg-4" style="padding-top: 3rem">Notes:</p>-->
+                
+            
+        </div>
+    
+<!--        <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">-->
+<!--            <div class="modal-dialog">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="staticBackdropLabel">Edit Note</h5>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <input type="text" class="form-control" id="editedText">-->
+<!--                        <input type="hidden" id="editId" value="-1">-->
+<!--                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                        <button type="button" class="btn btn-primary" id="saveEditBtn">Save Changes</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+</div>
+<%- include('footer') -%>
+

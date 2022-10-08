@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/scripts.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple node.js app with various reaction testing games. Built with express, passport, and mongodb.">
+</head>
+<body style="background-color: rgb(19, 20, 23)">
+<header class="p-3 mb-3" style="background-color: rgb(30, 31, 38)">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <%= title %>
+            </a>
+            
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                <li><a href="/reaction" class="nav-link px-2 text-white-80 link-secondary">Reaction Time</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                <li><a href="/cps" class="nav-link px-2 text-white-80 link-secondary">Clicks Per Second</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                <li><a href="/accuracy" class="nav-link px-2 text-white-80 link-secondary">Accuracy</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                <li><a href="/leaderboard" class="nav-link px-2 text-white-80 link-secondary">Leaderboard</a></li>
+            </ul>
+
+            <%if (user) {%>
+            <div class="dropdown text-end">
+                <input type="hidden" value="<%= user.id %>" id="user">
+                <a href="#" class="d-block link-light text-muted text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src=<%= user.profilePhoto %> alt="mdo" width="32" height="32" class="rounded-circle me-2">
+                    <%= user.username %>
+                </a>
+                <ul class="dropdown-menu text-small" style="">
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form action="/logout" method="post">
+                        <button class="dropdown-item" type="submit">Sign out</button>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        </form>
+                    </li>
+<!--                    <li><a class="dropdown-item" href="/logout">Sign out</a></li>-->
+                </ul>
+            </div>
+            <% } else { %>
+                <a href="/login/federated/github" class="btn btn-info"><span class="fa fa-github"></span> Github Login</a>
+            <% } %>
+        </div>
+    </div>
+</header>
+<input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrf">
