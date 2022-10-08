@@ -1,7 +1,8 @@
- import React from "react";
+import React from "react";
 // import Modal from "react-modal"
-import { AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
+import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
 import Modal from '@mui/material/Modal';
+import { pink } from "@mui/material/colors";
 // import BasicModal from "./entities/modal";
 
 const style = {
@@ -14,35 +15,129 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+};
+
+const centerStyle = {
+    display: 'flex',
+    alignItems: "center",
+    direction: "row",
+    flexDirection: 'column',
+    background: "lightgrey"
   };
 
-  export default function Reminders() {
+const StyledPaper = styled(Paper)(({ theme }) => ({
+backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+...theme.typography.body2,
+padding: theme.spacing(2),
+maxWidth: 400,
+color: theme.palette.text.primary,
+}));
+
+export default function Reminders() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
+    const [open2, setOpen2] = React.useState(false);
+    const handleOpen2 = () => setOpen2(true);
+    const handleClose2 = () => setOpen2(false);
+    
+    let blogs = []
+
+    const blogFormat = <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
+    <Grid container wrap="nowrap" spacing={2}>
+    <Grid item>
+        <Avatar>W</Avatar>
+    </Grid>
+    <Grid item xs>
+        <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
+    </Grid>
+    </Grid>
+    </StyledPaper> </div>
+    
+
+
+    const addBlog = () => {
+        console.log("hi")
+        blogs.push(blogFormat)
+    }
+
     return (
-      <div>
-        <Button onClick={handleOpen}>Open modal</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-            <Button onClick={handleClose}>Open modal</Button>
-          </Box>
-        </Modal>
-      </div>
+    <view style={centerStyle}>
+        <div>
+            <Box sx={{ height:"fit-content", width: 'fit-content', maxWidth: 500, borderRadius:3, borderWidth:1, border:5, borderColor:"navy" }}>
+                <Typography variant="h3" gutterBottom>
+                Blogger
+                </Typography>
+            </Box>
+            <Fab style={{ backgroundColor:"green", color:"black", width:75, height:75}} onClick={handleOpen}>Make a post!</Fab>
+            <Modal
+                id="modalPost"
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="postMaker"
+                aria-describedby="blogDesc"
+            >
+                <Box sx={style}>
+                  <Box
+                        component="form"
+                     sx={{
+                          '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <Typography id="createBlog" variant="h6" component="h2">
+                            Create your blog:
+                        </Typography>
+                        <TextField fullWidth inputProps={{ maxLength: 250 }} id="blogDesc" label="big balls in yo mouth" multiline variant="filled"/>
+                        <Button onClick={addBlog}>Post your blog!</Button>
+                        <Button onClick={handleClose}>Cancel</Button>
+                    </Box>
+                </Box>
+            </Modal>
+        </div>
+
+
+
+        <div id="insertBlogPosts">
+        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen2}>View "Usernames" post</Fab>
+            <Modal
+                open={open2}
+                onClose={handleClose2}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+
+                <Box sx={style}>
+                    {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
+                  <Box
+                        component="form"
+                     sx={{
+                          '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            "Username" posted:
+                        </Typography>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            STUFF THEY TYPED HERE
+                        </Typography>
+                        <Button>View Replies!</Button>
+                        <Button>Reply!</Button>
+                        <Button onClick={handleClose}>Exit!</Button>
+                    </Box>
+                </Box>
+            </Modal>
+
+
+        </div>
+    </view>
     );
-  }
+}
+
+
 
 /*
 class Reminders extends React.Component {
