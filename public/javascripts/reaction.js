@@ -4,8 +4,11 @@ window.onload = function() {
     const reactionBtn1 = document.getElementById("reactionBtn1")
     const reactionBtn2 = document.getElementById("reactionBtn2")
     const reactionBtn3 = document.getElementById("reactionBtn3");
+    const reactionBtn4 = document.getElementById("reactionBtn4");
+    const reactionBtn5 = document.getElementById("reactionBtn5");
+    const reactionBtn6 = document.getElementById("reactionBtn6");
     
-    var btns = [reactionBtn1, reactionBtn2, reactionBtn3]
+    var btns = [reactionBtn1, reactionBtn2, reactionBtn3, reactionBtn4, reactionBtn5, reactionBtn6]
     var clicks = []
     var startTime = null
     var chosenBtn = null
