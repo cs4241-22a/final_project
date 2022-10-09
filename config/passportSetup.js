@@ -35,7 +35,8 @@ passport.use(
                 google_id: "",
                 Local_user_id: "",
                 Local_password: "",
-                Friends: []
+                Friends: [],
+                Friend_Request: []
               })
               .then((newUser) => {
                 newUser._id = newUser.insertedId;
@@ -106,7 +107,8 @@ passport.use(
                 google_id: google_id,
                 Local_user_id: "",
                 Local_password: "",
-                Friends: []
+                Friends: [],
+                Friend_Request: []
               })
               .then((newUser) => {
                 newUser._id = newUser.insertedId;

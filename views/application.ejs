@@ -1,18 +1,65 @@
 <!DOCTYPE html>
 <head>
-
 </head>
+<script>
+    const refresh = 1000;
+    const ChangeEndTime = function () {
+        document.querySelector('#end_time').value = document.querySelector('#start_time').value;
+        document.querySelector('#end_time').min = document.querySelector('#start_time').value;
+    }
+    const TimeNow = function () {
+        let Now = new Date()
+        document.querySelector("#timenow").innerHTML=Now;
+        document.querySelector("#Submit_Time").value = Now;
+        RefreshTime();
+    }
+    const RefreshTime = function () {
+
+        setTimeout(TimeNow, refresh);
+    }
+    
+    window.onload = function() {
+        TimeNow();
+
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+        now.setMilliseconds(null)
+        now.setSeconds(null)
+
+        document.querySelector('#start_time').value = now.toISOString().slice(0, -1);
+        document.querySelector('#start_time').min = now.toISOString().slice(0, -1);
+        // document.querySelector('#start_time').step = 60 * 15;
+        document.querySelector('#end_time').value = now.toISOString().slice(0, -1);
+        document.querySelector('#end_time').min = now.toISOString().slice(0, -1);
+        // document.querySelector('#end_time').step = 60 * 15;
+    }
+
+</script>
 <body>
     <h1>This is the application</h1>
     <a href="/friends">See friends</a>
+    <h2 id="timenow"></h2>
     <form method = 'POST' action = '/app/add_plan' >
-        Enter Todo: <input type = 'text' name = 'note'></input> <br />
-        Enter Time Slot: <input type = 'text' name = 'time'></input> <br />
+        Enter Todo: <input type = 'text' name = 'note' required></input> <br />
+        Enter Start Time: <input id="start_time" type = 'datetime-local' name = 'start_time'></input> <br />
+        Enter End Time: <input id="end_time" type = 'datetime-local' name = 'end_time' ></input> <br />
+        <input id="Submit_Time" type = "hidden" type = 'text' name = 'submit_time' value = "<%= moment().format() %>" ></input>
         <input
       type="submit"
       value="Add plan"
     />
     </form>
     <p><%= msg %></p>
-    <h3><%= body %></h3>
+    <% body.forEach(function(plan){ %>
+        <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
+        <form method="POST" action="/app/delete_plan">
+            Note:<%= plan.Note %><br><br>
+            Start Time:<%= moment(plan.Start_Time) %><br><br>
+            End Time:<%= moment(plan.End_Time) %><br><br>
+            Added: <%= moment(plan.Submit_Time).fromNow() %>
+            <input type="hidden" type = 'text' name = '_id' value="<%= plan._id %>"></input>
+            <input type="submit" value="Delete"/><br><br><hr>
+        </form>
+    <% }) %>
 </body>

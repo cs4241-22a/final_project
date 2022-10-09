@@ -18,3 +18,6 @@ Project Name: The diary group
    - Mongodb
    - React (TBD)
    - Three (TBD)
+
+Difficulties:
+1. converting the datas, and have a way sorting them

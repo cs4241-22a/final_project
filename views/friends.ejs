@@ -1,1 +1,19 @@
-<h1>Welcome to friends side</h1>
+<h1>Welcome to friends slide</h1>
+<h5><%= myID %></h5>
+<form method = 'POST' action = '/friends/add_friend' >
+    FriendID: <input type = 'text' name = 'friend_id' required></input> <br />
+    <input type="submit" value="Add friend"/>
+</form>
+<% friend_list.forEach(friend => { %>
+    <li><%= friend[0] %></li>
+
+    <li><%= friend[1] %></li>
+<% }) %>
+<h2>friend requests From</h2>
+<% friend_req.forEach(req => { %>
+    <li><%= req[0] %></li>
+    <form method="POST" action="/friends/accept_friend_request">
+        <input type='hidden' value="<%= req[1] %>" name="friend_id"></input>
+        <input type="submit" value="Accept">
+    </form>
+<% }) %>
