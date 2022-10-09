@@ -6,6 +6,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn')
 const UserRouter = require('./api/User')
+const AuthRouter = require('./api/Auth')
 const auth = require('./middleware/authenticate')
 
 // INIT
@@ -47,6 +48,8 @@ app.get('/game', auth, (req, res) => {
 })
 // Users route
 app.use('/user', UserRouter)
+// Auth route
+app.use('/auth', AuthRouter)
 
 // connect to database, ASK ME FOR THE ENV VARIABLES OR THIS WILL NOT WORK!!, 
 // if you do not need to test w/ database then comment out this code

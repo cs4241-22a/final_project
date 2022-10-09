@@ -74,8 +74,50 @@ const api = {
             },
             desc: 'used for logging in, authenticates user and creates an auth token'
         },
+        {
+            '/auth/login': {
+                req: {
+                    body: {
+                        username: String
+                    }
+                },
+                res: {
+                    body: {
+                        accessToken: String,
+                        refreshToken: String
+                    }
+                }
+            }
+        },
+        {
+            '/auth/token': {
+                req: {
+                    body: {
+                        token: String
+                    }
+                },
+                res: {
+                    body: {
+                        accessToken: String
+                    }
+                }
+            }
+        }
+    ],
+    'DELETE': [
+        {
+            '/auth/logout': {
+                req: {
+                    body: {
+                        token: String
+                    }
+                },
+                res: {
+                    status: "SUCCESS/FAILED"
+                }
+            }
+        }
     ]
-
 }
 
 //MONGODB Models

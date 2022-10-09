@@ -1,13 +1,16 @@
-require('dotenv').config()
 const express = require('express')
-const app = express()
+const authRouter = express.Router()
+// INIT
+require('dotenv').config()
+authRouter.use(express.json())
+// authorization
 const jwt = require('jsonwebtoken')
-app.use(express.json())
+
 
 // Ideally stored in a database
 let refreshTokens = []
 
-app.post('/login', (req, res) => {
+authRouter.post('/login', (req, res) => {
     const username = req.body.username
     const user = { name: username }
 
@@ -16,7 +19,8 @@ app.post('/login', (req, res) => {
     refreshTokens.push(refreshToken)
     res.json({ accessToken: accessToken, refreshToken: refreshToken })
 })
-app.post('/token', (req, res) => {
+
+authRouter.post('/token', (req, res) => {
     const refreshToken = req.body.token
     if (refreshToken == null) { return res.status.sendStatus(401) }
     if (!refreshTokens.includes(refreshToken)) {
@@ -30,7 +34,8 @@ app.post('/token', (req, res) => {
         res.json({ accessToken: accessToken })
     })
 })
-app.delete('/logout', (req, res) => {
+
+authRouter.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus(204)
 })
@@ -39,4 +44,4 @@ const generateAccessToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m' })
 }
 
-app.listen(4000)
+module.exports = authRouter; 

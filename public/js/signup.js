@@ -7,7 +7,6 @@ const clearFormPassword = () => {
 
 signupForm.addEventListener('submit', async e => {
     e.preventDefault()
-    const statusMSG = document.getElementById('status-message')
     const username = signupForm.elements['signupUsername'].value
     const password = signupForm.elements['signupPassword'].value
     const passwordConfirm = signupForm.elements['signupPasswordConfirm'].value

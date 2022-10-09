@@ -84,9 +84,8 @@ userRouter.post('/signup', (req, res) => {
         })
     }
 })
-
 // Signin
-userRouter.post('/signin', (req, res) => {
+userRouter.post('/login', (req, res) => {
     // Getting username & password from the request
     let { username, password } = req.body;
     username = username.trim()
