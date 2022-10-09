@@ -7,42 +7,43 @@ require('dotenv').config()
 const express = require('express'),
       mongodb  = require('mongodb'),
       path = require('path'),
+      
       app = express()
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-/**
- * MongoDB setting up connection variables
- */
-/** 
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST}`
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-*/
-/**
- * MongoDB Connecting to database
- */
-let collection = null;
-
-// client.connect()
-//   .then(() => {
-//     return client.db('a3-inventory').collection('inventory')
-//   })
-//   .then(__collection => {
-//     collection = __collection;
-
-// })
 
 app.use(express.static('public'))
 app.use(express.static('views'))
 app.use(express.json())
 
 /**
+ * MongoDB setting up connection variables
+ */
+
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST}`
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+/**
+ * MongoDB Connecting to database
+ */
+let collection = null;
+
+client.connect()
+  .then(() => {
+    return client.db('ClimbingMap').collection('climbs')
+  })
+  .then(__collection => {
+     collection = __collection;
+  })
+/**
  * When user want's all route entries
  */
-// app.get('/routes', (req, res) => {
-//   collection.find({_id:mongodb.ObjectId(req.session.passport.user)})
-//   .project({_id:0, items:1}).toArray()
-//   .then(result => res.json(result));
-// })
+app.get('/routes', (req, res) => {
+  let routes = []
+  collection.find()
+    .toArray()
+    .then(result => res.json(result))
+})
 
 // /**
 //  * When new data is submitted
