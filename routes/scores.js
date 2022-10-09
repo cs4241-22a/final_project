@@ -25,8 +25,8 @@ router.get("/getResultsForUser", function(req, res, next) {
 router.post('/addResult', function (req, res, next) {
     console.log("AddResult: %s", req.body)
     Results.create({owner_id: req.body.owner_id, game_type: req.body.game_type, score: req.body.score}, () => {
-        Results.find({owner_id: req.body.owner_id}).lean().exec(function (err, documents) {
-            console.log("Found result: %s", documents);
+        Results.find({game_type: req.body.game_type}).lean().exec(function (err, documents) {
+            console.log("Found results: %s", documents);
             res.json(documents)
         })
     })

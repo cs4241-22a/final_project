@@ -58,3 +58,6 @@
     </div>
 </header>
 <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrf">
+<% if (locals.game_type) {%>
+    <input type="hidden" name="_game_type" value="<%= game_type %>" id="game_type">
+<% } %>

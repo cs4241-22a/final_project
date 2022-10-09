@@ -41,7 +41,28 @@ window.onload = function() {
             setTimeout(setBtn, delay)
         }
         else {
-            statusText.innerText = `Avg Reaction Time: ${average(clicks).toFixed(3)}`
+            var avg = average(clicks).toFixed(3)
+            statusText.innerText = `Avg Reaction Time: ${avg}`
+
+            var result = {
+                owner_id: user,
+                game_type: game,
+                score: avg
+            }
+            
+            fetch( '/addResult', {
+                method:'POST',
+                headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
+                body: JSON.stringify(result)
+            })
+                .then(async function( response ) {
+                    var data = await response.json()
+                    console.log( data )
+                    console.log("response ^")
+                    const evt = new CustomEvent("updateData", {detail: {data: data}, bubbles: true, composed: false, cancelable: false})
+                    document.dispatchEvent(evt)
+                })
+            
             clicks = []
             startBtn.disabled = false
         }
