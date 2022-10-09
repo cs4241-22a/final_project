@@ -50,6 +50,23 @@ window.onload = function() {
         statusText.innerText = `You performed ${numClicks} in 10 seconds!`
         clickWindow.style.backgroundColor = "lightslategrey"
         clickWindow.removeEventListener('click', handleClick)
+        
+        var result = {
+            owner_id: user,
+            game_type: game,
+            score: numClicks
+        }
+
+        fetch( '/addResult', {
+            method:'POST',
+            headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
+            body: JSON.stringify(result)
+        }).then(async function( response ) {
+            var data = await response.json()
+            console.log( data )
+            console.log("response ^")
+        })
+        
         startBtn.disabled = false
     }
     

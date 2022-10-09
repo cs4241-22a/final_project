@@ -24,4 +24,24 @@ window.onload = function() {
     const reactionBtn3 = document.getElementById("reactionBtn3");
     const reactionBtn4 = document.getElementById("reactionBtn4");
     const reactionBtn5 = document.getElementById("reactionBtn5");
+    
+    
+    function endGame() {
+
+        var result = {
+            owner_id: user,
+            game_type: game,
+            score: 0
+        }
+
+        fetch( '/addResult', {
+            method:'POST',
+            headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
+            body: JSON.stringify(result)
+        }).then(async function( response ) {
+            var data = await response.json()
+            console.log( data )
+            console.log("response ^")
+        })
+    }
 }
