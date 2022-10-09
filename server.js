@@ -72,6 +72,10 @@ app.post('/submit', (req, res) => {
     client.db("Final").collection("profiles").insertOne(req.body).then(result => res.json(result))
 })
 
+app.get('/getAllMatches', (req, res) => {
+    client.db("Final").collection("profiles").find().toArray().then(result => res.json(result))
+})
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const {response} = require("express");
 const uri = "mongodb+srv://admin:admin@final.nhlyk4z.mongodb.net/?retryWrites=true&w=majority";
