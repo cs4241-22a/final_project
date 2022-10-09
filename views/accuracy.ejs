@@ -1,5 +1,21 @@
 <%- include('header', { title: 'ReactionTests' }) -%>
 <div class="main-content">
-    <h1>ACCURACY</h1>
-</div>
+    <div class="px-2 py-2 my-2 text-center mx-auto" style="max-width: 70vw">
+        <h1 class="display-5 fw-bold text-light">Accuracy</h1>
+        <div class="col-lg-auto mx-auto vh-80">
+            <p class="lead mb-4 text-muted">Click all five of the buttons as fast as possible when it appears on the screen.</p>
+            <button id="startBtn" class="btn btn-success mb-4">Start Test</button>
+            <p id="statusText" class="text-muted"> </p>
+        </div>
+        <div id="btnContainer" class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 30vw; width: 50vw">
+            <div class="container-md">
+                <div id="reactionBtn1" class="randBtn shadow m-1 rounded" style="height: 1vw; width: 1vw; background-color: lightgreen"></div>
+                <div id="reactionBtn2" class="randBtn shadow m-1 rounded" style="height: 1vw; width: 1vw; background-color: lightgreen"></div>
+                <div id="reactionBtn3" class="randBtn shadow m-1 rounded" style="height: 1vw; width: 1vw; background-color: lightgreen"></div>
+                <div id="reactionBtn4" class="randBtn shadow m-1 rounded" style="height: 1vw; width: 1vw; background-color: lightgreen"></div>
+                <div id="reactionBtn5" class="randBtn shadow m-1 rounded" style="height: 1vw; width: 1vw; background-color: lightgreen"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/accuracy.js"></script>
 <%- include('footer') -%>
