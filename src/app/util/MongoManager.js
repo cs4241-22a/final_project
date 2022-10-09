@@ -1,3 +1,5 @@
+import Climb from "../route/Climb";
+
 export default class MongoManager
 {
     constructor()
@@ -9,11 +11,15 @@ export default class MongoManager
      * Adds a route to the database
      * @param {route to add} route 
      */
-    addRoute(route)
+    async addRoute(route)
     {
-        let body = route.toJSON();
+        route = new Climb("3", "5.4", "Yellow", 1, "rope", true, true);
 
-        fetch( '/addRoute', {
+        //let body = route.toJSON();
+       // console.log(body)
+       let body = JSON.stringify(route);
+        
+        return fetch( '/addRoute', {
             method:'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -31,7 +37,7 @@ export default class MongoManager
      */
     removeRoute(route)
     {
-        let body = route.getIdJSON();
+        let body = JSON.stringify(route.getIdJSON());
 
         fetch( '/removeRoute', {
             method:'POST',
@@ -57,10 +63,6 @@ export default class MongoManager
               "Content-Type": "application/json"
           }})
           .then( response => response.json())
-          .then(json => {
-            //TO-DO Store Routes in Table
-            return json
-          })
     }
 
 }

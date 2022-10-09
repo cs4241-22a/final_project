@@ -45,6 +45,28 @@ app.get('/routes', (req, res) => {
     .then(result => res.json(result))
 })
 
+/**
+ * When new route is added
+ */
+app.post('/addRoute', (req, res) => {
+  console.log(req.body)
+
+  let body = {
+              grade: req.body.grade,
+              color:req.body.color,
+              section:req.body.section,
+              type:req.body.type,
+              canLead:req.body.canLead,
+              canTopRope:req.body.canTopRope,
+            }
+
+  collection.insertOne(body)
+    .then(result => {
+      console.log(result)
+      res.json(result)
+    })
+})
+
 // /**
 //  * When new data is submitted
 //  */
