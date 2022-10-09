@@ -26,6 +26,7 @@ function App() {
         <Route path='/goal' element={<Goal />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
+        <Route path='/username' element={<Home />} />
       </Routes>
     </Router>
   );

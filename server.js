@@ -104,6 +104,38 @@ app.get("/login", (req, res) => {
 // });
 
 app.get("/home", ensureAuthenticated, (req, res) => {
+  // console.log(result);
+  /**
+   * {
+  Id: '077a1017-b52f-480f-91b6-5c0dbd2cd0a1@589c76f5-ca15-41f9-884b-55ec15a0672a',
+  EmailAddress: 'ekim4@wpi.edu',
+  DisplayName: 'Kim, Eri',
+  Alias: 'ekim4',
+  MailboxGuid: 'a197f5a4-418b-4c88-83a1-39a52fb95d3e'
+}
+   */
+  res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
+});
+
+app.get("/username", ensureAuthenticated, (req, res) => {
+  console.log(req.user._json);
+  let user = req.body;
+  user.name = req.user._json.DisplayName;
+  user.userid = req.user._json.Id;
+  user.products = [];
+  userCollection.insertOne(req.body);
+  res.json(user);
+});
+
+// app.post("/home", ensureAuthenticated, (req, res) => {
+//   console.log("post----");
+//   console.log(req.user);
+//   let user = req.body;
+//   user.name = req.user.DisplayName;
+//   userCollection.insertOne(req.body).then((result) => res.json(result));
+// });
+
+app.get("/listings", ensureAuthenticated, (req, res) => {
   console.log(req.user._json.DisplayName);
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
