@@ -1,31 +1,43 @@
 window.onload = () => {
 
   const startBtn = document.getElementById('startBtn')
+  const statusMsg = document.getElementById('gameStatus')
+  const resultsMsg = document.getElementById('gameResults')
+  
   const canvas = document.getElementById('gameCanvas')
+  const cWidth = canvas.style.width
+  const cHeight = canvas.style.height
 
-  var buttonsClicked = 0
-  var startTs = 0
+  let buttonsClicked = 0
+  let startTs = null
+  let totalTimeTs = null
 
-  // start game, clear previous stats if any
+  // start game, clear previous state of game
+  startBtn.onclick = startGame
   startGame = (e) => {
     e.preventDefault()
 
-    // reset stats
-    this.setState({totalTimeSeconds: 0})
-    this.setState({buttonsClicked: 0})
-
-    // clear canvas
-    const canvas = document.getElementById('mouseAccuracyCanvas')
+    // reset game
+    buttonsClicked = 0
     canvas.innerHTML = ''
 
     // place game button on canvas
     const btn = document.createElement('button')
+    canvas.appendChild(btn)
     btn.id = 'gameButton'
-    btn.className = 'btn'
+    btn.className = 'btn btn-info'
+    btn.innerHTML = 'CLICK ME'
     btn.onclick = this.handleButtonClick
-    const x = Math.random().toPrecision(2)
-    const y = Math.random().toPrecision(2)
-    /* set btn style to absolute position x,y */
+    
+    /* set position x,y inside canvas */
+    btn.style.position = 'absolute'
+    const x = Math.round(Math.random().toPrecision(2) * cWidth)
+    const y = Math.round(Math.random().toPrecision(2) * cHeight)
+    btn.style.left = x
+    btn.style.top = y
+
+    // capture start time
+    startTs = Date.now()
 
   }
 
@@ -33,19 +45,19 @@ window.onload = () => {
     e.preventDefault()
 
     // increment counter 
-    const i = this.state.buttonsClicked
-    this.setState({buttonsClicked: i+1})
+    buttonsClicked++
 
     // check if win condition satisfied
-    if (i+1 === 10) {
+    if (buttonsClicked === 10) {
       this.gameOver()
 
     } else {
       // move button to random place within canvas 
-      const x = Math.random().toPrecision(2)
-      const y = Math.random().toPrecision(2)
       const btn = document.getElementById('gameButton')
-      /* set btn style to absolute position x,y */
+      const x = Math.round(Math.random().toPrecision(2) * cWidth)
+      const y = Math.round(Math.random().toPrecision(2) * cHeight)
+      btn.style.left = x
+      btn.style.top = y
     }
   }
 
@@ -53,7 +65,14 @@ window.onload = () => {
   gameOver = (e) => {
     e.preventDefault()
 
-    // clear canvas and display completion message
+    totalTimeTs = (Date.now() - startTs)
+    startTs = null
+    canvas.innerHTML = ''
+
+    // display results
+    const msgs = ['Congratulations!', 'Nice work!', 'Good job!', 'Great work!']
+    statusMsg.innerHTML = msgs[Math.round(Math.random*3)]
+    resultsMsg.innerHTML = `Total time: ${totalTimeTs*1000} sec`
   }
 
 }

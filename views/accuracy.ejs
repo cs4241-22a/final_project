@@ -4,15 +4,24 @@
         <h1 class="display-5 fw-bold text-light">Mouse Accuracy Test</h1>
         <div class="col-lg-auto mx-auto vh-80">
             <p class="lead mb-4 text-muted">
-                A button will randomly appear somewhere on the frame. 
+                A <span class="badge badge-info">button</span> will randomly appear somewhere on the frame. 
                 When clicked, another button will appear in a different, random location. <br />
                 The score will be calculated by the overall time it takes to click 10 buttons.
             </p>
             <button id="startBtn" class="btn btn-success mb-4">Start</button>
         </div>
-        <div class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vw; width: 60vw">
-            <div id="gameCanvas" class="container-md">
+        <div class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vh; width: 70vw; background-color: black;">
+            <div id="gameCanvas" class="container-md" style="position:relative">
                 <!-- button will be randomly placed in here -->
+                <div>
+                    <span id="gameStatus" class="badge badge-success">
+                        <!-- status message placed here -->
+                    </span>
+                    <br />
+                    <p id="gameResults">
+                        <!-- score placed here -->
+                    </p>
+                </div>
             </div>
         </div>
     </div>
