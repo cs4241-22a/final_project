@@ -39,6 +39,39 @@ class App extends React.Component {
     window.appState = this;
     this.startTimer();
   }
+  save() {
+    let username = "";
+    let data = [
+      this.state.score,
+      this.state.passiveDamage,
+      this.state.lunchCost,
+      this.state.hayCost,
+      this.state.mashCost,
+      this.state.textbookCost,
+      this.state.grassCost,
+      this.state.officehoursCost,
+      this.state.studyCost,
+      this.state.meditateCost,
+      this.state.dunkinCost,
+      this.state.reviewCost
+    ];
+    const json = {user: username, data};
+    const body = JSON.stringify(json);
+    fetch("/new", {
+      method: "POST",
+      body
+    }).then(function(response) {
+      outerthis.updatedata();
+      document.getElementById("EditForm").reset();
+      outerthis.setState({m: "off"});
+      outerthis.setState({t: "off"});
+      outerthis.setState({w: "off"});
+      outerthis.setState({r: "off"});
+      outerthis.setState({f: "off"});
+      outerthis.setState({s: "off"});
+      outerthis.setState({u: "off"});
+    });
+  }
   render() {
     return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("body", null, /* @__PURE__ */ React.createElement("h1", null, "Gompei Clicker"), /* @__PURE__ */ React.createElement("p", null, "Score: ", /* @__PURE__ */ React.createElement("span", {
       id: "score"

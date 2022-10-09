@@ -49,6 +49,35 @@ class App extends React.Component {
 		this.startTimer();
     }
 	
+	save(){
+		let username = "";
+		let data = [this.state.score, 
+			this.state.passiveDamage, 
+			this.state.lunchCost, 
+			this.state.hayCost, 
+			this.state.mashCost, 
+			this.state.textbookCost, 
+			this.state.grassCost, 
+			this.state.officehoursCost, 
+			this.state.studyCost, 
+			this.state.meditateCost, 
+			this.state.dunkinCost, 
+			this.state.reviewCost];
+		const json = { user: username, data: data}
+		const body = JSON.stringify( json )
+		
+		fetch( '/save{
+		  method:'POST',
+		  body 
+		})
+		.then( function( response ) {
+		  // do something with the reponse 
+		
+			//DO SOMETHING TO INDICATE IT SAVED
+				
+		})
+	}
+	
 	render() {
 		return (
 			<>
