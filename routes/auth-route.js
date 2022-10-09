@@ -65,7 +65,8 @@ router.post("/register", async (req, res) => {
             Local_user_id: uname,
             Local_password: pass,
             Friends: [],
-            Friend_Request: []
+            Friend_Request: [],
+            Friend_Pending: []
           })
           .then((result) => {
             res.render("index", { msg: "New user created plz login" });

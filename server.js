@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require("passport");
 const AppRoute = require("./routes/app-route");
 const AuthRoute = require("./routes/auth-route");
+const FriendPlanRoute = require('./routes/friendplan-route')
 const cookieSession = require("cookie-session");
 const client = require("./config/mongodbSetup");
 const FriendsRoute = require('./routes/firends-route')
@@ -41,6 +42,7 @@ app.get('/', (req,res)=> {
 app.use("/auth", AuthRoute);
 app.use("/app", AppRoute);
 app.use('/friends', FriendsRoute);
+app.use('/friendplan', FriendPlanRoute)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
