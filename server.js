@@ -1,6 +1,18 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}/database?retryWrites=true&w=majority`;
+
+const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true,});
+let collection = null
+
+client.connect((err) => {
+    collection = client.db('database').collection('data'); 
+});
 
 // Init express application
 const app = express();

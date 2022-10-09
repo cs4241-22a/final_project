@@ -71,6 +71,7 @@
     background-position: center;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -110,6 +111,18 @@
   }
 
   .signup {
+    color: #479343;
+    font-weight: 700;
+  }
+
+  .logo {
+    width: 200px;
+    height: 200px;
+    padding-bottom: 30px;
+    align-items: center;
+  }
+
+  .login {
     color: #479343;
     font-weight: 700;
   }
