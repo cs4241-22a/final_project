@@ -1,7 +1,18 @@
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
   
 const Shop = () => {
+
+const [products, setProducts] = useState([]);
+useEffect(() => {
+  fetch("/getAllProducts", {
+    method: "GET",
+  }).then(async (response) => {
+  let res = await response.json()
+  setProducts(res)
+})
+}, [])
+
   return (
     <div
       style={{
@@ -13,6 +24,10 @@ const Shop = () => {
       }}
     >
       <h1>The GoatAShop</h1>
+      <div>
+      {products.map(product => 
+       <div>{JSON.stringify(product)}</div>)}
+    </div>
     </div>
   );
 };
