@@ -1,8 +1,0 @@
-When3Meet Project Proposal
-Abby Hyde, Cole Ouellette, Nick Grumski, Ted Clifford, Yasmine Aoua
-
-We are going to make an event scheduler website, inspired by when2meet. We intend to have the same base funcitonality of creating an event and sharing it with a link. We plan to expand upon this by having user accounts where the user can list their full availibility and can sign into an event and have their availibility auto-populated instead of manually having to enter it. If availibility is changed, it will update for all events that a user signed in to share their availibility for. We will allow for events to be shown as public or private. If an event is public, anyone with the link can share availibility, if it's private only authorized users can share availibility. A possible stretch goal is having a user's calendar displayed on their profile, if we have time.
-
-The intended users of this website would be anyone who is planning an event or meeting and the people that are trying to attend. An event organizer can have the ability to select a time for the event and this will update all respondants availibilities for other events. Event organizers have the option to make an event public or private. If private, they choose who is invited.
-
-For the front end we will be using React and Bootstrap. We will host the website on Glitch because it allows for easy collaboration. Our data will be stored in a MongoDB database and we will be using Express middleware and Node.js.
