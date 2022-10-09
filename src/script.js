@@ -1,5 +1,5 @@
 import App from './app/App'
-import Climb from "./app/route/Climb.js";
+import Climb from "./app/route/Climb";
 
 let app = new App()
 window.app = app
