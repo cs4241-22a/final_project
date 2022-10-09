@@ -23,11 +23,11 @@ Express, MongoDB, React, Oauth
 4. What challenges you faced in completing the project.<br>
 
 5. What each group member was responsible for designing / developing.<br>
-Alex Bolduc - 
-Lena Dias - 
-Sean O'Connor - 
-Jonathan Metcalf - 
-Darian Tavana - 
+<li>Alex Bolduc - 
+<li>Lena Dias - 
+<li>Sean O'Connor - 
+<li>Jonathan Metcalf - 
+<li>Darian Tavana - 
 
 6. A link to your project video.<br>
 [youtube link]
