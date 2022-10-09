@@ -15,16 +15,19 @@ const bodyParser = require('body-parser');
 const cookie = require( 'cookie-session' );
 const k1 = "kdjkjdakask";
 const k2 = "dsjfjsfrifw";
+require('dotenv').config()
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const muri = "mongodb+srv://"+process.env.MONGO_USER+":"+ process.env.MONGO_PASSWORD+"@a3cluster.oip0htf.mongodb.net/?retryWrites=true&w=majority";
 const mClient = new MongoClient(muri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-let collection = null
 
+let collection = null
+console.log(muri)
 mClient.connect()
   .then( () => {
+    console.log(muri)
     // will only create collection if it doesn't exist
-    return mClient.db( 'a3Accounts' ).collection( 'users' )
+    return mClient.db( 'finalProject' ).collection( 'data')
   })
   .then( __collection => {
     // store reference to collection
@@ -39,26 +42,6 @@ mClient.connect()
     //collection.find({ }).toArray().then( result => res.json( result ) )
   }
 
-/* appdata structure example*/
-/*
-   { 'abc@abc.com': {
-      'name': 'John Smith',
-      'working': true,
-      'password': '',
-      'cars': [
-          { 'model': 'ford',
-            'year': 2000,
-            'milage': 205
-          }
-      ]
-   }
- 
-const appdata = [
-  { 'model': 'toyota', 'year': 1999, 'mileage': 205724},
-  { 'model': 'dodge', 'year': 2004, 'mileage': 172057 },
-  { 'model': 'ford', 'year': 1987, 'mileage': 299690} 
-];
-*/
 var appdata = {};
 // add url encoding
 app.use( express.urlencoded({ extended:true }) )
@@ -76,6 +59,7 @@ app.post('/signup',(request,response,next) => handlePostSignUp( request, respons
 // we send people to login when they do not have login flag set
 // problem we also ned to 
 app.use( function( req,res,next) {
+  console.log("Check Session")
   console.log(req.session)
   if( req.session.login === true ){
     console.log(req.session)
@@ -270,10 +254,12 @@ async function handlePostSignUp( request, response, next ) {
 
 async function handleGetUserUpdate( request, response, next ) {
   console.log("in userupdate  ... ");
+  console.log("testing")
   console.log( request.session );
   if( request.session.login === true ){
     // construct Json file to push to the user for rendering
     var email = request.session.email;
+    console.log("ahhhhhh")
     var user = await getUser(email)
     if( user !== null ){
       // I have my my e-mail
@@ -300,11 +286,16 @@ const sendUpdatePage = function( request, response, next ) {
 }
 // returns user record (if exists) or null
 async function getUser(email){
-  var query = {'email': email}
   var ret = null;
   if( collection !== null){
-    console.log("getUser: have collection, email: "+email)
-    ret = await collection.findOne(query)
+
+    console.log("getUser: have, email: "+email)
+    ret = await collection.findOne(
+      {$and:[
+        {'type': 'teacher'},
+        {'email': email}
+      ]}
+    )
     console.log("getUser return: ",ret);
   }
   return ret;
@@ -409,6 +400,8 @@ async function handlePostUpdate( request, response, next ) {
     response.sendFile( __dirname +"/" + dir + '/signup.html' );
   }
 }
+
+
 
 async function handleGetJ( request, response ) {
   console.log("handleGetJ geting args ... ")
