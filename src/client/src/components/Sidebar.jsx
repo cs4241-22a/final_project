@@ -40,21 +40,21 @@ const Sidebar = ({ petName, level, onResourceClick }) => {
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {hats.map((hat) => {
                             return (
-                                <Resource key={hat.resourceID} onClick={() => onResourceClick({ filePath: hat.filePath, resourceType: hat.resourceType })} filePath={hat.filePath} />
+                                <Resource key={hat.resourceID} onClick={() => onResourceClick({ resourceID: hat.resourceID, resourceType: hat.resourceType })} filePath={hat.filePath} />
                             )
                         })}
                     </TabPanel>
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {colors.map((color) => {
                             return (
-                                <Resource key={color.resourceID} onClick={() => onResourceClick({ filePath: color.filePath, resourceType: color.resourceType })} filePath={color.filePath} />
+                                <Resource key={color.resourceID} onClick={() => onResourceClick({ resourceID: color.resourceID, resourceType: color.resourceType })} filePath={color.filePath} />
                             )
                         })}
                     </TabPanel>
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {species.map((species) => {
                             return (
-                                <Resource key={species.resourceID} onClick={() => onResourceClick({ filePath: species.filePath, resourceType: species.resourceType })} filePath={species.filePath} />
+                                <Resource key={species.resourceID} onClick={() => onResourceClick({ resourceID: species.resourceID, resourceType: species.resourceType })} filePath={species.filePath} />
                             )
                         })}
                     </TabPanel>

@@ -45,16 +45,16 @@ const RootPage = () => {
     }, [])
 
 
-    const handleResourceClick = ({filePath, resourceType}) => {
+    const handleResourceClick = ({resourceID, resourceType}) => {
         switch(resourceType){
             case "HAT":
-                setHat(filePath);
+                setHat(resourceID);
                 break;
             case "COLOR":
-                setColor(filePath);
+                setColor(resourceID);
                 break;
             case "SPECIES":
-                setSpecies(filePath);
+                setSpecies(resourceID);
                 break;
             default:
                 break;
