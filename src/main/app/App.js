@@ -1,5 +1,5 @@
-import Climb from "./route/Climb"
-import MongoManager from "./util/MongoManager"
+import MongoManager from "../../util/MongoManager";
+import Climb from "./route/Climb";
 
 let instance = null
 

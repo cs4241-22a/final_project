@@ -1,4 +1,4 @@
-import Climb from "../route/Climb";
+import Climb from "../main/app/route/Climb";
 
 export default class MongoManager
 {

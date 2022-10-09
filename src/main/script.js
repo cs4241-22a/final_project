@@ -1,7 +1,8 @@
-import App from './app/App'
-import Climb from "./app/route/Climb";
+const { default: App } = require("./app/App");
+const { default: Climb } = require("./app/route/Climb");
 
-let app = new App()
+
+let app = new App();
 window.app = app
 
 //TODO: get the list of climbs from the database, and iterate over to populate the filter list
