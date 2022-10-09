@@ -11,3 +11,6 @@ https://enlear.academy/5-reasons-why-you-should-use-svelte-for-front-end-develop
 Different Svelte File
 https://svelte.dev/tutorial/declaring-props
 
+
+svelte and multiple pages routing
+https://codechips.me/svelte-routing-with-page-js-part-1/
