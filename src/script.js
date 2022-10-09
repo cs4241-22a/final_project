@@ -30,3 +30,5 @@ function addOption(climb) {
         }
     }
 }
+
+console.log("t")

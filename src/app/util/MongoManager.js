@@ -59,6 +59,7 @@ export default class MongoManager
           .then( response => response.json())
           .then(json => {
             //TO-DO Store Routes in Table
+            return json
           })
     }
 
