@@ -39,7 +39,7 @@ export default class MongoManager
     {
         let body = JSON.stringify({"_id": route._id});
 
-        fetch( '/removeRoute', {
+        return fetch( '/removeRoute', {
             method:'POST',
             headers: {
                 "Content-Type": "application/json"

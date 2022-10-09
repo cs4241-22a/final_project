@@ -16,7 +16,8 @@ export default class App
         instance = this
 
         this.mongoManger = new MongoManager()
-        this.climb = new Climb()
+
         this.gymMap = new GymMap()
+        this.routes = this.mongoManger.getAllRoutes();
     }
 }
