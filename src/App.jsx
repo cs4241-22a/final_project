@@ -66,16 +66,16 @@ class App extends React.Component {
 		const json = { user: username, data: data}
 		const body = JSON.stringify( json )
 		
-		fetch( '/save{
-		  method:'POST',
-		  body 
-		})
-		.then( function( response ) {
+		// fetch( '/save', {
+		//  method:'POST',
+		//  body
+			//})
+		// .then( function( response ) {
 		  // do something with the reponse 
 		
 			//DO SOMETHING TO INDICATE IT SAVED
-				
-		})
+
+		// })
 	}
 	
 	render() {
@@ -87,19 +87,19 @@ class App extends React.Component {
 					<img src="/gompei.png" height="256px" width="256px" alt="Gompei" onClick={(e) => this.addToScore()}/>
 					
 					<table>
-						<tr> <UpgradePanel text="Buy Campus Center Lunch" val={this.state.lunchCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.lunchCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Hay" val={this.state.hayCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.hayCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy MASH" val={this.state.mashCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.mashCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Textbook" val={this.state.textbookCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.textbookCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Grass" val={this.state.grassCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.grassCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Office Hours" val={this.state.officehoursCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.officehoursCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Study" val={this.state.studyCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.studyCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Meditate" val={this.state.meditateCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.meditateCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Dunkin" val={this.state.dunkinCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.dunkinCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
-						<tr> <UpgradePanel text="Buy Review" val={this.state.reviewCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.reviewCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Campus Center Lunch " val={this.state.lunchCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.lunchCost)} img="https://cdn.discordapp.com/attachments/818541682018615347/1028724104213299340/Sandwich-Free-PNG-Image_1_54x54.png"/></tr>
+						<tr> <UpgradePanel text="Buy Hay " val={this.state.hayCost} onClick={(e) => this.buyHay()} enabled={(this.state.score >= this.state.hayCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy MASH " val={this.state.mashCost} onClick={(e) => this.buyMash()} enabled={(this.state.score >= this.state.mashCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Textbook " val={this.state.textbookCost} onClick={(e) => this.buyTextbook()} enabled={(this.state.score >= this.state.textbookCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Grass " val={this.state.grassCost} onClick={(e) => this.buyGrass()} enabled={(this.state.score >= this.state.grassCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Office Hours " val={this.state.officehoursCost} onClick={(e) => this.buyOfficeHours()} enabled={(this.state.score >= this.state.officehoursCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Study " val={this.state.studyCost} onClick={(e) => this.buyStudy()} enabled={(this.state.score >= this.state.studyCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Meditate " val={this.state.meditateCost} onClick={(e) => this.buyMeditate()} enabled={(this.state.score >= this.state.meditateCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Dunkin " val={this.state.dunkinCost} onClick={(e) => this.buyDunkin()} enabled={(this.state.score >= this.state.dunkinCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Review " val={this.state.reviewCost} onClick={(e) => this.buyReview()} enabled={(this.state.score >= this.state.reviewCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
 						
 					</table>
-					
+
 					<p>Will use these descriptions later:
 						<br/>Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.
 						<br/>Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.
