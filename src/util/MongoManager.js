@@ -57,12 +57,17 @@ export default class MongoManager
      */
     async getAllRoutes()
     {
+        let routes = []
         return fetch( `/routes`, {
             method:'GET',
             headers: {
               "Content-Type": "application/json"
           }})
           .then( response => response.json())
+          .then(routeArray => routeArray.forEach(rawRoute => {
+            let climb = new Climb(rawRoute._id, rawRoute.grade, rawRoute.color, rawRoute.section, rawRoute.type, rawRoute.canLead, rawRoute.canTopRope)
+            routes.push(climb)
+          })).then(() => {return routes})
     }
 
 }
