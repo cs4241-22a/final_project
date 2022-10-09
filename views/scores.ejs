@@ -1,40 +1,49 @@
+<div id="results" style="visibility: hidden">
+    <div class="chart-container" style="position: relative; height:50vh; width:80vw">
+        <canvas id="allScores"></canvas>
+    </div>
+    <div class="chart-container" style="position: relative; height:50vh; width:80vw">
+        <canvas id="myScores"></canvas>
+    </div>
+</div>
 
-<div class="chart-container" style="position: relative; height:50vh; width:80vw">
-    <canvas id="allScores"></canvas>
-</div>
-<div class="chart-container" style="position: relative; height:50vh; width:80vw">
-    <canvas id="myScores"></canvas>
-</div>
-<script>
-    window.onload = function() {
-        // TODO: Fix event registration (not being catched for some reason)
-        document.addEventListener("updateData", function(e){
-            console.log("got update event"); 
-            updateGraphs(e);
-            }, false)
-    }
+<script type="application/javascript">
+    
+    var resultsDiv = document.getElementById("results")
+    
+    // TODO: Fix event registration (not being catched for some reason)
+    window.addEventListener("updateData", function(e){
+        console.log("got update event"); 
+        updateGraphs(e);
+        return true;
+        })
+    console.log("added listener")
     
     function updateGraphs(e){
         console.log("Updating data")
         var data = null
         
-        data = (e.hasOwnProperty('data')) ? e.detail.data : getData(game);
-        if (e.hasOwnProperty('data'))
-             data = e.data;
+        data = (typeof e.detail.data !== "undefined") ? e.detail.data : getData(game);
         console.log("Got data for game: %s\nuser: %s\n\tdata: %s", game, user, data)
+        
+        //TODO: Use data to create graphs & result text
+        
+        results.style.visibility = null
     }
     
-    
     function getData(game){
+        console.log("trying to get data")
+        var res = null
         fetch( '/getResults', {
             method: 'POST',
             headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
             body: JSON.stringify({"game_type": game})
         }).then(
             async function( response ) {
-                return response.json()
+                res = await response.json()
             }
         );
+        return res
     }
     
     function setupGraphs(allData, userData){

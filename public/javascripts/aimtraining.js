@@ -42,6 +42,8 @@ window.onload = function() {
             var data = await response.json()
             console.log( data )
             console.log("response ^")
+
+            window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
         })
     }
 }
