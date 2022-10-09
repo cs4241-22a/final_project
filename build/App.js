@@ -1,4 +1,23 @@
 import React from "./_snowpack/pkg/react.js";
+class UpgradePanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    console.log("this handler will be replaced!");
+  }
+  render() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+      class: "UpgradePanelBackground",
+      style: {display: "inline-block"},
+      onClick: this.props.onClick
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: this.props.img
+    }), /* @__PURE__ */ React.createElement("label", null, this.props.text), /* @__PURE__ */ React.createElement("label", null, this.props.val)));
+  }
+}
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -33,47 +52,67 @@ class App extends React.Component {
       width: "256px",
       alt: "Gompei",
       onClick: (e) => this.addToScore()
-    }), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyLunch()
-    }, " Buy Campus Center Lunch [", /* @__PURE__ */ React.createElement("span", {
-      id: "lunch-cost"
-    }, this.state.lunchCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyHay()
-    }, " Buy Hay [", /* @__PURE__ */ React.createElement("span", {
-      id: "hay-cost"
-    }, this.state.hayCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyMash()
-    }, " Buy MASH [", /* @__PURE__ */ React.createElement("span", {
-      id: "mash-cost"
-    }, this.state.mashCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyTextbook()
-    }, " Buy Textbook [", /* @__PURE__ */ React.createElement("span", {
-      id: "textbook-cost"
-    }, this.state.textbookCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyGrass()
-    }, " Buy Grass [", /* @__PURE__ */ React.createElement("span", {
-      id: "grass-cost"
-    }, this.state.grassCost), "] "), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyOfficeHours()
-    }, " Buy Office Hours [", /* @__PURE__ */ React.createElement("span", {
-      id: "office-hours-cost"
-    }, this.state.officehoursCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyStudy()
-    }, " Buy Study [", /* @__PURE__ */ React.createElement("span", {
-      id: "study-cost"
-    }, this.state.studyCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyMeditate()
-    }, " Buy Meditate [", /* @__PURE__ */ React.createElement("span", {
-      id: "meditate-cost"
-    }, this.state.meditateCost), "]"), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyDunkin()
-    }, " Buy Dunkin [", /* @__PURE__ */ React.createElement("span", {
-      id: "dunkin-cost"
-    }, this.state.dunkinCost), "] "), /* @__PURE__ */ React.createElement("button", {
-      onClick: (e) => this.buyReview()
-    }, " Buy Review [", /* @__PURE__ */ React.createElement("span", {
-      id: "review-cost"
-    }, this.state.reviewCost), "]"), /* @__PURE__ */ React.createElement("p", null, "Will use these descriptions later:", /* @__PURE__ */ React.createElement("br", null), "Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy MASH - Gompei will attend a MASH session, teaching him how to do his Calc IV homework, increasing his click strength by 25.", /* @__PURE__ */ React.createElement("br", null), "Buy Textbook - Gompei will *buy* his course textbook, increasing his passive click strength by 10.", /* @__PURE__ */ React.createElement("br", null), "Buy Grass - Gompei eats some of the grass on the Quad, increasing his click strength by 75.", /* @__PURE__ */ React.createElement("br", null), "Buy Office Hours - Gompei will attend Noelle's and Kyle's office hour and they help him fix his bug, increasing his passive click strength by 35", /* @__PURE__ */ React.createElement("br", null), "Buy Study - Gompei takes some time to study for his next Physics Exam, increasing his click strength by 500.", /* @__PURE__ */ React.createElement("br", null), "Buy Meditate - Gompei meditates reducing his stress, increasing his passive click strength by 300.", /* @__PURE__ */ React.createElement("br", null), "Buy Dukin - Gompei buys Dunkin Donuts through the mobile app, increasing his click strength by 15000.", /* @__PURE__ */ React.createElement("br", null), "Buy Review - Gompei makes a review guide for his history exam, incrasing his passive click strength by 10000.")));
+    }), /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Campus Center Lunch",
+      val: this.state.lunchCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.lunchCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Hay",
+      val: this.state.hayCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.hayCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy MASH",
+      val: this.state.mashCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.mashCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Textbook",
+      val: this.state.textbookCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.textbookCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Grass",
+      val: this.state.grassCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.grassCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Office Hours",
+      val: this.state.officehoursCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.officehoursCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Study",
+      val: this.state.studyCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.studyCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Meditate",
+      val: this.state.meditateCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.meditateCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Dunkin",
+      val: this.state.dunkinCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.dunkinCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    })), /* @__PURE__ */ React.createElement("tr", null, " ", /* @__PURE__ */ React.createElement(UpgradePanel, {
+      text: "Buy Review",
+      val: this.state.reviewCost,
+      onClick: (e) => this.buyLunch(),
+      enabled: this.state.score >= this.state.reviewCost,
+      img: "https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+    }))), /* @__PURE__ */ React.createElement("p", null, "Will use these descriptions later:", /* @__PURE__ */ React.createElement("br", null), "Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy MASH - Gompei will attend a MASH session, teaching him how to do his Calc IV homework, increasing his click strength by 25.", /* @__PURE__ */ React.createElement("br", null), "Buy Textbook - Gompei will *buy* his course textbook, increasing his passive click strength by 10.", /* @__PURE__ */ React.createElement("br", null), "Buy Grass - Gompei eats some of the grass on the Quad, increasing his click strength by 75.", /* @__PURE__ */ React.createElement("br", null), "Buy Office Hours - Gompei will attend Noelle's and Kyle's office hour and they help him fix his bug, increasing his passive click strength by 35", /* @__PURE__ */ React.createElement("br", null), "Buy Study - Gompei takes some time to study for his next Physics Exam, increasing his click strength by 500.", /* @__PURE__ */ React.createElement("br", null), "Buy Meditate - Gompei meditates reducing his stress, increasing his passive click strength by 300.", /* @__PURE__ */ React.createElement("br", null), "Buy Dukin - Gompei buys Dunkin Donuts through the mobile app, increasing his click strength by 15000.", /* @__PURE__ */ React.createElement("br", null), "Buy Review - Gompei makes a review guide for his history exam, incrasing his passive click strength by 10000.")));
   }
   addToScore(e) {
     this.setState({score: this.state.score + this.state.clickDamage});

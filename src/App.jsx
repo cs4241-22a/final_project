@@ -1,6 +1,31 @@
 
 import React from "react";
 
+class UpgradePanel extends React.Component {
+	constructor(props) {
+		super(props);
+		this.props = props;
+		this.onClick = this.onClick.bind(this);
+	}
+	
+	onClick() {
+		console.log('this handler will be replaced!');
+	}
+
+	render() {
+		return (
+			<>
+				<div class="UpgradePanelBackground" style={{display: "inline-block"}} onClick={this.props.onClick}>
+					<img src={this.props.img}/>
+					<label>{this.props.text}</label>
+					<label>{this.props.val}</label>
+				</div>
+			</>
+		);
+	}
+}
+
+
 class App extends React.Component {
 	
 	constructor(props) {
@@ -31,16 +56,21 @@ class App extends React.Component {
 					<h1>Gompei Clicker</h1>
 					<p>Score: <span id="score">{this.state.score}</span> Click Damage: <span id="click-damage">{this.state.clickDamage}</span> Passive Damage: <span id="passive-damage">{this.state.passiveDamage}</span> </p>
 					<img src="/gompei.png" height="256px" width="256px" alt="Gompei" onClick={(e) => this.addToScore()}/>
-					<button onClick={(e) => this.buyLunch()}> Buy Campus Center Lunch [<span id="lunch-cost">{this.state.lunchCost}</span>]</button>
-					<button onClick={(e) => this.buyHay()}> Buy Hay [<span id="hay-cost">{this.state.hayCost}</span>]</button>
-					<button onClick={(e) => this.buyMash()}> Buy MASH [<span id="mash-cost">{this.state.mashCost}</span>]</button>
-					<button onClick={(e) => this.buyTextbook()}> Buy Textbook [<span id="textbook-cost">{this.state.textbookCost}</span>]</button>
-					<button onClick={(e) => this.buyGrass()}> Buy Grass [<span id="grass-cost">{this.state.grassCost}</span>] </button>
-					<button onClick={(e) => this.buyOfficeHours()}> Buy Office Hours [<span id="office-hours-cost">{this.state.officehoursCost}</span>]</button>
-					<button onClick={(e) => this.buyStudy()}> Buy Study [<span id="study-cost">{this.state.studyCost}</span>]</button>
-					<button onClick={(e) => this.buyMeditate()}> Buy Meditate [<span id="meditate-cost">{this.state.meditateCost}</span>]</button>
-					<button onClick={(e) => this.buyDunkin()}> Buy Dunkin [<span id="dunkin-cost">{this.state.dunkinCost}</span>] </button>
-					<button onClick={(e) => this.buyReview()}> Buy Review [<span id="review-cost">{this.state.reviewCost}</span>]</button>
+					
+					<table>
+						<tr> <UpgradePanel text="Buy Campus Center Lunch" val={this.state.lunchCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.lunchCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Hay" val={this.state.hayCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.hayCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy MASH" val={this.state.mashCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.mashCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Textbook" val={this.state.textbookCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.textbookCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Grass" val={this.state.grassCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.grassCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Office Hours" val={this.state.officehoursCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.officehoursCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Study" val={this.state.studyCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.studyCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Meditate" val={this.state.meditateCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.meditateCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Dunkin" val={this.state.dunkinCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.dunkinCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						<tr> <UpgradePanel text="Buy Review" val={this.state.reviewCost} onClick={(e) => this.buyLunch()} enabled={(this.state.score >= this.state.reviewCost)} img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"/></tr>
+						
+					</table>
+					
 					<p>Will use these descriptions later:
 						<br/>Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.
 						<br/>Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.

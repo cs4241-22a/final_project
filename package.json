@@ -16,10 +16,10 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
+    "favicon": "^0.0.2",
     "mime": "^3.0.0",
     "passport": "^0.6.0",
     "passport-github2": "^0.1.12",
-    "favicon": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "serve-favicon": "^2.5.0"

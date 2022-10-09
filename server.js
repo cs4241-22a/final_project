@@ -1,6 +1,7 @@
 const express = require( 'express' ),
     session = require('express-session'),
     passport = require('passport'),
+	mime = require('MIME'),
     GitHubStrategy = require('passport-github2').Strategy,
     util = require('util'), // todo maybe not
     path = require('path'),
@@ -21,7 +22,6 @@ let SESSION_SECRET="literally-whatever";
 
 app.use( (req,res,next) => {
     //console.log( 'url:', req.url )
-    console.log("firstreqfunc");
 	next()
 })
 
@@ -81,7 +81,7 @@ function ensureAuthenticated(req, res, next) {
 
 app.use( express.json() )
 
-//not in crome apparently
+//not in crome apparently - NOPE IT WORKX
 app.use(favicon(path.join(__dirname, 'public/factorio.ico')))
 
 
@@ -89,12 +89,20 @@ app.use(favicon(path.join(__dirname, 'public/factorio.ico')))
 // ROUTES
 // ---
 app.get('/', function(req, res) {
-    console.log("functionworx");
+	//DISABLING LOGGING IN FOR NOW
+	res.sendFile(path.join(__dirname, '/build/index.html'));
+	return;
 	if (req.hasOwnProperty('user')) {
         console.log('A user is logged in!');
         console.log(req.user);
-    } else console.log('no user logged in.');
-    res.sendFile(path.join(__dirname, '/build/index.html'));
+		//res.sendFile(path.join(__dirname, '/build/index.html'));
+    } 
+	
+	else {
+		console.log('no user logged in.');
+		res.sendFile(path.join(__dirname, '/build/login.html'));
+	}
+    
 });
 
 app.get('/login', function (req, res) {
@@ -133,6 +141,7 @@ app.get('/auth/github/callback',
 
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/css'));
 app.use(express.static(__dirname + '/build'));
 
 app.listen(process.env.PORT || 3000 )
