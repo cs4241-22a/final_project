@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const {Router, static} = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const Pet = require("../models/Pet");
+const router = Router();
 
 router.use("/api", bodyParser.json(), require("./api"));
 router.use("/auth", require("./auth"));
@@ -10,8 +10,10 @@ router.get("/", async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+router.use("/assets", static("public/assets"));
+
 router.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 router.post("/logout", (req, res, next) => {

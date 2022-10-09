@@ -7,6 +7,7 @@ const Pet = new mongoose.Schema({
     species: Number,
     level: Number,
     xp: Number,
+    xpToNextLevel: Number,
     githubUsername: {type: String, unique: true},
 });
 const model = mongoose.model("Pet", Pet);
