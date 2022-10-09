@@ -2,6 +2,7 @@ import React from "../_snowpack/pkg/react.js";
 import Button from "../_snowpack/pkg/react-bootstrap/Button.js";
 import Card from "../_snowpack/pkg/react-bootstrap/Card.js";
 import {Container, Row, Col} from "../_snowpack/pkg/react-bootstrap.js";
+import Header from "./header.js";
 class Table extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +103,7 @@ class App extends React.Component {
     return /* @__PURE__ */ React.createElement("div", {
       className: "App",
       id: "basic"
-    }, /* @__PURE__ */ React.createElement("h1", null, "Homepage"), /* @__PURE__ */ React.createElement(Table, {
+    }, /* @__PURE__ */ React.createElement(Header, null), /* @__PURE__ */ React.createElement(Table, {
       items: this.state.recipes
     }));
   }

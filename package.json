@@ -28,7 +28,8 @@
     "mongoose": "^6.6.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "reactstrap": "^9.1.4"
   },
   "devDependencies": {
     "snowpack": "^3.8.8"
