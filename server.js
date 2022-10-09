@@ -13,20 +13,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cookie({
-    name: 'session',
-    keys: [process.env.KEY1, process.env.KEY2]
-}));
-
-// middleware for unauthenticated users
-// app.use((req, res, next) => {
-//     if (recipecollection !== null && usercollection !== null) {
-//         next();
-//     } else {
-//         res.status(503).send();
-//     }
-// });
-
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -94,7 +80,6 @@ app.get('/userdata', async (req, res) => {
     res.json(allData).end(); // later refine this, only send data for a given user
 });
 
-
 app.post('/login', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
@@ -149,6 +134,20 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/build/pages/register.html');
+});
+
+// middleware for authentication; should only affect the data modification routes
+app.use(cookie({
+    name: 'session',
+    keys: [process.env.KEY1, process.env.KEY2]
+}));
+
+app.use((req, res, next) => {
+    if (recipecollection !== null && usercollection !== null) {
+        next();
+    } else {
+        res.status(503).send();
+    }
 });
 
 // recipe db interaction
