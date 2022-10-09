@@ -6,15 +6,6 @@ const Utils = require("../Utils/Utils.js");
 const DB = client.db("finalproject");
 const collection = DB.collection("User");
 
-const FindUserID = async function (collection, _id) {
-  try {
-    const result = await collection.findOne({ _id: _id });
-    return result;
-  } catch {
-    console.log(err);
-  }
-};
-
 const UpdateFriendPending = async function (value, _id) {
   try {
     const filter = { _id: _id };
@@ -73,42 +64,26 @@ const UpdateFriendReq = async function (value, _id) {
   }
 };
 
-const ID_to_Uname = async function (_id) {
-  const result = await Utils.FindUserID(collection, _id);
-  return result.username;
-};
-
-const FindUsersUsername = async function (collection, Username) {
-  const options = {
-    sort: { title: 1 },
-  };
-  const query = { username: Username };
-  try {
-    let cursor = await collection.find(query, options);
-    if ((await cursor.count()) === 0) {
-      return false;
-    } else {
-      return cursor;
-    }
-  } catch {
-    (err) => console.log(err);
-  }
-};
-
 const putIntoList = async function (result) {
   let friends = [];
   let friend_requests = [];
   let friend_pending = [];
   for (i in result.Friends) {
-    let Friend_Uname = await ID_to_Uname(result.Friends[i]);
+    let Friend_Uname = await Utils.ID_to_Uname(collection, result.Friends[i]);
     friends.push([Friend_Uname, result.Friends[i]]);
   }
   for (i in result.Friend_Request) {
-    let Req_Friend_Uname = await ID_to_Uname(result.Friend_Request[i]);
+    let Req_Friend_Uname = await Utils.ID_to_Uname(
+      collection,
+      result.Friend_Request[i]
+    );
     friend_requests.push([Req_Friend_Uname, result.Friend_Request[i]]);
   }
   for (i in result.Friend_Pending) {
-    let Pending_Friend_Uname = await ID_to_Uname(result.Friend_Pending[i]);
+    let Pending_Friend_Uname = await Utils.ID_to_Uname(
+      collection,
+      result.Friend_Pending[i]
+    );
     friend_pending.push([Pending_Friend_Uname, result.Friend_Pending[i]]);
   }
   return [friends, friend_requests, friend_pending];

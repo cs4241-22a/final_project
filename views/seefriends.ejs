@@ -1,52 +1,51 @@
 <!DOCTYPE html>
-<head>
-</head>
+<head> </head>
 <script>
-    const refresh = 1000;
-    const ChangeEndTime = function () {
-        document.querySelector('#end_time').value = document.querySelector('#start_time').value;
-        document.querySelector('#end_time').min = document.querySelector('#start_time').value;
-    }
-    const TimeNow = function () {
-        let Now = new Date()
-        document.querySelector("#timenow").innerHTML=Now;
-        document.querySelector("#Submit_Time").value = Now;
-        RefreshTime();
-    }
-    const RefreshTime = function () {
+  const refresh = 1000;
+  const ChangeEndTime = function () {
+    document.querySelector("#end_time").value =
+      document.querySelector("#start_time").value;
+    document.querySelector("#end_time").min =
+      document.querySelector("#start_time").value;
+  };
+  const TimeNow = function () {
+    let Now = new Date();
+    document.querySelector("#timenow").innerHTML = Now;
+    document.querySelector("#Submit_Time").value = Now;
+    RefreshTime();
+  };
+  const RefreshTime = function () {
+    setTimeout(TimeNow, refresh);
+  };
 
-        setTimeout(TimeNow, refresh);
-    }
-    
-    window.onload = function() {
-        TimeNow();
+  window.onload = function () {
+    TimeNow();
 
-        var now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 
-        now.setMilliseconds(null)
-        now.setSeconds(null)
+    now.setMilliseconds(null);
+    now.setSeconds(null);
 
-        document.querySelector('#start_time').value = now.toISOString().slice(0, -1);
-        document.querySelector('#start_time').min = now.toISOString().slice(0, -1);
-        // document.querySelector('#start_time').step = 60 * 15;
-        document.querySelector('#end_time').value = now.toISOString().slice(0, -1);
-        document.querySelector('#end_time').min = now.toISOString().slice(0, -1);
-        // document.querySelector('#end_time').step = 60 * 15;
-    }
-
+    document.querySelector("#start_time").value = now
+      .toISOString()
+      .slice(0, -1);
+    document.querySelector("#start_time").min = now.toISOString().slice(0, -1);
+    // document.querySelector('#start_time').step = 60 * 15;
+    document.querySelector("#end_time").value = now.toISOString().slice(0, -1);
+    document.querySelector("#end_time").min = now.toISOString().slice(0, -1);
+    // document.querySelector('#end_time').step = 60 * 15;
+  };
 </script>
 <body>
-    <h1>Plan from friend <%= msg %></h1>
-    <% body.forEach(function(plan){ %>
-        <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
-        <form method="POST" action="/app/delete_plan">
-            Note:<%= plan.Note %><br><br>
-            Start Time:<%= moment(plan.Start_Time) %><br><br>
-            End Time:<%= moment(plan.End_Time) %><br><br>
-            Added: <%= moment(plan.Submit_Time).fromNow() %>
-            <input type="hidden" type = 'text' name = '_id' value="<%= plan._id %>"></input>
-            <input type="submit" value="Delete"/><br><br><hr>
-        </form>
-    <% }) %>
+  <h1>Plan from friend <%= msg %></h1>
+  <% body.forEach(function(plan){ %>
+  <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
+  <form>
+    Note:<%= plan.Note %><br /><br />
+    Start Time:<%= moment(plan.Start_Time) %><br /><br />
+    End Time:<%= moment(plan.End_Time) %><br /><br />
+    Added: <%= moment(plan.Submit_Time).fromNow() %>
+  </form>
+  <% }) %>
 </body>
