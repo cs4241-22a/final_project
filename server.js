@@ -13,19 +13,19 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(cookie({
-//     name: 'session',
-//     keys: [process.env.KEY1, process.env.KEY2]
-// }));
+app.use(cookie({
+    name: 'session',
+    keys: [process.env.KEY1, process.env.KEY2]
+}));
 
 // middleware for unauthenticated users
-// app.use((req, res, next) => {
-//     if (recipecollection !== null && usercollection !== null) {
-//         next();
-//     } else {
-//         res.status(503).send();
-//     }
-// });
+app.use((req, res, next) => {
+    if (recipecollection !== null && usercollection !== null) {
+        next();
+    } else {
+        res.status(503).send();
+    }
+});
 
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
@@ -85,13 +85,11 @@ const Recipe = mongoose.model('Recipe', recipeSchema);
 
 app.get('/recipedata', async (req, res) => {
     console.log("Querying recipe data");
-    await config();
     let allData = await Recipe.find({}); // later refine this, to only send recipes written by the user
     res.json(allData).end();
 });
 
 app.get('/userdata', async (req, res) => {
-    await config();
     let allData = await User.find({});
     res.json(allData).end(); // later refine this, to only send data for a given user
 });
