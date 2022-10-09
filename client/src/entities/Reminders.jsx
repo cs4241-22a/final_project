@@ -41,28 +41,53 @@ export default function Reminders() {
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false);
     
-    let blogs = []
+    const blogs = [
+        <div>hello</div>,
+        <div>world</div>,
+      ]
 
-    const blogFormat = <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
-    <Grid container wrap="nowrap" spacing={2}>
-    <Grid item>
-        <Avatar>W</Avatar>
-    </Grid>
-    <Grid item xs>
-        <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
-    </Grid>
-    </Grid>
-    </StyledPaper> </div>
+    const blogFormat = <div>
+        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen2}>View "Usernames" post</Fab>
+    <Modal
+        open={open2}
+        onClose={handleClose2}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+    >
+
+        <Box sx={style}>
+            {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
+          <Box
+                component="form"
+             sx={{
+                  '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    "Username" posted:
+                </Typography>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    STUFF THEY TYPED HERE
+                </Typography>
+                <Button>View Replies!</Button>
+                <Button>Reply!</Button>
+                <Button onClick={handleClose2}>Exit!</Button>
+            </Box>
+        </Box>
+    </Modal>
+    </div>
     
 
 
     const addBlog = () => {
-        console.log("hi")
         blogs.push(blogFormat)
+        console.log(blogs)
     }
 
     return (
-    <view style={centerStyle}>
+    <div style={centerStyle}>
         <div>
             <Box sx={{ height:"fit-content", width: 'fit-content', maxWidth: 500, borderRadius:3, borderWidth:1, border:5, borderColor:"navy" }}>
                 <Typography variant="h3" gutterBottom>
@@ -100,40 +125,21 @@ export default function Reminders() {
 
 
         <div id="insertBlogPosts">
-        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen2}>View "Usernames" post</Fab>
-            <Modal
-                open={open2}
-                onClose={handleClose2}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-
-                <Box sx={style}>
-                    {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
-                  <Box
-                        component="form"
-                     sx={{
-                          '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            "Username" posted:
-                        </Typography>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            STUFF THEY TYPED HERE
-                        </Typography>
-                        <Button>View Replies!</Button>
-                        <Button>Reply!</Button>
-                        <Button onClick={handleClose}>Exit!</Button>
-                    </Box>
-                </Box>
-            </Modal>
+            {blogs}
+            <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
+                <Grid container wrap="nowrap" spacing={2}>
+                <Grid item>
+                    <Avatar>W</Avatar>
+                </Grid>
+                <Grid item xs>
+                    <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
+                </Grid>
+                </Grid>
+            </StyledPaper> </div>
 
 
         </div>
-    </view>
+    </div>
     );
 }
 
