@@ -19,13 +19,13 @@ app.use(cookie({
 }));
 
 // middleware for unauthenticated users
-app.use((req, res, next) => {
-    if (recipecollection !== null && usercollection !== null) {
-        next();
-    } else {
-        res.status(503).send();
-    }
-});
+// app.use((req, res, next) => {
+//     if (recipecollection !== null && usercollection !== null) {
+//         next();
+//     } else {
+//         res.status(503).send();
+//     }
+// });
 
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
@@ -84,14 +84,14 @@ const User = mongoose.model('User', userSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 app.get('/recipedata', async (req, res) => {
-    console.log("Querying recipe data");
-    let allData = await Recipe.find({}); // later refine this, to only send recipes written by the user
+    console.log("Retrieving recipe data");
+    let allData = await Recipe.find({}); // later refine this, only send recipes written by the user
     res.json(allData).end();
 });
 
 app.get('/userdata', async (req, res) => {
     let allData = await User.find({});
-    res.json(allData).end(); // later refine this, to only send data for a given user
+    res.json(allData).end(); // later refine this, only send data for a given user
 });
 
 

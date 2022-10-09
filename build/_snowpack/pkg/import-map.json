@@ -1,6 +1,9 @@
 {
   "imports": {
     "react": "./react.js",
+    "react-bootstrap": "./react-bootstrap.js",
+    "react-bootstrap/Button": "./react-bootstrap/Button.js",
+    "react-bootstrap/Card": "./react-bootstrap/Card.js",
     "react-dom": "./react-dom.js"
   }
 }
