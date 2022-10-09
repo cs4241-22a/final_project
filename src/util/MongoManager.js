@@ -35,9 +35,9 @@ export default class MongoManager
      * removes a route from the database
      * @param {route to remove} route 
      */
-    removeRoute(route)
+    async removeRoute(route)
     {
-        let body = JSON.stringify(route.getIdJSON());
+        let body = JSON.stringify({"_id": route._id});
 
         fetch( '/removeRoute', {
             method:'POST',

@@ -39,7 +39,6 @@ client.connect()
  * When user want's all route entries
  */
 app.get('/routes', (req, res) => {
-  let routes = []
   collection.find()
     .toArray()
     .then(result => res.json(result))
@@ -49,7 +48,6 @@ app.get('/routes', (req, res) => {
  * When new route is added
  */
 app.post('/addRoute', (req, res) => {
-  console.log(req.body)
 
   let body = {
               grade: req.body.grade,
@@ -61,10 +59,16 @@ app.post('/addRoute', (req, res) => {
             }
 
   collection.insertOne(body)
-    .then(result => {
-      console.log(result)
-      res.json(result)
-    })
+    .then(result => res.json(result))
+})
+
+/**
+ * When route is removed
+ * Expected: _id
+ */
+ app.post('/removeRoute', (req, res) => {
+  collection.deleteOne({_id: mongodb.ObjectId(req.body._id)})
+    .then(result => res.json(result))
 })
 
 // /**
