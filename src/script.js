@@ -4,38 +4,29 @@ import './style.css'
 let app = new App()
 window.app = app
 
+//TODO: get the list of climbs from the database, and iterate over to populate the filter list
 
-/**
- * //TODO: get the list of climbs from the database, and iterate over to populate the filter list
-const climbsArray = ["VB", "V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12"]
+const climb1 = new Climb("1", "VB", "Brown", 1);
+const climb2 = new Climb("2", "5.4", "Yellow", 1, true);
+const climb3 = new Climb("3", "V12", "Green", 1);
 
-const climb1 = new Climb("1", "VB", "Brown", 1, true);
+const climbsArray = [climb1, climb2, climb3];
 
-
-//Get the grades select
-grades = document.getElementById('grades');
+//Get the grades and types select
+const grades = document.getElementById('grades');
+const climbType = document.getElementById('climbType');
 //Iterate over each element in grades to add each grade as an option in the select
-bouldersArray.forEach(grade => addOption(grade))
-
+climbsArray.forEach(climb => addOption(climb))
 //Add the option to the select
-function addOption(grade) {
-    grades.options[grades.options.length] = new Option(grade, grade);
+function addOption(climb) {
+    for (let i = 0; i < climbType.length; ++i){
+        if (climbType.options[i].value !== climb.type){
+            climbType.options[climbType.options.length] = new Option(climb.type().type)
+        }
+    }
+    for (let i = 0; i < grades.length; ++i){
+        if (grades.options[i].value !== grades.type){
+            grades.options[grades.options.length] = new Option(climb.grade)
+        }
+    }
 }
-
-
-
- */
-/*
-import * as d3 from 'd3'
-window.d3 = d3
-console.log(d3)
-let svgContainer = d3.select(document.getElementById("gymMap"))
-
-svgContainer.selectAll("*").remove()
-
-d3.svg("./gym_map.svg")
-    .then(data => {
-        d3.select("#gymMap").node().append(data.documentElement)
-        d3.select("#gymMap").select("#zone2").style("fill", "red")
-    })
-    */
