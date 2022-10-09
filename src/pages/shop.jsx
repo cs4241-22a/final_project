@@ -1,6 +1,8 @@
 
 import React, {useEffect, useState} from 'react';
-  
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 const Shop = () => {
 
 const [products, setProducts] = useState([]);
@@ -24,9 +26,19 @@ useEffect(() => {
       }}
     >
       <h1>The GoatAShop</h1>
-      <div>
+      <div class="d-flex">
       {products.map(product => 
-       <div>{JSON.stringify(product)}</div>)}
+      <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src="" />
+      <Card.Body>
+        <Card.Title>{product.name}</Card.Title>
+        <Card.Text>
+        {product.description}
+        </Card.Text>
+        <Button variant="primary">Contact</Button>
+      </Card.Body>
+    </Card>
+       )}
     </div>
     </div>
   );
