@@ -13,10 +13,6 @@ export default class MongoManager
      */
     async addRoute(route)
     {
-        route = new Climb("3", "5.4", "Yellow", 1, "rope", true, true);
-
-        //let body = route.toJSON();
-       // console.log(body)
        let body = JSON.stringify(route);
         
         return fetch( '/addRoute', {
