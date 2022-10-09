@@ -1,0 +1,108 @@
+<div class="chart-container" style="position: relative; height:50vh; width:80vw">
+    <canvas id="allScores"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:50vh; width:80vw">
+    <canvas id="myScores"></canvas>
+</div>
+<script>
+    window.onload = function() {
+        // TODO: Fix event registration (not being catched for some reason)
+        
+        document.addEventListener("updateData", function(e){console.log("got update event"); updateGraphs(e);}, false)
+    }
+    
+    function updateGraphs(e){
+        console.log("Updating data")
+        var data = null
+        
+        data = (e.hasOwnProperty('data')) ? e.detail.data : getData(game);
+        if (e.hasOwnProperty('data'))
+             data = e.data;
+        console.log("Got data for game: %s\nuser: %s\n\tdata: %s", game, user, data)
+    }
+    
+    
+    function getData(game){
+        fetch( '/getResults', {
+            method: 'POST',
+            headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
+            body: JSON.stringify({"game_type": game})
+        }).then(
+            async function( response ) {
+                return response.json()
+            }
+        );
+    }
+    
+    function setupGraphs(allData, userData){
+        const configAllScores = {
+            type: 'bar',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'All Scores',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        const configMyScores = {
+            type: 'line',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Custom Chart Title',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        const labels = []
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+        };
+    }
+</script>
