@@ -31,10 +31,6 @@ function addOption(climb) {
     if (!optionExists(climb.grade, gradesFilter)){
         gradesFilter.options[gradesFilter.options.length] = new Option(climb.grade, climb.grade)
     }
-
-    if (!optionExists(parseClimbType(climb.type), climbTypeFilter)){
-        climbTypeFilter.options[climbTypeFilter.options.length] = new Option(parseClimbType(climb.type), parseClimbType(climb.type))
-    }
 }
 
 function parseClimbType(climb) {
