@@ -91,18 +91,21 @@ client
     productCollection = _productCollection;
   });
 
+  //Default page
+app.get("/", ensureAuthenticated, (req, res) => {
+  console.log("HI-/");
+  console.log(req.isAuthenticated());
+  res.redirect("/home");
+});
+
+//Login Page
 app.get("/login", (req, res) => {
   console.log("HI-/login");
   console.log(req.isAuthenticated());
   res.sendFile("login.html", { user: req.user, root: __dirname + "/build/" });
 });
 
-// app.get("/", (req, res) => {
-//   console.log("HI-/");
-//   console.log(req.isAuthenticated());
-//   res.sendFile("login.html", { user: req.user, root: __dirname });
-// });
-
+//Website Page
 app.get("/home", ensureAuthenticated, (req, res) => {
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
@@ -111,6 +114,7 @@ app.get("/shop", ensureAuthenticated, (req, res) => {
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
+//Other methods
 app.get("/username", ensureAuthenticated, (req, res) => {
   console.log(req.user._json);
   let user = req.body;
@@ -180,7 +184,7 @@ app.get(
 
 app.get("/logout", function (req, res) {
   req.logout();
-  res.redirect("/home");
+  res.redirect("/login");
 });
 
 function ensureAuthenticated(req, res, next) {
