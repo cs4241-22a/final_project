@@ -178,6 +178,7 @@ export default class Model {
     constructor(info) {
         this.initialize(info);
         this.info = info;
+        
     }
 
     copy() {
@@ -185,6 +186,7 @@ export default class Model {
         m.puzzle = this.puzzle.clone();
         m.victory = this.victory;
         m.level = this.level;
+        m.numMoves = this.numMoves;
         return m;
     }
     
@@ -205,7 +207,7 @@ export default class Model {
         this.puzzle.setPlayer(arow, acol);
         this.victory = false;
         this.level = parseInt(info.level);
-        
+        this.numMoves = 0;
     }
 
     isWin() {

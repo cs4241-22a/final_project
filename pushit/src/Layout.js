@@ -40,7 +40,7 @@ export const layout = {
 
     resetButtons : {
         position: "absolute",
-        left: 640,
+        left: 610,
         top: 190
     },
 
@@ -61,16 +61,14 @@ export const layout = {
 
     resetbutton : {
         position: "absolute",
-        top: 105,
-        left: 3
+        top: 85,
+        left: 33
     },
 
 
     text: {
-        position: "absolute",
-        left: 530,
-        top: 150,
-        color: "yellow",
+        top: 50,
+        color: "purple",
         backgroundColor: "#F0CE97",
         width: 80,
     }

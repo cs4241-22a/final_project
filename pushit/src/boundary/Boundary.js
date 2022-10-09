@@ -1,5 +1,5 @@
-const LEVELOFFSETH = 20;
-const BOXSIZE = 55;
+const LEVELOFFSETH = 10;
+const BOXSIZE = 50;
 const OFFSET = 3;
 
 

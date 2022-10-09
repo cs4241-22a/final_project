@@ -6,7 +6,7 @@ import { redrawCanvas } from './boundary/Boundary.js'
 import Model from './model/Model.js';
 import {configuration_1} from './model/Puzzle.js';
 import {Up, Down, Left, Right} from './model/Model.js';
-import {move} from './controller/Controller.js';
+import {move, reset} from './controller/Controller.js';
 
 var level1 = JSON.parse(JSON.stringify(configuration_1));
 
@@ -25,22 +25,11 @@ function App() {
     let newModel = move(model, direction);
     setModel(newModel);
   }
-  /*
-  const handleClick = (e) => {
-    let newModel = selectSquare(model, canvasRef.current, e);
-    setModel(newModel);
-  }
 
-  const extendHandler = (direction) => {
-    let newModel = extend(model, direction);
-    setModel(newModel);
+  const resetHandler = () => {
+        let newModel = reset(model);
+        setModel(newModel);
   }
-
-  const resetHandler = (levelNum) => {
-    let newModel = reset(model, levelNum);
-    setModel(newModel);
-  }
-*/
 
   return(
     <main style={layout.Appmain} ref={appRef}>
@@ -81,31 +70,14 @@ function App() {
       </div>
 
       <div style={layout.resetButtons}>
-        
-          <button style={layout.level1button} 
-                  data-testid="l1button"
-                  //onClick={(e) => resetHandler(1)}
-                  //disabled={model.isLevel(1)} 
-                  >Level1
-          </button>
-          <button style={layout.level2button} 
-                  data-testid="l2button"
-                  //onClick={(e) => resetHandler(2)} 
-                  //disabled={model.isLevel(2)} 
-                  >Level2
-          </button>
-          <button style={layout.level3button} 
-                  data-testid="l3button"
-                  //onClick={(e) => resetHandler(3)} 
-                  //disabled={model.isLevel(3)} 
-                  >Level3
-          </button>
-
-          <button style={layout.resetbutton} 
-                  data-testid="resetbutton"
-                 // onClick={(e) => resetHandler(0)} 
-                  >Reset
-          </button>
+        <label style={layout.text}>
+                {"number moves: " + model.numMoves}
+        </label>
+        <button style={layout.resetbutton} 
+                data-testid="resetbutton"
+                onClick={(e) => resetHandler()} 
+                >Reset
+        </button>
 
       </div>
 
