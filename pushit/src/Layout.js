@@ -1,12 +1,12 @@
 export const layout = {
     canvas: {
-        height: "640",
+        height: "560",
         width: "640",
     },
     
     Appmain: {
         backgroundColor: "#F0CE97",
-        height: "120vh",
+        height: "100vh",
         width: "100vw",
         
     },

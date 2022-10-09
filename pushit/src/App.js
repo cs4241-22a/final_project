@@ -31,8 +31,32 @@ function App() {
         setModel(newModel);
   }
 
+  const keyHandler = (event) => {
+        //console.log(event.keyCode);
+        let newModel;
+        switch (event.keyCode) {
+                case 38:
+                        newModel = move(model, Up);
+                        break;
+                case 39:
+                        newModel = move(model, Right);
+                        break;
+                case 37:
+                        newModel = move(model, Left);
+                        break;
+                case 40:
+                        newModel = move(model, Down);
+                        break;
+                default:
+                        newModel = model;
+                        break;
+
+        }
+        setModel(newModel)
+  }
+
   return(
-    <main style={layout.Appmain} ref={appRef}>
+    <main style={layout.Appmain} ref={appRef} onKeyDown={(e) => keyHandler(e)}>
       <canvas tabIndex="1"
               className="App-canvas"
               data-testid="canvas"
@@ -41,7 +65,7 @@ function App() {
               height={layout.canvas.height}
               />
 
-      <div style={layout.buttons}>
+      <div style={layout.buttons} onKeyPress={(e) => keyHandler(e)}>
           <button style={layout.upbutton} 
                   onClick={(e) => moveHandler(Up)} 
                   disabled={!model.puzzle.canMove(Up)}
