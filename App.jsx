@@ -1,14 +1,11 @@
-import React from 'react';
-import './App.css';
-import { layout } from './Layout.js';
-import { redrawCanvas } from './boundary/Boundary.js'
-import Model from './model/Model.js';
-import {configuration_1} from './model/Puzzle.js';
-import {Up, Down, Left, Right} from './model/Model.js';
-import {move, reset} from './controller/Controller.js';
-
-var level1 = JSON.parse(JSON.stringify(configuration_1));
-
+// import logo from './logo.svg';
+// import React from 'react';
+// import { layout } from './Layout.js';
+// import { redrawCanvas } from './boundary/Boundary.js'
+// import Model from './model/Model.js';
+// import {configuration_1} from './model/Puzzle.js';
+// import {Up, Down, Left, Right} from './model/Model.js';
+// import {move, reset} from './controller/Controller.js';
 
 function App() {
   //default to level 1
@@ -55,7 +52,7 @@ function App() {
   }
 
   return(
-    <main style={layout.Appmain} ref={appRef} onKeyDown={(e) => keyHandler(e)}>
+    <main ref={appRef} onKeyDown={(e) => keyHandler(e)}>
       <canvas tabIndex="1"
               className="App-canvas"
               data-testid="canvas"
@@ -93,10 +90,10 @@ function App() {
       </div>
 
       <div style={layout.resetButtons}>
-        <label style={layout.text}>
-                {"number moves: " + model.numMoves}
+        <label class="box">
+                {"number of moves: " + model.numMoves}
         </label>
-        <button style={layout.resetbutton} 
+        <button class="button is-danger" 
                 data-testid="resetbutton"
                 onClick={(e) => resetHandler()} 
                 >Reset
@@ -108,5 +105,7 @@ function App() {
   );
 }
 
+console.log("bruh");
 
-export default App;
+
+// export default App;
