@@ -1,11 +1,7 @@
 Chayanne
-- start building the index page
-- layout the website protoype (either in HTML or bulma/bootstrap builder)
-- create the tab headings
-- start to compile the resources
-- research on the dynamic card system
+- finish html/css for tomorrow
+- start svelte move
 
 Hailey
-- looking into svelte
-- send Chayanne documentation on svelte and front-end
-- have a template on combining json and svelte
+- make webpack
+- explore fetch and json for svelte
