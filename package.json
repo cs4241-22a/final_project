@@ -32,9 +32,13 @@
     "react-icons": "^4.4.0",
     "react-is": "^18.2.0",
     "react-router-dom": "^6.4.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "snowpack": "^3.8.8"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
