@@ -10,5 +10,8 @@ router.get('/cps', function(req, res, next) {
 router.get('/reaction', function(req, res, next) {
     res.render('reaction', { title: 'ReactionTests', user : req.user, game_type: "reaction"});
 })
+router.get('/aimtraining', function(req, res, next) {
+    res.render('aimtraining', { title: 'ReactionTests', user : req.user, game_type: "aimtraining"});
+})
 
 module.exports = router;
