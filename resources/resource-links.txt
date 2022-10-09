@@ -1,0 +1,49 @@
+~~~~ FULLSTACK PAGE ~~~~
+~~FRONT END~~
+Material.io 
+Best practices for building Android Apps
+https://material.io/design
+
+HCI Bib
+HCI resources (albeit a bit outdated)
+http://hcibib.org/
+
+Accessible Web Tools
+A Mastersheet of many Accessible web components
+https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
+
+Responsive Design
+Helpful step-by-step guides to learn Responsive Design
+https://web.dev/learn/design/
+
+
+~~BACK END~~
+
+
+
+~~FULL STACK~~
+Front-End Dev's Guide to Terminal
+A user friendly guide to using Terminal commands
+https://www.joshwcomeau.com/javascript/terminal-for-js-devs/
+
+React Libraries
+13 React Libraries that are helpful to know
+https://cult.honeypot.io/reads/react-libraries-2022/
+
+Svelte Tutorials
+Tutorials from the official Svelte documentation
+https://svelte.dev/tutorial/basics
+
+w3 Schools
+A website with documentation and tutorials for almost all of the most popular web development languages and Tools
+https://www.w3schools.com/
+
+
+~~~~ THEORY PAGE ~~~~~
+Teach Yourself CS
+Massive guide to learn lots of underlying knowlegdge of Computer Science
+https://teachyourselfcs.com/
+
+
+
+~~~~ CYBERSECURITY PAGE ~~~~

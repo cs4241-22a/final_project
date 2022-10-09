@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>How to Survive CS@WPI</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
         <!--Needed to run the slideshow on the opening page-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
@@ -92,13 +93,11 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
                                     <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
                                     <br>
-                                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
                                 <a href="#" class="card-footer-item">Save</a>
-                                <a href="#" class="card-footer-item">Edit</a>
-                                <a href="#" class="card-footer-item">Delete</a>
                             </footer>
                         </div>
                     </div>
@@ -123,19 +122,115 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
                                     <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
                                     <br>
-                                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
                                 <a href="#" class="card-footer-item">Save</a>
-                                <a href="#" class="card-footer-item">Edit</a>
-                                <a href="#" class="card-footer-item">Delete</a>
                             </footer>
                         </div>
                     </div>
                 </div>
-                <div class="column">
-                    <h1 class="title is-2 has-text-centered">Login (or FAQ)</h1>
+                <div class="column has-background-primary">
+                    <h1 class="title is-2 has-text-centered">Submit A Resource</h1>
+                    <!--Submit Resource Form-->
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                          <input class="input" type="text" placeholder="Name">
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input" type="email" placeholder="Email input">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-exclamation-triangle"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Resource Title</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input" type="text" placeholder="Title">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Resource Link</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input" type="url" placeholder="URL">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-exclamation-triangle"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">What Subject is this?</label>
+                        <div class="control">
+                          <div class="select">
+                            <select>
+                              <option>Fullstack/Design</option>
+                              <option>Theory</option>
+                              <option>Cybersecurity</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Give a small description of the resource</label>
+                        <div class="control">
+                          <textarea class="textarea" placeholder="Textarea"></textarea>
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <div class="control">
+                          <label class="checkbox">
+                            <input type="checkbox">
+                            I agree to the <a href="#">terms and conditions</a>
+                          </label>
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <div class="control">
+                          <label class="radio">
+                            <input type="radio" name="question">
+                            Yes
+                          </label>
+                          <label class="radio">
+                            <input type="radio" name="question">
+                            No
+                          </label>
+                        </div>
+                      </div>
+                      
+                      <div class="field is-grouped">
+                        <div class="control">
+                          <button class="button is-link">Submit</button>
+                        </div>
+                        <div class="control">
+                          <button class="button is-link is-light">Cancel</button>
+                        </div>
+                      </div>    
                 </div>
               </div>
         </container>
