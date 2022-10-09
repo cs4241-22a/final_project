@@ -28,6 +28,49 @@ class UpgradePanel extends React.Component {
 	}
 }
 
+class LeaderBoard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.props = props;
+	}
+	
+	render(){
+		const scores = this.props.scores;
+				
+		const rows = [];
+		for (let i = 0; i < scores.length; i++) {
+			rows.push(
+			<tr>
+				<th>{i + 1}</th>
+				<td>{scores[i].User}</td>
+				<td>{scores[i].Score}</td>
+			</tr>
+			);
+		}
+		for (let i = rows.length; i < 10; i++) {
+			rows.push(
+			<tr>
+				<th>{i}</th>
+				<td>{"-"}</td>
+				<td>{"-"}</td>
+			</tr>
+			);
+		}
+		
+		
+		return (
+			<>
+				<table>
+					<tr>
+						<th>Rank</th><th>User Name</th><th>Score</th>
+					</tr>
+					<tbody id="LeaderBoard">{rows}</tbody>
+				</table>
+			</>
+		);
+	}
+}
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -46,9 +89,11 @@ class App extends React.Component {
 			meditateCost: 25000,
 			dunkinCost: 137500,
 			reviewCost: 500000,
+			leaderboard: [],
 		};
 
 		window.appState = this;
+		this.reloadLeaderboard();
 		this.startTimer();
 	}
 
@@ -79,6 +124,16 @@ class App extends React.Component {
 			.then((res) => res.json())
 			.then((message) => {
 				console.log(message);
+			});
+	}
+	
+	reloadLeaderboard() {
+		fetch("/leaderboard", {
+			method: "GET",
+		})
+			.then((res) => res.json())
+			.then((leaderboard) => {
+				this.setState({leaderboard: leaderboard.Leaderboard});
 			});
 	}
 
@@ -204,19 +259,8 @@ class App extends React.Component {
 					</table>
 
 					<button onClick={() => this.save()}>Save</button>
-					<button
-						onClick={function () {
-							fetch("/leaderboard", {
-								method: "GET",
-							})
-								.then((res) => res.json())
-								.then((leaderboard) => {
-									console.log(leaderboard);
-								});
-						}}
-					>
-						Leaderboard
-					</button>
+					<button onClick={() => this.reloadLeaderboard()}> Refresh Leaderboard </button>
+					<LeaderBoard scores={this.state.leaderboard}/>
 
 					<p>
 						Will use these descriptions later:

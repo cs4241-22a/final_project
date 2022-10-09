@@ -18,6 +18,25 @@ class UpgradePanel extends React.Component {
     }), /* @__PURE__ */ React.createElement("label", null, this.props.text), /* @__PURE__ */ React.createElement("label", null, this.props.val)));
   }
 }
+class LeaderBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+  render() {
+    const scores = this.props.scores;
+    const rows = [];
+    for (let i = 0; i < scores.length; i++) {
+      rows.push(/* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, i + 1), /* @__PURE__ */ React.createElement("td", null, scores[i].User), /* @__PURE__ */ React.createElement("td", null, scores[i].Score)));
+    }
+    for (let i = rows.length; i < 10; i++) {
+      rows.push(/* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, i), /* @__PURE__ */ React.createElement("td", null, "-"), /* @__PURE__ */ React.createElement("td", null, "-")));
+    }
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Rank"), /* @__PURE__ */ React.createElement("th", null, "User Name"), /* @__PURE__ */ React.createElement("th", null, "Score")), /* @__PURE__ */ React.createElement("tbody", {
+      id: "LeaderBoard"
+    }, rows)));
+  }
+}
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -34,9 +53,11 @@ class App extends React.Component {
       studyCost: 12500,
       meditateCost: 25e3,
       dunkinCost: 137500,
-      reviewCost: 5e5
+      reviewCost: 5e5,
+      leaderboard: []
     };
     window.appState = this;
+    this.reloadLeaderboard();
     this.startTimer();
   }
   save() {
@@ -63,6 +84,14 @@ class App extends React.Component {
       body
     }).then((res) => res.json()).then((message) => {
       console.log(message);
+    });
+  }
+  reloadLeaderboard() {
+    fetch("/leaderboard", {
+      method: "GET"
+    }).then((res) => res.json()).then((leaderboard) => {
+      console.log(leaderboard.Leaderboard);
+      this.setState({leaderboard: leaderboard.Leaderboard});
     });
   }
   render() {
@@ -141,14 +170,10 @@ class App extends React.Component {
     }))), /* @__PURE__ */ React.createElement("button", {
       onClick: () => this.save()
     }, "Save"), /* @__PURE__ */ React.createElement("button", {
-      onClick: function() {
-        fetch("/leaderboard", {
-          method: "GET"
-        }).then((res) => res.json()).then((leaderboard) => {
-          console.log(leaderboard);
-        });
-      }
-    }, "Leaderboard"), /* @__PURE__ */ React.createElement("p", null, "Will use these descriptions later:", /* @__PURE__ */ React.createElement("br", null), "Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy MASH - Gompei will attend a MASH session, teaching him how to do his Calc IV homework, increasing his click strength by 25.", /* @__PURE__ */ React.createElement("br", null), "Buy Textbook - Gompei will *buy* his course textbook, increasing his passive click strength by 10.", /* @__PURE__ */ React.createElement("br", null), "Buy Grass - Gompei eats some of the grass on the Quad, increasing his click strength by 75.", /* @__PURE__ */ React.createElement("br", null), "Buy Office Hours - Gompei will attend Noelle's and Kyle's office hour and they help him fix his bug, increasing his passive click strength by 35", /* @__PURE__ */ React.createElement("br", null), "Buy Study - Gompei takes some time to study for his next Physics Exam, increasing his click strength by 500.", /* @__PURE__ */ React.createElement("br", null), "Buy Meditate - Gompei meditates reducing his stress, increasing his passive click strength by 300.", /* @__PURE__ */ React.createElement("br", null), "Buy Dukin - Gompei buys Dunkin Donuts through the mobile app, increasing his click strength by 15000.", /* @__PURE__ */ React.createElement("br", null), "Buy Review - Gompei makes a review guide for his history exam, incrasing his passive click strength by 10000.")));
+      onClick: () => this.reloadLeaderboard()
+    }, " Refresh Leaderboard "), /* @__PURE__ */ React.createElement(LeaderBoard, {
+      scores: this.state.leaderboard
+    }), /* @__PURE__ */ React.createElement("p", null, "Will use these descriptions later:", /* @__PURE__ */ React.createElement("br", null), "Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy MASH - Gompei will attend a MASH session, teaching him how to do his Calc IV homework, increasing his click strength by 25.", /* @__PURE__ */ React.createElement("br", null), "Buy Textbook - Gompei will *buy* his course textbook, increasing his passive click strength by 10.", /* @__PURE__ */ React.createElement("br", null), "Buy Grass - Gompei eats some of the grass on the Quad, increasing his click strength by 75.", /* @__PURE__ */ React.createElement("br", null), "Buy Office Hours - Gompei will attend Noelle's and Kyle's office hour and they help him fix his bug, increasing his passive click strength by 35", /* @__PURE__ */ React.createElement("br", null), "Buy Study - Gompei takes some time to study for his next Physics Exam, increasing his click strength by 500.", /* @__PURE__ */ React.createElement("br", null), "Buy Meditate - Gompei meditates reducing his stress, increasing his passive click strength by 300.", /* @__PURE__ */ React.createElement("br", null), "Buy Dukin - Gompei buys Dunkin Donuts through the mobile app, increasing his click strength by 15000.", /* @__PURE__ */ React.createElement("br", null), "Buy Review - Gompei makes a review guide for his history exam, incrasing his passive click strength by 10000.")));
   }
   addToScore(e) {
     this.setState({score: this.state.score + this.state.clickDamage});

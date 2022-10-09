@@ -173,7 +173,6 @@ app.post("/save", async (req, res) => {
 
 app.get("/leaderboard", async (req, res) => {
 	let collections = (await db.listCollections().toArray()).map((c) => c.name);
-	console.log(collections);
 	let scores = [];
 	for (const collection of collections) {
 		let document = await db.collection(`${collection}`).findOne({});
@@ -184,6 +183,7 @@ app.get("/leaderboard", async (req, res) => {
 	}
 	leaderboard = scores.sort((a, b) => b.Score - a.Score);
 	res.json({ Leaderboard: leaderboard });
+	//console.log(leaderboard);
 });
 
 app.use(express.static(__dirname + "/public"));
