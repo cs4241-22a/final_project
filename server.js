@@ -170,6 +170,17 @@ app.post("/save", async (req, res) => {
 	}
 });
 
+app.get("/load", async (req, res) => {
+	let base = [0, 0, 15, 30, 200, 250, 1000, 1500, 12500, 25000, 137500, 500000]; //Data for game with no saves
+	let collections = (await db.listCollections().toArray()).map((c) => c.name); //Array of all collections in DB
+	//If collection does not exist, create and insert base stats
+	if (collections.indexOf(req.user.username) === -1) {
+		db.collection(`${req.user.username}`).insertOne({ Data: base });
+	}
+	let progress = await db.collection(`${req.user.username}`).findOne({});
+	res.json(progress);
+});
+
 app.get("/leaderboard", async (req, res) => {
 	let collections = (await db.listCollections().toArray()).map((c) => c.name);
 	let scores = [];
