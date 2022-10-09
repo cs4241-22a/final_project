@@ -8,7 +8,7 @@
 	"license": "ISC",
 	"scripts": {
 		"start": "node server.js",
-		"devStart": "nodemon server.js",
+		"devStart": "nodemon --inspect server.js",
 		"clean": "rm dist/bundle.js",
 		"dev": "snowpack dev",
 		"build": "snowpack build"

@@ -105,13 +105,10 @@ app.use(favicon(path.join(__dirname, "public/factorio.ico")));
 // ROUTES
 // ---
 app.get("/", function (req, res) {
-	//DISABLING LOGGING IN FOR NOW
-	res.sendFile(path.join(__dirname, "/build/index.html"));
-	return;
 	if (req.hasOwnProperty("user")) {
 		console.log("A user is logged in!");
 		console.log(req.user);
-		//res.sendFile(path.join(__dirname, '/build/index.html'));
+		res.sendFile(path.join(__dirname, "/build/index.html"));
 	} else {
 		console.log("no user logged in.");
 		res.sendFile(path.join(__dirname, "/build/login.html"));
@@ -159,14 +156,16 @@ app.get(
 );
 
 app.post("/save", async (req, res) => {
-	console.log(req.body);
-	let collections = await db.collections(); //Array of all collections in DB
+	let collections = (await db.listCollections().toArray()).map((c) => c.name); //Array of all collections in DB
 	//If collection does not exist, create and insert document, otherwise replace document in collection
-	if (collections.indexOf(req.body.user) !== -1) {
-		db.collection(`${req.body.user}`).insertOne({ Data: req.body.data });
+	if (collections.indexOf(req.user.username) === -1) {
+		db.collection(`${req.user.username}`).insertOne({ Data: req.body.data });
 		res.json(JSON.stringify({ Data: "Stored in DB" }));
 	} else {
-		db.collection(`${req.body.user}`).replaceOne({}, { Data: req.body.data });
+		db.collection(`${req.user.username}`).replaceOne(
+			{},
+			{ Data: req.body.data }
+		);
 		res.json(JSON.stringify({ Data: "Stored in DB" }));
 	}
 });
