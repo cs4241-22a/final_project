@@ -5,7 +5,7 @@ import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, Te
 import Modal from '@mui/material/Modal';
 import { pink } from "@mui/material/colors";
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
-import BasicModal from "./modal";
+import basicPost from "./post";
 
 const style = {
     position: 'absolute',
@@ -27,13 +27,6 @@ const centerStyle = {
     background: "lightgrey"
   };
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
-backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-...theme.typography.body2,
-padding: theme.spacing(2),
-maxWidth: 400,
-color: theme.palette.text.primary,
-}));
 
 const blogs = []
 
@@ -43,10 +36,8 @@ export default function Reminders() {
     const handleClose = () => setOpen(false);
     
 
-
-    const blogFormat = BasicModal()
+    const blogFormat = basicPost()
     
-
 
     const addBlog = () => {
         blogs.push(blogFormat)
@@ -99,7 +90,7 @@ export default function Reminders() {
             <ul>{item}</ul>
             )}
             </ul>}
-            <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
+            {/* <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
                 <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
                     <Avatar>W</Avatar>
@@ -108,7 +99,7 @@ export default function Reminders() {
                     <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
                 </Grid>
                 </Grid>
-            </StyledPaper> </div>
+            </StyledPaper> </div> */}
 
 
         </div>
@@ -332,7 +323,7 @@ class Reminders extends React.Component {
                                 POST from User
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                Deez nuts in your mouth.
+                               haha
                             </Typography>
                             </Box>
                         </Modal>
