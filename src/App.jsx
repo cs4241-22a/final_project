@@ -27,6 +27,8 @@ export default function App(props) {
     ).unwrap()
   )
   const [turn, setTurn] = useState(game.turn)
+  const [engine, setEngine] = useState("StockFish")
+  const [level, setLevel] = useState(10)
   const [playAs, setPlayAs] = useState('white')
   const [gameRunning, setGameRunning] = useState(false)
   const [windowDimensions, setWindowDimensions] = useState(
@@ -42,13 +44,13 @@ export default function App(props) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  function beginGame(color) {
+  function beginGame(color, elo) {
     setGame(Chess.default())
     setTurn('white')
     setPlayAs(color)
     setGameRunning(true)
     if (color === 'black') {
-      playComputerMove(game, 'StockFish', 1000).then((chess) => {
+      playComputerMove(game, engine, 1000, level).then((chess) => {
         setGame(chess)
       })
     }
@@ -68,7 +70,14 @@ export default function App(props) {
             <Route
               exact
               path="/"
-              element={<Home begin={beginGame} gameRunning={gameRunning} />}
+              element={
+                <Home
+                  begin={beginGame}
+                  gameRunning={gameRunning}
+                  setLevel={setLevel}
+                  setEngine={setEngine}
+                />
+              }
             />
             <Route path="/about" element={<About />} />
             <Route path="/stats" element={<Stats />} />
@@ -85,6 +94,8 @@ export default function App(props) {
                       gameRunning={gameRunning}
                       endGame={endGame}
                       dimensions={windowDimensions}
+                      engine={engine}
+                      level={level}
                     />
                   </div>
                 </div>

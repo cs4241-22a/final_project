@@ -20,7 +20,7 @@ const engines = [
   },
   {
     name: 'Komodo',
-    exec: './engines/komodo-13.02-linux',
+    exec: './engines/komodo',
   },
   {
     name: 'LeelaChessZero',
@@ -88,13 +88,22 @@ app.get('/bestmove', cors(), async (req, res) => {
   const movetime = req.query.movetime
   const engineInfo = engines.find((e) => e.name === engineName)
   const engine = new Engine(engineInfo.exec)
-
   await engine.init()
+  if (engineName === 'StockFish') {
+    await engine.setoption('Skill Level', req.query.level)
+  }
+
+  if (engineName === 'Komodo') {
+    await engine.setoption('Skill', req.query.level)
+  }
   await engine.position(fen)
-  const output = await engine.go({ movetime: movetime, depth: 20})
+  const output = await engine
+    .go({ movetime: movetime, depth: 20 })
+    .catch((err) => console.log(err))
 
   res.json(output)
   res.end()
+  await engine.quit()
 })
 
 app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login.html'))

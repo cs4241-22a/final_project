@@ -6,12 +6,11 @@ import { makeFen } from 'chessops/fen'
 import { Navigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-
-export async function playComputerMove(chess, engine, movetime) {
+export async function playComputerMove(chess, engine, movetime, level) {
   const fen = makeFen(chess.toSetup())
-  const move = await getBestMove(fen, engine, movetime)
+  const move = await getBestMove(fen, engine, movetime, level)
   chess.play(move)
-  return chess;
+  return chess
 }
 
 function getPosition(index, color) {
@@ -24,15 +23,15 @@ function getSquareFromChessNotation(pos) {
   return 8 * col + row
 }
 
-
-async function getBestMove(pos, engine, movetime) {
+async function getBestMove(pos, engine, movetime, level) {
   const response = await fetch(
-    'http://mc.craftsteamg.com:4000/bestmove?' +
-    new URLSearchParams({
-      position: pos,
-      engine: engine,
-      movetime: movetime,
-    })
+    'http://176.31.253.185:4000/bestmove?' +
+      new URLSearchParams({
+        position: pos,
+        engine: engine,
+        movetime: movetime,
+        level: level
+      })
   )
 
   const json = await response.json()
@@ -60,27 +59,44 @@ async function getBestMove(pos, engine, movetime) {
   return move
 }
 
-
-
-
-
 export default function Board(props) {
   const [dragging, setDragging] = useState(-1)
-  const [blPawn] = useImage('./pieces/p.png')
-  const [blRook] = useImage('./pieces/r.png')
-  const [blBishop] = useImage('./pieces/b.png')
-  const [blKnight] = useImage('./pieces/n.png')
-  const [blQueen] = useImage('./pieces/q.png')
-  const [blKing] = useImage('./pieces/k.png')
+  const [blPawn, status1] = useImage('./pieces/p.png')
+  const [blRook, status2] = useImage('./pieces/r.png')
+  const [blBishop, status3] = useImage('./pieces/b.png')
+  const [blKnight, status4] = useImage('./pieces/n.png')
+  const [blQueen, status5] = useImage('./pieces/q.png')
+  const [blKing, status6] = useImage('./pieces/k.png')
 
-  const [wPawn] = useImage('./pieces/wp.png')
-  const [wRook] = useImage('./pieces/wr.png')
-  const [wBishop] = useImage('./pieces/wb.png')
-  const [wKnight] = useImage('./pieces/wn.png')
-  const [wQueen] = useImage('./pieces/wq.png')
-  const [wKing] = useImage('./pieces/wk.png')
+  const [wPawn, status7] = useImage('./pieces/wp.png')
+  const [wRook, status8] = useImage('./pieces/wr.png')
+  const [wBishop, status9] = useImage('./pieces/wb.png')
+  const [wKnight, status10] = useImage('./pieces/wn.png')
+  const [wQueen, status11] = useImage('./pieces/wq.png')
+  const [wKing, status12] = useImage('./pieces/wk.png')
+
+  function allLoaded() {
+    const values = [
+      status1,
+      status2,
+      status3,
+      status4,
+      status5,
+      status6,
+      status7,
+      status8,
+      status9,
+      status10,
+      status11,
+      status12,
+    ]
+    if (values.includes('loading') || values.includes('failed')) {
+      return false
+    }
+    return true
+  }
+
   let size = props.dimensions.width * 0.4
-  console.log(size)
   if (size < 200) {
     size = props.dimensions.width * 0.9
   }
@@ -126,10 +142,9 @@ export default function Board(props) {
   }
 
   async function onMove() {
-    await playComputerMove(props.game, "StockFish", 1000)
+    await playComputerMove(props.game, props.engine, 1000, props.level)
     props.flipTurn()
   }
-
 
   function generateChessBoard() {
     const squares = []
@@ -154,15 +169,13 @@ export default function Board(props) {
     const ranks = fen.ranks
     const pieces = []
 
-
     for (let square = 0; square < 64; square++) {
       const [row, col] = getPosition(square)
       const piece = ranks[col][row]
 
-
-      let [fRow, fCol] = [row, col] 
-      if (props.playAs === "black") {
-        [fRow, fCol] = getPosition(63 - square)
+      let [fRow, fCol] = [row, col]
+      if (props.playAs === 'black') {
+        ;[fRow, fCol] = getPosition(63 - square)
       }
 
       if (piece === '-') {
@@ -199,11 +212,15 @@ export default function Board(props) {
     props.endGame()
   }
 
-
-  return (
-    props.gameRunning ?
+  return props.gameRunning ? (
+    allLoaded() ? (
       <div>
-        <Button variant="danger" onClick={endGame}>Resign</Button>
+        <Button variant="danger" onClick={endGame}>
+          Resign
+        </Button>
+        <Button variant="secondary" onClick={() => {}}>
+          Undo
+        </Button>
         <Stage width={size} height={size}>
           <Layer>
             {squares.map((entry) => (
@@ -221,7 +238,9 @@ export default function Board(props) {
                   key={`T${entry.square}`}
                   x={entry.x}
                   y={entry.y}
-                  text={props.playAs === "white" ? entry.square : 63 - entry.square}
+                  text={
+                    props.playAs === 'white' ? entry.square : 63 - entry.square
+                  }
                 ></Text>
               </>
             ))}
@@ -246,25 +265,21 @@ export default function Board(props) {
                     cancelled = true
                   }
 
-
                   let newX = Math.floor(
                     (e.target.attrs.x + size / 16) / (size / 8)
                   )
                   let newY =
                     7 - Math.floor((e.target.attrs.y + size / 16) / (size / 8))
 
-
                   if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
                     cancelled = true
                   }
 
-
                   let newSquare = 8 * newY + newX
 
-                  if (props.playAs === "black") {
+                  if (props.playAs === 'black') {
                     newSquare = 63 - newSquare
                   }
-
 
                   const move = {
                     from: piece.square,
@@ -302,7 +317,10 @@ export default function Board(props) {
               />
             ))}
             {getHover().map((sq) => {
-              const [row, col] = props.playAs === "white" ? getPosition(sq) : getPosition(63 - sq)
+              const [row, col] =
+                props.playAs === 'white'
+                  ? getPosition(sq)
+                  : getPosition(63 - sq)
               const x = row * (size / 8) + size / 16
               const y = col * (size / 8) + size / 16
               return (
@@ -318,14 +336,35 @@ export default function Board(props) {
               )
             })}
           </Layer>
-          {props.game.isEnd() ?
-            <Layer opacity={.8} onClick={endGame}>
-              <Rect x={size / 8} y={size / 8} width={(6 * size) / 8} height={(6 * size) / 8} fill={"white"} />
-              <Text x={(size / 2) - (size / 8)} y={(size / 8) + (size / 16)} text={"THE GAME IS OVER"} fontSize={20} />
-              <Text x={(size / 2) - (size / 8)} y={(size / 8) + (size / 8)} text={"CLICK TO RETURN TO HOME"} fontSize={20} />
+          {props.game.isEnd() ? (
+            <Layer opacity={0.8} onClick={endGame}>
+              <Rect
+                x={size / 8}
+                y={size / 8}
+                width={(6 * size) / 8}
+                height={(6 * size) / 8}
+                fill={'white'}
+              />
+              <Text
+                x={size / 2 - size / 8}
+                y={size / 8 + size / 16}
+                text={'THE GAME IS OVER'}
+                fontSize={20}
+              />
+              <Text
+                x={size / 2 - size / 8}
+                y={size / 8 + size / 8}
+                text={'CLICK TO RETURN TO HOME'}
+                fontSize={20}
+              />
             </Layer>
-            : null}
+          ) : null}
         </Stage>
-      </div> : <Navigate to="/" />
+      </div>
+    ) : (
+      <h1>Loading Game...</h1>
+    )
+  ) : (
+    <Navigate to="/" />
   )
 }
