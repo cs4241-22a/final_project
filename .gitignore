@@ -6,6 +6,8 @@ dist/*
 node_modules/
 *.log
 build/*
+package-lock.json
+.idea/*
 
 # OS generated files
 .DS_Store
