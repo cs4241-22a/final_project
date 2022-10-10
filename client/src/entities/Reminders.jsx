@@ -1,8 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 // import Modal from "react-modal"
 import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { pink } from "@mui/material/colors";
+import { rootShouldForwardProp } from "@mui/material/styles/styled";
 // import BasicModal from "./entities/modal";
 
 const style = {
@@ -33,28 +35,23 @@ maxWidth: 400,
 color: theme.palette.text.primary,
 }));
 
+const blogs = []
+
 export default function Reminders() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [open2, setOpen2] = React.useState(false);
-    const handleOpen2 = () => setOpen2(true);
-    const handleClose2 = () => setOpen2(false);
     
-    const blogs = [
-        <div>hello</div>,
-        <div>world</div>,
-      ]
+
 
     const blogFormat = <div>
-        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen2}>View "Usernames" post</Fab>
+        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen}>View "Usernames" post</Fab>
     <Modal
-        open={open2}
-        onClose={handleClose2}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
     >
-
         <Box sx={style}>
             {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
           <Box
@@ -73,7 +70,7 @@ export default function Reminders() {
                 </Typography>
                 <Button>View Replies!</Button>
                 <Button>Reply!</Button>
-                <Button onClick={handleClose2}>Exit!</Button>
+                <Button onClick={handleClose}>Exit!</Button>
             </Box>
         </Box>
     </Modal>
@@ -85,6 +82,7 @@ export default function Reminders() {
         blogs.push(blogFormat)
         console.log(blogs)
     }
+    
 
     return (
     <div style={centerStyle}>
@@ -125,7 +123,12 @@ export default function Reminders() {
 
 
         <div id="insertBlogPosts">
-            {blogs}
+            {/* {blogs} */}
+            {<ul>
+            {blogs.map(item =>
+            <ul>{item}</ul>
+            )}
+            </ul>}
             <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
                 <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
