@@ -19,7 +19,9 @@ class UpgradePanel extends React.Component {
 					style={{ display: "inline-block" }}
 					onClick={this.props.onClick}
 				>
-					<img src={this.props.img} />
+					<img src={this.props.img}
+						 height="54px"
+						 width="54px"/>
 					<label>{this.props.text}</label>
 					<label>{this.props.val}</label>
 				</div>
@@ -175,91 +177,92 @@ class App extends React.Component {
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Campus Center Lunch "
+									text=" Buy Campus Center Lunch "
 									val={this.state.lunchCost}
 									onClick={(e) => this.buyLunch()}
 									enabled={this.state.score >= this.state.lunchCost}
-									img="https://cdn.discordapp.com/attachments/818541682018615347/1028724104213299340/Sandwich-Free-PNG-Image_1_54x54.png"
+									img="/Sandwich-Free-PNG-Image.png"
+
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Hay "
+									text=" Buy Hay "
 									val={this.state.hayCost}
 									onClick={(e) => this.buyHay()}
 									enabled={this.state.score >= this.state.hayCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/NicePng_hay-bale-png_569882.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy MASH "
+									text=" Buy MASH "
 									val={this.state.mashCost}
 									onClick={(e) => this.buyMash()}
 									enabled={this.state.score >= this.state.mashCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/science-clipart-transparent-7.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Textbook "
+									text=" Buy Textbook "
 									val={this.state.textbookCost}
 									onClick={(e) => this.buyTextbook()}
 									enabled={this.state.score >= this.state.textbookCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/PngItem_5004460.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Grass "
+									text=" Buy Grass "
 									val={this.state.grassCost}
 									onClick={(e) => this.buyGrass()}
 									enabled={this.state.score >= this.state.grassCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/PngItem_33323.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Office Hours "
+									text=" Buy Office Hours "
 									val={this.state.officehoursCost}
 									onClick={(e) => this.buyOfficeHours()}
 									enabled={this.state.score >= this.state.officehoursCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/PngItem_2021146.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Study "
+									text=" Buy Study "
 									val={this.state.studyCost}
 									onClick={(e) => this.buyStudy()}
 									enabled={this.state.score >= this.state.studyCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/lamp-35398.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Meditate "
+									text=" Buy Meditate "
 									val={this.state.meditateCost}
 									onClick={(e) => this.buyMeditate()}
 									enabled={this.state.score >= this.state.meditateCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/Meditation-Transparent.png"
 								/>
 							</tr>
 							<tr>
 								{" "}
 								<UpgradePanel
-									text="Buy Dunkin "
+									text=" Buy Dunkin "
 									val={this.state.dunkinCost}
 									onClick={(e) => this.buyDunkin()}
 									enabled={this.state.score >= this.state.dunkinCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/clipart170161.png"
 								/>
 							</tr>
 							<tr>
@@ -269,7 +272,7 @@ class App extends React.Component {
 									val={this.state.reviewCost}
 									onClick={(e) => this.buyReview()}
 									enabled={this.state.score >= this.state.reviewCost}
-									img="https://cdn.discordapp.com/attachments/709559606082535474/1028474882415132763/unknown.png"
+									img="/pencil-16217.png"
 								/>
 							</tr>
 						</table>
@@ -295,7 +298,7 @@ class App extends React.Component {
 						<LeaderBoard scores={this.state.leaderboard} />
 
 						<p>
-							Will use these descriptions later:
+							Upgrades:
 							<br />
 							Buy Campus Center Lunch - Gompei will go to the Campus Center and
 							grab a bite to eat, increasing his click strength by 1.
