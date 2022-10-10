@@ -34,8 +34,8 @@ function App() {
         <Route exact path='/' element={<Login getUser={getUser} user={user}/> } />
         <Route path='/home' element={<Home getUser={getUser} user={user}/>} />
         <Route path='/messages' element={<Messages />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/listings' element={<Listings />} />
+        <Route path='/shop' element={<Shop getUser={getUser} user={user}/>} />
+        <Route path='/listings' element={<Listings getUser={getUser} user={user}/>} />
         <Route path='/goal' element={<Goal />} />
         <Route path='/login' element={<Login getUser={getUser} user={user}/>} />
         <Route path='/logout' element={<Logout />} />

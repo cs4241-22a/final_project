@@ -118,13 +118,20 @@ app.get("/shop", ensureAuthenticated, (req, res) => {
 //Other methods
 app.get("/username", (req, res) => {
   if (req.user) {
-    console.log(req.user._json);
     let user = req.body;
     user.name = req.user._json.DisplayName;
     user.userid = req.user._json.Id;
     user.products = [];
-    userCollection.insertOne(req.body);
-    res.json(user);
+    userCollection.findOne({ userid: user.userid }).then((result) => {
+      if (result) {
+        console.log("found it in db");
+        res.json(result);
+      } else {
+        console.log("not registered. adding an entry to db");
+        userCollection.insertOne(req.body);
+        res.json(user);
+      }
+    });
   }
 });
 

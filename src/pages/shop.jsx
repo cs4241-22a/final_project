@@ -4,10 +4,16 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 
-const Shop = () => {
+const Shop = (props) => {
 
 const [products, setProducts] = useState([]);
+const navigate = useNavigate();
+
 useEffect(() => {
+  props.getUser()
+  if (!props.user.name) {
+    navigate('/login');
+  }
   fetch("/getAllProducts", {
     method: "GET",
   }).then(async (response) => {

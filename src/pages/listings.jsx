@@ -2,10 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {Container} from '../Container';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from "react-router-dom";
 
-const Listings = () => {
+const Listings = (props) => {
 const [products, setProducts] = useState([]);
+const navigate = useNavigate();
+
 useEffect(() => {
+	props.getUser()
+  if (!props.user.name) {
+    navigate('/login');
+  }
   fetch("/getListings", {
     method: "GET",
   }).then(async (response) => {
