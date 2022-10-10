@@ -100,7 +100,9 @@ class App extends React.Component {
 				this.setState({ reviewCost: progress[12] });
 				this.setState({ leaderboard: [] });
 
+				
 				this.setState({ ready: true });
+				this.setState({ time: 0 });
 
 				window.appState = this;
 				this.reloadLeaderboard();
@@ -114,6 +116,7 @@ class App extends React.Component {
 
 	save() {
 		let username = "test";
+		let outerthis = this;
 		let data = [
 			this.state.score,
 			this.state.passiveDamage,
@@ -140,6 +143,7 @@ class App extends React.Component {
 			.then((res) => res.json())
 			.then((message) => {
 				console.log(message);
+				outerthis.reloadLeaderboard();
 			});
 	}
 
@@ -361,6 +365,11 @@ class App extends React.Component {
 	startTimer() {
 		setInterval(() => {
 			this.setState({ score: this.state.score + this.state.passiveDamage });
+			this.setState({ time: this.state.time + 1 });
+			if(this.state.time === 120){
+				this.setState({ time: 0 });
+				this.save();
+			}
 		}, 500); // half second*/
 	}
 
