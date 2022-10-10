@@ -61,7 +61,7 @@ function App() {
               height={layout.canvas.height}
               />
 
-      <div style={layout.buttons} onKeyPress={(e) => keyHandler(e)}>
+      <div style={layout.buttons} onKeyDown={(e) => keyHandler(e)}>
           <button style={layout.upbutton} 
                   onClick={(e) => moveHandler(Up)} 
                   disabled={!model.puzzle.canMove(Up)}
@@ -75,28 +75,29 @@ function App() {
           </button>
 
           <button style={layout.rightbutton}
-                  //data-testid="rightbutton" 
                   onClick={(e) => moveHandler(Right)} 
                   disabled={!model.puzzle.canMove(Right)} 
                   >&gt;
           </button>
 
           <button style={layout.downbutton} 
-                  data-testid="downbutton"
                   onClick={(e) => moveHandler(Down)} 
                   disabled={!model.puzzle.canMove(Down)} 
                   >v
           </button>
       </div>
 
-      <div style={layout.resetButtons}>
+      <div style={layout.resetButtons} class="">
         <label class="box">
                 {"number of moves: " + model.numMoves}
         </label>
         <button class="button is-danger" 
-                data-testid="resetbutton"
                 onClick={(e) => resetHandler()} 
                 >Reset
+        </button>
+        <button class="button is-danger" 
+                //onClick={(e) => resetHandler()} 
+                >Start Timer
         </button>
 
       </div>
@@ -104,8 +105,6 @@ function App() {
     </main>
   );
 }
-
-console.log("bruh");
 
 
 // export default App;
