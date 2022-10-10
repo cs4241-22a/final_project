@@ -6,7 +6,6 @@ Authors:
 
 TODO:
 - make output scalable
-- add win condition
-  - add scoreboard functionality
+- add scoreboard functionality
 - add more levels
   - maybe add procedural level generation
