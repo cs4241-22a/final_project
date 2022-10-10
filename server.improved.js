@@ -10,12 +10,10 @@ const http = require( 'http' ),
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000;
+require('dotenv').config()
 const serveStatic = require('serve-static');
 const bodyParser = require('body-parser');
 const cookie = require( 'cookie-session' );
-const k1 = "kdjkjdakask";
-const k2 = "dsjfjsfrifw";
-require('dotenv').config()
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const muri = "mongodb+srv://"+process.env.MONGO_USER+":"+ process.env.MONGO_PASSWORD+"@a3cluster.oip0htf.mongodb.net/?retryWrites=true&w=majority";
@@ -78,6 +76,8 @@ app.use( function( req,res,next) {
 app.get('/userupdate',(request,response,next) => sendUpdatePage( request, response, next ));
 app.post('/userupdate',(request,response,next) => handlePostUpdate( request, response, next ));
 app.get('/userfetch',(request,response,next) => handleGetUserUpdate( request, response, next ));
+app.get('/classesfetch',(request,response,next) => handleGetClasses( request, response, next ));
+app.get('/blocksfetch',(request,response,next) => handleGetBlocks( request, response, next ));
 // signput comes after cookie validation
 app.get('/signout',(request,response,next) => handleSignOut( request, response, next ));
 app.use(bodyParser.json({type: 'text/plain'}));
@@ -178,8 +178,12 @@ async function handlePostL( request, response ) {
       if( user.password === request.body.password ){
         // we are good
         // set cookie
+        console.log("login is good")
         request.session.login = true;
         request.session.email = request.body.email;
+        console.log(request.session)
+        console.log("sending redirect");
+        //response.sendFile( __dirname +"/" + dir + 'main.html' );
         response.redirect( 'main.html' )
       } 
     } 
@@ -274,6 +278,43 @@ async function handleGetUserUpdate( request, response, next ) {
   }
 }
 
+async function handleGetClasses( request, response, next ) {
+  console.log("handleGetClasses: ... ");
+  console.log( request.session );
+  if( request.session.login === true ){
+    // construct Json file to push to the user for rendering
+    var classes = await getClasses()
+    if( classes !== null ){
+      // I have my my e-mail
+      console.log(classes)
+      var rb = JSON.stringify(classes)
+      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.end(rb)
+    }
+  } else {
+    // clean up session
+    next();
+  }
+}
+async function handleGetBlocks( request, response, next ) {
+  console.log("handleGetBlocks: ... ");
+  console.log( request.session );
+  if( request.session.login === true ){
+    // construct Json file to push to the user for rendering
+    var blocks = await getBlocks()
+    if( blocks !== null ){
+      // I have my my e-mail
+      console.log(blocks)
+      var rb = JSON.stringify(blocks)
+      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.end(rb)
+    }
+  } else {
+    // clean up session
+    next();
+  }
+}
+
 const sendUpdatePage = function( request, response, next ) {
   console.log("in sendUpdatePage  ... ");
   console.log( request.session );
@@ -297,6 +338,58 @@ async function getUser(email){
       ]}
     )
     console.log("getUser return: ",ret);
+  }
+  return ret;
+}
+// returns all classes data
+async function getClasses(){
+  var ret = null;
+  if( collection !== null){
+    console.log("getClasses:")
+    ret = await collection.find(
+      {'type': 'class'}
+    ).toArray()
+    console.log("getClasses returns: ",ret);
+  }
+  return ret;
+}
+async function getClass(code){
+  var ret = null;
+  if( collection !== null){
+    console.log("getClass: calss code: "+code)
+    ret = await collection.findOne(
+      {$and:[
+        {'type': 'class'},
+        {'code': code}
+      ]}
+    )
+    console.log("getClass returns: ",ret);
+  }
+  return ret.toArray();
+}
+// returns all blocks data
+async function getBlocks(){
+  var ret = null;
+  if( collection !== null){
+    console.log("getBlocks:")
+    ret = await collection.find(
+      {'type': 'block'}
+    ).toArray()
+    console.log("getBlocks return: ",ret);
+  }
+  return ret;
+}
+async function getBlock(name){
+  var ret = null;
+  if( collection !== null){
+    console.log("getBlock: block name: "+name)
+    ret = await collection.findOne(
+      {$and:[
+        {'type': 'block'},
+        {'name': name}
+      ]}
+    )
+    console.log("getBlock returns: ",ret);
   }
   return ret;
 }
@@ -400,8 +493,6 @@ async function handlePostUpdate( request, response, next ) {
     response.sendFile( __dirname +"/" + dir + '/signup.html' );
   }
 }
-
-
 
 async function handleGetJ( request, response ) {
   console.log("handleGetJ geting args ... ")
