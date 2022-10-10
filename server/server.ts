@@ -1,12 +1,12 @@
 import express from "express";
 
-const port = '3000';
+const PORT = "3000";
 
-// Setup static express server
 const app = express();
+const listenPort = process.env.PORT || PORT;
 
-app.use(express.static('build'));
+app.use(express.static("build"));
 
-const listenPort = process.env.PORT || port;
 app.listen(listenPort);
+
 console.log(`Listening on port ${listenPort}`);
