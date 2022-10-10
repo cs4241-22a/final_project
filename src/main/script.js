@@ -67,5 +67,5 @@ function sortSelect(selElem) {
 }
 
 function apply() {
-    
+
 }
