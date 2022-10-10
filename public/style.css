@@ -67,9 +67,10 @@ p {
     font-family: "InterTight";
 }
 
-input[type=submit] {
+.submitButton-container {
     width: 25%;
     margin-top: 10%;
+    text-align: center;
     font-size: larger;
     font-family: "InterTight";
     background-color: cadetblue;
@@ -80,7 +81,7 @@ input[type=submit] {
     cursor: pointer;
   }
 
-input[type=submit]:hover {
+.submitButton-container:hover {
     background-color: #2e6768;
   }
 
