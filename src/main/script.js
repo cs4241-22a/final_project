@@ -4,7 +4,7 @@ const { default: Climb } = require("./app/route/Climb");
 
 let app = new App();
 window.app = app
-
+/*
 const climb1 = new Climb("1", "VB", "Brown", 1, "boulder");
 const climb2 = new Climb("2", "V1", "Brown", 1, "boulder");
 const climb3 = new Climb("3", "5.4", "Yellow", 1, "rope", true, true);
@@ -68,4 +68,4 @@ function sortSelect(selElem) {
 
 function apply() {
 
-}
+}*/
