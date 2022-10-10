@@ -3,8 +3,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Container, Row, Col } from 'react-bootstrap';
-import Header from './header'
-
+import Header from './header';
 
 class Table extends React.Component {
     constructor(props) {
@@ -15,30 +14,28 @@ class Table extends React.Component {
         return (
             <Container>
                 <Row xs={1} md={4}>
-                {
-                    this.props.items.map((item, index) => (
-                        <Card style={{ width: '18rem', padding: '10px', margin: '15px' }}>
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Text>
-                                    {<ul>
-                                        <li><b>Prep Time: {item.prepTime}</b></li>
-                                        <li><b>Serves: {item.numPeople}</b></li>
-                                    </ul>}
-                                    <p>{item.directions}</p>
-                                </Card.Text>
-                                <Button variant="primary">View Full Recipe</Button>
-                            </Card.Body>
-                        </Card>
-                    ))
-                }
+                    {
+                        this.props.items.map((item, index) => (
+                            <Card style={{ width: '18rem', padding: '10px', margin: '15px' }}>
+                                <Card.Body>
+                                    <Card.Title>{item.title}</Card.Title>
+                                    <Card.Text>
+                                        {<ul>
+                                            <li><b>Prep Time: {item.prepTime}</b></li>
+                                            <li><b>Serves: {item.numPeople}</b></li>
+                                        </ul>}
+                                        <p>{item.directions}</p>
+                                    </Card.Text>
+                                    <Button variant="primary">View Full Recipe</Button>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    }
                 </Row>
             </Container>
         );
     }
 }
-
-
 
 
 class App extends React.Component {
@@ -111,11 +108,6 @@ class App extends React.Component {
             },
         }).then(response => response.json())
             .then(res => this.setState(prevState => ({ recipes: [...prevState.recipes, ...res] })));
-        //     this.setState({ ...this.state, recipes: [...this.state.recipes, ...res] });
-        //     console.log("Current state");
-        //     console.log(this.state);
-        // }
-
     }
 
     componentDidMount() {
@@ -142,5 +134,6 @@ class App extends React.Component {
         );
     }
 }
+
 
 export default App;

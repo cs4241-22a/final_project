@@ -1,26 +1,26 @@
-const verifyInfo = function() {  
+const verifyInfo = function () {
     const username = document.getElementById("username").value;
-    if(username === "") {
-        document.getElementById("message").innerHTML = "**Fill the username please!";  
-        return false;  
+    if (username === "") {
+        document.getElementById("message").innerHTML = "**Fill the username please!";
+        return false;
     }
 
-    const pw = document.getElementById("password").value;  
-    //check empty password field  
-    if(pw === "") {  
-       document.getElementById("message").innerHTML = "**Fill the password please!";  
-       return false;  
-    }  
+    const pw = document.getElementById("password").value;
+    // check empty password field
+    if (pw === "") {
+        document.getElementById("message").innerHTML = "**Fill the password please!";
+        return false;
+    }
 
     const confirmPw = document.getElementById("confirmpassword").value;
-    if(pw !== confirmPw) {
-        document.getElementById("message").innerHTML = "**Passwords do not match";  
-       return false;
+    if (pw !== confirmPw) {
+        document.getElementById("message").innerHTML = "**Passwords do not match";
+        return false;
     } else {
         // all good, try to make account
-        const json = { 
-          "username": username, 
-          "password": pw
+        const json = {
+            "username": username,
+            "password": pw
         };
         const data = JSON.stringify(json);
 
@@ -28,16 +28,15 @@ const verifyInfo = function() {
             method: "POST",
             body: data,
             headers: {
-            "Content-Type": "application/json"
+                "Content-Type": "application/json"
             }
-        }).then (response => {
+        }).then(response => {
             if (!response.ok) {
-              throw new Error(`HTTP error, status = ${response.status}`);
+                throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {
                 return response.json();
-            }
-            else {
+            } else {
                 window.location.replace(response.url);
                 return false;
             }
