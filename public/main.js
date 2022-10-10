@@ -15,14 +15,12 @@ form.onsubmit = function(event) {
     const hobbies = form.elements['hobbies'];
     const fProject = form.elements['fProject'];
     const currProject = form.elements['currProject'];
-    const Mingle = form.elements['Mingle'];
-    const Date = form.elements["Date"];
+    const status = form.elements['status'];
 
 
     const yAgeRange = form.elements['yAgeRange'];
     const oAgeRange = form.elements['oAgeRange'];
     const Distance = form.elements['Distance'];
-    const sexualOrientation = form.elements['sexualOrientation'];
 
     const input = {
         firstName: fName.value,
@@ -33,12 +31,10 @@ form.onsubmit = function(event) {
         hobbies: hobbies.value,
         firstProject: fProject.value,
         currentProject: currProject.value,
-        mingle: Mingle.value,
-        date: Date.value,
+        status: status.value,
         youngest: yAgeRange.value,
         oldest: oAgeRange.value,
         distance: Distance.value,
-        orientation: sexualOrientation.value
 
     }
 
@@ -48,8 +44,9 @@ form.onsubmit = function(event) {
         headers: {'Content-Type': 'application/json'},
         body: body,
     })
-        .then(response => response.json())
-        .then( console.log)
+        .then(response => {
+            window.location.href = "/profile.html";
+        })
 
     form.reset();
 

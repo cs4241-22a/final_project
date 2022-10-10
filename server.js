@@ -40,7 +40,6 @@ app.get('/oauth-callback', (req, res) => {
         console.log('My token:', _token);
         token = _token;
         client.db( 'Final' ).collection( 'Users' ).insertOne({token: token});
-        // res.redirect("/main.html");
         res.redirect("/loggedIn");
     }).
     catch(err => res.status(500).json({ message: err.message }));
@@ -53,6 +52,7 @@ app.get('/loggedIn', (req, res) => {
 
             req.session.login = true;
             req.session.user = response.data.login;
+            req.session.pic = response.data.avatar_url;
             console.log(req.session.user);
             client.db("Final").collection("profiles").find({user: req.session.user}).toArray(function (err, result) {
                 if (err) throw err;
@@ -68,8 +68,11 @@ app.get('/loggedIn', (req, res) => {
 app.post('/submit', (req, res) => {
     let newLog = (req.body);
     newLog.user = req.session.user;
+    newLog.pic = req.session.pic;
     console.log(collection);
-    client.db("Final").collection("profiles").insertOne(req.body).then(result => res.json(result))
+    client.db("Final").collection("profiles").insertOne(req.body).then(result => {
+        res.redirect("/profile.html");
+    })
 })
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
