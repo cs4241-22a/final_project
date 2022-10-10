@@ -1,4 +1,5 @@
 import Logo from "../assets/images/logo.svg";
+import xImage from "../assets/images/x.png";
 import {useState, useEffect} from "react";
 
 const exampleData = [{
@@ -115,8 +116,8 @@ function HomePageSection({title, data}) {
   }
 
   return (
-    <section onClick={() => {toggleItems()}}>
-      <button className={"m-2 btn section-header" + (itemsDeployed ? " btn-primary" : " btn-secondary")}>
+    <section>
+      <button className={"m-2 btn section-header" + (itemsDeployed ? " btn-primary" : " btn-secondary")} onClick={() => {toggleItems()}}>
         {title}
       </button>
       <ul className="grocery-items">
@@ -127,12 +128,17 @@ function HomePageSection({title, data}) {
 }
 
 function GroceryItem({title, index, visible}) {
+
+  function deleteItem() {
+    console.log("Deleting item: " + title);
+  }
+
   return (
     <li key={index} className={"grocery-item-container " + (visible ? "" : "hidden")}>
-      <div className="text">
-        <p>{title}</p>
-      </div>
-      <button type="button" className="btn-close" ariaLabel="Close"></button>
+      <div className="item-title">{title}</div>
+      <button type="button" className="btn-delete" ariaLabel="delete" onClick={() => {deleteItem()}}>
+        <img src={xImage} alt="x"/>
+      </button>
     </li>
   )
 }

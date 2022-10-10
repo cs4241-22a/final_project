@@ -44,6 +44,10 @@
     grid-template-columns: repeat(4, calc(100vw / 4));
 }
 
+.section-header {
+  font-weight: 500;
+}
+
 .home-page-sections section {
     display: flex;
     flex-direction: column;
@@ -58,10 +62,6 @@
   display: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .grocery-items {
   width: 100%;
   display: flex;
@@ -69,32 +69,26 @@
   align-items: center;
 }
 
+.btn-delete {
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-delete img {
+  height: 20px;
+  width: 20px;
+  transition: all 0.5s ease;
+}
+
 .grocery-item-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
-}
-
-.grocery-item-container .text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-close {
-  border: none;
-  background: none;
-  margin-right: 2px;
-}
-
-.btn-close:after{
-  display: inline-block;
-  content: "\00d7"; /* This will render the 'X' */
-}
-
-.grocery-item-container {
   color: black;
   height: 40px;
   width: 80%;
@@ -102,11 +96,33 @@
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.63);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.5em 0.5em 0.5em;
+  transition: all 0.5s ease;
+}
+
+.grocery-item-container:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+}
+
+.grocery-item-container:hover .btn-delete img {
+  transform: scale(1.2);
+}
+
+.item-title {
+  user-select: none;
 }
 
 ul {
   list-style: none;
   padding-left: 0px;
+}
+
+.hidden {
+  display: none;
+  height: 0px;
+  opacity: 0;
 }
 
 /*styling for login page */
