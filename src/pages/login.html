@@ -2,21 +2,15 @@
 <html lang="en">
 
 <head>
-    <title>login</title>
+    <title>log in</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body>
-    <form action="/login" method="POST">
-        <label for="username">username:</label>
-        <input type="text" id="username" name="username" autocomplete="off" />
-        <label for="password">password:</label>
-        <input type="password" id="password" name="password" />
-        <button name="login" type="submit">login</button>
-    </form>
-
-    <p>or, <a href="register">register an account</a></p>
-    <p id="message"></p>
+<body class="blue-bg">
+    <script type="module" src="public/login.js"></script>
+    <div id="page"></div>
 </body>
 
 </html>
