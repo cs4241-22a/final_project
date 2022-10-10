@@ -2,10 +2,13 @@ require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
-const helmet = require('helmet');
 const bcrypt = require('bcrypt');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const helmet = require('helmet');
+const uuidv4 = require('uuid').v4;
+const cookieParser = require('cookie-parser');
+
+const saltRounds = 10;
 
 const itemTypes = {
     CANNEDJARRED: "Canned / Jarred Goods",  // "canned-jarred"
@@ -18,13 +21,15 @@ const itemTypes = {
     OTHER: "Other",                         // "other"
 }
 
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}/database?retryWrites=true&w=majority`;
+const uri = 'mongodb+srv://goGrocery:onCTPMLKBjCDBp40@cluster0.ptctsas.mongodb.net/?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true,});
 let collection = null
 
 // Init express application
 const app = express();
+
+const sessions = new Map();
 
 // Start listening on defined port
 app.listen(process.env.PORT || 3000, () => {
@@ -34,25 +39,30 @@ app.listen(process.env.PORT || 3000, () => {
 // Middleware setup
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(helmet({
     crossOriginEmbedderPolicy: false
 }));
 
 // Get routes
 app.get("/user-data", (req, resp) => {
-    const userId = req.query.id;
     // Fetch user data from DB
 
-    if (!userId) { // Guard clause
+    const sessionId = req.cookies.session;
+    const userId = sessions.get(sessionId);
+    if (!userId) {
+        resp.status(401);
         resp.end();
     }
+    console.log("Session valid. gettign user data")
+
     client.connect((err, client) => {
         if (err) {
             throw err;
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": new ObjectId(userId)}, {}, (err, res) => {
+            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
@@ -69,6 +79,7 @@ app.get("/user-data", (req, resp) => {
                     }
                     console.log(body)
                     resp.json(JSON.stringify(body));
+                    resp.status(200);
                     resp.end();
                 }
             })
@@ -81,13 +92,22 @@ app.post("/add-item", (req, resp) => {
     if (!data) { // Guard clause
         resp.end();
     }
+
+    const sessionId = req.cookies.session;
+    const userId = sessions.get(sessionId);
+    if (!userId) {
+        resp.status(401);
+        resp.end();
+    }
+    console.log("Session valid. Adding item")
+
     client.connect((err, client) => {
         if (err) {
             throw err;
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": new ObjectId(data.userId)}, {}, (err, res) => {
+            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
@@ -159,13 +179,22 @@ app.post("/remove-item", (req, resp) => {
     if (!data) { // Guard clause
         resp.end();
     }
+
+    const sessionId = req.cookies.session;
+    const userId = sessions.get(sessionId);
+    if (!userId) {
+        resp.status(401);
+        resp.end();
+    }
+    console.log("Session valid. Removing item")
+    
     client.connect((err, client) => {
         if (err) {
             throw err;
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": new ObjectId(data.userId)}, {}, (err, res) => {
+            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
@@ -232,7 +261,57 @@ app.post("/remove-item", (req, resp) => {
     })
 })
 
-app.post("/new-user", (req, resp) => {
+app.post("/login", (req, resp) => {
+    // Check email and password
+    const data = req.body;
+    client.connect((err, client) => {
+        if (err) {
+            throw err;
+        } else {
+            // Connection succeeded
+            const db = client.db("database");
+            db.collection("users").findOne({"email": data.email}, {}, (err, res) => {
+                if (err) {
+                    throw err;
+                } else {
+                    if (res) {
+                        // User exists
+                        const hash = res.password;
+                        bcrypt.compare(data.password, hash, (err, bcryptRes) => {
+                            // Check if password is right
+                            if (bcryptRes) {
+                                const body = {
+                                    error: false,
+                                }
+                                const sessionId = uuidv4();
+                                sessions.set(sessionId, res._id);
+                                resp.set("Set-Cookie", 'session=$' + sessionId);
+                                resp.json(JSON.stringify(body));
+                                resp.end();
+                            } else {
+                                const body = {
+                                    error: true
+                                }
+                                resp.json(JSON.stringify(body));
+                                resp.end();
+                            }
+                        })
+                    } else {
+                        const body = {
+                            error: true
+                        }
+                        console.log("User does not exist.");
+                        resp.json(JSON.stringify(body));
+                        resp.end();
+                    }
+                }
+            })
+        }
+    })
+})
+
+app.post("/register", (req, resp) => {
+    console.log("Registering new user...");
     const data = req.body;
     client.connect((err, client) => {
         if (err) {
@@ -256,9 +335,7 @@ app.post("/new-user", (req, resp) => {
                             // Hash pass
                             const newUser = {
                                 email: data.email,
-                                password: hash,
-                                saveData: data.progressCheck,
-                                history: []
+                                password: hash
                             }
                             db.collection("users").insertOne(newUser, (err, res) => {
                                 // Insert to DB
@@ -268,57 +345,12 @@ app.post("/new-user", (req, resp) => {
                                     console.log("New user sent to database!");
                                     const body = {
                                         error: false,
-                                        email: data.email,
                                     }
                                     resp.json(JSON.stringify(body));
                                     resp.end();
                                 }
                             })
                         });
-                    }
-                }
-            })
-        }
-    })
-})
-
-app.post("/existing-user", (req, resp) => {
-    const data = req.body;
-    client.connect((err, client) => {
-        if (err) {
-            throw err;
-        } else {
-            // Connection successful
-            const db = client.db("database");
-            db.collection("users").findOne({"email": data.email}, {}, (err, res) => {
-                if (err) {
-                    throw err;
-                } else {
-                    if (!res) {
-                        const body = {
-                            error: true
-                        }
-                        resp.json(JSON.stringify(body));
-                        resp.end();
-                    } else {
-                        const hash = res.password;
-                        bcrypt.compare(data.password, hash, (err, bcryptRes) => {
-                            // Check if password is right
-                            if (bcryptRes) {
-                                const body = {
-                                    error: false,
-                                    email: data.email,
-                                }
-                                resp.json(JSON.stringify(body));
-                                resp.end();
-                            } else {
-                                const body = {
-                                    error: true
-                                }
-                                resp.json(JSON.stringify(body));
-                                resp.end();
-                            }
-                        })
                     }
                 }
             })

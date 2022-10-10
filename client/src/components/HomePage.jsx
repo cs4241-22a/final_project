@@ -51,7 +51,7 @@ function Topbar() {
       // item not entered or item type not selected, give some user feedback
     }
     else {
-      let body = JSON.stringify({ userId: userId, itemType: list.value, itemName: item.value.toLowerCase()})
+      let body = JSON.stringify({ itemType: list.value, itemName: item.value.toLowerCase()})
       fetch( '/add-item', { 
         method:'POST',
         body: body,
@@ -99,20 +99,26 @@ function Sections() {
   useEffect(() => {
 
     async function fetchUserData() {
-      fetch( `/user-data?id=${userId}`, {
+      fetch( "/user-data", {
         method: 'GET'
       })
-        .then( response => response.json() )
-        .then( json => {
-          setCannedJarredData(json.cannedJarredData);
-          setDairyData(json.dairyData);
-          setDryBakingData(json.dryBakingData);
-          setFrozenData(json.frozenData);
-          setGrainsData(json.grainsData);
-          setMeatData(json.meatData);
-          setProduceData(json.produceData);
-          setOtherData(json.otherData);
-        })
+        .then( (response) => {
+          if (response.statusCode === 200) {
+            response.json().then( json => {
+              setCannedJarredData(json.cannedJarredData);
+              setDairyData(json.dairyData);
+              setDryBakingData(json.dryBakingData);
+              setFrozenData(json.frozenData);
+              setGrainsData(json.grainsData);
+              setMeatData(json.meatData);
+              setProduceData(json.produceData);
+              setOtherData(json.otherData);
+            })
+          } else {
+            window.location = "/login";
+          }
+        } )
+
     }
     
     fetchUserData();
@@ -167,7 +173,7 @@ function GroceryItem({title, group, index, visible}) {
 
   function deleteItem() {
     console.log("Deleting item: " + title);
-    let body = JSON.stringify({ userId: userId, itemType: group, itemName: title})
+    let body = JSON.stringify({ itemType: group, itemName: title})
     fetch('remove-item', {
       method: 'POST',
       body: body
