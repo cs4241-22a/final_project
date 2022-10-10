@@ -1,78 +1,92 @@
-window.onload = () => {
-
-  const startBtn = document.getElementById('startBtn')
-  const statusMsg = document.getElementById('gameStatus')
-  const resultsMsg = document.getElementById('gameResults')
-  
-  const canvas = document.getElementById('gameCanvas')
-  const cWidth = canvas.style.width
-  const cHeight = canvas.style.height
-
-  let buttonsClicked = 0
-  let startTs = null
-  let totalTimeTs = null
-
-  // start game, clear previous state of game
-  startBtn.onclick = startGame
-  startGame = (e) => {
-    e.preventDefault()
-
-    // reset game
-    buttonsClicked = 0
-    canvas.innerHTML = ''
-
-    // place game button on canvas
-    const btn = document.createElement('button')
-    canvas.appendChild(btn)
-    btn.id = 'gameButton'
-    btn.className = 'btn btn-info'
-    btn.innerHTML = 'CLICK ME'
-    btn.onclick = this.handleButtonClick
+window.onload = function() {
     
-    /* set position x,y inside canvas */
-    btn.style.position = 'absolute'
-    const x = Math.round(Math.random().toPrecision(2) * cWidth)
-    const y = Math.round(Math.random().toPrecision(2) * cHeight)
-    btn.style.left = x
-    btn.style.top = y
+    const statusText = document.getElementById("statusText")
+    const reactionBtn1 = document.getElementById("reactionBtn1")
+    const reactionBtn2 = document.getElementById("reactionBtn2")
+    const reactionBtn3 = document.getElementById("reactionBtn3");
+    const reactionBtn4 = document.getElementById("reactionBtn4");
+    const reactionBtn5 = document.getElementById("reactionBtn5");
+    const reactionBtn6 = document.getElementById("reactionBtn6");
+    
+    var btns = [reactionBtn1, reactionBtn2, reactionBtn3, reactionBtn4, reactionBtn5, reactionBtn6]
+    var clicks = []
+    var startTime = null
+    var chosenBtn = null
 
-    // capture start time
-    startTs = Date.now()
+    const average = array => array.reduce((a, b) => a + b) / array.length;
 
-  }
-
-  handleButtonClick = (e) => {
-    e.preventDefault()
-
-    // increment counter 
-    buttonsClicked++
-
-    // check if win condition satisfied
-    if (buttonsClicked === 10) {
-      this.gameOver()
-
-    } else {
-      // move button to random place within canvas 
-      const btn = document.getElementById('gameButton')
-      const x = Math.round(Math.random().toPrecision(2) * cWidth)
-      const y = Math.round(Math.random().toPrecision(2) * cHeight)
-      btn.style.left = x
-      btn.style.top = y
+    const startBtn = document.getElementById("startBtn");
+    startBtn.addEventListener('click', function () {
+        startBtn.disabled = true;
+        statusText.innerText = "Starting in 3...";
+        setTimeout(function() {countdown(2)}, 1100)
+    })
+    
+    function countdown(i){
+        if (i !== 0){
+            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2.. 1..." : "NAAA"
+            i -= 1
+            console.log(i)
+            setTimeout(function() {countdown(i)}, 1100)
+        }
+        else{
+            statusText.innerText = "Wait for green!"
+            playGame()
+        } 
     }
-  }
+    
+    function playGame(){
+        if (clicks.length < 5){
+            var delay = Math.random() * 2000 + 1500 // 1.5-3 seconds
+            setTimeout(setBtn, delay)
+        }
+        else {
+            var avg = average(clicks).toFixed(3)
+            statusText.innerText = `Avg Reaction Time: ${avg}`
 
-  // end game, capture game stats
-  gameOver = (e) => {
-    e.preventDefault()
+            var result = {
+                owner_id: user,
+                game_type: game,
+                score: avg
+            }
+            
+            fetch( '/addResult', {
+                method:'POST',
+                headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
+                body: JSON.stringify(result)
+            }).then(async function( response ) {
+                var data = await response.json()
+                console.log( data )
+                console.log("response ^")
 
-    totalTimeTs = (Date.now() - startTs)
-    startTs = null
-    canvas.innerHTML = ''
-
-    // display results
-    const msgs = ['Congratulations!', 'Nice work!', 'Good job!', 'Great work!']
-    statusMsg.innerHTML = msgs[Math.round(Math.random*3)]
-    resultsMsg.innerHTML = `Total time: ${totalTimeTs*1000} sec`
-  }
-
+                window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
+            })
+            
+            clicks = []
+            startBtn.disabled = false
+        }
+        // while (iteration < 5){
+        //     var delay = Math.random() * 2000 // 0-2 seconds
+        //     setTimeout(setBtn, delay)
+        //    
+        // }
+    }
+    
+    function setBtn() {
+        chosenBtn = btns[Math.floor(Math.random() * btns.length)]
+        startTime = Date.now()
+        chosenBtn.addEventListener('click', handleClick)
+        
+        chosenBtn.style.backgroundColor = "lightgreen"
+    }
+    
+    function handleClick(){
+        var reactionTime = (Date.now() - startTime)/1000
+        console.log("Btn clicked!")
+        clicks.push(reactionTime)
+        statusText.innerText = `Reaction Time: ${reactionTime}`
+        chosenBtn.removeEventListener('click', handleClick)
+        chosenBtn.style.backgroundColor = "lightslategrey"
+        playGame()
+    }
 }

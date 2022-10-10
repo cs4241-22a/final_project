@@ -1,29 +1,28 @@
-<%- include('header', { title: 'AccuracyTests' }) -%>
+<%- include('header', { title: 'ReactionTests' }) -%>
 <div class="main-content">
     <div class="px-2 py-2 my-2 text-center mx-auto" style="max-width: 70vw">
-        <h1 class="display-5 fw-bold text-light">Mouse Accuracy Test</h1>
+        <!--    <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
+        <h1 class="display-5 fw-bold text-light">Accuracy</h1>
         <div class="col-lg-auto mx-auto vh-80">
-            <p class="lead mb-4 text-muted">
-                A <span class="badge badge-info">button</span> will randomly appear somewhere on the frame. 
-                When clicked, another button will appear in a different, random location. <br />
-                The score will be calculated by the overall time it takes to click 10 buttons.
-            </p>
-            <button id="startBtn" class="btn btn-success mb-4">Start</button>
+            <p class="lead mb-4 text-muted">Click on the correct button as fast as possible when it turns green.<br>Your score is determined from the average reaction time of 5 clicks.</p>
+            <button id="startBtn" class="btn btn-success mb-4">Start Test</button>
+            <p id="statusText" class="text-muted"> </p>
         </div>
-        <div class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vh; width: 70vw; background-color: black;">
-            <div id="gameCanvas" class="container-md" style="position:relative">
-                <!-- button will be randomly placed in here -->
-                <div>
-                    <span id="gameStatus" class="badge badge-success">
-                        <!-- status message placed here -->
-                    </span>
-                    <br />
-                    <p id="gameResults">
-                        <!-- score placed here -->
-                    </p>
+<!--        <div class="container-md text-center">-->
+            <div class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vw; width: 50vw">
+                <div class="container-md">
+                    <div class="row justify-content-evenly">
+                        <div id="reactionBtn1" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                        <div id="reactionBtn2" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                        <div id="reactionBtn3" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                        <div id="reactionBtn4" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                        <div id="reactionBtn5" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                        <div id="reactionBtn6" class="shadow m-1 rounded" style="height: 12vw; width: 12vw; background-color: lightslategrey"></div>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
+    <%- include('scores') -%>
 </div>
+<script src="/javascripts/accuracy.js"></script>
 <%- include('footer') -%>
