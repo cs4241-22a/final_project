@@ -5,8 +5,6 @@ const { default: Climb } = require("./app/route/Climb");
 let app = new App();
 window.app = app
 
-//TODO: get the list of climbs from the database, and iterate over to populate the filter list
-
 const climb1 = new Climb("1", "VB", "Brown", 1, "boulder");
 const climb2 = new Climb("2", "V1", "Brown", 1, "boulder");
 const climb3 = new Climb("3", "5.4", "Yellow", 1, "rope", true, true);
@@ -31,22 +29,6 @@ function populateFilters() {
 function addOption(climb) {
     if (!optionExists(climb.grade, gradesFilter)){
         gradesFilter.options[gradesFilter.options.length] = new Option(climb.grade, climb.grade)
-    }
-}
-
-function parseClimbType(climb) {
-    if (climb.type.includes("rope")) {
-        if (climb.canLead) {
-            if (climb.canTopRope) {
-                return "Lead or Top Rope"
-            } else if (!climb.canTopRope) {
-                return "Lead Only"
-            }
-        } else if (climb.canTopRope && !climb.canLead) {
-            return "Top Rope Only"
-        }
-    } else if (climb.type.includes("boulder")) {
-        return "Boulder"
     }
 }
 
