@@ -1,36 +1,17 @@
 import React, { useState } from 'react'
-import Board from './Board'
+import Board, { playComputerMove } from './Board'
 import { parseFen } from 'chessops/fen'
 import { Chess } from 'chessops/chess'
-import { makeFen } from 'chessops/fen'
-import { makePgn } from 'chessops/pgn'
-import GameViewer from './PGNViewer'
-import { makeSan, makeSanAndPlay } from 'chessops/san'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import NavBar from './components/Navbar/NavBar'
 import GameHistory from './pages/GameHistory'
 import About from './pages/About'
 import Stats from './pages/Stats'
 import Container from 'react-bootstrap/Container'
+import Home from './pages/Home'
 
-async function getBestMove(pos, engine, movetime) {
-  const response = await fetch(
-    'http://mc.craftsteamg.com:4000/bestmove?' +
-      new URLSearchParams({
-        position: pos,
-        engine: engine,
-        movetime: movetime,
-      })
-  )
-  const json = await response.json()
-  return json.bestmove
-}
 
-function getSquareFromChessNotation(pos) {
-  const row = pos.charCodeAt(0) - 97
-  const col = parseInt(pos[1]) - 1
-  return 8 * col + row
-}
+
 
 export default function App(props) {
   const [game, setGame] = useState(
@@ -40,19 +21,25 @@ export default function App(props) {
       ).unwrap()
     ).unwrap()
   )
-
   const [turn, setTurn] = useState(game.turn)
-  const [history, setHistory] = useState([])
+  const [playAs, setPlayAs] = useState("white")
+  const [gameRunning, setGameRunning] = useState(false)
 
-  async function onMove(san) {
-    setTurn(game.turn)
-    const fen = makeFen(game.toSetup())
-    const move = await getBestMove(fen, 'StockFish', 1000)
-    const from = getSquareFromChessNotation(move.substring(0, 2))
-    const to = getSquareFromChessNotation(move.substring(2))
-    const compSan = makeSanAndPlay(game, { from: from, to: to })
-    setHistory([...history, san, compSan])
-    setTurn(game.turn)
+  function beginGame(color) {
+    setGame(Chess.default())
+    setTurn("white")
+    setPlayAs(color)
+    setGameRunning(true)
+    if (color === "black") {
+      playComputerMove(game, "StockFish", 1000).then((chess) => {
+        setGame(chess)
+      })
+    }
+  }
+  
+  function endGame() {
+    setGameRunning(false)
+    setGame(Chess.default())
   }
 
   return (
@@ -61,21 +48,11 @@ export default function App(props) {
         <NavBar />
         <Container fluid>
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Board
-                  game={game}
-                  playAs={'white'}
-                  turn={turn}
-                  onMove={onMove}
-                />
-              }
-            />
+            <Route exact path="/" element={<Home begin={beginGame} gameRunning={gameRunning} />} />
             <Route path="/about" element={<About />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/gamehistory" element={<GameHistory />} />
+            <Route path="/play" element={<Board game={game} flipTurn={() => setTurn(game.turn)} playAs={playAs} gameRunning={gameRunning} endGame={endGame}/>} />
           </Routes>
         </Container>
       </BrowserRouter>
