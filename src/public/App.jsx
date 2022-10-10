@@ -138,5 +138,89 @@ class App extends React.Component {
     }
 }
 
+// routes for adding, modifying, and deleting a recipe
+// todo: these can either be here or in another file if we choose to make a separate page to add recipes
+
+// todo: ingredients field is a placeholder right now, we need to decide how we will pass in the array of ingredients
+// (one field for each, or comma seperated then parsed are my two ideas)
+const addRecipe = function() {
+
+    const inputs = {
+        title: document.getElementById('#title'),
+        ingredients: document.getElementById('#ingredients'),
+        directions: document.getElementById('#directions'),
+        prepTime: document.getElementById('#preptime'),
+        numPeople: document.getElementById('#numpeople')
+    }
+
+    const body = {
+        title: inputs.title.value,
+        ingredients: inputs.ingredients.value,
+        directions: inputs.directions.value,
+        prepTime: inputs.prepTime.value,
+        numPeople: inputs.numPeople.value
+    }
+
+    fetch( '/add', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( body )
+    })
+        .then( response => response.json() )
+
+    return false
+}
+
+const modifyRecipe = function() {
+    //send all the fields, since any could be changed besides title, and title is used for search purposes
+    const inputs = {
+        title: document.getElementById('#title'),
+        ingredients: document.getElementById('#ingredients'),
+        directions: document.getElementById('#directions'),
+        prepTime: document.getElementById('#preptime'),
+        numPeople: document.getElementById('#numpeople')
+    }
+
+    const body = {
+        title: inputs.title.value,
+        ingredients: inputs.ingredients.value,
+        directions: inputs.directions.value,
+        prepTime: inputs.prepTime.value,
+        numPeople: inputs.numPeople.value
+    }
+
+    fetch( '/update', {
+        method:'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( body )
+    })
+        .then( response => response.json() )
+
+    return false
+}
+
+const deleteRecipe = function() {
+    //only title needed
+    const title = document.getElementById('#title')
+    const body = {
+        title: title.value
+    }
+
+    fetch( '/delete', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( body )
+    })
+        .then( response => response.json() )
+
+    return false
+}
+
 
 export default App;
