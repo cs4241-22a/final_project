@@ -1,26 +1,31 @@
 import React from "react";
-import logo from "../logo.svg";
-import "../css/App.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { CanvasScreen } from "./screens";
+import CssBaseline from "@mui/material/CssBaseline";
+import { indigo, grey } from "@mui/material/colors";
 
-function App() {
+export default function App() {
+  const lightTheme = createTheme({
+    palette: {
+      mode: "light",
+      primary: indigo,
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          text: {
+            color: "white",
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={lightTheme}>
+      {/* <ThemeProvider theme={createTheme({ palette: { mode: "dark" } })}> */}
+      <CssBaseline />
+      <CanvasScreen />
+    </ThemeProvider>
   );
 }
-
-export default App;
