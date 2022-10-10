@@ -87,7 +87,7 @@ function App() {
           </button>
       </div>
 
-      <div style={layout.resetButtons}>
+      <div style={layout.resetButtons} class="">
         <label class="box">
                 {"number of moves: " + model.numMoves}
         </label>

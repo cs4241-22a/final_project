@@ -75,63 +75,63 @@
     //     });
     // }
 
-    function updateTable() {
-      let lastSpot = document.documentElement.scrollTop || document.body.scrollTop;
-      let table = document.getElementById("scoreList");
-      table.innerHTML =
-        "<thead><tr><th>Name</th><th>Clicks</th><th>Rating</th><th>Delete?</th></tr></thead>";
-      fetch("/getScores", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then(function (json) {
-          for (let response of json) {
-            let i = 0;
-            for (i = 1; i < table.rows.length; i++) {
-              if (
-                parseInt(response.Clicks, 10) >
-                parseInt(table.rows.item(i).cells.item(1).innerHTML, 10)
-              ) {
-                //this ensures the leaderboard is sorted
-                break;
-              }
-            }
-            let row = table.insertRow(i);
-            let Name = row.insertCell(0);
-            let Clicks = row.insertCell(1);
-            let Rating = row.insertCell(2);
-            let End = row.insertCell(3);
+//     function updateTable() {
+//       let lastSpot = document.documentElement.scrollTop || document.body.scrollTop;
+//       let table = document.getElementById("scoreList");
+//       table.innerHTML =
+//         "<thead><tr><th>Name</th><th>Clicks</th><th>Rating</th><th>Delete?</th></tr></thead>";
+//       fetch("/getScores", {
+//         method: "GET",
+//       })
+//         .then((response) => response.json())
+//         .then(function (json) {
+//           for (let response of json) {
+//             let i = 0;
+//             for (i = 1; i < table.rows.length; i++) {
+//               if (
+//                 parseInt(response.Clicks, 10) >
+//                 parseInt(table.rows.item(i).cells.item(1).innerHTML, 10)
+//               ) {
+//                 //this ensures the leaderboard is sorted
+//                 break;
+//               }
+//             }
+//             let row = table.insertRow(i);
+//             let Name = row.insertCell(0);
+//             let Clicks = row.insertCell(1);
+//             let Rating = row.insertCell(2);
+//             let End = row.insertCell(3);
 
-            row.cells[0].innerHTML = response.Name;
-            row.cells[1].innerHTML = response.Clicks;
-            row.cells[2].innerHTML = response.Rating;
+//             row.cells[0].innerHTML = response.Name;
+//             row.cells[1].innerHTML = response.Clicks;
+//             row.cells[2].innerHTML = response.Rating;
 
-            if (parseInt(response.Delete) == 1) {
-              var btn = document.createElement("button");
-              btn.type = "button";
-              btn.innerHTML = "Delete this score";
-              btn.className = "delete is-medium";
-              btn.onclick = (function (entry) {
-                return function () {
-                  chooseUser(response.Name);
-                };
-              })(response.Name);
-              End.appendChild(btn);
-            }
-          }
-        window.scrollTo(0,lastSpot);
-        });
-    }
+//             if (parseInt(response.Delete) == 1) {
+//               var btn = document.createElement("button");
+//               btn.type = "button";
+//               btn.innerHTML = "Delete this score";
+//               btn.className = "delete is-medium";
+//               btn.onclick = (function (entry) {
+//                 return function () {
+//                   chooseUser(response.Name);
+//                 };
+//               })(response.Name);
+//               End.appendChild(btn);
+//             }
+//           }
+//         window.scrollTo(0,lastSpot);
+//         });
+//     }
 
-    function chooseUser(usr) {
-      fetch("/remove", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Name: usr }),
-      }).then(function (response) {
-        // do something with the reponse
-        updateTable();
-      });
+//     function chooseUser(usr) {
+//       fetch("/remove", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ Name: usr }),
+//       }).then(function (response) {
+//         // do something with the reponse
+//         updateTable();
+//       });
     }
   </script>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>

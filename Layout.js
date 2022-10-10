@@ -3,10 +3,6 @@ const layout = {
     height: "500",
     width: "640",
   },
-  Appmain: {
-    height: "100vh",
-    width: "100vw",
-  },
 
   buttons: {
     position: "absolute",
@@ -38,13 +34,6 @@ const layout = {
     position: "absolute",
     left: 610,
     top: 190,
-  },
-
-
-  resetbutton: {
-    position: "absolute",
-    top: 85,
-    left: 33,
   },
 
   text: {
