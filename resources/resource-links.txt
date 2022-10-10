@@ -50,3 +50,13 @@ https://teachyourselfcs.com/
 
 
 ~~~~ CYBERSECURITY PAGE ~~~~
+
+CyberChef
+CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser.
+https://codechips.me/svelte-routing-with-page-js-part-1/
+
+The National Cyber League
+Join a community for immersive cyber challenges
+https://nationalcyberleague.org/
+
+
