@@ -1,4 +1,8 @@
 <div id="results" style="display: none">
+    <div>
+        <b id="topPercent"></b>
+        <canvas id="myChart"></canvas>
+    </div>
     <div class="chart-container" style="position: relative; height:50vh; width:80vw">
         <canvas id="allScores"></canvas>
     </div>
@@ -6,115 +10,116 @@
         <canvas id="myScores"></canvas>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
 
 <script type="application/javascript">
-    
+
     var resultsDiv = document.getElementById("results")
-    
-    // TODO: Fix event registration (not being catched for some reason)
-    window.addEventListener("updateData", function(e){
-        console.log("got update event"); 
+
+    window.addEventListener("updateData", function (e) {
         updateGraphs(e);
         return true;
-        })
-    console.log("added listener")
-    
-    function updateGraphs(e){
+    })
+
+    function updateGraphs(e) {
         console.log("Updating data")
         var data = null
-        
         data = (typeof e.detail.data !== "undefined") ? e.detail.data : getData(game);
+        myScore =  (typeof e.detail.data !== "undefined") ? e.detail.myScore : getData(game);
         console.log("Got data for game: %s\nuser: %s\n\tdata: %s", game, user, data)
-        
+
         //TODO: Use data to create graphs & result text
-        
+        getTopPercent(data, myScore)
+        // setupGraphs();
+
         results.style.display = "block"
     }
-    
-    function getData(game){
+
+    function getData(game) {
         console.log("trying to get data")
         var res = null
-        fetch( '/getResults', {
+        fetch('/getResults', {
             method: 'POST',
-            headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
-            body: JSON.stringify({"game_type": game})
+            headers: { "X-CSRF-TOKEN": csrf, "Content-Type": "application/json" },
+            body: JSON.stringify({ "game_type": game })
         }).then(
-            async function( response ) {
+            async function (response) {
                 res = await response.json()
             }
         );
         return res
     }
-    
-    function setupGraphs(allData, userData){
-        const configAllScores = {
-            type: 'bar',
-            data: data,
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'All Scores',
-                        padding: {
-                            top: 10,
-                            bottom: 30
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+    function getTopPercent(allScore, myScore) {
+        let topScore = true;
+        let highIndex = 0;
+
+        for (let i = 0; i < allScore.length; i++) {
+            if (allScore[i] >= myScore) {
+                highIndex = i + 1;
+                topScore = false;
+                break;
+            }
+        }
+
+        topText = document.getElementById('topPercent');
+
+        if (topScore){
+            topText.innerText = "New High Score!"
+        }
+        else{
+            topPercNum = (highIndex-allScore.length)/allScore.length
+            topText.innerText = `You Scored Top ${topPercNum}%`;
+        }
+
+    }
+
+    function setupGraphs(allData) {
+        // find intv, devide by 10
+        const intv = allData[allData.length] - allData[0];
+        
+
+
+        var originalLineDraw = Chart.controllers.line.prototype.draw;
+        Chart.helpers.extend(Chart.controllers.line.prototype, {
+            draw: function () {
+                originalLineDraw.apply(this, arguments);
+
+                var chart = this.chart;
+                var ctx = chart.chart.ctx;
+
+                var index = chart.config.data.lineAtIndex;
+                if (index) {
+                    var xaxis = chart.scales['x-axis-0'];
+                    var yaxis = chart.scales['y-axis-0'];
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
+                    ctx.strokeStyle = '#ff0000';
+                    ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
+                    ctx.stroke();
+                    ctx.restore();
                 }
-            },
-        };
-        const configMyScores = {
+            }
+        });
+
+        var config = {
             type: 'line',
-            data: data,
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Custom Chart Title',
-                        padding: {
-                            top: 10,
-                            bottom: 30
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            },
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [{
+                    label: "My First dataset",
+                    data: [65, 0, 80, 81, 56, 85, 40],
+                    fill: false
+                }],
+                lineAtIndex: 2
+            }
         };
-        const labels = []
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
-            }]
-        };
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        new Chart(ctx, config);
     }
 </script>
