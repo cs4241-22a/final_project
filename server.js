@@ -61,7 +61,8 @@ const recipeSchema = new mongoose.Schema(
             required: true
         },
     },
-    { timestamps: true }, { collection: 'userinfo' }
+    { timestamps: true },
+    { collection: 'userinfo' }
 );
 
 recipeSchema.index({ title: 1, user: 1 }, { unique: true });
@@ -99,7 +100,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-    
+
     usercollection.find({ username: user }).toArray()
         .then(result => {
             if (result.length === 0) {
@@ -113,11 +114,11 @@ app.post('/register', (req, res) => {
                         req.session.login = true;
                         req.session.username = req.body.username;
                         res.redirect('/');
-                    })
+                    });
             } else {
                 res.end(JSON.stringify("username already in use"));
             }
-        })
+        });
 });
 
 app.get('/index', (req, res) => {
@@ -125,8 +126,8 @@ app.get('/index', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/build/pages/index.html')
-})
+    res.sendFile(__dirname + '/build/pages/index.html');
+});
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/build/pages/login.html');
@@ -153,10 +154,10 @@ app.use((req, res, next) => {
 // recipe db interaction
 
 app.post('/add', express.json(), (req, res) => {
-    const data = req.body
-    data.username = req.session.username
+    const data = req.body;
+    data.username = req.session.username;
     recipecollection.insertOne(req.body)
-        .then(result => res.json(result))
+        .then(result => res.json(result));
 })
 
 app.post('/update', express.json(), (req, res) => {
@@ -166,18 +167,18 @@ app.post('/update', express.json(), (req, res) => {
 
 // TODO: add the fields we will use to update route
 app.post('/modify', express.json(), (req, res) => {
-    const data = req.body
-    const user = req.session.username
+    const data = req.body;
+    const user = req.session.username;
 
     recipecollection.updateOne({ $and: [{ name: name }, { username: user }] }, { $set: { name: data.name } })
-        .then(result => res.json(result))
+        .then(result => res.json(result));
 });
 
 app.post('/delete', express.json(), (req, res) => {
     // delete a recipe made by a given user with a given name
     const user = req.session.username; // !!! where does "name" come from on the next line?
     recipecollection.deleteOne({ $and: [{ name: name }, { username: user }] })
-        .then(result => res.json(result))
+        .then(result => res.json(result));
 });
 
 app.listen(3000);
