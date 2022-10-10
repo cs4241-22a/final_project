@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import gompei from '../../public/gompei.png';
+import { Button } from 'semantic-ui-react'
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -10,9 +13,15 @@ const Login = (props) => {
     }
   }, [props.user]);
   return (
-    <div id="login">
-      <a href="/auth/outlook">Login with Outlook</a>
-    </div>
+    <Container id="login" style={{display: 'flex', flexDirection: 'column', maxWidth: 'fit-content', alignItems: 'center'}}>
+        <h1 style={{margin: '1rem'}}>Welcome to GoataShop!</h1>
+        <img src={gompei} alt="BigCo Inc. logo"/>
+        <a href="/auth/outlook">
+          <Button style={{width: '15rem', height: '5rem', borderRadius: '1rem', backgroundColor: '#ac2b37', color: 'white', margin: '1rem', border: '0'}}>
+              <p style={{margin: '0'}}>Log in with Outlook</p>
+          </Button>
+      </a>    
+ </Container>
   );
 };
   

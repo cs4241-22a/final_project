@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-padding: 80px 60px;
+padding: 1rem;
 background: black;
-position: absolute;
-bottom: 0;
+position: fixed;
+left:0;
+bottom:0;
+right:0;
 width: 100%;
+max-height: fit-content;
 
 @media (max-width: 1000px) {
 	padding: 1rem;
@@ -40,8 +43,7 @@ grid-gap: 20px;
 
 export const FooterLink = styled.a`
 color: white;
-margin-bottom: 20px;
-font-size: 18px;
+font-size: 1rem;
 text-decoration: none;
 
 &:hover {
@@ -51,8 +53,7 @@ text-decoration: none;
 `;
 
 export const Heading = styled.p`
-font-size: 24px;
+font-size: 1rem;
 color: white;
-margin-bottom: 40px;
 font-weight: bold;
 `;
