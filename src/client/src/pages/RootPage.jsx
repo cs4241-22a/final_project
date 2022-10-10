@@ -45,20 +45,38 @@ const RootPage = () => {
     }, [])
 
 
-    const handleResourceClick = ({resourceID, resourceType}) => {
-        switch(resourceType){
+    const handleResourceClick = ({ resourceID, resourceType }) => {
+        const newCustom = {
+            hat: hat,
+            color: color,
+            species: species
+        }
+        switch (resourceType) {
             case "HAT":
                 setHat(resourceID);
+                newCustom.hat = resourceID;
                 break;
             case "COLOR":
                 setColor(resourceID);
+                newCustom.color = resourceID;
                 break;
             case "SPECIES":
                 setSpecies(resourceID);
+                newCustom.species = resourceID;
                 break;
             default:
                 break;
         }
+        fetch("/api/pet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newCustom)
+        }).then((response) => {
+            console.log(response);
+        })
+
     }
 
     const handleClick = () => {
@@ -70,7 +88,7 @@ const RootPage = () => {
         }).then((response) => {
             response.json().then((data) => {
                 setXP(data.xp);
-                if(data.level != level){
+                if (data.level != level) {
                     setLevel(data.level);
                     setXPToNextLevel(data.xpToNextLevel);
                 }
@@ -86,12 +104,12 @@ const RootPage = () => {
                 //Verify?
             })
         })
-        
+
     }
 
     return (
         <div className="min-h-screen flex flex-row bg-gray-100">
-            <Sidebar petName={petName} level={level} onResourceClick={handleResourceClick}/>
+            <Sidebar petName={petName} level={level} onResourceClick={handleResourceClick} />
             <div className='flex justify-center items-center flex-col w-full gap-4 bg-gray-800'>
                 <Pet hatID={hat} speciesID={species} colorID={color} onClick={handleClick} />
                 <progress id="file" value={xp} max={xpToNextLevel}> {xp} </progress>
