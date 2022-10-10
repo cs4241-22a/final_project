@@ -6,7 +6,7 @@ const layout = {
 
   buttons: {
     position: "absolute",
-    left: 600,
+    left: 640,
     top: 350,
   },
 
