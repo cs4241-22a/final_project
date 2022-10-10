@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 
-
-const Home = () => {
-
-const [user, setUser] = useState({});
-useEffect(() => {
-  fetch("/username", {
-    method: "GET",
-  }).then(async (response) => {
-  let res = await response.json()
-  setUser(res)
-})
-}, [])
+const Home = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    props.getUser()
+    if (!props.user.name) {
+      navigate('/login');
+    }
+  }, []);
 
   return (
     <div
@@ -25,7 +22,7 @@ useEffect(() => {
     >
       <h1>Welcome to GoataShop</h1>
       <h2>For when you really GoataShop</h2>
-      <p>{user.name}</p>
+      <p>{props.user.name}</p>
     </div>
   );
 };

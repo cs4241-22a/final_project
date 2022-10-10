@@ -91,27 +91,24 @@ client
     productCollection = _productCollection;
   });
 
-  //Default page //TODO doesn't change landing page :(
+//Default page //TODO doesn't change landing page :(
 app.get("/", (req, res) => {
-  console.log("HI-/");
+  console.log("HI-/landing");
   console.log(req.isAuthenticated());
-  if (req.isUnauthenticated)
-  {
-    console.log("hereeee!")
-    res.redirect("/login")
-  }
+  res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
 //Login Page
 app.get("/login", (req, res) => {
   console.log("HI-/login");
   console.log(req.isAuthenticated());
-  res.sendFile("login.html", { user: req.user, root: __dirname + "/build/" });
+  res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
 //Website Page
 app.get("/home", ensureAuthenticated, (req, res) => {
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
+  console.log(res);
 });
 
 app.get("/shop", ensureAuthenticated, (req, res) => {
@@ -119,14 +116,16 @@ app.get("/shop", ensureAuthenticated, (req, res) => {
 });
 
 //Other methods
-app.get("/username", ensureAuthenticated, (req, res) => {
-  console.log(req.user._json);
-  let user = req.body;
-  user.name = req.user._json.DisplayName;
-  user.userid = req.user._json.Id;
-  user.products = [];
-  userCollection.insertOne(req.body);
-  res.json(user);
+app.get("/username", (req, res) => {
+  if (req.user) {
+    console.log(req.user._json);
+    let user = req.body;
+    user.name = req.user._json.DisplayName;
+    user.userid = req.user._json.Id;
+    user.products = [];
+    userCollection.insertOne(req.body);
+    res.json(user);
+  }
 });
 
 app.get("/getAllProducts", ensureAuthenticated, (req, res) => {
@@ -151,28 +150,31 @@ app.get("/getListings", ensureAuthenticated, (req, res) => {
     });
 });
 
-app.post('/addListing', ensureAuthenticated, (req, res) => {
+app.post("/addListing", ensureAuthenticated, (req, res) => {
   console.log("Adding");
   console.log(req.user._json.Id);
-  productCollection.insertOne({
-    userid: req.user._json.Id,
-    name:req.body.name,
-    category:req.body.category,
-    description:req.body.description,
-    price:req.body.price,
-  })
-  .then((result)=>res.json(result));
+  productCollection
+    .insertOne({
+      userid: req.user._json.Id,
+      name: req.body.name,
+      category: req.body.category,
+      description: req.body.description,
+      price: req.body.price,
+    })
+    .then((result) => res.json(result));
 });
 
 //TODO In progress, no code in listing.jsx yet
-app.delete('/listing/:id', ensureAuthenticated, (req, res) => {
+app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
   productCollection
-  .findOne({_id:mongodb.ObjectId(req.params.id)})
-  .then( (result) => {
-    collection.deleteOne({
-      _id:mongodb.ObjectId(req.params.id)
-    }).then((result) => res.json(result));
-  });
+    .findOne({ _id: mongodb.ObjectId(req.params.id) })
+    .then((result) => {
+      collection
+        .deleteOne({
+          _id: mongodb.ObjectId(req.params.id),
+        })
+        .then((result) => res.json(result));
+    });
 });
 
 app.get("/listings", ensureAuthenticated, (req, res) => {
@@ -219,6 +221,6 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  console.log("not authenticated")
+  console.log("not authenticated");
   res.redirect("/login");
 }

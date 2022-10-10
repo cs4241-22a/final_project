@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const Listings = () => {
-
 const [products, setProducts] = useState([]);
 useEffect(() => {
   fetch("/getListings", {
@@ -13,7 +12,7 @@ useEffect(() => {
   let res = await response.json()
   setProducts(res)
 })
-}, []) //, change to just }) this help with live update -> but it's also run non stop in background
+}, [])
 
 return (	
 	<div
@@ -65,7 +64,7 @@ const onSubmit= (event) => {
 		body,
 	}).then(async(response) =>{
 		let res = await response.json()
-	})
+	}).then(location.reload())
 }
 
 export default Listings;

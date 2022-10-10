@@ -1,23 +1,17 @@
-import React from 'react';
-const Login = () => {
+import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
+
+const Login = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    props.getUser()
+    if (props.user.name) {
+      navigate('/home');
+    }
+  }, [props.user]);
   return (
-    <div
-      class="d-flex flex-column align-self-center align-items-center mx-2"
-      style="background: white; margin-top: 1rem; border-radius: 1rem"
-    >
-      <a
-        class="btn btn-primary mb-3"
-        style="
-          background: #1a2c55;
-          width: 20rem;
-          height: 5rem;
-          font-size: 1.5rem;
-        "
-        href="/auth/outlook"
-        role="button"
-      >
-        Sign in with Outlook
-      </a>
+    <div id="login">
+      <a href="/auth/outlook">Login with Outlook</a>
     </div>
   );
 };
