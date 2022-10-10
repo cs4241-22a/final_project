@@ -214,6 +214,7 @@ class Model {
             if (!(s.color === "white"))
                 return false;
         }
+        this.victory = true;
         return true;
     }
 }

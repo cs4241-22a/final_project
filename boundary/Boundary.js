@@ -1,4 +1,4 @@
-const LEVELOFFSETH = 10;
+const LEVELOFFSETH = 5;
 const BOXSIZE = 50;
 const OFFSET = 3;
 
@@ -45,7 +45,7 @@ function redrawCanvas(model, canvasObj, appObj) {
     else {
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.fillText("Congrats! You have won the puzzle!",40,220);
+        ctx.fillText("Congrats! You have won the puzzle!",60,220);
     }
 }
 
