@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from './header';
+import SearchAndSort from './searchAndSort';
 
 class Table extends React.Component {
     constructor(props) {
@@ -100,7 +101,7 @@ class App extends React.Component {
         //this.load();
     }
 
-    load() {
+    load() { //TODO: Is this necessary? Shouldn't we only fire on componentDidMount?
         fetch('/recipedata', {
             method: 'get',
             headers: {
@@ -130,6 +131,7 @@ class App extends React.Component {
             <div className="App">
                 <Header />
                 {/* originally id was in the App div, but want the header to span entire page */}
+                <SearchAndSort />
                 <body id='basic'>
                     <Table items={this.state.recipes} />
                 </body>

@@ -75,7 +75,15 @@ const Recipe = mongoose.model('Recipe', recipeSchema);
 
 app.get('/recipedata', async (req, res) => {
     console.log("Retrieving recipe data");
-    let allData = await Recipe.find({}); // later refine this, only send recipes written by the user
+    //console.log(req.query);
+    let allData;
+    if(!req.query.search){
+        allData = await Recipe.find({});
+    } else {
+        allData = await Recipe.find({ //TODO: Advanced search, eg. by ingredients?
+            title: { $regex: req.query.search, $options: 'i' }
+        });
+    }
     res.json(allData).end();
 });
 
