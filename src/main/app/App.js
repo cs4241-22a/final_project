@@ -33,7 +33,7 @@ export default class App
     }
 
     /**
-     * Called when a filters are applied
+     * Called when filters are applied
      */
     onFilterUpdate()
     {
