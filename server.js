@@ -38,9 +38,6 @@ app.use(helmet({
     crossOriginEmbedderPolicy: false
 }));
 
-// Serve React build
-app.use(express.static(__dirname + "/client/build"));
-
 // Get routes
 app.get("/user-data", (req, resp) => {
     const userId = req.query.id;
@@ -305,9 +302,9 @@ app.post("/existing-user", (req, resp) => {
                         resp.end();
                     } else {
                         const hash = res.password;
-                        bcrypt.compare(data.password, hash, (err, bcryptres) => {
+                        bcrypt.compare(data.password, hash, (err, bcryptRes) => {
                             // Check if password is right
-                            if (bcryptres) {
+                            if (bcryptRes) {
                                 const body = {
                                     error: false,
                                     email: data.email,
@@ -329,7 +326,9 @@ app.post("/existing-user", (req, resp) => {
     })
 })
 
-// Default get
+// Serve React build
+app.use(express.static(__dirname + "/client/build"));
+// Serve react app
 app.get("*", (req, res) => {
-    res.sendFile(__dirname + "/build/index.html")
+    res.sendFile(__dirname + "/client/build/index.html");
 });

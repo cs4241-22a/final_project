@@ -36,7 +36,7 @@ export default function LoginPage(props) {
           </div>
 
           <p className="text-center mt-2">
-            Need an account? <a className="signup" href="#">Sign Up</a>
+            Need an account? <a className="signup" href="/signup">Sign Up</a>
           </p>
 
         </div>
