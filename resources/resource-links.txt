@@ -12,7 +12,7 @@ Accessible Web Tools
 A Mastersheet of many Accessible web components
 https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
 
-Responsive Design
+Responsive Design (UNUSED)
 Helpful step-by-step guides to learn Responsive Design
 https://web.dev/learn/design/
 
@@ -22,10 +22,20 @@ runrb.io
 Online development space to create, run, and test Ruby on Rails code
 https://runrb.io/
 
+CodeAbbey
+Test out your Java skills with a wide variety of Java problems to solve
+https://www.codeabbey.com/index/task_list
 
+SQLZoo
+Wiki-based interactive tutorials to learn SQL
+https://sqlzoo.net/wiki/SQL_Tutorial
+
+PHP the Right Way (UNUSED)
+A frequently updated guide to learn and write PHP code. 
+https://phptherightway.com/
 
 ~~FULL STACK~~
-Front-End Dev's Guide to Terminal
+Front-End Dev's Guide to Terminal (UNUSED)
 A user friendly guide to using Terminal commands
 https://www.joshwcomeau.com/javascript/terminal-for-js-devs/
 
@@ -47,7 +57,25 @@ Teach Yourself CS
 Massive guide to learn lots of underlying knowlegdge of Computer Science
 https://teachyourselfcs.com/
 
+Theories in Computer Science
+A quick guide giving small explanations of the basics of computer science theory.
+https://cs.lmu.edu/~ray/notes/cstheories/
 
+Theory of Computation
+MIT Opencourseware on their class, Theory of Computation, at both a graduate and undergraduate level.
+https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/
+
+DiscreteMath.org
+An open content source to learn discrete math. 
+https://discretemath.org/
+
+Discrete Mathematics, An Introduction
+An interactive ebook introducing discrete math to beginners
+https://discrete.openmathbooks.org/dmoi3/
+
+VisualAlgo
+A website with visuals and animations of many popular algorithims. 
+https://visualgo.net/en
 
 ~~~~ CYBERSECURITY PAGE ~~~~
 
@@ -59,4 +87,18 @@ The National Cyber League
 Join a community for immersive cyber challenges
 https://nationalcyberleague.org/
 
+Cyber Awareness Challenge
+Training used by Department of Defense workers to be aware of common cyber security threats
+https://public.cyber.mil/training/cyber-awareness-challenge/
 
+Cybersecurity Games
+A set of games from the University of Texas at Austin focused on testing and sharpening cybersecurity skills.
+https://it.tamu.edu/security/cybersecurity-games/index.php
+
+Hacker101
+Free online classes covering web security. 
+https://www.hacker101.com/
+
+TryHackMe
+Learning cybersecurity in small, byte-sized, gamified lessons.
+https://tryhackme.com/
