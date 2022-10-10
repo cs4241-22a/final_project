@@ -72,7 +72,7 @@
 
       return false;
     };
-    
+  
     
     document.addEventListener('DOMContentLoaded', () => {
       // Functions to open and close a modal
@@ -115,6 +115,27 @@
 
         if (e.keyCode === 27) { // Escape key
           closeAllModals();
+        } else {
+          let newModel;
+          switch (event.keyCode) {
+                  case 38:
+                          newModel = move(model, Up);
+                          break;
+                  case 39:
+                          newModel = move(model, Right);
+                          break;
+                  case 37:
+                          newModel = move(model, Left);
+                          break;
+                  case 40:
+                          newModel = move(model, Down);
+                          break;
+                  default:
+                          newModel = model;
+                          break;
+
+          }
+          setModel(newModel);
         }
       });
     });
