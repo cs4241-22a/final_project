@@ -5,7 +5,7 @@ import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, Te
 import Modal from '@mui/material/Modal';
 import { pink } from "@mui/material/colors";
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
-// import BasicModal from "./entities/modal";
+import BasicModal from "./modal";
 
 const style = {
     position: 'absolute',
@@ -44,37 +44,7 @@ export default function Reminders() {
     
 
 
-    const blogFormat = <div>
-        <Fab style={{ backgroundColor:"grey", color:"black", width:500, height:75, borderRadius:5}} onClick={handleOpen}>View "Usernames" post</Fab>
-    <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-    >
-        <Box sx={style}>
-            {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
-          <Box
-                component="form"
-             sx={{
-                  '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    "Username" posted:
-                </Typography>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    STUFF THEY TYPED HERE
-                </Typography>
-                <Button>View Replies!</Button>
-                <Button>Reply!</Button>
-                <Button onClick={handleClose}>Exit!</Button>
-            </Box>
-        </Box>
-    </Modal>
-    </div>
+    const blogFormat = BasicModal()
     
 
 
@@ -112,7 +82,7 @@ export default function Reminders() {
                         <Typography id="createBlog" variant="h6" component="h2">
                             Create your blog:
                         </Typography>
-                        <TextField fullWidth inputProps={{ maxLength: 250 }} id="blogDesc" label="big balls in yo mouth" multiline variant="filled"/>
+                        <TextField fullWidth inputProps={{ maxLength: 250 }} id="blogDesc" label="Start typing here..." multiline variant="filled"/>
                         <Button onClick={addBlog}>Post your blog!</Button>
                         <Button onClick={handleClose}>Cancel</Button>
                     </Box>
