@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import Board, { playComputerMove } from './Board'
-import { parseFen } from 'chessops/fen'
 import { Chess } from 'chessops/chess'
-import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import NavBar from './components/Navbar/NavBar'
-import GameHistory from './pages/GameHistory'
-import About from './pages/About'
-import Stats from './pages/Stats'
+import { parseFen } from 'chessops/fen'
+import { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Board, { playComputerMove } from './Board'
+import NavBar from './components/Navbar/NavBar'
+import About from './pages/About'
+import GameHistory from './pages/GameHistory'
 import Home from './pages/Home'
+import Stats from './pages/Stats'
 
 function getWindowDimentions() {
   const { innerWidth: width, innerHeight: height } = window
@@ -76,8 +76,8 @@ export default function App(props) {
             <Route
               path="/play"
               element={
-                <div class="row">
-                  <div class="w-50 mx-auto">
+                <div className="row">
+                  <div className="mx-auto">
                     <Board
                       game={game}
                       flipTurn={() => setTurn(game.turn)}

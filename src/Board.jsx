@@ -79,7 +79,11 @@ export default function Board(props) {
   const [wKnight] = useImage('./pieces/wn.png')
   const [wQueen] = useImage('./pieces/wq.png')
   const [wKing] = useImage('./pieces/wk.png')
-  const size = props.dimensions.width * 0.4
+  let size = props.dimensions.width * 0.4
+  console.log(size)
+  if (size < 200) {
+    size = props.dimensions.width * 0.9
+  }
   const squares = generateChessBoard()
 
   function getHover() {
