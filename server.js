@@ -8,15 +8,15 @@ const helmet = require('helmet');
 const bcrypt = require('bcrypt');
 
 const itemTypes = {
-    CANNEDJARRED: "canned-jarred",
-    DAIRY: "dairy",
-    DRYBAKING: "dry-baking",
-    FROZEN: "frozen",
-    GRAINS: "grains",
-    MEAT: "meat",
-    PRODUCE: "produce",
-    OTHER: "other",
-  }
+    CANNEDJARRED: "Canned / Jarred Goods",  // "canned-jarred"
+    DAIRY: "Dairy",                         // "dairy"
+    DRYBAKING: "Dry / Baking Goods",        // "dry-baking"
+    FROZEN: "Frozen",                       // "frozen"
+    GRAINS: "Grains",                       // "grains"
+    MEAT: "Meat",                           // "meat"
+    PRODUCE: "Produce",                     // "produce"
+    OTHER: "Other",                         // "other"
+}
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}/database?retryWrites=true&w=majority`;
 
@@ -70,6 +70,7 @@ app.get("/user-data", (req, resp) => {
                         produceData: res.produceData,
                         otherData: res.otherData
                     }
+                    console.log(body)
                     resp.json(JSON.stringify(body));
                     resp.end();
                 }

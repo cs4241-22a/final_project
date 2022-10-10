@@ -2,15 +2,17 @@ import Logo from "../assets/images/logo.svg";
 import xImage from "../assets/images/x.png";
 import {useState, useEffect} from "react";
 
+const userId = "user1"
+
 const itemTypes = {
-  CANNEDJARRED: "canned-jarred",
-  DAIRY: "dairy",
-  DRYBAKING: "dry-baking",
-  FROZEN: "frozen",
-  GRAINS: "grains",
-  MEAT: "meat",
-  PRODUCE: "produce",
-  OTHER: "other",
+  CANNEDJARRED: "Canned / Jarred Goods",  // "canned-jarred"
+  DAIRY: "Dairy",                         // "dairy"
+  DRYBAKING: "Dry / Baking Goods",        // "dry-baking"
+  FROZEN: "Frozen",                       // "frozen"
+  GRAINS: "Grains",                       // "grains"
+  MEAT: "Meat",                           // "meat"
+  PRODUCE: "Produce",                     // "produce"
+  OTHER: "Other",                         // "other"
 }
 
 const exampleData = [{
@@ -44,11 +46,28 @@ export default function HomePage() {
  * Topbar component for Go-Grocery HomePage
  */
 function Topbar() {
+  function addItem(item, list) {
+    if(item.value === "" || list.value === "Select Item Type*") {
+      // item not entered or item type not selected, give some user feedback
+    }
+    else {
+      let body = JSON.stringify({ userId: userId, itemType: list.value, itemName: item.value.toLowerCase()})
+      fetch( '/add-item', { 
+        method:'POST',
+        body: body,
+        headers: { 'Content-Type': 'application/json' }
+      })
+      // response is error: true || false
+      .then( response => response.json() )
+      .then( json => console.log(json) )
+    }
+  }
+
   return (
     <div className="navbar navbar-light bg-light border">
       <img src={Logo} alt="Go Grocery" className="topbar-logo"/>
       <form className="form-inline">
-        <input className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder="Enter Item Name*" aria-label="Search" />
+        <input id="item"className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder="Enter Item Name*" aria-label="Search" />
         <select id="item-type-select" className="form-control bg-secondary input-text">
           <option selected>Select Item Type*</option>
           <option>Canned / Jarred Goods</option>
@@ -60,7 +79,7 @@ function Topbar() {
           <option>Produce</option>
           <option>Other</option>
         </select>
-        <button type="submit" class="m-2 btn btn-primary">Add to List</button>
+        <button type="submit" class="m-2 btn btn-primary" onClick={() => {addItem(document.getElementById("item"), document.getElementById("item-type-select"))}}>Add to List</button>
       </form>
     </div>
   )
@@ -70,7 +89,7 @@ function Sections() {
 
   const [cannedJarredData, setCannedJarredData] = useState(null);
   const [dairyData, setDairyData] = useState(null);
-  const [dryBakingData, setDryBakingDataData] = useState(null);
+  const [dryBakingData, setDryBakingData] = useState(null);
   const [frozenData, setFrozenData] = useState(null);
   const [grainsData, setGrainsData] = useState(null);
   const [meatData, setMeatData] = useState(null);
@@ -80,16 +99,22 @@ function Sections() {
   useEffect(() => {
 
     async function fetchUserData() {
-      setCannedJarredData(exampleData);
-      setDairyData(exampleData);
-      setDryBakingDataData(exampleData);
-      setFrozenData(exampleData);
-      setGrainsData(exampleData);
-      setMeatData(exampleData);
-      setProduceData(exampleData);
-      setOtherData(exampleData);
+      fetch( `/user-data?id=${userId}`, {
+        method: 'GET'
+      })
+        .then( response => response.json() )
+        .then( json => {
+          setCannedJarredData(json.cannedJarredData);
+          setDairyData(json.dairyData);
+          setDryBakingData(json.dryBakingData);
+          setFrozenData(json.frozenData);
+          setGrainsData(json.grainsData);
+          setMeatData(json.meatData);
+          setProduceData(json.produceData);
+          setOtherData(json.otherData);
+        })
     }
-
+    
     fetchUserData();
   }, []) 
 
@@ -147,7 +172,7 @@ function GroceryItem({title, index, visible}) {
   return (
     <li key={index} className={"grocery-item-container " + (visible ? "" : "hidden")}>
       <div className="item-title">{title}</div>
-      <button type="button" className="btn-delete" ariaLabel="delete" onClick={() => {deleteItem()}}>
+      <button type="button" className="btn-delete" aria-label="delete" onClick={() => {deleteItem()}}>
         <img src={xImage} alt="x"/>
       </button>
     </li>
