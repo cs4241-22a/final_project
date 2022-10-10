@@ -2,16 +2,12 @@ import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 
 export function Header() {
   return (
-    <AppBar
-      position="fixed"
-      component="nav"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-    >
+    <AppBar component="nav" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           Welcome to Emoji Place! 😄
         </Typography>
-        <Button variant="text">Log out</Button>
+        <Button variant="text">LOGOUT</Button>
       </Toolbar>
     </AppBar>
   );
