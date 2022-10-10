@@ -1,3 +1,4 @@
+import ClimbTypeUtils from "../../util/ClimbTypeParser";
 import MongoManager from "../../util/MongoManager";
 import GymMap from "./visuals/GymMap";
 
@@ -17,10 +18,12 @@ export default class App
         this.mongoManger = new MongoManager()
 
         this.gymMap = new GymMap()
+        this.climbTypeUtils = new ClimbTypeUtils();
 
         //Load all of the routes in the database
         this.mongoManger.getAllRoutes().then(routes => {
             this.routes = routes
+            this.populateFilters()
             //update grade list
             //update climb types
             //List of filtered climbs
@@ -31,27 +34,19 @@ export default class App
 
     
     populateFilters() {
-        climbsArray.forEach(climb => addOption(climb))
+        //climbsArray.forEach(climb => addOption(climb))
         
-        const gradesFilter = document.getElementById('grades');
+       // const gradesFilter = document.getElementById('grades');
+
+       const gradesFilter = document.getElementById('grades');
+       this.routes.forEach(climb => this.addOption(climb, gradesFilter))
         
-        const climbTypeFilter = document.getElementById('climbType');
-        let climbs = [...new Set(route.map(climb => climb.type))]
-        climbs.forEach(climb => {
-            climbTypeFilter.options[climbTypeFilter.options.length] = new Option(climb.type, climb.type)
-
-        })
-
-    }
-    
-    populateGradeFilters()
-    {
-
+ 
     }
 
     //Add the option to the select
-    addOption(climb) {
-        if (!optionExists(climb.grade, gradesFilter)){
+    addOption(climb, gradesFilter) {
+        if (!this.optionExists(climb.grade, gradesFilter)){
             gradesFilter.options[gradesFilter.options.length] = new Option(climb.grade, climb.grade)
         }
     }
