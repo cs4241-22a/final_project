@@ -20,6 +20,8 @@ window.addEventListener('load', () => {
     console.log(123)
     populateFilters()
     sortSelect(gradesFilter)
+    const applyButton = document.getElementById("apply")
+    applyButton.onclick = apply
 })
 function populateFilters() {
     climbsArray.forEach(climb => addOption(climb))
@@ -62,4 +64,8 @@ function sortSelect(selElem) {
     for (let i=0;i<tmpAry.length;i++) {
         selElem.options[i] = new Option(tmpAry[i][0], tmpAry[i][1]);
     }
+}
+
+function apply() {
+    
 }
