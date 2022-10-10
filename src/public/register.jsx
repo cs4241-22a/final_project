@@ -37,12 +37,8 @@ const verifyInfo = function() {
             }
         }).then(response => {
             if (!response.ok) {
-<<<<<<< HEAD
-                throw new Error(`HTTP error, status = ${response.status}`);
-=======
-                console.log(response)
+                console.log(response);
               throw new Error(`HTTP error, status = ${response.status}`);
->>>>>>> 0d66e3d2c7bd96a07408e9f9644452cd77dc5b58
             }
             else if (!response.redirected) {
                 return response.json();
