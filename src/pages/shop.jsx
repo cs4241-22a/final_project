@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import gompei from '../../public/gompei.png';
+import Popup from '../components/DetailPopup';
 
 const Shop = (props) => {
 
@@ -30,6 +31,13 @@ useEffect(() => {
   
 }, [])
 
+//Popup stuff
+const [isOpen, setIsOpen] = useState(false);
+
+const togglePopup = () => {
+  setIsOpen(!isOpen);
+}
+
   return (
     <div
       style={{
@@ -38,16 +46,15 @@ useEffect(() => {
         alignItems: 'Left',
         height: '100vh',
         padding: '2%'
-      }}
-    >
+      }}>
+
       <h1>The GoataShop</h1>
       <div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
 
       <Row m={1} md={3} className="g-4">
       {products.map(product => 
-     
       <Col>
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '18rem' }} onClick = {togglePopup}>
         <Row>
           <Col>
       <Card.Img variant="top" src={gompei} />
@@ -68,6 +75,14 @@ useEffect(() => {
        )}    </Row>
 
     </div>
+
+       {isOpen && <Popup
+        content={<>
+          <img src={gompei} />
+        </>}
+        handleClose={togglePopup}
+      />}
+
     </div>
   );
 };
