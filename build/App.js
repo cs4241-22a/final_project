@@ -107,7 +107,7 @@ class App extends React.Component {
         id: "score"
       }, this.state.score), " Click Damage:", " ", /* @__PURE__ */ React.createElement("span", {
         id: "click-damage"
-      }, this.state.clickDamage), " Passive Damage: ", /* @__PURE__ */ React.createElement("span", {
+      }, this.state.clickDamage), " Passive Damage:", " ", /* @__PURE__ */ React.createElement("span", {
         id: "passive-damage"
       }, this.state.passiveDamage), " "), /* @__PURE__ */ React.createElement("img", {
         src: "/gompei.png",
@@ -179,7 +179,16 @@ class App extends React.Component {
         onClick: () => this.save()
       }, "Save"), /* @__PURE__ */ React.createElement("button", {
         onClick: () => this.reloadLeaderboard()
-      }, " Refresh Leaderboard "), /* @__PURE__ */ React.createElement(LeaderBoard, {
+      }, " ", "Refresh Leaderboard", " "), /* @__PURE__ */ React.createElement("button", {
+        onClick: function() {
+          fetch("/logout", {
+            method: "POST"
+          }).then((res) => res.json()).then((location) => {
+            console.log(location.url);
+            window.location.href = location.url;
+          });
+        }
+      }, "Logout"), /* @__PURE__ */ React.createElement(LeaderBoard, {
         scores: this.state.leaderboard
       }), /* @__PURE__ */ React.createElement("p", null, "Will use these descriptions later:", /* @__PURE__ */ React.createElement("br", null), "Buy Campus Center Lunch - Gompei will go to the Campus Center and grab a bite to eat, increasing his click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy Hay - Gompei will go to his hay dealer and buy some hay, increasing his passive click strength by 1.", /* @__PURE__ */ React.createElement("br", null), "Buy MASH - Gompei will attend a MASH session, teaching him how to do his Calc IV homework, increasing his click strength by 25.", /* @__PURE__ */ React.createElement("br", null), "Buy Textbook - Gompei will *buy* his course textbook, increasing his passive click strength by 10.", /* @__PURE__ */ React.createElement("br", null), "Buy Grass - Gompei eats some of the grass on the Quad, increasing his click strength by 75.", /* @__PURE__ */ React.createElement("br", null), "Buy Office Hours - Gompei will attend Noelle's and Kyle's office hour and they help him fix his bug, increasing his passive click strength by 35", /* @__PURE__ */ React.createElement("br", null), "Buy Study - Gompei takes some time to study for his next Physics Exam, increasing his click strength by 500.", /* @__PURE__ */ React.createElement("br", null), "Buy Meditate - Gompei meditates reducing his stress, increasing his passive click strength by 300.", /* @__PURE__ */ React.createElement("br", null), "Buy Dukin - Gompei buys Dunkin Donuts through the mobile app, increasing his click strength by 15000.", /* @__PURE__ */ React.createElement("br", null), "Buy Review - Gompei makes a review guide for his history exam, incrasing his passive click strength by 10000.")));
     } else {

@@ -33,36 +33,37 @@ class LeaderBoard extends React.Component {
 		super(props);
 		this.props = props;
 	}
-	
-	render(){
+
+	render() {
 		const scores = this.props.scores;
-				
+
 		const rows = [];
 		for (let i = 0; i < scores.length; i++) {
 			rows.push(
-			<tr>
-				<th>{i + 1}</th>
-				<td>{scores[i].User}</td>
-				<td>{scores[i].Score}</td>
-			</tr>
+				<tr>
+					<th>{i + 1}</th>
+					<td>{scores[i].User}</td>
+					<td>{scores[i].Score}</td>
+				</tr>
 			);
 		}
 		for (let i = rows.length; i < 10; i++) {
 			rows.push(
-			<tr>
-				<th>{i}</th>
-				<td>{"-"}</td>
-				<td>{"-"}</td>
-			</tr>
+				<tr>
+					<th>{i}</th>
+					<td>{"-"}</td>
+					<td>{"-"}</td>
+				</tr>
 			);
 		}
-		
-		
+
 		return (
 			<>
 				<table>
 					<tr>
-						<th>Rank</th><th>User Name</th><th>Score</th>
+						<th>Rank</th>
+						<th>User Name</th>
+						<th>Score</th>
 					</tr>
 					<tbody id="LeaderBoard">{rows}</tbody>
 				</table>
@@ -74,43 +75,39 @@ class LeaderBoard extends React.Component {
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		
+
 		fetch("/load", {
 			method: "GET",
 		})
 			.then((res) => res.json())
 			.then((data) => {
 				const progress = data.Data;
-				
-				this.setState({ score: progress[0]});
-				this.setState({ passiveDamage: progress[1]});
-				this.setState({ clickDamage: progress[2]});
-				this.setState({ lunchCost: progress[3]});
-				this.setState({ hayCost: progress[4]});
-				this.setState({ mashCost: progress[5]});
-				this.setState({ textbookCost: progress[6]});
-				this.setState({ grassCost: progress[7]});
-				this.setState({ officehoursCost: progress[8]});
-				this.setState({ studyCost: progress[9]});
-				this.setState({ meditateCost: progress[10]});
-				this.setState({ dunkinCost: progress[11]});
-				this.setState({ reviewCost: progress[12]});
-				this.setState({ leaderboard: []});
-				
-				this.setState({ ready: true});
-				
-				
-				
+
+				this.setState({ score: progress[0] });
+				this.setState({ passiveDamage: progress[1] });
+				this.setState({ clickDamage: progress[2] });
+				this.setState({ lunchCost: progress[3] });
+				this.setState({ hayCost: progress[4] });
+				this.setState({ mashCost: progress[5] });
+				this.setState({ textbookCost: progress[6] });
+				this.setState({ grassCost: progress[7] });
+				this.setState({ officehoursCost: progress[8] });
+				this.setState({ studyCost: progress[9] });
+				this.setState({ meditateCost: progress[10] });
+				this.setState({ dunkinCost: progress[11] });
+				this.setState({ reviewCost: progress[12] });
+				this.setState({ leaderboard: [] });
+
+				this.setState({ ready: true });
+
 				window.appState = this;
 				this.reloadLeaderboard();
 				this.startTimer();
 			});
-		
-		
-		this.state = {
-			ready: false
-		}
 
+		this.state = {
+			ready: false,
+		};
 	}
 
 	save() {
@@ -143,19 +140,19 @@ class App extends React.Component {
 				console.log(message);
 			});
 	}
-	
+
 	reloadLeaderboard() {
 		fetch("/leaderboard", {
 			method: "GET",
 		})
 			.then((res) => res.json())
 			.then((leaderboard) => {
-				this.setState({leaderboard: leaderboard.Leaderboard});
+				this.setState({ leaderboard: leaderboard.Leaderboard });
 			});
 	}
 
 	render() {
-		if(this.state.ready === true){
+		if (this.state.ready === true) {
 			return (
 				<>
 					<body>
@@ -163,7 +160,8 @@ class App extends React.Component {
 						<p>
 							Score: <span id="score">{this.state.score}</span> Click Damage:{" "}
 							<span id="click-damage">{this.state.clickDamage}</span> Passive
-							Damage: <span id="passive-damage">{this.state.passiveDamage}</span>{" "}
+							Damage:{" "}
+							<span id="passive-damage">{this.state.passiveDamage}</span>{" "}
 						</p>
 						<img
 							src="/gompei.png"
@@ -277,8 +275,24 @@ class App extends React.Component {
 						</table>
 
 						<button onClick={() => this.save()}>Save</button>
-						<button onClick={() => this.reloadLeaderboard()}> Refresh Leaderboard </button>
-						<LeaderBoard scores={this.state.leaderboard}/>
+						<button onClick={() => this.reloadLeaderboard()}>
+							{" "}
+							Refresh Leaderboard{" "}
+						</button>
+						<button
+							onClick={function () {
+								fetch("/logout", {
+									method: "POST",
+								})
+									.then((res) => res.json())
+									.then((location) => {
+										window.location.href = location.url; //index
+									});
+							}}
+						>
+							Logout
+						</button>
+						<LeaderBoard scores={this.state.leaderboard} />
 
 						<p>
 							Will use these descriptions later:
@@ -289,11 +303,11 @@ class App extends React.Component {
 							Buy Hay - Gompei will go to his hay dealer and buy some hay,
 							increasing his passive click strength by 1.
 							<br />
-							Buy MASH - Gompei will attend a MASH session, teaching him how to do
-							his Calc IV homework, increasing his click strength by 25.
+							Buy MASH - Gompei will attend a MASH session, teaching him how to
+							do his Calc IV homework, increasing his click strength by 25.
 							<br />
-							Buy Textbook - Gompei will *buy* his course textbook, increasing his
-							passive click strength by 10.
+							Buy Textbook - Gompei will *buy* his course textbook, increasing
+							his passive click strength by 10.
 							<br />
 							Buy Grass - Gompei eats some of the grass on the Quad, increasing
 							his click strength by 75.
@@ -305,8 +319,8 @@ class App extends React.Component {
 							Buy Study - Gompei takes some time to study for his next Physics
 							Exam, increasing his click strength by 500.
 							<br />
-							Buy Meditate - Gompei meditates reducing his stress, increasing his
-							passive click strength by 300.
+							Buy Meditate - Gompei meditates reducing his stress, increasing
+							his passive click strength by 300.
 							<br />
 							Buy Dukin - Gompei buys Dunkin Donuts through the mobile app,
 							increasing his click strength by 15000.
@@ -317,17 +331,16 @@ class App extends React.Component {
 					</body>
 				</>
 			);
-		}
-		else{
+		} else {
 			return (
-                <>
-                    <body>
-                        <h1>Gompei Clicker</h1>
-                        <br/>
-                        <h2>Loading...</h2>
-                    </body>
-                </>
-            );
+				<>
+					<body>
+						<h1>Gompei Clicker</h1>
+						<br />
+						<h2>Loading...</h2>
+					</body>
+				</>
+			);
 		}
 	}
 
