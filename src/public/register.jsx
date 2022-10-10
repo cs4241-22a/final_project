@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Button, Container, Form } from "react-bootstrap";
 
-const verifyInfo = function() {  
+const verifyInfo = function () {
     const username = document.getElementById("username").value;
     if (username === "") {
         document.getElementById("message").innerHTML = "**Fill the username please!";
@@ -38,7 +38,7 @@ const verifyInfo = function() {
         }).then(response => {
             if (!response.ok) {
                 console.log(response);
-              throw new Error(`HTTP error, status = ${response.status}`);
+                throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {
                 return response.json();
@@ -74,7 +74,7 @@ class Register extends React.Component {
                     <Form.Control type="password" placeholder="Confirm password" />
                 </Form.Group>
 
-                <Button variant="primary" onClick= { verifyInfo }>
+                <Button variant="primary" onClick={verifyInfo}>
                     Submit
                 </Button>
 

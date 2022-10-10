@@ -152,32 +152,54 @@ app.use((req, res, next) => {
 
 // recipe db interaction
 
-app.post('/add', express.json(), (req, res) => {
+// takes a username (assumed to be unique) and returns the MongoDB id associated with it
+const getIdFromUsername = async (usernameToFind) => {
+    const user = await User.findOne({ username: usernameToFind });
+    return user.id;
+}
+
+const getRecipesFromUsername = async (usernameToFind) => {
+    const userId = await getIdFromUsername(usernameToFind);
+    const docs = await Recipe.find({ user: userId }, "_id title ingredients directions numPeople prepTime image");
+    return docs;
+}
+
+app.post('/add', express.json(), async (req, res) => {
     const data = req.body
     data.username = req.session.username
     Recipe.insertOne(req.body)
-        .then(result => res.json(result))
-})
-
-app.post('/update', express.json(), (req, res) => {
-    recipecollection.find({ name: { $exists: true } }).toArray()
-        .then(result => res.json(result));
-})
-
-// TODO: add the fields we will use to update route
-app.post('/modify', express.json(), (req, res) => {
-    const data = req.body;
-    const user = req.session.username;
-
-    recipecollection.updateOne({ $and: [{ name: name }, { username: user }] }, { $set: { name: data.name } })
         .then(result => res.json(result));
 });
 
-app.post('/delete', express.json(), (req, res) => {
-    // delete a recipe made by a given user with a given name
-    const user = req.session.username; // !!! where does "name" come from on the next line?
-    recipecollection.deleteOne({ $and: [{ name: name }, { username: user }] })
-        .then(result => res.json(result));
+app.patch('/update', express.json(), async (req, res) => {
+    const userId = await getIdFromUsername(req.session.username);
+    let doc = await Recipe.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, ingredients: req.body.ingredients, prepTime: req.body.prepTime, numPeople: req.body.numPeople, image: req.body.image });
+    const data = await getRecipesFromUsername(req.session.username);
+
+    if (data.length == 0) {
+        res.end();
+    } else {
+        res.json(data).end();
+    }
+});
+
+// TODO: add the fields we will use to update route
+// app.post('/modify', express.json(), (req, res) => {
+//     const data = req.body;
+//     const user = req.session.username;
+
+//     recipecollection.updateOne({ $and: [{ name: name }, { username: user }] }, { $set: { name: data.name } })
+//         .then(result => res.json(result));
+// });
+
+app.post('/delete', express.json(), async (req, res) => {
+    const userId = await getIdFromUsername(req.session.username);
+    Recipe.deleteOne({ title: req.body.title, user: userId }).then(() => { // assumes unique recipe title
+        console.log("Successfully deleted");
+    }).catch((error) => {
+        console.log(error); // Failure
+    });
+    res.json(await getRecipesFromUsername(req.session.username)).end();
 });
 
 app.listen(3000);
