@@ -54,6 +54,24 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get('/cpsScores', function(req, res) {
+  // collection.find({ username: req.session.username}).toArray().then(result => {
+  //   res.end(JSON.stringify(result));
+  // });
+})
+
+app.get('/reactionScores', function(req, res) {
+  // collection.find({ username: req.session.username}).toArray().then(result => {
+  //   res.end(JSON.stringify(result));
+  // });
+})
+
+app.get('/accuracyScores', function(req, res) {
+  // collection.find({ username: req.session.username}).toArray().then(result => {
+  //   res.end(JSON.stringify(result));
+  // });
+})
+
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', gamesRouter);
