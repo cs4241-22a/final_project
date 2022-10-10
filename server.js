@@ -95,8 +95,8 @@ app.post("/add-item", (req, resp) => {
                 } else {
                     // Found user document
                     // Edit correct field 
-                    const array = null;
-                    const field = null;
+                    let array = null;
+                    let field = null;
                     switch(data.itemType) {
                         case itemTypes.CANNEDJARRED:
                             array = res.cannedJarredData;
@@ -138,7 +138,7 @@ app.post("/add-item", (req, resp) => {
                     if (!array) {
                         resp.end();
                     }
-                    array.push(data.newItem);
+                    array.push(data.itemName);
                     db.collection("users").updateOne({"_id": new ObjectId(data.userId)}, { $set: {field: array} }, (err, result) => {
                         if (err) {
                             throw err;
@@ -149,9 +149,85 @@ app.post("/add-item", (req, resp) => {
                             resp.json(JSON.stringify(body));
                             resp.end();
                         }
-                    });   
-                    resp.json(JSON.stringify(body));
-                    resp.end();
+                    });
+                }
+            })
+        }
+    })
+})
+
+app.post("/remove-item", (req, resp) => {
+    const data = req.body;
+    if (!data) { // Guard clause
+        resp.end();
+    }
+    client.connect((err, client) => {
+        if (err) {
+            throw err;
+        } else {
+            // If DB connection is successful
+            const db = client.db("database");
+            db.collection("data").findOne({"_id": new ObjectId(data.userId)}, {}, (err, res) => {
+                if (err) {
+                    throw err;
+                } else {
+                    // Found user document
+                    // Edit correct field 
+                    let array = null;
+                    let field = null;
+                    switch(data.itemType) {
+                        case itemTypes.CANNEDJARRED:
+                            array = res.cannedJarredData;
+                            field = "cannedJarredData";
+                            break;
+                        case itemTypes.DAIRY:
+                            array = res.dairyData;
+                            field = "dairyData";
+                            break;
+                        case itemTypes.DRYBAKING:
+                            array = res.dryBakingData;
+                            field = "dryBakingData";
+                            break;
+                        case itemTypes.FROZEN:
+                            array = res.frozenData;
+                            field = "frozenData";
+                            break;
+                        case itemTypes.GRAINS:
+                            array = res.grainsData;
+                            field = "grainsData";
+                            break;
+                        case itemTypes.MEAT:
+                            array = res.meatData;
+                            field = "meatData";
+                            break;
+                        case itemTypes.PRODUCE:
+                            array = res.produceData;
+                            field = "produceData";
+                            break;
+                        case itemTypes.OTHER:
+                            array = res.otherData;
+                            field = "otherData";
+                            break;
+                        default:
+                            array = null;
+                            field = null;
+                            break;
+                    }
+                    if (!array) {
+                        resp.end();
+                    }
+                    array = array.filter(i => i !== data.itemName);
+                    db.collection("users").updateOne({"_id": new ObjectId(data.userId)}, { $set: {field: array} }, (err, result) => {
+                        if (err) {
+                            throw err;
+                        } else {
+                            const body = {
+                                error: false
+                            }
+                            resp.json(JSON.stringify(body));
+                            resp.end();
+                        }
+                    });
                 }
             })
         }
