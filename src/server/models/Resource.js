@@ -5,6 +5,7 @@ const Resource = new mongoose.Schema({
     resourceID: Number,
     filePath: String,
     unlockLevel: Number,
+    color: String
 });
 const model = mongoose.model("Resource", Resource);
 

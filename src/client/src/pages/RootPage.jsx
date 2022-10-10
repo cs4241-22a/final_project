@@ -93,7 +93,7 @@ const RootPage = () => {
         <div className="min-h-screen flex flex-row bg-gray-100">
             <Sidebar petName={petName} level={level} onResourceClick={handleResourceClick}/>
             <div className='flex justify-center items-center flex-col w-full gap-4 bg-gray-800'>
-                <Pet hatID={hat} speciesID={species} colorID={color} />
+                <Pet hatID={hat} speciesID={species} colorID={color} onClick={handleClick} />
                 <progress id="file" value={xp} max={xpToNextLevel}> {xp} </progress>
                 <div className="my-4 text-center">
                     <p id="totalXP" className="text-2xl">Total XP: <span className="font-bold text-blue-600">{xp}</span></p>

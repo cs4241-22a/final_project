@@ -47,7 +47,7 @@ const Sidebar = ({ petName, level, onResourceClick }) => {
                     <TabPanel className="grid grid-cols-3 gap-2">
                         {colors.map((color) => {
                             return (
-                                <Resource key={color.resourceID} onClick={() => onResourceClick({ resourceID: color.resourceID, resourceType: color.resourceType })} filePath={color.filePath} />
+                                <Resource key={color.resourceID} onClick={() => onResourceClick({ resourceID: color.color, resourceType: color.resourceType })} filePath={color.filePath} />
                             )
                         })}
                     </TabPanel>
