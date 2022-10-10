@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { Button, Container, Form } from "react-bootstrap";
+
 const verifyInfo = function() {  
     const username = document.getElementById("username").value;
     if(username === "") {
@@ -23,6 +27,7 @@ const verifyInfo = function() {
           "password": pw
         };
         const data = JSON.stringify(json);
+        console.log(data)
 
         fetch("/register", {
             method: "POST",
@@ -32,6 +37,7 @@ const verifyInfo = function() {
             }
         }).then (response => {
             if (!response.ok) {
+                console.log(response)
               throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {
@@ -49,3 +55,35 @@ const verifyInfo = function() {
         });
     }
 }
+
+class Register extends React.Component {
+    render() {
+        return (
+            <Container>
+                <Form.Group className="mb-3" controlId="username">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Username" />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="confirmpassword">
+                    <Form.Label>Confirm password</Form.Label>
+                    <Form.Control type="password" placeholder="Confirm password" />
+                </Form.Group>
+
+                <Button variant="primary" onClick= { verifyInfo }>
+                    Submit
+                </Button>
+
+                <Container id="message"></Container>
+            </Container>
+        );
+    }
+}
+
+var mountNode = document.getElementById("page");
+ReactDOM.render(<Register />, mountNode);

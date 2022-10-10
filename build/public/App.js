@@ -101,11 +101,12 @@ class App extends React.Component {
   }
   render() {
     return /* @__PURE__ */ React.createElement("div", {
-      className: "App",
+      className: "App"
+    }, /* @__PURE__ */ React.createElement(Header, null), /* @__PURE__ */ React.createElement("body", {
       id: "basic"
-    }, /* @__PURE__ */ React.createElement(Header, null), /* @__PURE__ */ React.createElement(Table, {
+    }, /* @__PURE__ */ React.createElement(Table, {
       items: this.state.recipes
-    }));
+    })));
   }
 }
 export default App;

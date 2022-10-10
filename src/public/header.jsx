@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Button, Container, Form, Navbar, Nav } from "react-bootstrap";
   
 class Header extends React.Component {
     render() {
@@ -8,7 +8,8 @@ class Header extends React.Component {
             <Container>
                 <Navbar.Brand href="/">Recipes</Navbar.Brand>
                 <Nav className="justify-content-end">
-                    <Nav.Link href="register" >Register</Nav.Link>
+                    <Button href="login" variant="outline-primary">Log in</Button>
+                    <Button href="register" variant="primary">Sign up</Button>
                 </Nav>
                 
             </Container>

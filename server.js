@@ -4,14 +4,17 @@ const mongoose = require('mongoose');
 const cookie = require('cookie-session');
 require('dotenv').config();
 const path = require('path');
-let recipecollection = null;
-let usercollection = null;
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ limit: '5000mb', extended: true, parameterLimit: 100000000000 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookie({
+    name: 'session',
+    keys: [process.env.KEY1, process.env.KEY2]
+}));
 
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
@@ -83,7 +86,7 @@ app.get('/userdata', async (req, res) => {
 app.post('/login', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-    usercollection.find({ $and: [{ password: { $exists: true } }, { username: user }] }).toArray()
+    User.find({ $and: [{ password: { $exists: true } }, { username: user }] })
         .then(result => {
             if (password === result[0].password) { //only one user/password combo should exist for each user
                 req.session.login = true;
@@ -100,15 +103,16 @@ app.post('/register', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
     
-    usercollection.find({ username: user }).toArray()
+    User.find({ username: user })
         .then(result => {
+            console.log("r " + result)
             if (result.length === 0) {
                 //if username not found create new user and login
                 let user_login = {
                     username: user,
                     password: password
                 };
-                usercollection.insertOne(user_login)
+                User.collection.insertOne(user_login)
                     .then(function () {
                         req.session.login = true;
                         req.session.username = req.body.username;
@@ -137,13 +141,8 @@ app.get('/register', (req, res) => {
 });
 
 // middleware for authentication; should only affect the data modification routes
-app.use(cookie({
-    name: 'session',
-    keys: [process.env.KEY1, process.env.KEY2]
-}));
-
 app.use((req, res, next) => {
-    if (recipecollection !== null && usercollection !== null) {
+    if (Recipe !== null && User !== null) {
         next();
     } else {
         res.status(503).send();
@@ -155,7 +154,7 @@ app.use((req, res, next) => {
 app.post('/add', express.json(), (req, res) => {
     const data = req.body
     data.username = req.session.username
-    recipecollection.insertOne(req.body)
+    Recipe.insertOne(req.body)
         .then(result => res.json(result))
 })
 
