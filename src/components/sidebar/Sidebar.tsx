@@ -11,7 +11,7 @@ export function Sidebar() {
       }}
     >
       <Toolbar />
-      <Box sx={{ overflow: "auto", p: "18px" }}>
+      <Box sx={{ p: "18px" }}>
         <Typography variant="h6" component="div" align="center">
           Players online:
         </Typography>

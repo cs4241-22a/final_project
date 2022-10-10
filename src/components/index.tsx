@@ -1,3 +1,3 @@
-export * from "./Header";
-export * from "./Sidebar";
-export * from "./Canvas";
+export * from "./Header/Header";
+export * from "./Sidebar/Sidebar";
+export * from "./ActiveEmoji/ActiveEmoji";
