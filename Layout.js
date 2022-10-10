@@ -1,34 +1,38 @@
 const layout = {
   canvas: {
-    height: "500",
-    width: "640",
+    height: "510",
+    width: "510",
   },
 
   buttons: {
     position: "absolute",
     left: 640,
     top: 350,
+    width: 9 + "em",
   },
-
-  upbutton: {
-    position: "absolute",
-    left: 60,
+  
+  button: {
+    visibility: "hidden",
   },
-  downbutton: {
-    position: "absolute",
-    left: 62,
-    top: 50,
-  },
-  leftbutton: {
-    position: "absolute",
-    left: 30,
-    top: 25,
-  },
-  rightbutton: {
-    position: "absolute",
-    left: 89,
-    top: 25,
-  },
+  // upbutton: {
+  //   position: "absolute",
+  //   left: 60,
+  // },
+  // downbutton: {
+  //   position: "absolute",
+  //   left: 62,
+  //   top: 50,
+  // },
+  // leftbutton: {
+  //   position: "absolute",
+  //   left: 30,
+  //   top: 25,
+  // },
+  // rightbutton: {
+  //   position: "absolute",
+  //   left: 89,
+  //   top: 25,
+  // },
 
   resetButtons: {
     position: "absolute",

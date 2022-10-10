@@ -8,7 +8,9 @@
 // import {move, reset} from './controller/Controller.js';
 
 
-let [model, setModel] = null;
+// let [model, setModel] = null;
+let model = null
+let setModel = null;
 
 function App() {
   //default to level 1
@@ -38,30 +40,39 @@ function App() {
               height={layout.canvas.height}
               />
 
-      <div style={layout.buttons}>
-          <button style={layout.upbutton} 
+      <div style={layout.buttons} className = "is-flex-direction-row is-flex-wrap-wrap">
+        <button className = "button" 
+                style={layout.button}
+                onClick={(e) => moveHandler(Up)} 
+                disabled={!model.puzzle.canMove(Up)}
+                >a
+        </button>  
+        <button className = "button"
                   onClick={(e) => moveHandler(Up)} 
                   disabled={!model.puzzle.canMove(Up)}
                   >^
-          </button>
-
-          <button style={layout.leftbutton} 
-                  onClick={(e) => moveHandler(Left)} 
-                  disabled={!model.puzzle.canMove(Left)}
-                  >&lt;
-          </button>
-
-          <button style={layout.rightbutton}
-                  onClick={(e) => moveHandler(Right)} 
-                  disabled={!model.puzzle.canMove(Right)} 
-                  >&gt;
-          </button>
-
-          <button style={layout.downbutton} 
-                  onClick={(e) => moveHandler(Down)} 
-                  disabled={!model.puzzle.canMove(Down)} 
-                  >v
-          </button>
+        </button>
+        <button className = "button" 
+                style={layout.button}
+                onClick={(e) => moveHandler(Up)} 
+                disabled={!model.puzzle.canMove(Up)}
+                >a
+        </button> 
+        <button className = "button"
+                onClick={(e) => moveHandler(Left)} 
+                disabled={!model.puzzle.canMove(Left)}
+                >&lt;
+        </button>
+        <button className = "button"
+                onClick={(e) => moveHandler(Down)} 
+                disabled={!model.puzzle.canMove(Down)} 
+                >v
+        </button>
+        <button className = "button"
+                onClick={(e) => moveHandler(Right)} 
+                disabled={!model.puzzle.canMove(Right)} 
+                >&gt;
+        </button>
       </div>
 
       <div style={layout.resetButtons}>
