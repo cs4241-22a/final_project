@@ -146,7 +146,7 @@ function HomePageSection({title, data}) {
     }
     return data.map((item, index) => {
       return (
-        <GroceryItem visible={itemsDeployed} title={item.title} index={index} />
+        <GroceryItem visible={itemsDeployed} title={item.title} index={index} group={title} />
       )
     })
   }
@@ -163,10 +163,17 @@ function HomePageSection({title, data}) {
   )
 }
 
-function GroceryItem({title, index, visible}) {
+function GroceryItem({title, group, index, visible}) {
 
   function deleteItem() {
     console.log("Deleting item: " + title);
+    let body = JSON.stringify({ userId: userId, itemType: group, itemName: title})
+    fetch('remove-item', {
+      method: 'POST',
+      body: body
+    })
+    .then( response => response.json() )
+    .then( json => console.log(json) )
   }
 
   return (
