@@ -42,9 +42,10 @@
             <label for="currProject">Current Project:</label>
             <input type="text" id="currProject" name="currProject" required><br><br>
             <p style="text-align: center;">Mingle or Looking to Date?</p>
-            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="status" value="Mingle" required>
+            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="status" value = "mingle" required>
+<!--        value="Mingle" value="Date"-->
             <label for="mingleStatus">Mingle</label>
-            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="status" value="Date" required>
+            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="status" value="date" required>
             <label for="toDateStatus">Date</label><br><br>
 <!--        </form>-->
     </div>
@@ -58,17 +59,6 @@
             <label for="distSlider">Distance (0 and 20k+ miles): </label>
             <label id="distValue"></label>
             <input style="float: right;" type="range" id="distSlider" name="Distance" min="0" max="20000" step="50" oninput="document.getElementById('distValue').innerHTML = this.value" required /><br><br>
-            <label for="sexualOrientation">Sexual Orientation:</label>
-            <select name="sexualOrientation" id="sexualOrientation" required>
-                <option value="" disabled selected hidden>Choose an option</option>
-                <option value="Gay">Gay</option>
-                <option value="Lesbian">Lesbian</option>
-                <option value="Heterosexual">Heterosexual</option>
-                <option value="Bisexual">Bisexual</option>
-                <option value="Pansexual">Pansexual</option>
-                <option value="Asexual">Asexual</option>
-                <option value="Other">Other</option>
-            </select>
 <!--        </form>-->
     </div>
 </div>
