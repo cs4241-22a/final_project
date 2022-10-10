@@ -5,7 +5,6 @@ import FenParser from '@chess-fu/fen-parser'
 import { makeFen } from 'chessops/fen'
 import { Navigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import { Chess } from 'chessops'
 
 
 export async function playComputerMove(chess, engine, movetime) {
@@ -63,7 +62,6 @@ async function getBestMove(pos, engine, movetime) {
 
 
 
-const size = 500
 
 
 export default function Board(props) {
@@ -81,7 +79,8 @@ export default function Board(props) {
   const [wKnight] = useImage('./pieces/wn.png')
   const [wQueen] = useImage('./pieces/wq.png')
   const [wKing] = useImage('./pieces/wk.png')
-
+  const size = props.dimensions.width * 0.4
+  const squares = generateChessBoard()
 
   function getHover() {
     if (!canMove() || dragging === -1) {
@@ -196,7 +195,6 @@ export default function Board(props) {
     props.endGame()
   }
 
-  const [squares, setSquares] = useState(generateChessBoard())
 
   return (
     props.gameRunning ?

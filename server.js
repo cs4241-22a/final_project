@@ -91,7 +91,7 @@ app.get('/bestmove', cors(), async (req, res) => {
 
   await engine.init()
   await engine.position(fen)
-  const output = await engine.go({ movetime: movetime })
+  const output = await engine.go({ movetime: movetime, depth: 20})
 
   res.json(output)
   res.end()
@@ -106,7 +106,7 @@ app.post(
   }
 )
 
-app.use(connectEnsureLogin.ensureLoggedIn(), express.static('build'))
+app.use(express.static('build'))
 //Server Startup
 console.log(`Starting Server on Port ${process.env.port}`)
 app.listen(process.env.port)
