@@ -19,6 +19,9 @@ export default function App() {
         },
       },
     },
+    zIndex: {
+      drawer: 2,
+    },
   });
 
   return (

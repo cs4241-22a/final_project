@@ -1,10 +1,12 @@
 import React from "react";
-import { Header } from "../components";
+import { Header, Sidebar } from "../components";
+import { Box } from "@mui/material";
 
 export function CanvasScreen() {
   return (
-    <div>
+    <Box sx={{ display: "flex" }}>
       <Header />
-    </div>
+      <Sidebar />
+    </Box>
   );
 }
