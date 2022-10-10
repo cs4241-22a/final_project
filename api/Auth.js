@@ -5,10 +5,21 @@ require('dotenv').config()
 authRouter.use(express.json())
 // authorization
 const jwt = require('jsonwebtoken')
+const auth = require('../middleware/Authorization')
 
 
 // Ideally stored in a database
 let refreshTokens = []
+
+authRouter.get('/game/:authToken', (req, res, next) => {
+    req.headers['authorization'] = req.params.authToken
+    auth(req, res, next)
+    if (req.user) {
+        res.redirect('/game')
+    } else {
+        res.redirect('/login')
+    }
+})
 
 authRouter.post('/login', (req, res) => {
     const username = req.body.username
@@ -34,7 +45,6 @@ authRouter.post('/token', (req, res) => {
         res.json({ accessToken: accessToken })
     })
 })
-
 authRouter.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus(204)

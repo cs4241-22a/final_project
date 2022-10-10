@@ -3,14 +3,21 @@ const jwt = require('jsonwebtoken')
 
 const auth = (req, res, next) => {
     const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
+    const token = authHeader //&& authHeader.split(' ')[1]
     if (token == null) {
-        return res.sendStatus(401)
+        console.log('token == null')
+        return res.json({
+            status: "FAILED",
+            message: "accessToken == null"
+        })
     }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if (err) {
-            return res.sendStatus(403)
+            return res.json({
+                status: "FAILED",
+                message: "Error verifying accessToken"
+            })
         }
         req.user = user
         next()

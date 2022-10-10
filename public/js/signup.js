@@ -15,7 +15,7 @@ signupForm.addEventListener('submit', async e => {
         const signupData = {
             "username": username,
             "password": password,
-            "userdata": JSON.stringify([])
+            "highscore": 0
         }
 
         const response = await fetch('/user/signup', {
@@ -40,5 +40,4 @@ signupForm.addEventListener('submit', async e => {
         alert("passwords Don't match!")
         clearFormPassword()
     }
-
 })

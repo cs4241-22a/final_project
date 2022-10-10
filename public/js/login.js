@@ -24,10 +24,13 @@ loginForm.addEventListener('submit', async e => {
     console.log(responseJSON)
     if (responseJSON.status == "FAILED") {
         alert(responseJSON.message)
-        clearFormPassword()
     }
-    if (responseJSON.status == "SUCCESS") { //TODO
-        window.location.replace('/game')
+
+    if (responseJSON.status == "SUCCESS") {
+        localStorage.setItem('auth', JSON.stringify({ username: responseJSON.username, accessToken: responseJSON.accessToken }))
+
+        //TODO
+        window.location = `/auth/game/${responseJSON.accessToken}`
     }
 
 })

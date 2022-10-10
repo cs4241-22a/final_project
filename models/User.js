@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     username: String,
     password: String,
-    userdata: String
+    highscore: Number
 })
 
 const User = mongoose.model('User', UserSchema)

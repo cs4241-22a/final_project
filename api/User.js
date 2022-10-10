@@ -8,6 +8,7 @@ userRouter.use(express.json())
 
 // authorization
 const jwt = require('jsonwebtoken')
+const auth = require('./../middleware/Authorization')
 // Password handler
 const argon2 = require('argon2')
 //mongoDB User model
@@ -53,7 +54,7 @@ userRouter.post('/signup', (req, res) => {
                     const newUser = new User({ //create a new user (mongoose.model)
                         username,
                         password: hashedPassword,
-                        userdata
+                        highscore: 0
                     })
 
                     newUser.save().then(result => { //saves to database using mongoose
@@ -84,7 +85,7 @@ userRouter.post('/signup', (req, res) => {
         })
     }
 })
-// Signin
+// Login
 userRouter.post('/login', (req, res) => {
     // Getting username & password from the request
     let { username, password } = req.body;
@@ -129,7 +130,6 @@ userRouter.post('/login', (req, res) => {
                                 status: "FAILED",
                                 message: "An error occured while comparing passwords"
                             })
-
                         })
                 } else {
                     res.json({
@@ -146,5 +146,12 @@ userRouter.post('/login', (req, res) => {
             })
     }
 })
+// set highscore 
+userRouter.post('/setHighscore', (req, res) => {
+    const { username, accessToken, score } = req.body
+
+
+})
+
 
 module.exports = userRouter; 

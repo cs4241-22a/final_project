@@ -7,7 +7,8 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn')
 const UserRouter = require('./api/User')
 const AuthRouter = require('./api/Auth')
-const auth = require('./middleware/authenticate')
+const LeaderboardRouter = require('./api/Leaderboard')
+const auth = require('./middleware/Authorization')
 
 // INIT
 
@@ -18,6 +19,7 @@ app.use(bodyParser())
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.json())
+
 
 
 //Routes
@@ -37,19 +39,21 @@ app.get('/signup', (req, res) => { // changed createaccount to signup cause that
     res.render('signup')
 })
 // leaderboard page
-app.get('/leaderboard', auth, (req, res) => {
+app.get('/leaderboard', (req, res) => {
     console.log(req.user)
     res.render('leaderboard') // will change when these pages exist
 })
 // game page
-app.get('/game', auth, (req, res) => {
-    console.log(req.user)
-    res.render('game') // will change when these pages exist
+app.get('/game', (req, res) => {
+    res.render('game')
 })
 // Users route
 app.use('/user', UserRouter)
 // Auth route
 app.use('/auth', AuthRouter)
+// Leaderboard route
+app.use('/leaderboard', LeaderboardRouter)
+
 
 // connect to database, ASK ME FOR THE ENV VARIABLES OR THIS WILL NOT WORK!!, 
 // if you do not need to test w/ database then comment out this code

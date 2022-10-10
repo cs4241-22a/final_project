@@ -31,7 +31,11 @@ const api = {
             desc: 'serves game page'
         },
         {
-            '/getLeaderboard': { res: "array of scores" },
+            '/leaderboard/getLeaderboard': {
+                res: {
+                    body: ["array of {username: String, score: Number}"]
+                }
+            },
             desc: 'gets leaderboard info from mongoDB'
         }
 
@@ -102,6 +106,17 @@ const api = {
                     }
                 }
             }
+        },
+        {
+            '/leaderboard/submitScore': {
+                req: {
+                    body: {
+                        username: String,
+                        accessToken: String,
+                        score: Number
+                    }
+                }
+            }
         }
     ],
     'DELETE': [
@@ -124,7 +139,7 @@ const api = {
 const User = {
     username: String,
     password: String,
-    highscore: int
+    highscore: Number
 }
 const Leaderboard = {
     leaderboard: String, // where String is array [{username: String, score: Int}, {username: String, score: Int}]
