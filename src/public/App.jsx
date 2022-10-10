@@ -127,9 +127,12 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App" id='basic'>
+            <div className="App">
                 <Header />
-                <Table items={this.state.recipes} />
+                {/* originally id was in the App div, but want the header to span entire page */}
+                <body id='basic'>
+                    <Table items={this.state.recipes} />
+                </body>
             </div>
         );
     }
