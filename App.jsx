@@ -54,8 +54,6 @@ function App() {
   return(
     <main ref={appRef} onKeyDown={(e) => keyHandler(e)}>
       <canvas tabIndex="1"
-              className="App-canvas"
-              data-testid="canvas"
               ref={canvasRef}
               width={layout.canvas.width}
               height={layout.canvas.height}
@@ -87,15 +85,15 @@ function App() {
           </button>
       </div>
 
-      <div style={layout.resetButtons} class="">
-        <label class="box">
+      <div style={layout.resetButtons}>
+        <label className="box">
                 {"number of moves: " + model.numMoves}
         </label>
-        <button class="button is-danger" 
+        <button className="button is-danger" 
                 onClick={(e) => resetHandler()} 
                 >Reset
         </button>
-        <button class="button is-danger" 
+        <button className="button is-info" 
                 //onClick={(e) => resetHandler()} 
                 >Start Timer
         </button>

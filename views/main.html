@@ -14,9 +14,29 @@
   <body class="hero has-background-warning-light is-fullheight py-2">
     <main class="container is-fluid has-background-warning-light">
       <div class="container has-background-warning box">
-        <div id="root"></div>
+        <div id="root"></div> <!-- THIS IS OUR CANVAS STARTING POINT -->
+        <button class="js-modal-trigger" data-target="instructions">
+          Instructions
+        </button>
       </div>
     </main>
+    
+    <div id="instructions" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <p class="is-size-3"><b>Instructions:</b></p>
+          <p class="my-3 mx-5">You can use the arrow keys or the on screen buttons to move the character.
+          The goal is to push each pair of matching colored blocks together to remove them from the board. <br>You may not push more than one block at a time,
+          and the goal is to clear the board in as few moves as possible.</p>
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    
+    
   </body>
   <script>
     const add = function (e) {
@@ -52,6 +72,54 @@
 
       return false;
     };
+    
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Functions to open and close a modal
+      function openModal($el) {
+        $el.classList.add('is-active');
+      }
+
+      function closeModal($el) {
+        $el.classList.remove('is-active');
+      }
+
+      function closeAllModals() {
+        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+          closeModal($modal);
+        });
+      }
+
+      // Add a click event on buttons to open a specific modal
+      (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+        const modal = $trigger.dataset.target;
+        const $target = document.getElementById(modal);
+
+        $trigger.addEventListener('click', () => {
+          openModal($target);
+        });
+      });
+
+      // Add a click event on various child elements to close the parent modal
+      (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
+          closeModal($target);
+        });
+      });
+
+      // Add a keyboard event to close all modals
+      document.addEventListener('keydown', (event) => {
+        const e = event || window.event;
+
+        if (e.keyCode === 27) { // Escape key
+          closeAllModals();
+        }
+      });
+    });
+    
+    const instBtn = document.getElementById("instBtn");
     
     window.onload = function () {
       // const button = document.getElementById("formButton");
@@ -132,7 +200,7 @@
 //         // do something with the reponse
 //         updateTable();
 //       });
-    }
+    
   </script>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>

@@ -1,8 +1,7 @@
 const LEVELOFFSETH = 5;
 const BOXSIZE = 50;
 const OFFSET = 3;
-
-
+var isDraw = false;
 
 class Rectangle {
     constructor(x, y, width, height) {
@@ -39,7 +38,7 @@ function redrawCanvas(model, canvasObj, appObj) {
     ctx.clearRect(0,0,canvasObj.width, canvasObj.height)
   
     if (model.puzzle && !model.victory) {
-
+        isDraw = false;
         drawPuzzle(ctx, model.puzzle);
     }
     else {
@@ -65,7 +64,11 @@ function drawPuzzle(ctx, puzzle) {
 
     let rect = computeRectangle(puzzle.player);
     img.onload = function() {
-        ctx.drawImage(img, 400, 150, 1200, 1200, rect.x, rect.y, rect.width, rect.height);
+        if (!isDraw) {
+        
+            ctx.drawImage(img, 400, 150, 1200, 1200, rect.x, rect.y, rect.width, rect.height);
+            isDraw = true
+        }
     }
 }
 
