@@ -1,6 +1,25 @@
 import Logo from "../assets/images/logo.svg";
+import {useState, useEffect} from "react";
+
+const exampleData = [{
+  title: "Eggs",
+  quantity: 1
+},
+{
+  title: "Milk",
+  quantity: 1
+},
+{
+  title: "Sugar",
+  quantity: 1
+},
+{
+  title: "Coffee",
+  quantity: 2
+}];
 
 export default function HomePage() {
+
   return (
     <div className="home-page-container">
       <Topbar />
@@ -36,26 +55,84 @@ function Topbar() {
 }
 
 function Sections() {
+
+  const [cannedJarredData, setCannedJarredData] = useState(null);
+  const [dairyData, setDairyData] = useState(null);
+  const [dryBakingData, setDryBakingDataData] = useState(null);
+  const [frozenData, setFrozenData] = useState(null);
+  const [grainsData, setGrainsData] = useState(null);
+  const [meatData, setMeatData] = useState(null);
+  const [produceData, setProduceData] = useState(null);
+  const [otherData, setOtherData] = useState(null);
+
+  useEffect(() => {
+
+    async function fetchUserData() {
+      setCannedJarredData(exampleData);
+      setDairyData(exampleData);
+      setDryBakingDataData(exampleData);
+      setFrozenData(exampleData);
+      setGrainsData(exampleData);
+      setMeatData(exampleData);
+      setProduceData(exampleData);
+      setOtherData(exampleData);
+    }
+
+    fetchUserData();
+  }, []) 
+
   return (
     <div className="home-page-sections">
-      <HomePageSection title="Canned / Jarred Goods" />
-      <HomePageSection title="Dairy" />
-      <HomePageSection title="Dry / Baking Goods" />
-      <HomePageSection title="Frozen" />
-      <HomePageSection title="Grains" />
-      <HomePageSection title="Meat" />
-      <HomePageSection title="Produce" />
-      <HomePageSection title="Other" />
+      <HomePageSection data={cannedJarredData} title="Canned / Jarred Goods" />
+      <HomePageSection data={dairyData} title="Dairy" />
+      <HomePageSection data={dryBakingData} title="Dry / Baking Goods" />
+      <HomePageSection data={frozenData} title="Frozen" />
+      <HomePageSection data={grainsData} title="Grains" />
+      <HomePageSection data={meatData} title="Meat" />
+      <HomePageSection data={produceData} title="Produce" />
+      <HomePageSection data={otherData} title="Other" />
     </div>
   )
 }
 
-function HomePageSection({title}) {
+function HomePageSection({title, data}) {
+
+  const [itemsDeployed, setItemsDeployed] = useState(false);
+
+  function toggleItems() {
+    setItemsDeployed(!itemsDeployed);
+  }
+
+  function renderGroceryItems() {
+    if (!data) {
+      return <div></div>
+    }
+    return data.map((item, index) => {
+      return (
+        <GroceryItem visible={itemsDeployed} title={item.title} index={index} />
+      )
+    })
+  }
+
   return (
-    <section>
-      <button className="m-2 btn btn-secondary section-header">
+    <section onClick={() => {toggleItems()}}>
+      <button className={"m-2 btn section-header" + (itemsDeployed ? " btn-primary" : " btn-secondary")}>
         {title}
       </button>
+      <ul className="grocery-items">
+        {renderGroceryItems()}
+      </ul>
     </section>
+  )
+}
+
+function GroceryItem({title, index, visible}) {
+  return (
+    <li key={index} className={"grocery-item-container " + (visible ? "" : "hidden")}>
+      <div className="text">
+        <p>{title}</p>
+      </div>
+      <button type="button" className="btn-close" ariaLabel="Close"></button>
+    </li>
   )
 }
