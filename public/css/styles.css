@@ -1,5 +1,53 @@
-
 .UpgradePanelBackground{
 	background-color: orange;
 	min-width: 400px;
+	border: solid #a97006 0.1em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
 }
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #FFF}
+
+
+.main-table > tr {
+	background-color: orange;
+}
+
+.img-fluid {
+	max-height: 70vh;
+}
+
+
+.main-table > tr > div > label:nth-child(2) {
+	padding-right: 1em;
+	padding-left: 1em;
+	font-weight: bold;
+}
+
+
+/*CSS Grid stuff*/
+.container-foo {  display: grid;
+	grid-template-columns: 1fr 0.5fr 1.5fr;
+	grid-template-rows: min-content min-content min-content;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+    "clicker clicker upgrades"
+    "clicker clicker upgrades"
+    "footer footer footer";
+}
+
+.clicker {
+	justify-self: center;
+	align-self: start;
+	grid-area: clicker;
+}
+
+.upgrades {
+	justify-self: center;
+	align-self: start;
+	grid-area: upgrades;
+}
+
+.footer { grid-area: footer; }

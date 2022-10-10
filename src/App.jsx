@@ -159,178 +159,185 @@ class App extends React.Component {
 				<>
 					<body>
 						<h1>Gompei Clicker</h1>
-						<p>
-							Score: <span id="score">{this.state.score}</span> Click Damage:{" "}
-							<span id="click-damage">{this.state.clickDamage}</span> Passive
-							Damage:{" "}
-							<span id="passive-damage">{this.state.passiveDamage}</span>{" "}
-						</p>
-						<img
-							src="/gompei.png"
-							height="256px"
-							width="256px"
-							alt="Gompei"
-							onClick={(e) => this.addToScore()}
-						/>
+						<div className={'container-foo'}>
+							<div className={'clicker'}>
+								<p>
+									Score: <span id="score">{this.state.score}</span> Click Damage:{" "}
+									<span id="click-damage">{this.state.clickDamage}</span> Passive
+									Damage:{" "}
+									<span id="passive-damage">{this.state.passiveDamage}</span>{" "}
+								</p>
+								<img
+									src="/gompei.png"
+									alt="Gompei"
+									onClick={(e) => this.addToScore()}
+									className={'img-fluid'}
+								/>
+							</div>
 
-						<table>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Campus Center Lunch "
-									val={this.state.lunchCost}
-									onClick={(e) => this.buyLunch()}
-									enabled={this.state.score >= this.state.lunchCost}
-									img="/Sandwich-Free-PNG-Image.png"
+							<div className={'upgrades'}>
+								<table className={'main-table'}>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Campus Center Lunch "
+										val={this.state.lunchCost}
+										onClick={(e) => this.buyLunch()}
+										enabled={this.state.score >= this.state.lunchCost}
+										img="/Sandwich-Free-PNG-Image.png"
 
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Hay "
-									val={this.state.hayCost}
-									onClick={(e) => this.buyHay()}
-									enabled={this.state.score >= this.state.hayCost}
-									img="/NicePng_hay-bale-png_569882.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy MASH "
-									val={this.state.mashCost}
-									onClick={(e) => this.buyMash()}
-									enabled={this.state.score >= this.state.mashCost}
-									img="/science-clipart-transparent-7.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Textbook "
-									val={this.state.textbookCost}
-									onClick={(e) => this.buyTextbook()}
-									enabled={this.state.score >= this.state.textbookCost}
-									img="/PngItem_5004460.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Grass "
-									val={this.state.grassCost}
-									onClick={(e) => this.buyGrass()}
-									enabled={this.state.score >= this.state.grassCost}
-									img="/PngItem_33323.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Office Hours "
-									val={this.state.officehoursCost}
-									onClick={(e) => this.buyOfficeHours()}
-									enabled={this.state.score >= this.state.officehoursCost}
-									img="/PngItem_2021146.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Study "
-									val={this.state.studyCost}
-									onClick={(e) => this.buyStudy()}
-									enabled={this.state.score >= this.state.studyCost}
-									img="/lamp-35398.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Meditate "
-									val={this.state.meditateCost}
-									onClick={(e) => this.buyMeditate()}
-									enabled={this.state.score >= this.state.meditateCost}
-									img="/Meditation-Transparent.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text=" Buy Dunkin "
-									val={this.state.dunkinCost}
-									onClick={(e) => this.buyDunkin()}
-									enabled={this.state.score >= this.state.dunkinCost}
-									img="/clipart170161.png"
-								/>
-							</tr>
-							<tr>
-								{" "}
-								<UpgradePanel
-									text="Buy Review "
-									val={this.state.reviewCost}
-									onClick={(e) => this.buyReview()}
-									enabled={this.state.score >= this.state.reviewCost}
-									img="/pencil-16217.png"
-								/>
-							</tr>
-						</table>
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Hay "
+										val={this.state.hayCost}
+										onClick={(e) => this.buyHay()}
+										enabled={this.state.score >= this.state.hayCost}
+										img="/NicePng_hay-bale-png_569882.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy MASH "
+										val={this.state.mashCost}
+										onClick={(e) => this.buyMash()}
+										enabled={this.state.score >= this.state.mashCost}
+										img="/science-clipart-transparent-7.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Textbook "
+										val={this.state.textbookCost}
+										onClick={(e) => this.buyTextbook()}
+										enabled={this.state.score >= this.state.textbookCost}
+										img="/PngItem_5004460.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Grass "
+										val={this.state.grassCost}
+										onClick={(e) => this.buyGrass()}
+										enabled={this.state.score >= this.state.grassCost}
+										img="/PngItem_33323.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Office Hours "
+										val={this.state.officehoursCost}
+										onClick={(e) => this.buyOfficeHours()}
+										enabled={this.state.score >= this.state.officehoursCost}
+										img="/PngItem_2021146.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Study "
+										val={this.state.studyCost}
+										onClick={(e) => this.buyStudy()}
+										enabled={this.state.score >= this.state.studyCost}
+										img="/lamp-35398.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Meditate "
+										val={this.state.meditateCost}
+										onClick={(e) => this.buyMeditate()}
+										enabled={this.state.score >= this.state.meditateCost}
+										img="/Meditation-Transparent.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text=" Buy Dunkin "
+										val={this.state.dunkinCost}
+										onClick={(e) => this.buyDunkin()}
+										enabled={this.state.score >= this.state.dunkinCost}
+										img="/clipart170161.png"
+									/>
+								</tr>
+								<tr>
+									{" "}
+									<UpgradePanel
+										text="Buy Review "
+										val={this.state.reviewCost}
+										onClick={(e) => this.buyReview()}
+										enabled={this.state.score >= this.state.reviewCost}
+										img="/pencil-16217.png"
+									/>
+								</tr>
+							</table>
+							</div>
 
-						<button onClick={() => this.save()}>Save</button>
-						<button onClick={() => this.reloadLeaderboard()}>
-							{" "}
-							Refresh Leaderboard{" "}
-						</button>
-						<button
-							onClick={function () {
-								fetch("/logout", {
-									method: "POST",
-								})
-									.then((res) => res.json())
-									.then((location) => {
-										window.location.href = location.url; //index
-									});
-							}}
-						>
-							Logout
-						</button>
-						<LeaderBoard scores={this.state.leaderboard} />
+							<div className={'footer'}>
+								<button onClick={() => this.save()}>Save</button>
+								<button onClick={() => this.reloadLeaderboard()}>
+									{" "}
+									Refresh Leaderboard{" "}
+								</button>
+								<button
+									onClick={function () {
+										fetch("/logout", {
+											method: "POST",
+										})
+											.then((res) => res.json())
+											.then((location) => {
+												window.location.href = location.url; //index
+											});
+									}}
+								>
+									Logout
+								</button>
+								<LeaderBoard scores={this.state.leaderboard} />
 
-						<p>
-							Upgrades:
-							<br />
-							Buy Campus Center Lunch - Gompei will go to the Campus Center and
-							grab a bite to eat, increasing his click strength by 1.
-							<br />
-							Buy Hay - Gompei will go to his hay dealer and buy some hay,
-							increasing his passive click strength by 1.
-							<br />
-							Buy MASH - Gompei will attend a MASH session, teaching him how to
-							do his Calc IV homework, increasing his click strength by 25.
-							<br />
-							Buy Textbook - Gompei will *buy* his course textbook, increasing
-							his passive click strength by 10.
-							<br />
-							Buy Grass - Gompei eats some of the grass on the Quad, increasing
-							his click strength by 75.
-							<br />
-							Buy Office Hours - Gompei will attend Noelle's and Kyle's office
-							hour and they help him fix his bug, increasing his passive click
-							strength by 35
-							<br />
-							Buy Study - Gompei takes some time to study for his next Physics
-							Exam, increasing his click strength by 500.
-							<br />
-							Buy Meditate - Gompei meditates reducing his stress, increasing
-							his passive click strength by 300.
-							<br />
-							Buy Dukin - Gompei buys Dunkin Donuts through the mobile app,
-							increasing his click strength by 15000.
-							<br />
-							Buy Review - Gompei makes a review guide for his history exam,
-							incrasing his passive click strength by 10000.
-						</p>
+								<p>
+									Upgrades:
+									<br />
+									Buy Campus Center Lunch - Gompei will go to the Campus Center and
+									grab a bite to eat, increasing his click strength by 1.
+									<br />
+									Buy Hay - Gompei will go to his hay dealer and buy some hay,
+									increasing his passive click strength by 1.
+									<br />
+									Buy MASH - Gompei will attend a MASH session, teaching him how to
+									do his Calc IV homework, increasing his click strength by 25.
+									<br />
+									Buy Textbook - Gompei will *buy* his course textbook, increasing
+									his passive click strength by 10.
+									<br />
+									Buy Grass - Gompei eats some of the grass on the Quad, increasing
+									his click strength by 75.
+									<br />
+									Buy Office Hours - Gompei will attend Noelle's and Kyle's office
+									hour and they help him fix his bug, increasing his passive click
+									strength by 35
+									<br />
+									Buy Study - Gompei takes some time to study for his next Physics
+									Exam, increasing his click strength by 500.
+									<br />
+									Buy Meditate - Gompei meditates reducing his stress, increasing
+									his passive click strength by 300.
+									<br />
+									Buy Dukin - Gompei buys Dunkin Donuts through the mobile app,
+									increasing his click strength by 15000.
+									<br />
+									Buy Review - Gompei makes a review guide for his history exam,
+									incrasing his passive click strength by 10000.
+								</p>
+							</div>
+						</div>
 					</body>
 				</>
 			);
