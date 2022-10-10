@@ -2,6 +2,17 @@ import Logo from "../assets/images/logo.svg";
 import xImage from "../assets/images/x.png";
 import {useState, useEffect} from "react";
 
+const itemTypes = {
+  CANNEDJARRED: "canned-jarred",
+  DAIRY: "dairy",
+  DRYBAKING: "dry-baking",
+  FROZEN: "frozen",
+  GRAINS: "grains",
+  MEAT: "meat",
+  PRODUCE: "produce",
+  OTHER: "other",
+}
+
 const exampleData = [{
   title: "Eggs",
   quantity: 1
