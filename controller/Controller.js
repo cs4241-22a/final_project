@@ -5,6 +5,7 @@ function move(model, dir) {
 
         model.puzzle.move(dir);
         model.numMoves += 1;
+        model.isWin();
         return model.copy();
     }
     else return model;
