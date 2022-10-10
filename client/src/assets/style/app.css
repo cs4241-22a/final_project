@@ -178,6 +178,9 @@ label {
   color: #479343;
   font-weight: 700;
 }
+.error {
+  color: red;
+}
 .logo {
   width: 200px;
   height: 200px;
