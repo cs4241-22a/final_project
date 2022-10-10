@@ -7,14 +7,16 @@
 
 </head>
 <body>
-<h1 style="background-color: rgba(245, 245, 220, 0.8)">GitHub(by) Express</h1>
 <form>
-    <div>
-        <a href="javascript:void(0)" class="collapseBtn" onClick="closeNav()">&times;</a>
+    <div id="sideNavBar" class="sidenav">
+        <a href="javascript:void(0)" class="collapseBtn" onclick="closeNav()">&times;</a>
+        <p id="loggedIn"></p>
         <a href=#home>Home</a>
-        <a href="profile.html>">Profile</a>
+        <a href="/main.html">Main</a>
+        <a href="/profile.html>">Profile</a>
     </div>
-    <span style="font-size:30px;cursor:pointer" onClick="openNav()">&#9776;</span>
+    <span style="font-size:30px;cursor:pointer;color: white" onclick="openNav()">&#9776;</span>
+    <h1 style="background-color: rgba(245, 245, 220, 0.8)">GitHub(by) Express</h1>
 <div class="row">
     <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
         <h2 style="text-align: center;">Personal Information</h2>
@@ -29,6 +31,7 @@
             <input type="text" id="email" name="email" required><br><br>
             <label for="ageSlider">Age (between 0 and 60+):</label>
             <input style="float: right;" type="range" id="ageSlider" name="Age" min="0" max="60" step="1" required /><br><br>
+            
 <!--        </form>-->
     </div>
     <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
