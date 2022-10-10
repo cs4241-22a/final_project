@@ -43,19 +43,18 @@ const Stats = () =>
   function changeto( dataset )
   {
     let pie = document.getElementById("piechart");
-    if( dataset === "stockfish" ) { pie.data = {stockfish_data}; }
-    if( dataset === "leela"     ) { pie.data =     {leela_data}; }
-    if( dataset === "komodo"    ) { pie.data =    {komodo_data}; }
+    if( dataset === "stockfish" ) { pie.dataset.state = {stockfish_data}; }
+    if( dataset === "leela"     ) { pie.dataset.state =     {leela_data}; }
+    if( dataset === "komodo"    ) { pie.dataset.state =    {komodo_data}; }
   };
   return (
     <div>
-      <script src="https://d3js.org/d3.v4.js"></script>
       <h1>Stats for "user"</h1>
       <p>Gather stats from games played</p>
       <button onClick={ function(e) { changeto("stockfish") } }>Stockfish</button>
       <button onClick={ function(e) { changeto("leela") } }>Leela</button>
       <button onClick={ function(e) { changeto("komodo") } }>Komodo</button>
-      <Pie id="piechart" data={stockfish_data} />
+      <Pie id="piechart" data-state="stockfish_data" data={this.dataset.state} />
       {/*<p>Pie chart for all games, wins/loss/draws</p>
       <p>Pie chart for games vs Stockfish, wins/loss/draws</p>
       <p>Pie chart for games vs Leela, wins/loss/draws</p>

@@ -77,7 +77,7 @@ export default function App(props) {
               path="/play"
               element={
                 <div className="row">
-                  <div className="mx-auto">
+                  <div className="w-75 mx-auto">
                     <Board
                       game={game}
                       flipTurn={() => setTurn(game.turn)}
