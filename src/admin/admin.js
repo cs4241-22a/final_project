@@ -29,7 +29,7 @@ const addClimb = function(e) {
         section = document.querySelector( '#section' ),
         type = document.querySelector( '#type' )
 
-    const gradeValue = grade.value,
+    const gradeValue = grade.value.toUpperCase(),
         colorValue = color[color.selectedIndex].value,
         sectionValue = section[section.selectedIndex].value
 
