@@ -20,7 +20,7 @@ const Sidebar = ({ petName, level, onResourceClick }) => {
                 console.log(error);
             })
         })
-    }, [])
+    }, [level])
 
 
     return (

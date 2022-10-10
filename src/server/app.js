@@ -48,12 +48,12 @@ passport.use(
                 const defaultPet = new Pet({
                     githubUsername: profile._json.login,
                     name: getRandomName(),
-                    color:0,
-                    hat:0,
+                    color:"gray",
+                    hat:-1,
                     level:1,
                     xp:0,
                     species:0,
-                    xpToNextLevel:100,
+                    xpToNextLevel:20,
                 });
                 await defaultPet.save();
             }
