@@ -48,36 +48,34 @@ app.use(helmet({
 app.get("/user-data", (req, resp) => {
     // Fetch user data from DB
 
-    const sessionId = req.cookies.session;
+    const sessionId = req.cookies.session.substring(1);
     const userId = sessions.get(sessionId);
     if (!userId) {
         resp.status(401);
         resp.end();
     }
-    console.log("Session valid. gettign user data")
-
+    console.log("Session valid. getting user data")
     client.connect((err, client) => {
         if (err) {
             throw err;
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
+            db.collection("users").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
                     // Found user document
                     const body = {
-                        cannedJarredData: res.cannedJarredData,
-                        dairyData: res.dairyData,
-                        dryBakingData: res.dryBakingData,
-                        frozenData: res.frozenData,
-                        grainsData: res.grainsData,
-                        meatData: res.meatData,
-                        produceData: res.produceData,
-                        otherData: res.otherData
+                        cannedJarredData: res.userData.cannedJarredData,
+                        dairyData: res.userData.dairyData,
+                        dryBakingData: res.userData.dryBakingData,
+                        frozenData: res.userData.frozenData,
+                        grainsData: res.userData.grainsData,
+                        meatData: res.userData.meatData,
+                        produceData: res.userData.produceData,
+                        otherData: res.userData.otherData
                     }
-                    console.log(body)
                     resp.json(JSON.stringify(body));
                     resp.status(200);
                     resp.end();
@@ -93,7 +91,7 @@ app.post("/add-item", (req, resp) => {
         resp.end();
     }
 
-    const sessionId = req.cookies.session;
+    const sessionId = req.cookies.session.substring(1);
     const userId = sessions.get(sessionId);
     if (!userId) {
         resp.status(401);
@@ -107,7 +105,7 @@ app.post("/add-item", (req, resp) => {
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
+            db.collection("users").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
@@ -117,36 +115,36 @@ app.post("/add-item", (req, resp) => {
                     let field = null;
                     switch(data.itemType) {
                         case itemTypes.CANNEDJARRED:
-                            array = res.cannedJarredData;
-                            field = "cannedJarredData";
+                            array = res.userData.cannedJarredData;
+                            field = "userData.cannedJarredData";
                             break;
                         case itemTypes.DAIRY:
-                            array = res.dairyData;
-                            field = "dairyData";
+                            array = res.userData.dairyData;
+                            field = "userData.dairyData";
                             break;
                         case itemTypes.DRYBAKING:
-                            array = res.dryBakingData;
-                            field = "dryBakingData";
+                            array = res.userData.dryBakingData;
+                            field = "userData.dryBakingData";
                             break;
                         case itemTypes.FROZEN:
-                            array = res.frozenData;
-                            field = "frozenData";
+                            array = res.userData.frozenData;
+                            field = "userData.frozenData";
                             break;
                         case itemTypes.GRAINS:
-                            array = res.grainsData;
-                            field = "grainsData";
+                            array = res.userData.grainsData;
+                            field = "userData.grainsData";
                             break;
                         case itemTypes.MEAT:
-                            array = res.meatData;
-                            field = "meatData";
+                            array = res.userData.meatData;
+                            field = "userData.meatData";
                             break;
                         case itemTypes.PRODUCE:
-                            array = res.produceData;
-                            field = "produceData";
+                            array = res.userData.produceData;
+                            field = "userData.produceData";
                             break;
                         case itemTypes.OTHER:
-                            array = res.otherData;
-                            field = "otherData";
+                            array = res.userData.otherData;
+                            field = "userData.otherData";
                             break;
                         default:
                             array = null;
@@ -157,7 +155,7 @@ app.post("/add-item", (req, resp) => {
                         resp.end();
                     }
                     array.push(data.itemName);
-                    db.collection("users").updateOne({"_id": new ObjectId(data.userId)}, { $set: {field: array} }, (err, result) => {
+                    db.collection("users").updateOne({"_id": userId}, { $set: {field: array} }, (err, result) => {
                         if (err) {
                             throw err;
                         } else {
@@ -180,7 +178,7 @@ app.post("/remove-item", (req, resp) => {
         resp.end();
     }
 
-    const sessionId = req.cookies.session;
+    const sessionId = req.cookies.session.substring(1);
     const userId = sessions.get(sessionId);
     if (!userId) {
         resp.status(401);
@@ -194,7 +192,7 @@ app.post("/remove-item", (req, resp) => {
         } else {
             // If DB connection is successful
             const db = client.db("database");
-            db.collection("data").findOne({"_id": userId}, {}, (err, res) => {
+            db.collection("users").findOne({"_id": userId}, {}, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
@@ -204,36 +202,36 @@ app.post("/remove-item", (req, resp) => {
                     let field = null;
                     switch(data.itemType) {
                         case itemTypes.CANNEDJARRED:
-                            array = res.cannedJarredData;
-                            field = "cannedJarredData";
+                            array = res.userData.cannedJarredData;
+                            field = "userData.cannedJarredData";
                             break;
                         case itemTypes.DAIRY:
-                            array = res.dairyData;
-                            field = "dairyData";
+                            array = res.userData.dairyData;
+                            field = "userData.dairyData";
                             break;
                         case itemTypes.DRYBAKING:
-                            array = res.dryBakingData;
-                            field = "dryBakingData";
+                            array = res.userData.dryBakingData;
+                            field = "userData.dryBakingData";
                             break;
                         case itemTypes.FROZEN:
-                            array = res.frozenData;
-                            field = "frozenData";
+                            array = res.userData.frozenData;
+                            field = "userData.frozenData";
                             break;
                         case itemTypes.GRAINS:
-                            array = res.grainsData;
-                            field = "grainsData";
+                            array = res.userData.grainsData;
+                            field = "userData.grainsData";
                             break;
                         case itemTypes.MEAT:
-                            array = res.meatData;
-                            field = "meatData";
+                            array = res.userData.meatData;
+                            field = "userData.meatData";
                             break;
                         case itemTypes.PRODUCE:
-                            array = res.produceData;
-                            field = "produceData";
+                            array = res.userData.produceData;
+                            field = "userData.produceData";
                             break;
                         case itemTypes.OTHER:
-                            array = res.otherData;
-                            field = "otherData";
+                            array = res.userData.otherData;
+                            field = "userData.otherData";
                             break;
                         default:
                             array = null;
@@ -244,7 +242,7 @@ app.post("/remove-item", (req, resp) => {
                         resp.end();
                     }
                     array = array.filter(i => i !== data.itemName);
-                    db.collection("users").updateOne({"_id": new ObjectId(data.userId)}, { $set: {field: array} }, (err, result) => {
+                    db.collection("users").updateOne({"_id": userId}, { $set: {field: array} }, (err, result) => {
                         if (err) {
                             throw err;
                         } else {
@@ -287,6 +285,7 @@ app.post("/login", (req, resp) => {
                                 sessions.set(sessionId, res._id);
                                 resp.set("Set-Cookie", 'session=$' + sessionId);
                                 resp.json(JSON.stringify(body));
+                                console.log("user authenticated");
                                 resp.end();
                             } else {
                                 const body = {
@@ -335,22 +334,32 @@ app.post("/register", (req, resp) => {
                             // Hash pass
                             const newUser = {
                                 email: data.email,
-                                password: hash
+                                password: hash,
+                                userData: {
+                                    cannedJarredData: [],
+                                    dairyData: [],
+                                    dryBakingData: [],
+                                    frozenData: [],
+                                    grainsData: [],
+                                    meatData: [],
+                                    produceData: [],
+                                    otherData: []
+                                }
                             }
                             db.collection("users").insertOne(newUser, (err, res) => {
                                 // Insert to DB
                                 if (err) {
                                     throw err;
                                 } else {
-                                    console.log("New user sent to database!");
+                                    console.log("New user data sent to database!");
                                     const body = {
                                         error: false,
                                     }
                                     resp.json(JSON.stringify(body));
                                     resp.end();
                                 }
-                            })
-                        });
+                            });
+                        })
                     }
                 }
             })

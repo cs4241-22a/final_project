@@ -103,7 +103,7 @@ function Sections() {
         method: 'GET'
       })
         .then( (response) => {
-          if (response.statusCode === 200) {
+          if (response.status === 200) {
             response.json().then( json => {
               setCannedJarredData(json.cannedJarredData);
               setDairyData(json.dairyData);
