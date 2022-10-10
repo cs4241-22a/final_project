@@ -7,9 +7,12 @@
 // import {Up, Down, Left, Right} from './model/Model.js';
 // import {move, reset} from './controller/Controller.js';
 
+
+let [model, setModel] = null;
+
 function App() {
   //default to level 1
-  const [model, setModel] = React.useState(new Model(level1));
+  [model, setModel] = React.useState(new Model(level1));
   const appRef = React.useRef(null);
   const canvasRef = React.useRef(null);
 
@@ -27,39 +30,15 @@ function App() {
         setModel(newModel);
   }
 
-  const keyHandler = (event) => {
-        //console.log(event.keyCode);
-        let newModel;
-        switch (event.keyCode) {
-                case 38:
-                        newModel = move(model, Up);
-                        break;
-                case 39:
-                        newModel = move(model, Right);
-                        break;
-                case 37:
-                        newModel = move(model, Left);
-                        break;
-                case 40:
-                        newModel = move(model, Down);
-                        break;
-                default:
-                        newModel = model;
-                        break;
-
-        }
-        setModel(newModel)
-  }
-
   return(
-    <main ref={appRef} onKeyDown={(e) => keyHandler(e)}>
+    <main ref={appRef}>
       <canvas tabIndex="1"
               ref={canvasRef}
               width={layout.canvas.width}
               height={layout.canvas.height}
               />
 
-      <div style={layout.buttons} onKeyDown={(e) => keyHandler(e)}>
+      <div style={layout.buttons}>
           <button style={layout.upbutton} 
                   onClick={(e) => moveHandler(Up)} 
                   disabled={!model.puzzle.canMove(Up)}
