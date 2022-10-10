@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <a href="/auth/github">Login with GitHub</a>
+
+<div class="align-self-center .justify-content-center">
+    <a  href="/auth/github" id="github-button" class="btn btn-block btn-social btn-github">
+        <i class="fa fa-github"></i> Click here if not redirected...
+    </a>
+</div>
+<script>
+    document.querySelector('#github-button').click()
+</script>
 </body>
 </html>
