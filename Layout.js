@@ -5,7 +5,7 @@ const layout = {
   },
 
   buttons: {
-    width: 9 + "em",
+    width: 13 + "em",
   },
   
   button: {

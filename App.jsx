@@ -31,44 +31,42 @@ function App() {
                 />
         <div className="is-flex is-align-items-center is-flex-direction-row is-justify-content-space-evenly is-flex-grow-1 box">
           <div style={layout.buttons} className = "is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
-            <button className = "button" 
+            <button className = "button is-size-4" 
                     style={layout.button}
                     >a
             </button>  
-            <button className = "button has-background-dark has-text-white-ter"
+            <button className = "button has-background-dark has-text-white-ter is-size-4"
                       onClick={(e) => moveHandler(Up)} 
                       disabled={!model.puzzle.canMove(Up)}
                       >^
             </button>
-            <button className = "button" 
+            <button className = "button is-size-4" 
                     style={layout.button}
                     >a
             </button> 
-            <button className = "button has-background-dark has-text-white-ter"
+            <button className = "button has-background-dark has-text-white-ter is-size-4"
                     onClick={(e) => moveHandler(Left)} 
                     disabled={!model.puzzle.canMove(Left)}
                     >&lt;
             </button>
-            <button className = "button has-background-dark has-text-white-ter"
+            <button className = "button has-background-dark has-text-white-ter is-size-4"
                     onClick={(e) => moveHandler(Down)} 
                     disabled={!model.puzzle.canMove(Down)} 
                     >v
             </button>
-            <button className = "button has-background-dark has-text-white-ter"
+            <button className = "button has-background-dark has-text-white-ter is-size-4"
                     onClick={(e) => moveHandler(Right)} 
                     disabled={!model.puzzle.canMove(Right)} 
                     >&gt;
             </button>
           </div>
           <label className="box has-background-black-ter has-text-white-ter mt-5 mr-2">
-                  {"number of moves: " + model.numMoves}
+                  {"Moves: " + model.numMoves}
           </label>
-          <button id="formButton" onClick={(e) => add()} className="button is-success">Submit</button>
-          <button className="button is-danger" 
-                  onClick={(e) => resetHandler()} 
-                  >Reset
-          </button>
-
+          <div className="is-flex is-flex-direction-column">
+            <button id="formButton" onClick={(e) => add()} className="button is-success is-large">Submit</button>
+            <button className="button is-danger is-large" onClick={(e) => resetHandler()} >Reset</button>
+          </div>
         </div>
       </div>
       

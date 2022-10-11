@@ -80,8 +80,7 @@
                 </select>
               </div>
               <h2 class="is-size-5 has-text-centered mb-3">Leaderboard</h2>
-              <div class="select" style="visibility:hidden;"><select><option>PHOLD</option></select></div>
-              <div class="select" style="visibility:hidden;"><select></select>PHOLD</div>
+              <button class="button is-info is-light" type="button" onclick="updateTable()">Refresh Scores</button>
             </div>
             <table
               style="width: 100%;"
@@ -254,15 +253,19 @@
             switch (event.keyCode) { //arrow keys
               case 38:
                 newModel = move(model, Up);
+                e.preventDefault();
                 break;
               case 39:
                 newModel = move(model, Right);
+                e.preventDefault();
                 break;
               case 37:
                 newModel = move(model, Left);
+                e.preventDefault();
                 break;
               case 40:
                 newModel = move(model, Down);
+                e.preventDefault();
                 break;
               default:
                 newModel = model;
