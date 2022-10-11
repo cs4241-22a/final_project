@@ -38,10 +38,14 @@ The README for your second pull request doesn’t need to be a formal report, bu
 Our project is a “Cookie Clicker”-esque game, but with Gompei as the object to be clicked. As you click Gompei you will gain “goat bucks” for each click. You can purchase ‘upgrades’ to automate or improve your clicking. You can login via Github OAuth and your upgrades and scores will be saved either once every minute or manually. There is a global top-10 scoreboard for all players to see who is the best Gompei Clicker out there. The game also features a playlist soundtrack and Favicon tab icon.
 
 3. Any additional instructions that might be needed to fully use your project (login information etc.)
-4. An outline of the technologies you used and how you used them.
-5. What challenges you faced in completing the project.
-6. What each group member was responsible for designing / developing.
-7. A link to your project video.
+
+  Users can log in with GitHub OAuth. The home page will automatically redirect to the login page.
+  Saving and Leaderboard updating occurs once every minute and when the user clicks the corresponding button.
+  
+5. An outline of the technologies you used and how you used them.
+6. What challenges you faced in completing the project.
+7. What each group member was responsible for designing / developing.
+8. A link to your project video.
 
 Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
 
