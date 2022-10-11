@@ -1,5 +1,6 @@
 import Logo from "../assets/images/logo.svg";
 import xImage from "../assets/images/x.png";
+import arrowImg from "../assets/images/next-single-arrow.png";
 import {useState, useEffect} from "react";
 
 export default function HomePage() {
@@ -162,7 +163,11 @@ function HomePageSection({fetchUserData, title, data}) {
   return (
     <section>
       <button className={"m-2 btn section-header" + (itemsDeployed ? " btn-primary" : " btn-secondary")} onClick={() => {toggleItems()}}>
-        {title}
+        <div className="side">
+          <img src={arrowImg} alt="arrow" className={(itemsDeployed ? "turned" : "")}/>
+        </div>
+        <div className="center">{title}</div>
+        <div className="side"></div>
       </button>
       <ul className="grocery-items">
         {renderGroceryItems()}
