@@ -18,41 +18,29 @@
         <h1 style="background-color: rgba(245, 245, 220, 0.8);">Profile</h1>
     </div>
     <div>
-        <p style="background-color: rgba(245, 245, 220, 0.8); text-align: center;">Welcome to your profile!</p>
+        <h2 style="background-color: rgba(245, 245, 220, 0.8); text-align: center; border: 2px solid #fff;">Welcome to your profile!</h2>
     </div>
     <div class="row">
         <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
-            <img src="/public/michael-dam-mEZ3PoFGs_k-unsplash.jpg" style="object-fit: contain; width: 100px; height: 150px;"></img>
+            <h2>Here's Me</h2>
+            <p id="profilePic" style="text-align: center;"></p>
+        </div>
+        <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
+            <h2>All About Me</h2>
+            <p id="profileDesc"></p>
         </div>
     </div>
     <div class="row">
         <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
             <h2>First Project</h2>
-            <label for="nameOfFP">Name:</label>
-            <p id="nameOfFP">[Hello, name of project goes here.]</p>
-            <label for="descOfFP">Description:</label>
-            <p id="descOfFP">[This is the description of the project.]</p>
-            <label for="gitHubRepo">Here's the link to my GitHub Repo:</label>
-            <p id="gitHubRepo1">[This is the GitHub Repository link to the project.]</p>
+            <p id="firstProjectList"></p>
         </div>
         <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
             <h2>Current Project</h2>
-            <label for="nameOfCP">Name:</label>
-            <p id="nameOfCP">[Hello, name of project goes here.]</p>
-            <label for="descOfCP">Description:</label>
-            <p id="descOfCP">[This is the description of the project.]</p>
-            <label for="gitHubRepo">Here's the link to my GitHub Repo:</label>
-            <p id="gitHubRepo2">[This is the GitHub Repository link to the project.]</p>
+            <p id="currentProjectList"></p>
         </div>
     </div>
-    <div class="row">
-        <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
-            <p id="desiredStatus">[This person is looking to Mingle/Date]</p>
-            <button id="editButton">Edit</button>
-            <button id="updateButton">Update</button>
-        </div>
-    </div>
-
+        <div style="text-align: center;"><a href="/main.html"><button id="editButton" class="editButton-container" >Edit</button></a></div>
 <script src="/profile.js"></script>
 </body>
 </html>
