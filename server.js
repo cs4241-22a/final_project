@@ -43,29 +43,59 @@ app.use((req,res,next) => {
 })
 
 app.post('/loggingIn', (req,res) => {
-  if(req.body.user === "user" && req.body.pass === "pass") {
-    req.session.login = true;
-    loggedIn = true;
-    currUser = req.body.user;
-  }else{
-    req.session.login = false;
-    loggedIn = false;
-  }
-  res.json({login: loggedIn});
+  
+  db.collection('user').find({ }).toArray()
+    .then(result => {
+      let userLogin = false;
+      console.log(req.body);
+      
+      for(let login of result) {
+        if(login.user === req.body.user && login.pass === req.body.pass) {
+          userLogin = true;
+        }
+      }
+
+      if(userLogin) {
+        req.session.login = true;
+        loggedIn = true;
+        currUser = req.body.user;
+        console.log("login successful!");
+      }else{
+        req.session.login = false;
+        loggedIn = false;
+        console.log("Incorrect Login.");
+      }
+      res.json({login: loggedIn});
+    })
+
+ 
 });
 app.post('/register', (req,res) => {
   console.log(JSON.stringify(req.body));
-  if(req.body.user !== "" /* && user doesnt already exist*/) {
-    /* Add user to database */
-    req.session.login = true;
-    loggedIn = true;
-    currUser = req.body.user;
-    res.json({result: ""});
-  }else{
-    req.session.login = false;
-    loggedIn = false;
-    res.json({result: "This account already exists"});
-  }
+  db.collection('user').find({ }).toArray()
+    .then(result => {
+      let userFound = false;
+      console.log(req.body);
+      for(let login of result) {
+        if(login.user === req.body.user) {
+          userFound = true;
+        }
+      }
+
+      if(userFound) {
+        req.session.login = false;
+        loggedIn = false;
+        res.json({result: "This account already exists"});
+      } else {
+        /* Add user to database */
+        req.session.login = true;
+        loggedIn = true;
+        currUser = req.body.user;
+        
+        db.collection("user").insertOne( req.body );
+        res.json({result: ""});
+      }
+    })
 });
 
 app.get('/loginStatus', (req,res) => {
