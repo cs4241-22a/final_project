@@ -33,7 +33,7 @@ class Reminders extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false,
+            open: 0,
             data: {name: "", description: ""}
         }
     }
@@ -99,7 +99,7 @@ class Reminders extends React.Component {
 
 
             <div>
-                {<ul> {blogs.map(item => <ul key="{item}">{item}</ul> )} </ul>}
+                {<ul> {blogs.map(item => <ul>{item}</ul> )} </ul>}
             </div>
         </div>
         );

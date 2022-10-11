@@ -69,7 +69,7 @@ const replies = []
           </form>
 
           <div>
-              {<ul> {replies.map(item => <ul key="{item}">{item}</ul> )} </ul>}
+              {<ul> {replies.map(item => <ul>{item}</ul> )} </ul>}
           </div>
       
           </StyledPaper>
