@@ -97,7 +97,6 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/auth/error" }),
   function (req, res) {
-    //console.log(req.user.name, req.user.id);
     _USERNAME = req.user.name
     _USERID = req.user.id
     res.redirect("/app");
@@ -169,13 +168,15 @@ app.post("/add", (req, res) => {
     let toMongo = req.body;
     // if (parseFloat(toMongo.Clicks) == parseFloat(toMongo.CPS) * 10) {
       //toMongo.Rating = rater(toMongo.CPS);
-      toMongo.User = req.user;
-      collection.findOne({Name: new RegExp(toMongo.Name, 'i')}).then(function(doc){
+      toMongo.Name = _USERNAME;
+      toMongo.User = _USERID;
+      collection.findOne({User: _USERID}).then(function(doc){
         if (doc != null) {
-          if (parseInt(doc.Clicks, 10) < parseInt(toMongo.Clicks, 10) && parseInt(doc.User, 10) == parseInt(req.user, 10)) {
-            collection.deleteOne({Name: new RegExp(toMongo.Name, 'i')}).then(function (temp){
-              collection.insertOne(toMongo).then((result) => res.json(result));
-            });
+          if (parseInt(doc.Moves, 10) > parseInt(toMongo.Moves, 10)) {
+            collection.updateOne({User:_USERID}, { $set: {Moves:toMongo.Moves}});
+          }
+          if (parseFloat(doc.Time) > parseFloat(toMongo.Time)) {
+            collection.updateOne({User:_USERID}, { $set: {Time:toMongo.Time}});
           }
         } else {
           collection.insertOne(toMongo).then((result) => res.json(result));
