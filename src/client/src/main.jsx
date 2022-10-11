@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <RootPage />
   },
   {
-    path: "/login",
+    path: "/Login",
     element: <AuthPage />
   }
 ])
