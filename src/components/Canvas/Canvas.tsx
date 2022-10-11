@@ -1,21 +1,20 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ActiveEmoji } from "./ActiveEmoji";
-import { Box, Toolbar, Typography } from "@mui/material";
+import { GridMemo } from "./Grid";
+import { Box, Toolbar } from "@mui/material";
 import {
   TransformWrapper,
   TransformComponent,
-  ReactZoomPanPinchRef,
 } from "@pronestor/react-zoom-pan-pinch";
 
-export function Canvas() {
-  const [zoom, setZoom] = useState<number>(1);
+export type CanvasProps = {
+  canvasSize?: number;
+  size: number;
+};
 
-  function setZoomScale(
-    ref: ReactZoomPanPinchRef,
-    event: TouchEvent | MouseEvent
-  ) {
-    setZoom(ref.state.scale);
-  }
+export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
+  const grid = useRef([...Array(size * size)].map(() => ""));
+  const [activeEmoji, setActiveEmoji] = useState("1f600");
 
   return (
     <Box
@@ -26,13 +25,7 @@ export function Canvas() {
       height="100vh"
     >
       <Toolbar />
-      <TransformWrapper
-        initialScale={1}
-        centerOnInit={true}
-        minScale={1}
-        maxScale={5}
-        onZoomStop={setZoomScale}
-      >
+      <TransformWrapper initialScale={1} minScale={1} maxScale={8}>
         <TransformComponent
           wrapperStyle={{
             height: "100%",
@@ -41,14 +34,21 @@ export function Canvas() {
         >
           <Box
             display="grid"
-            gridTemplateColumns="repeat(100, 1fr)"
-            width={800}
-            height={800}
-            sx={{ backgroundColor: "red" }}
-          ></Box>
+            gridTemplateRows={`repeat(${size}, 1fr)`}
+            gridTemplateColumns={`repeat(${size}, 1fr)`}
+            width={canvasSize}
+            height={canvasSize}
+            sx={{ backgroundColor: "white" }}
+          >
+            <GridMemo
+              grid={grid.current}
+              size={canvasSize / size}
+              activeEmoji={activeEmoji}
+            />
+          </Box>
         </TransformComponent>
       </TransformWrapper>
-      <ActiveEmoji />
+      <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />
     </Box>
   );
 }

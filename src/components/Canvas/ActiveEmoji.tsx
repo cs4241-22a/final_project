@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import EmojiPicker, { EmojiClickData, Emoji } from "emoji-picker-react";
 
-export function ActiveEmoji() {
-  const [selectedEmoji, setSelectedEmoji] = useState<string>("1f600");
+export type ActiveEmojiProps = {
+  setActiveEmoji: React.Dispatch<React.SetStateAction<string>>;
+  activeEmoji: string;
+};
+
+export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
   const [emojiName, setEmojiName] = useState<string>("Grinning");
   const [selectActive, setSelectActive] = useState<boolean>(false);
 
-  function setEmoji(emojiData: EmojiClickData, event: MouseEvent) {
+  function set(emojiData: EmojiClickData, event: MouseEvent) {
     setEmojiName(
       emojiData.names[0].replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
         letter.toUpperCase()
       )
     );
-    setSelectedEmoji(emojiData.unified);
+    setActiveEmoji(emojiData.unified);
   }
 
   function setSelecting(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -22,10 +26,10 @@ export function ActiveEmoji() {
 
   return (
     <Box position="absolute" bottom={0} p={0} m="12px">
-      {selectActive ? <EmojiPicker onEmojiClick={setEmoji} /> : null}
+      {selectActive ? <EmojiPicker onEmojiClick={set} /> : null}
       <Tooltip title={emojiName} placement="right" onClick={setSelecting}>
         <IconButton size="large">
-          <Emoji unified={selectedEmoji} size={64} />
+          <Emoji unified={activeEmoji} size={64} />
         </IconButton>
       </Tooltip>
     </Box>
