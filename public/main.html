@@ -48,10 +48,136 @@
           <div>
             <ul id="outT" class="pure-menu-list"></ul>
           </div>
+          <div id="blocks">
+            Block A:    <button id="a" class="pure-button" > --'\/'--</button>
+            <div>
+              <ul id="ca" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC1a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block B: <button id="b" class="pure-button" onclick="aFunction('b')">-\/-</button>
+            <div>
+              <ul id="cb" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC2a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block C: <button id="c" class="pure-button" onclick="aFunction('c')">-\/-</button>
+            <div>
+              <ul id="cc" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC3a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block D: <button id="d" class="pure-button" onclick="aFunction('d')">-\/-</button>
+            <div>
+              <ul id="cd" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC4a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block E: <button id="e" class="pure-button" onclick="aFunction('e')">-\/-</button>
+            <div>
+              <ul id="ce" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC5a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block F: <button id="f" class="pure-button" onclick="aFunction('f')">-\/-</button>
+            <div>
+              <ul id="cf" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC6a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+            Block G: <button id="g" class="pure-button" onclick="aFunction('g')">-\/-</button>
+            <div>
+              <ul id="cg" hidden>
+                <li>
+                  Honors Calculus
+                  <button id ="MC7a" class="pure-button">
+                    add Class
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p> </p>
+
+
+          </div>
         </form>
       </div>
      </div>
   <script>
+
+
+let aView = false
+let bView = false
+let cView = false
+let dView = false
+let eView = false
+let fView = false
+let gView = false
+
+
+ async function aFunction(theId){
+  console.log("wazzup")
+  console.log(theId + " this was the ID")
+  let listId = "c" + theId
+  theList = document.getElementById(listId)
+  if(theList.getAttribute("hidden") === "hidden"){
+    console.log("Does it come here? " + listId)
+    document.getElementById(listId).removeAttribute("hidden")
+  } else{
+    console.log(" or Does it come here?" + listId)
+    theList.setAttribute("hidden", "hidden")
+  }
+}
+
+/*
+isHidden = true
+function testFunction(){
+    var activated = document.getElementById('classList')
+    if(isHidden){
+    activated.removeAttribute('hidden')
+    isHidden = false
+    }
+
+  
+}
+*/
+
   const submit = function( e ) {
     // prevent default form action from being carried out
     e.preventDefault()
@@ -74,12 +200,29 @@
         jsonCopy.year = newYear.value
       }
     }
+
+    if(userId == 'a'){
+      console.log("wazzup")
+      console.log('a' + " this was the ID")
+      let listId = "c" + 'a'
+      theList = document.getElementById(listId)
+      if(theList.getAttribute("hidden") === "hidden"){
+        console.log("Does it come here? " + listId)
+        document.getElementById(listId).removeAttribute("hidden")
+      }
+      else{
+        console.log(" or Does it come here?" + listId)
+        theList.setAttribute("hidden", "hidden")
+      }
+    }
+
     if(userId == "delete"){
       //console.log("I am here")
       jsonCopy.action = "delete"
       var index = e.target.getAttribute("index")
       jsonCopy.index = index
     }
+
     body = JSON.stringify( jsonCopy)
 
     fetch( '/submit', {
@@ -93,6 +236,12 @@
     .then(function(data){
       appendData(data)
     })
+
+
+
+
+
+
 
     function appendData(data){
       var mt = document.getElementById("outT")
@@ -174,9 +323,9 @@
     bilbos = document.getElementsByClassName("pure-button")
     for(var i = 0; i<bilbos.length; i++){
       //console.log(bilbos[i])
-      bilbos[i].addEventListener("click",submit)
       var id = bilbos[i].id
-      //console.log(id)
+      bilbos[i].addEventListener("click",submit)
+      console.log(id)
     }  
   }
   </script>

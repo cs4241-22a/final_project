@@ -10,10 +10,12 @@ const http = require( 'http' ),
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000;
-require('dotenv').config()
 const serveStatic = require('serve-static');
 const bodyParser = require('body-parser');
 const cookie = require( 'cookie-session' );
+const k1 = "kdjkjdakask";
+const k2 = "dsjfjsfrifw";
+require('dotenv').config()
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const muri = "mongodb+srv://"+process.env.MONGO_USER+":"+ process.env.MONGO_PASSWORD+"@a3cluster.oip0htf.mongodb.net/?retryWrites=true&w=majority";
@@ -76,13 +78,12 @@ app.use( function( req,res,next) {
 app.get('/userupdate',(request,response,next) => sendUpdatePage( request, response, next ));
 app.post('/userupdate',(request,response,next) => handlePostUpdate( request, response, next ));
 app.get('/userfetch',(request,response,next) => handleGetUserUpdate( request, response, next ));
-app.get('/classesfetch',(request,response,next) => handleGetClasses( request, response, next ));
-app.get('/blocksfetch',(request,response,next) => handleGetBlocks( request, response, next ));
 // signput comes after cookie validation
 app.get('/signout',(request,response,next) => handleSignOut( request, response, next ));
 app.use(bodyParser.json({type: 'text/plain'}));
 app.post('/submit',(request,response) => handlePostJ( request, response ));
 app.get('/showuser',(request,response) => handleGetJ( request, response ));
+
 
 /*
  * 
@@ -97,6 +98,7 @@ const handleGet = function( request, response ) {
     sendFile( response, filename )
   }
 }
+
 
 const handlePost = function( request, response ) {
   let dataString = ''
@@ -164,6 +166,48 @@ async function handlePostJ( request, response ) {
   }
 }
 
+
+async function handlePostJa( request, response ) {
+  var inD =  request.body;
+  console.log("handlePostJ geting args ... ")
+  console.log(inD)
+  var email = request.session.email;
+  console.log(email)
+  // do we have user
+  
+  var user = await getUser(email);
+  if(user !== null){
+    if( inD.action === "add" ){
+      // create new car
+      var nC = {model: inD.model, year: inD.year, mileage: inD.mileage}
+      // add car to cars array of user
+      user['cars'].push(nC)
+    }
+    console.log(user)
+    if(inD.action === "delete"){
+      const trashBin = user['cars'].splice(inD.index, 1)
+    }
+    // copy of the user
+    userCopy = user;
+    theYear = new Date().getFullYear()
+    for(k = 0; k<userCopy.cars.length; k++){
+      userCopy['cars'][k].milesPerYear = parseInt(userCopy['cars'][k].mileage / (theYear - userCopy['cars'][k].year))
+    }
+    console.log(user)
+    // update user record
+    await updateCarData(user)
+    // send json data to the client
+    var rb = JSON.stringify(userCopy['cars'])
+    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+    response.end(rb)
+  }
+}
+
+
+
+
+
+
 // handeles post login call
 async function handlePostL( request, response ) {
   console.log("handlePostL geting args ... ");
@@ -178,12 +222,8 @@ async function handlePostL( request, response ) {
       if( user.password === request.body.password ){
         // we are good
         // set cookie
-        console.log("login is good")
         request.session.login = true;
         request.session.email = request.body.email;
-        console.log(request.session)
-        console.log("sending redirect");
-        //response.sendFile( __dirname +"/" + dir + 'main.html' );
         response.redirect( 'main.html' )
       } 
     } 
@@ -191,6 +231,7 @@ async function handlePostL( request, response ) {
   // ask user again
   response.sendFile( __dirname +"/" + dir + '/login.html' );
 }
+
 
 const handleSignOut = function( request, response, next ) {
   console.log("in signout ... ");
@@ -278,43 +319,6 @@ async function handleGetUserUpdate( request, response, next ) {
   }
 }
 
-async function handleGetClasses( request, response, next ) {
-  console.log("handleGetClasses: ... ");
-  console.log( request.session );
-  if( request.session.login === true ){
-    // construct Json file to push to the user for rendering
-    var classes = await getClasses()
-    if( classes !== null ){
-      // I have my my e-mail
-      console.log(classes)
-      var rb = JSON.stringify(classes)
-      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-      response.end(rb)
-    }
-  } else {
-    // clean up session
-    next();
-  }
-}
-async function handleGetBlocks( request, response, next ) {
-  console.log("handleGetBlocks: ... ");
-  console.log( request.session );
-  if( request.session.login === true ){
-    // construct Json file to push to the user for rendering
-    var blocks = await getBlocks()
-    if( blocks !== null ){
-      // I have my my e-mail
-      console.log(blocks)
-      var rb = JSON.stringify(blocks)
-      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-      response.end(rb)
-    }
-  } else {
-    // clean up session
-    next();
-  }
-}
-
 const sendUpdatePage = function( request, response, next ) {
   console.log("in sendUpdatePage  ... ");
   console.log( request.session );
@@ -341,58 +345,44 @@ async function getUser(email){
   }
   return ret;
 }
-// returns all classes data
-async function getClasses(){
+
+async function getBlock(letter){
   var ret = null;
   if( collection !== null){
-    console.log("getClasses:")
-    ret = await collection.find(
-      {'type': 'class'}
-    ).toArray()
-    console.log("getClasses returns: ",ret);
-  }
-  return ret;
-}
-async function getClass(code){
-  var ret = null;
-  if( collection !== null){
-    console.log("getClass: calss code: "+code)
-    ret = await collection.findOne(
-      {$and:[
-        {'type': 'class'},
-        {'code': code}
-      ]}
-    )
-    console.log("getClass returns: ",ret);
-  }
-  return ret.toArray();
-}
-// returns all blocks data
-async function getBlocks(){
-  var ret = null;
-  if( collection !== null){
-    console.log("getBlocks:")
-    ret = await collection.find(
-      {'type': 'block'}
-    ).toArray()
-    console.log("getBlocks return: ",ret);
-  }
-  return ret;
-}
-async function getBlock(name){
-  var ret = null;
-  if( collection !== null){
-    console.log("getBlock: block name: "+name)
+
+    console.log("getBlock: have, block: "+email)
     ret = await collection.findOne(
       {$and:[
         {'type': 'block'},
-        {'name': name}
+        {'name': letter}
       ]}
     )
-    console.log("getBlock returns: ",ret);
+    console.log("getBlock return: ",ret);
   }
   return ret;
 }
+
+async function getClass(ident){
+  var ret = null;
+  if( collection !== null){
+
+    console.log("getClass: have, class: "+email)
+    ret = await collection.findOne(
+      {$and:[
+        {'type': 'class'},
+        {'code': ident}
+      ]}
+    )
+    console.log("getUser return: ",ret);
+  }
+  return ret;
+}
+
+
+
+
+
+
 // json object for a user
 async function addUser(user){
   if( collection !== null){
@@ -493,6 +483,8 @@ async function handlePostUpdate( request, response, next ) {
     response.sendFile( __dirname +"/" + dir + '/signup.html' );
   }
 }
+
+
 
 async function handleGetJ( request, response ) {
   console.log("handleGetJ geting args ... ")
