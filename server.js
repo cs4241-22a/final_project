@@ -15,6 +15,7 @@ app.use( cookie({
   keys: [key1, key2]
 }))
 let loggedIn = false;
+let currUser = "";
 
 app.use(express.json());
 app.use(express.static('build'));
@@ -45,14 +46,30 @@ app.post('/loggingIn', (req,res) => {
   if(req.body.user === "user" && req.body.pass === "pass") {
     req.session.login = true;
     loggedIn = true;
+    currUser = req.body.user;
   }else{
     req.session.login = false;
     loggedIn = false;
   }
-  res.status(200).send();
-});
-app.get('/loginStatus', (req,res) => {
   res.json({login: loggedIn});
+});
+app.post('/register', (req,res) => {
+  console.log(JSON.stringify(req.body));
+  if(req.body.user !== "" /* && user doesnt already exist*/) {
+    /* Add user to database */
+    req.session.login = true;
+    loggedIn = true;
+    currUser = req.body.user;
+    res.json({result: ""});
+  }else{
+    req.session.login = false;
+    loggedIn = false;
+    res.json({result: "This account already exists"});
+  }
+});
+
+app.get('/loginStatus', (req,res) => {
+  res.json({login: loggedIn, user: currUser});
 })
 
 // Sends json array of all documents in the collection specified by req.body.name

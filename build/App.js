@@ -4,7 +4,7 @@ import {Navigate} from "./_snowpack/pkg/react-router-dom.js";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {loggedin: true, arr: []};
+    this.state = {loggedin: true, currUser: "", arr: []};
     this.loginStatus();
     this.load();
   }
@@ -24,7 +24,7 @@ class App extends React.Component {
       "no-cors": true,
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
-      this.setState({loggedin: json.login});
+      this.setState({loggedin: json.login, currUser: json.user});
     });
   }
   render() {
@@ -34,7 +34,7 @@ class App extends React.Component {
         to: "/login"
       });
     } else {
-      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello person"), /* @__PURE__ */ React.createElement("ul", null, this.state.arr.map((entry) => /* @__PURE__ */ React.createElement("li", null, "hello ", entry.name))));
+      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser), /* @__PURE__ */ React.createElement("ul", null, this.state.arr.map((entry) => /* @__PURE__ */ React.createElement("li", null, "hello ", entry.name))));
     }
   }
 }

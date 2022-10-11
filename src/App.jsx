@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor( props ) {
     super( props )
     // initialize our state
-    this.state = { loggedin: true, arr: [] }
+    this.state = { loggedin: true, currUser:"", arr: [] }
     this.loginStatus();
     this.load();
   }
@@ -33,7 +33,7 @@ class App extends React.Component {
     })
     .then( response => response.json() )
     .then( json => {
-      this.setState({ loggedin: json.login }) 
+      this.setState({ loggedin: json.login, currUser: json.user }) 
     })
   }
   
@@ -46,7 +46,7 @@ class App extends React.Component {
       return (
         <>
         <h1>
-            Hello person
+            Hello {this.state.currUser}
         </h1>
         <ul>
           {this.state.arr.map((entry) => <li>hello {entry.name}</li>)}
