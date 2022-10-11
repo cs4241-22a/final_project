@@ -5,7 +5,8 @@ import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, Te
 import Modal from '@mui/material/Modal';
 import { pink } from "@mui/material/colors";
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
-import basicPost from "./post";
+import BasicPost from "./post";
+// import BlogDesc from "./description";
 
 const style = {
     position: 'absolute',
@@ -30,20 +31,20 @@ const centerStyle = {
 
 const blogs = []
 
-export default function Reminders() {
+export default function Reminders(description) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
-
-    const blogFormat = basicPost()
+    const [data, setData] = React.useState({
+        name: "",
+        description: ""
+    });
     
 
     const addBlog = () => {
-        blogs.push(blogFormat)
+        blogs.push(<BasicPost></BasicPost>)
         console.log(blogs)
     }
-    
 
     return (
     <div style={centerStyle}>
@@ -59,7 +60,7 @@ export default function Reminders() {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="postMaker"
-                aria-describedby="blogDesc"
+                aria-describedby="blogDescr"
             >
                 <Box sx={style}>
                   <Box
@@ -73,7 +74,13 @@ export default function Reminders() {
                         <Typography id="createBlog" variant="h6" component="h2">
                             Create your blog:
                         </Typography>
-                        <TextField fullWidth inputProps={{ maxLength: 250 }} id="blogDesc" label="Start typing here..." multiline variant="filled"/>
+                        
+                        {/* <BlogDesc></BlogDesc> */}
+                        
+                        <TextField onChange={e => {
+                            setData({...data, description: e.target.value})
+                            //console.log(data)
+                        }} fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Start typing here..." multiline variant="filled"/>
                         <Button onClick={addBlog}>Post your blog!</Button>
                         <Button onClick={handleClose}>Cancel</Button>
                     </Box>
@@ -84,24 +91,7 @@ export default function Reminders() {
 
 
         <div id="insertBlogPosts">
-            {/* {blogs} */}
-            {<ul>
-            {blogs.map(item =>
-            <ul>{item}</ul>
-            )}
-            </ul>}
-            {/* <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
-                <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                    <Avatar>W</Avatar>
-                </Grid>
-                <Grid item xs>
-                    <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
-                </Grid>
-                </Grid>
-            </StyledPaper> </div> */}
-
-
+            {<ul> {blogs.map(item => <ul>{item}</ul> )} </ul>}
         </div>
     </div>
     );

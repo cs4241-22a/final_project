@@ -1,6 +1,8 @@
 
 import * as React from 'react';
-import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
+import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead, touchRippleClasses } from '@mui/material';
+import './button.css'
+import BasicReply from './reply';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -9,33 +11,32 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   maxWidth: 400,
   color: theme.palette.text.primary,
 }));
+  
+
+const postReply = event => {
+  event.preventDefault();
+  this.state.replyTable.push(<BasicReply></BasicReply>)
+}
 
 
-// export default function basicPost() {
+
+// const replyForm = <form>
+// <label htmlFor="reply" />
+// <br />
+// <input
+//   id = "reply"
+//   type="text"
+//   name="reply"
+//   placeholder="235 character limit"
+// />
+// <br />
+// <button onClick={postReply} className="button-34" role="button">
+//   Reply
+// </button>
+// </form>;
+
   
-  
-//   return (
-//     <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
-//     <Grid container wrap="nowrap" spacing={2}>
-//     <Grid item>
-//     <Avatar>W</Avatar>
-//     </Grid>
-//     <Grid item xs>
-//     <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
-//     </Grid>
-//     </Grid>
-//     </StyledPaper> 
-//     </div>
-//     );
-    
-//   }
-  
-  
-  
-  
-  
-  
-  class basicPost extends React.Component {
+  class BasicPost extends React.Component {
     constructor(props) {
       super(props)
       this.state = { 
@@ -52,7 +53,6 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
           time: "",
           _id: ""
         },
-        postTable: [],
         replyTable: [],
       }
       
@@ -66,15 +66,39 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
         <Avatar>W</Avatar>
         </Grid>
         <Grid item xs>
-        <Typography>{"Hi guys, my first reply here! I am testing how big the replies can be here when you make them!"}</Typography>
+        <Typography>{"hifaf awwfaf aw fafaw fwa all!"}</Typography>
         </Grid>
         </Grid>
-        </StyledPaper> 
+
+        <div id="insertReplyPosts">
+            {<ul> {this.state.replyTable.map(item => <ul>{item}</ul> )} </ul>}
         </div>
+
+        <form>
+        <label htmlFor="reply" />
+        <br />
+        <input
+          id = "reply"
+          type="text"
+          name="reply"
+          placeholder="235 character limit"
+        />
+        <br />
+        <button onSubmit={postReply} className="button-34" type="submit">
+          Reply
+        </button>
+        </form>
+    
+        </StyledPaper>
+
+        {/* //replies */}
+        
+        </div>
+        
         );
       };
       
       
       
     }
-    export default basicPost;
+    export default BasicPost;
