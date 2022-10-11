@@ -1,12 +1,10 @@
-# Final Project
-*Due before the start of class, October 13th (final day of the term)*
-
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+Cole Manning, Mason Powell, Ben Sacak, Greg Klimov
 
 ## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
 
+
+
+Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
 - Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
 - Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
 - Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
@@ -36,11 +34,14 @@ Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or som
 The README for your second pull request doesn’t need to be a formal report, but it should contain:
 
 1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
+
+Our project is a “Cookie Clicker”-esque game, but with Gompei as the object to be clicked. As you click Gompei you will gain “goat bucks” for each click. You can purchase ‘upgrades’ to automate or improve your clicking. You can login via Github OAuth and your upgrades and scores will be saved either once every minute or manually. There is a global top-10 scoreboard for all players to see who is the best Gompei Clicker out there. The game also features a playlist soundtrack and Favicon tab icon.
+
+3. Any additional instructions that might be needed to fully use your project (login information etc.)
+4. An outline of the technologies you used and how you used them.
+5. What challenges you faced in completing the project.
+6. What each group member was responsible for designing / developing.
+7. A link to your project video.
 
 Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
 
