@@ -161,6 +161,10 @@ app.get("/controller/Controller.js", loggedIn, (req, res) => {
   res.sendFile(__dirname + "/controller/Controller.js");
 });
 
+app.get("/assets/PushBox.png", (req, res) => {
+  res.sendFile(__dirname + "/assets/PushBox.png");
+});
+
 
 app.post("/add", (req, res) => {
   // assumes only one object to insert

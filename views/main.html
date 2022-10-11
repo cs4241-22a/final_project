@@ -11,17 +11,63 @@
     />
     <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
   </head>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        <img src="./assets/PushBox.png" width="28" height="28">
+      </a>
+      
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item js-modal-trigger" data-target="instructions">
+          Instructions
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item js-modal-trigger" data-target="authors">
+              Authors
+            </a>
+            <a class="navbar-item" href="https://github.com/Cather-Zhang/final_project" target="_blank" rel="noopener noreferrer">
+              Documentation
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-danger" onclick="window.location.href='https://pushbox.glitch.me/logout';">
+              <strong>Log Out</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
   <body class="hero has-background-warning-light is-fullheight py-2">
     <main class="container is-fluid has-background-warning-light">
       <div class="container has-background-warning box">
         <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3 box is-flex-shrink-5">
           <h1 class="is-size-4">Welcome to PushBox!</h1>
-          <button class="js-modal-trigger button is-info mx-3"  data-target="instructions">
+          <!--<button class="js-modal-trigger button is-info mx-3"  data-target="instructions">
             Instructions
           </button>
           <button class="button is-danger mx-1" onclick="window.location.href='https://pushbox.glitch.me/logout';">
             Log Out
-          </button>
+          </button> -->
         </div>
         <div class = "columns">
           <div id="root" class="column"></div> <!-- THIS ROOT IS REPLACED WITH OUR CANVAS -->
@@ -65,6 +111,27 @@
         </div>
       </div>
     </main>
+    
+    <div id="authors" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <p class="is-size-3"><b>Authors:</b></p>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Mark Renzi</p><span class="buttons"><a class="button is-link is-light" href="https://github.com/Mark-Renzi" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/mark-renzi-137932213/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Jordan Wecler</p> <span class="buttons"><a class="button is-link is-light" href="https://github.com/jrwecler" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/jordan-wecler-0524b11b4/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Cather Zhang</p> <span class="buttons"><a class="button is-link is-light" href="https://github.com/Cather-Zhang" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/cather-zhang/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
     
     <div id="instructions" class="modal">
       <div class="modal-background"></div>
@@ -129,6 +196,24 @@
     document.addEventListener('DOMContentLoaded', () => {
       
       updateTable();
+      
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
       
       // Functions to open and close a modal
       function openModal($el) {
@@ -273,7 +358,7 @@
 
               row.cells[0].innerHTML = response.Name;
               row.cells[1].innerHTML = response.Moves;
-              row.cells[2].innerHTML = response.Time + " s";
+              row.cells[2].innerHTML = response.Time + "s";
             }
               
 
