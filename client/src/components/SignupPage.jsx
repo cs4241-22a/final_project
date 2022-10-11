@@ -60,7 +60,7 @@ export default function SignupPage(props) {
                 window.location = "/login";
               } else {
                 // Login was successful!
-                window.location = "/home";
+                window.location = "/home" + (loginJson.homeCart ? ("#" + loginJson.homeCart) : "");
               }
             })
           })

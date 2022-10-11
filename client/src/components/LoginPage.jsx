@@ -23,7 +23,7 @@ export default function LoginPage(props) {
           window.location = "/login";
         } else {
           // Login was successful!
-          window.location = "/home";
+          window.location = "/home" + (loginJson.homeCart ? ("#" + loginJson.homeCart) : "");
         }
       })
     })
@@ -45,7 +45,7 @@ export default function LoginPage(props) {
       <div className="Auth-form">
         <div className="Auth-form-content">
 
-          <h3 className="Auth-form-title">Log In to Your Group</h3>
+          <h3 className="Auth-form-title">Log In to Your Account</h3>
 
           <div className="form-group mt-3">
             <label>Email</label>

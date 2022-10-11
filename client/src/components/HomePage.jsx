@@ -14,8 +14,8 @@ export default function HomePage() {
   const [produceData, setProduceData] = useState(null);
   const [otherData, setOtherData] = useState(null);
 
-  async function fetchUserData() {
-    fetch( "/user-data", {
+  async function fetchCartData() {
+    fetch( `/cart-data?cart=${window.location.hash.substring(1)}`, {
       method: 'GET'
     })
       .then( (response) => {
@@ -31,20 +31,18 @@ export default function HomePage() {
             setProduceData(data.produceData);
             setOtherData(data.otherData);
           })
-        } else {
-          window.location = "/login";
         }
       } )
 
   }
 
   useEffect(() => {
-    fetchUserData();
+    fetchCartData();
   }, []) 
 
   return (
     <div className="home-page-container">
-      <Topbar fetchUserData={fetchUserData}/>
+      <Topbar fetchCartData={fetchCartData}/>
       <Sections 
       cannedJarredData={cannedJarredData}
       dairyData={dairyData}
@@ -54,7 +52,7 @@ export default function HomePage() {
       meatData={meatData}
       produceData={produceData}
       otherData={otherData}
-      fetchUserData={fetchUserData}/>
+      fetchCartData={fetchCartData}/>
     </div>
   )
 }
@@ -62,7 +60,7 @@ export default function HomePage() {
 /**
  * Topbar component for Go-Grocery HomePage
  */
-function Topbar({fetchUserData}) {
+function Topbar({fetchCartData}) {
   function addItem(item, list) {
     let error = false;
     if(item.value === "") {
@@ -82,7 +80,7 @@ function Topbar({fetchUserData}) {
     item.classList.remove("is-invalid");
     list.classList.add("is-valid");
     item.classList.add("is-valid");
-    let body = JSON.stringify({ itemType: list.value, itemName: item.value.toLowerCase()});
+    let body = JSON.stringify({ itemType: list.value, itemName: item.value.toLowerCase(), cartCode: window.location.hash.substring(1)});
     fetch( '/add-item', { 
       method:'POST',
       body: body,
@@ -93,7 +91,7 @@ function Topbar({fetchUserData}) {
       if (response.status === 200) {
         list.value = "Select Item Type*";
         item.value = "";
-        fetchUserData();
+        fetchCartData();
         setTimeout(() => {    
           // Remove decoration in one second
           list.classList.remove("is-valid");
@@ -103,11 +101,43 @@ function Topbar({fetchUserData}) {
     } );
   }
 
+  // Just used for updating placeholder text in cart code input
+  const [cartCode, setCartCode] = useState(window.location.hash.substring(1));
+  const [homeCart, setHomeCart] = useState(null);
+
+  useEffect(() => {
+    // Fetch user's home cart on load
+    fetch("/home-cart").then((res) => {
+      if (res.status === 200) {
+        res.json().then(d => {
+          setHomeCart(JSON.parse(d).homeCart);
+        })
+      } else {
+        setHomeCart("ERROR!");
+      }
+    })
+  }, [])
+
+  function changeCart() {
+    const input = document.getElementById("cart-code");
+    if (input.value.length === 6) {
+      setCartCode(input.value);
+      window.location.hash = input.value;
+      input.classList.remove("is-invalid");
+      fetchCartData();
+    } else {
+      input.classList.add("is-invalid");
+    }
+  }
+
   return (
     <div className="navbar navbar-light bg-light border">
       <img src={Logo} alt="Go Grocery" className="topbar-logo"/>
+      <p>Your home cart: {homeCart}</p>
       <div className="form-inline">
-        <input id="item"className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder="Enter Item Name*" aria-label="Search" />
+        <input id="cart-code" className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder={cartCode} aria-label="Search" />
+        <button class="m-2 btn btn-secondary" onClick={() => changeCart()}>Change Cart</button>
+        <input id="item" className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder="Enter Item Name*" aria-label="Search" />
         <select id="item-type-select" className="form-control bg-secondary input-text">
           <option selected>Select Item Type*</option>
           <option>Canned / Jarred Goods</option>
@@ -129,19 +159,19 @@ function Sections(props) {
 
   return (
     <div className="home-page-sections">
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.cannedJarredData} title="Canned / Jarred Goods" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.dairyData} title="Dairy" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.dryBakingData} title="Dry / Baking Goods" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.frozenData} title="Frozen" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.grainsData} title="Grains" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.meatData} title="Meat" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.produceData} title="Produce" />
-      <HomePageSection fetchUserData={props.fetchUserData} data={props.otherData} title="Other" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.cannedJarredData} title="Canned / Jarred Goods" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.dairyData} title="Dairy" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.dryBakingData} title="Dry / Baking Goods" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.frozenData} title="Frozen" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.grainsData} title="Grains" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.meatData} title="Meat" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.produceData} title="Produce" />
+      <HomePageSection fetchCartData={props.fetchCartData} data={props.otherData} title="Other" />
     </div>
   )
 }
 
-function HomePageSection({fetchUserData, title, data}) {
+function HomePageSection({fetchCartData, title, data}) {
 
   const [itemsDeployed, setItemsDeployed] = useState(false);
 
@@ -155,7 +185,7 @@ function HomePageSection({fetchUserData, title, data}) {
     }
     return data.map((item, index) => {
       return (
-        <GroceryItem fetchUserData={fetchUserData} visible={itemsDeployed} title={item} index={index} group={title} />
+        <GroceryItem fetchCartData={fetchCartData} visible={itemsDeployed} title={item} index={index} group={title} />
       )
     })
   }
@@ -176,11 +206,11 @@ function HomePageSection({fetchUserData, title, data}) {
   )
 }
 
-function GroceryItem({title, group, index, visible, fetchUserData}) {
+function GroceryItem({title, group, index, visible, fetchCartData}) {
 
   function deleteItem() {
     console.log("Deleting item: " + title);
-    let body = JSON.stringify({ itemType: group, itemName: title})
+    let body = JSON.stringify({ itemType: group, itemName: title, cartCode: window.location.hash.substring(1)})
     fetch('/remove-item', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -188,7 +218,7 @@ function GroceryItem({title, group, index, visible, fetchUserData}) {
     })
     .then( response => {
       if (response.status === 200) {
-        fetchUserData();
+        fetchCartData();
       }
     } );
   }
