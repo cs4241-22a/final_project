@@ -11,11 +11,4 @@ const layout = {
   button: {
     visibility: "hidden",
   },
-
-  text: {
-    top: 50,
-    color: "purple",
-    backgroundColor: "#F0CE97",
-    width: 80,
-  },
 };

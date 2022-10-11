@@ -11,7 +11,7 @@
     />
     <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
   </head>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top has-background-warning-light" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item">
         <img src="./assets/PushBox.png" width="28" height="28">
@@ -57,17 +57,11 @@
       </div>
     </div>
   </nav>
-  <body class="hero has-background-warning-light is-fullheight py-2">
+  <body class="hero has-background-warning-light is-fullheight py-2 has-navbar-fixed-top">
     <main class="container is-fluid has-background-warning-light">
-      <div class="container has-background-warning box">
+      <div class="container has-background-warning box" style="margin-top:50px;">
         <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3 box is-flex-shrink-5">
           <h1 class="is-size-4">Welcome to PushBox!</h1>
-          <!--<button class="js-modal-trigger button is-info mx-3"  data-target="instructions">
-            Instructions
-          </button>
-          <button class="button is-danger mx-1" onclick="window.location.href='https://pushbox.glitch.me/logout';">
-            Log Out
-          </button> -->
         </div>
         <div class = "columns">
           <div id="root" class="column"></div> <!-- THIS ROOT IS REPLACED WITH OUR CANVAS -->
@@ -257,7 +251,7 @@
         } else {
           let newModel;
           if (!model.victory){
-            switch (event.keyCode) {
+            switch (event.keyCode) { //arrow keys
               case 38:
                 newModel = move(model, Up);
                 break;
@@ -293,7 +287,7 @@
       updateTable();
     }
     
-    function changeLevel(index){
+    function changeLevel(index){ //Changing levels is only tested for leaderboard, TODO: ensure model.level change is correct and setmodel call is correct when more levels are added
       model.level = index + 1;
       sortLevel = index + 1;
       let newModel = reset(model);
@@ -303,18 +297,8 @@
     
     var firstMove = true;
     var timePassed = 0;
-    var sortType = "Move";
+    var sortType = "Moves";
     var sortLevel = 1;
-    
-    // function getUID() {
-    //   fetch("/getuid", {
-    //     method: "GET",
-    //   })
-    //     .then((response) => response.json())
-    //     .then(function (json) {
-    //       return json.UID;
-    //     });
-    // }
 
     function updateTable() {
       let table = document.getElementById("scoreList");
@@ -334,7 +318,7 @@
                     parseFloat(response.Moves) >
                     parseFloat(table.rows.item(i).cells.item(1).innerHTML)
                   ) {
-                    //this ensures the leaderboard is sorted
+                    //this ensures the leaderboard is sorted by lowest moves
                     break;
                   }
                 }
@@ -344,7 +328,7 @@
                     parseFloat(response.Time) >
                     parseFloat(table.rows.item(i).cells.item(2).innerHTML)
                   ) {
-                    //this ensures the leaderboard is sorted
+                    //this ensures the leaderboard is sorted by lowest times
                     break;
                   }
                 }
@@ -357,7 +341,7 @@
 
               row.cells[0].innerHTML = response.Name;
               row.cells[1].innerHTML = response.Moves;
-              row.cells[2].innerHTML = response.Time + "s";
+              row.cells[2].innerHTML = response.Time.toFixed(3) + "s";
             }
               
 
@@ -365,16 +349,6 @@
           }
         });
     }
-
-//     function chooseUser(usr) {
-//       fetch("/remove", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ Name: usr }),
-//       }).then(function (response) {
-//         // do something with the reponse
-//         updateTable();
-//       });
     
   </script>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
