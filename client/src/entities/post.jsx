@@ -14,13 +14,6 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   
 const replies = []
 
-const postReply = e => {
-  e.preventDefault();
-  replies.push(<BasicReply></BasicReply>)
-  console.log(replies)
-}
-
-  
   class BasicPost extends React.Component {
     constructor(props) {
       super(props)
@@ -28,13 +21,12 @@ const postReply = e => {
         add: {
           title: "",
           desc: "",
-          date: "",
           time: "",
+          _id: ""
         },
         delete: {
           title: "",
           desc: "",
-          date: "",
           time: "",
           _id: ""
         },
@@ -42,6 +34,12 @@ const postReply = e => {
       
     }
     
+    postReply = e => {
+      e.preventDefault();
+      replies.push(<BasicReply></BasicReply>)
+      console.log(replies)
+    }
+
     render() {
       return (
         <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
@@ -55,7 +53,7 @@ const postReply = e => {
           </Grid>
 
 
-          <form>
+          <form onSubmit={e => {this.setState({...this.state.add, title: e.target.value}) }}> 
           <label htmlFor="reply" />
           <br />
           <input
@@ -65,13 +63,13 @@ const postReply = e => {
             placeholder="235 character limit"
           />
           <br />
-          <button onClick={postReply} className="button-34" type="submit">
+          <button onClick={this.postReply} className="button-34" type="submit">
             Reply
           </button>
           </form>
 
           <div>
-              {<ul> {replies.map(item => <ul>{item}</ul> )} </ul>}
+              {<ul> {replies.map(item => <ul key="{item}">{item}</ul> )} </ul>}
           </div>
       
           </StyledPaper>

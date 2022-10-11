@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM, { render } from "react-dom";
 import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
 import Modal from '@mui/material/Modal';
-import { pink } from "@mui/material/colors";
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
 import BasicPost from "./post";
 
@@ -30,19 +29,18 @@ const centerStyle = {
 
 const blogs = []
 
-const addBlog = () => {
-    blogs.push(<BasicPost></BasicPost>)
-    console.log(blogs)
-}
-
-
 class Reminders extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: 0,
+            open: false,
             data: {name: "", description: ""}
         }
+    }
+
+    addBlog = () => {
+        blogs.push(<BasicPost></BasicPost>)
+        console.log(blogs)
     }
 
     handleOpen = e =>{
@@ -88,10 +86,10 @@ class Reminders extends React.Component {
                             {/* <BlogDesc></BlogDesc> */}
                             
                             <TextField onChange={e => {
-                                this.state.data({...this.state.data, description: e.target.value})
+                                this.setState({...this.state.data, description: e.target.value})
                                 //console.log(data)
                             }} fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Start typing here..." multiline variant="filled"/>
-                            <Button onClick={addBlog}>Post your blog!</Button>
+                            <Button onClick={this.addBlog}>Post your blog!</Button>
                             <Button onClick={this.handleClose}>Cancel</Button>
                         </Box>
                     </Box>
@@ -101,7 +99,7 @@ class Reminders extends React.Component {
 
 
             <div>
-                {<ul> {blogs.map(item => <ul>{item}</ul> )} </ul>}
+                {<ul> {blogs.map(item => <ul key="{item}">{item}</ul> )} </ul>}
             </div>
         </div>
         );
