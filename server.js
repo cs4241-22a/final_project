@@ -117,6 +117,10 @@ app.get("/assets/favicon-32.ico", loggedIn, (req, res) => {
   res.sendFile(__dirname + "/assets/favicon-32.ico");
 });
 
+app.get("/assets/2.jpg", loggedIn, (req, res) => {
+  res.sendFile(__dirname + "/assets/2.jpg");
+});
+
 app.get("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {

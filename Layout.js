@@ -5,9 +5,6 @@ const layout = {
   },
 
   buttons: {
-    position: "absolute",
-    left: 640,
-    top: 350,
     width: 9 + "em",
   },
   
@@ -34,11 +31,11 @@ const layout = {
   //   top: 25,
   // },
 
-  resetButtons: {
-    position: "absolute",
-    left: 610,
-    top: 190,
-  },
+  // resetButtons: {
+  //   position: "absolute",
+  //   left: 610,
+  //   top: 190,
+  // },
 
   text: {
     top: 50,

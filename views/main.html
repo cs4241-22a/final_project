@@ -14,10 +14,55 @@
   <body class="hero has-background-warning-light is-fullheight py-2">
     <main class="container is-fluid has-background-warning-light">
       <div class="container has-background-warning box">
-        <div id="root"></div> <!-- THIS IS OUR CANVAS STARTING POINT -->
-        <button class="js-modal-trigger" data-target="instructions">
-          Instructions
-        </button>
+        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3">
+          <h1 class="is-size-4">Welcome to PushBox!</h1>
+          <button class="js-modal-trigger button is-info mx-3"  data-target="instructions">
+            Instructions
+          </button>
+          <button class="button is-danger mx-1" onclick="window.location.href='https://pushbox.glitch.me/logout';">
+            Log Out
+          </button>
+        </div>
+        <div class = "columns">
+          <div id="root" class="column"></div> <!-- THIS ROOT IS REPLACED WITH OUR CANVAS -->
+          <div class="column box mt-5 mb-3 mx-3">
+            <div class="is-flex is-justify-content-space-evenly is-align-content-center mb-3">
+              <div class="select">
+                <select onchange="changeLevel(this.selectedIndex);">
+                  <option>Level 1</option>
+                  <option>Level 2</option>
+                </select>
+              </div>
+              <div class="select">
+                <select onchange="changeSort(this.selectedIndex);">
+                  <option>Moves</option>
+                  <option>Time</option>
+                </select>
+              </div>
+              <h2 class="is-size-5 has-text-centered mb-3">Leaderboard</h2>
+              <div class="select" style="visibility:hidden;"><select><option>PHOLD</option></select></div>
+              <div class="select" style="visibility:hidden;"><select></select>PHOLD</div>
+            </div>
+            <table
+              style="width: 100%;"
+              id="scoreList"
+              class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Moves</th>
+                  <th>Time</th>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td>-1</td>
+                  <td>NA</td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
       </div>
     </main>
     
@@ -29,7 +74,7 @@
           <p class="is-size-3"><b>Instructions:</b></p>
           <p class="my-3 mx-5">You can use the arrow keys or the on screen buttons to move the character.
           The goal is to push each pair of matching colored blocks together to remove them from the board. <br>You may not push more than one block at a time,
-          and the goal is to clear the board in as few moves as possible.</p>
+            and the goal is to clear the board in as few moves as possible.</p>
         </div>
       </div>
 
@@ -41,25 +86,21 @@
   <script>
     const add = function (e) {
       // prevent default form action from being carried out
-      e.preventDefault();
+      // e.preventDefault();
 
       const input = document.querySelector("#yourname"),
         //clicks = document.querySelector("#clicks"),
         CPS = document.querySelector("#result");
       let json = {
-          Name: input.value,
-          Clicks: score,
-          CPS: (score / duration).toFixed(1),
-          Rating: 0,
+          Name: 0,
+          Moves: model.numMoves,
+          Time: 0,
+          Level: model.level,
           User: 0,
-          Delete: 0,
         },
         body = JSON.stringify(json);
 
-      if (
-        score !== 0 &&
-        score === parseFloat(CPS.textContent) * 10
-      ) {
+      if (model.victory == true) {
         fetch("/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -75,6 +116,7 @@
   
     
     document.addEventListener('DOMContentLoaded', () => {
+      
       // Functions to open and close a modal
       function openModal($el) {
         $el.classList.add('is-active');
@@ -117,25 +159,44 @@
           closeAllModals();
         } else {
           let newModel;
-          switch (event.keyCode) {
-                  case 38:
-                          newModel = move(model, Up);
-                          break;
-                  case 39:
-                          newModel = move(model, Right);
-                          break;
-                  case 37:
-                          newModel = move(model, Left);
-                          break;
-                  case 40:
-                          newModel = move(model, Down);
-                          break;
-                  default:
-                          newModel = model;
-                          break;
+          if (!model.victory){
+            switch (event.keyCode) {
+              case 38:
+                newModel = move(model, Up);
+                if (firstMove == true){
+                  startTimer();
+                  firstMove = false;
+                }
+                break;
+              case 39:
+                newModel = move(model, Right);
+                if (firstMove == true){
+                  startTimer();
+                  firstMove = false;
+                }
+                break;
+              case 37:
+                newModel = move(model, Left);
+                if (firstMove == true){
+                  startTimer();
+                  firstMove = false;
+                }
+                break;
+              case 40:
+                newModel = move(model, Down);
+                if (firstMove == true){
+                  startTimer();
+                  firstMove = false;
+                }
+                break;
+              default:
+                newModel = model;
+                break;
 
+            }
+            setModel(newModel);
           }
-          setModel(newModel);
+          
         }
       });
     });
@@ -143,16 +204,14 @@
     const instBtn = document.getElementById("instBtn");
     
     window.onload = function () {
-      // const button = document.getElementById("formButton");
-      // const clickArea = document.getElementById("clickarea");
-      // clickArea.style.backgroundColor = "hsl(171, 100%, 29%)";
-      // button.onclick = add;
       // updateTable();
       // const UID = (async () => {
       // const data = await getUID();
       // return data
       //})()
     };
+    
+    var firstMove = true;
     
     // function getUID() {
     //   fetch("/getuid", {
