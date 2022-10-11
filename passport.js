@@ -17,8 +17,7 @@ passport.use(
       callbackURL: "https://pushbox.glitch.me/auth/github/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      //console.log(profile.displayName);
-      return done(null, { name: profile.displayName, id: profile.id });
+      return done(null, { name: profile.username, id: profile.id });
     }
   )
 );

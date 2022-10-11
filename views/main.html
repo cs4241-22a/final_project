@@ -111,7 +111,6 @@
           updateTable();
         });
       }
-
       return false;
     };
   
@@ -246,7 +245,7 @@
             if (parseInt(response.Level,10) == parseInt(sortLevel,10)){
               let i = 0;
               if (sortType == "Moves"){
-                for (i = 1; i < table.rows.length; i++) {
+                for (i = table.rows.length-1; i > 1; i--) {
                   if (
                     parseFloat(response.Moves) >
                     parseFloat(table.rows.item(i).cells.item(1).innerHTML)
@@ -256,7 +255,7 @@
                   }
                 }
               } else {
-                for (i = 1; i < table.rows.length; i++) {
+                for (i = table.rows.length-1; i > 1; i--) {
                   if (
                     parseFloat(response.Time) >
                     parseFloat(table.rows.item(i).cells.item(2).innerHTML)
@@ -267,14 +266,14 @@
                 }
               }
 
-              let row = table.insertRow(i);
+              let row = table.insertRow(i+1);
               let Name = row.insertCell(0);
               let FMoves = row.insertCell(1);
               let FTime = row.insertCell(2);
 
               row.cells[0].innerHTML = response.Name;
               row.cells[1].innerHTML = response.Moves;
-              row.cells[2].innerHTML = response.Time;
+              row.cells[2].innerHTML = response.Time + " s";
             }
               
 
