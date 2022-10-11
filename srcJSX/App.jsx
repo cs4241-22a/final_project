@@ -1,3 +1,5 @@
+//SOURCE ONLY
+
 let model = null
 let setModel = null;
 
@@ -21,6 +23,9 @@ function App() {
         setModel(newModel);
   }
 
+  //REMEMBER: if you modify this file at all, run 'npm run build' to compile the jsx to js-- 
+  //this will overwrite the versions in lib
+  
   return(
     <main ref={appRef}>
       <div className = "is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">

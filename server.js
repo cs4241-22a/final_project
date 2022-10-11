@@ -131,12 +131,12 @@ app.get("/public/scripts.js", loggedIn, (req, res) => {
   res.sendFile(__dirname + "/public/scripts.js");
 });
 
-app.get("/index.jsx", loggedIn, (req, res) => {
-  res.sendFile(__dirname + "/index.jsx");
+app.get("/lib/index.js", loggedIn, (req, res) => {
+  res.sendFile(__dirname + "/lib/index.js");
 });
 
-app.get("/App.jsx", loggedIn, (req, res) => {
-  res.sendFile(__dirname + "/App.jsx");
+app.get("/lib/App.js", loggedIn, (req, res) => {
+  res.sendFile(__dirname + "/lib/App.js");
 });
 
 app.get("/Layout.js", loggedIn, (req, res) => {
