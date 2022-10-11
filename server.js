@@ -154,6 +154,11 @@ app.use((req, res, next) => {
     }
 });
 
+// user stuff. should require you to be authenticated
+app.get("/username", (req, res) => {
+    res.end(JSON.stringify(req.body.username));
+})
+
 // recipe db interaction
 
 // takes a username (assumed to be unique) and returns the MongoDB id associated with it

@@ -128,8 +128,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <Header />
-                {/* originally id was in the App div, but want the header to span entire page */}
+                {/* todo: set loggedIn based off of if there's a current user. accountButtons is true on main page, false on login + register */}
+                <Header accountButtons={true} loggedIn={false} />
                 <body id='basic'>
                     <Table items={this.state.recipes} />
                 </body>
