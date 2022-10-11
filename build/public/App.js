@@ -73,18 +73,11 @@ class App extends React.Component {
           numPeople: 4,
           user: "test2"
         }
-      ]
+      ],
+      user: false
     };
     console.log("State:");
     console.log(this.state);
-  }
-  load() {
-    fetch("/recipedata", {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((response) => response.json()).then((res) => this.setState((prevState) => ({recipes: [...prevState.recipes, ...res]})));
   }
   componentDidMount() {
     fetch("/recipedata", {
@@ -98,13 +91,26 @@ class App extends React.Component {
       console.log("Current state");
       console.log(this.state);
     });
+    fetch("/getUser", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        return false;
+      } else
+        return response.json();
+    }).then((data) => {
+      this.setState({user: data});
+    });
   }
   render() {
     return /* @__PURE__ */ React.createElement("div", {
       className: "App"
     }, /* @__PURE__ */ React.createElement(Header, {
       accountButtons: true,
-      loggedIn: false
+      loggedIn: this.state.user != false
     }), /* @__PURE__ */ React.createElement("body", {
       id: "basic"
     }, /* @__PURE__ */ React.createElement(Table, {
