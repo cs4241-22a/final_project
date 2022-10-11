@@ -117,14 +117,12 @@
   
     function startTimer() {
       beginTime = new Date().getTime();
-      console.log("START");
       let timerTracker = setInterval(function () {
         timePassed = (new Date().getTime() - beginTime) / 1000;
 
         //after game finished
         if (model.victory) {
           clearInterval(timerTracker);
-          console.log(timePassed);
         }
       }, 1);
     }
@@ -244,7 +242,6 @@
       })
         .then((response) => response.json())
         .then(function (json) {
-          console.log(json);
           for (let response of json) {
             if (parseInt(response.Level,10) == parseInt(sortLevel,10)){
               let i = 0;
