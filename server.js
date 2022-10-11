@@ -242,6 +242,7 @@ app.post("/remove-item", (req, resp) => {
                             break;
                     }
                     if (!array) {
+                        resp.status(404);
                         resp.end();
                     }
                     array = array.filter(i => i !== data.itemName);
@@ -249,10 +250,7 @@ app.post("/remove-item", (req, resp) => {
                         if (err) {
                             throw err;
                         } else {
-                            const body = {
-                                error: false
-                            }
-                            resp.json(JSON.stringify(body));
+                            resp.status(200);
                             resp.end();
                         }
                     });

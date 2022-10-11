@@ -52,7 +52,8 @@ export default function HomePage() {
       grainsData={grainsData}
       meatData={meatData}
       produceData={produceData}
-      otherData={otherData}/>
+      otherData={otherData}
+      fetchUserData={fetchUserData}/>
     </div>
   )
 }
@@ -127,19 +128,19 @@ function Sections(props) {
 
   return (
     <div className="home-page-sections">
-      <HomePageSection data={props.cannedJarredData} title="Canned / Jarred Goods" />
-      <HomePageSection data={props.dairyData} title="Dairy" />
-      <HomePageSection data={props.dryBakingData} title="Dry / Baking Goods" />
-      <HomePageSection data={props.frozenData} title="Frozen" />
-      <HomePageSection data={props.grainsData} title="Grains" />
-      <HomePageSection data={props.meatData} title="Meat" />
-      <HomePageSection data={props.produceData} title="Produce" />
-      <HomePageSection data={props.otherData} title="Other" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.cannedJarredData} title="Canned / Jarred Goods" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.dairyData} title="Dairy" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.dryBakingData} title="Dry / Baking Goods" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.frozenData} title="Frozen" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.grainsData} title="Grains" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.meatData} title="Meat" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.produceData} title="Produce" />
+      <HomePageSection fetchUserData={props.fetchUserData} data={props.otherData} title="Other" />
     </div>
   )
 }
 
-function HomePageSection({title, data}) {
+function HomePageSection({fetchUserData, title, data}) {
 
   const [itemsDeployed, setItemsDeployed] = useState(false);
 
@@ -153,7 +154,7 @@ function HomePageSection({title, data}) {
     }
     return data.map((item, index) => {
       return (
-        <GroceryItem visible={itemsDeployed} title={item.title} index={index} group={title} />
+        <GroceryItem fetchUserData={fetchUserData} visible={itemsDeployed} title={item} index={index} group={title} />
       )
     })
   }
@@ -170,17 +171,21 @@ function HomePageSection({title, data}) {
   )
 }
 
-function GroceryItem({title, group, index, visible}) {
+function GroceryItem({title, group, index, visible, fetchUserData}) {
 
   function deleteItem() {
     console.log("Deleting item: " + title);
     let body = JSON.stringify({ itemType: group, itemName: title})
-    fetch('remove-item', {
+    fetch('/remove-item', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: body
     })
-    .then( response => response.json() )
-    .then( json => console.log(json) )
+    .then( response => {
+      if (response.status === 200) {
+        fetchUserData();
+      }
+    } );
   }
 
   return (
