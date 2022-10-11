@@ -1,6 +1,3 @@
-// server.js
-// where your node app starts
-
 // init project
 require("dotenv").config();
 const express = require("express");
@@ -78,6 +75,7 @@ client
 
 collection = client.db("ScoreDB").collection("scores");
 
+//ROUTES
 app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect("/app");
@@ -170,25 +168,22 @@ app.post("/add", (req, res) => {
   // assumes only one object to insert
   client.connect(() => {
     let toMongo = req.body;
-    // if (parseFloat(toMongo.Clicks) == parseFloat(toMongo.CPS) * 10) {
-      //toMongo.Rating = rater(toMongo.CPS);
-      toMongo.Name = _USERNAME;
-      toMongo.User = _USERID;
-      collection.findOne({User: _USERID}).then(function(doc){
-        if (doc != null) {
-          if (parseInt(doc.Moves, 10) > parseInt(toMongo.Moves, 10)) {
-            collection.updateOne({User:_USERID}, { $set: {Moves:toMongo.Moves}});
-          }
-          if (parseFloat(doc.Time) > parseFloat(toMongo.Time)) {
-            collection.updateOne({User:_USERID}, { $set: {Time:toMongo.Time}});
-          }
-          collection.updateOne({User:_USERID}, { $set: {Name:toMongo.Name}}).then((result) => res.json(result));
-        } else {
-          collection.insertOne(toMongo).then((result) => res.json(result));
+    toMongo.Name = _USERNAME;
+    toMongo.User = _USERID;
+    collection.findOne({User: _USERID}).then(function(doc){
+      if (doc != null) {
+        if (parseInt(doc.Moves, 10) > parseInt(toMongo.Moves, 10)) {
+          collection.updateOne({User:_USERID}, { $set: {Moves:toMongo.Moves}});
         }
-      });
-      return true;
-    // }
+        if (parseFloat(doc.Time) > parseFloat(toMongo.Time)) {
+          collection.updateOne({User:_USERID}, { $set: {Time:toMongo.Time}});
+        }
+        collection.updateOne({User:_USERID}, { $set: {Name:toMongo.Name}}).then((result) => res.json(result));
+      } else {
+        collection.insertOne(toMongo).then((result) => res.json(result));
+      }
+    });
+    return true;
   });
 });
 
@@ -235,16 +230,8 @@ app.get("/getScores", loggedIn, (req, res) => {
   });
 });
 
+
+//LISTEN
 app.listen(8000, () => {
   console.log("Server is up and running at the port 8000");
 });
-
-// function rater(cps) {
-//   let rating = "Average";
-//   if (cps < 4) {
-//     rating = "Below Average";
-//   } else if (cps > 7) {
-//     rating = "Above Average";
-//   }
-//   return rating;
-// }

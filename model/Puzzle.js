@@ -24,5 +24,3 @@ const configuration_1 = {
 };
 
 var level1 = JSON.parse(JSON.stringify(configuration_1));
-
-//export {configuration_1};

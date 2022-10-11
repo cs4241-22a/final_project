@@ -1,7 +1,7 @@
 {
   "name": "PushBox",
   "version": "1.0.0",
-  "description": "A game with an online leaderboard",
+  "description": "A puzzle game with an online leaderboard",
   "main": "views/index.html",
   "scripts": {
     "start": "node server.js"

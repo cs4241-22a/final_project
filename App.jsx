@@ -1,14 +1,3 @@
-// import logo from './logo.svg';
-// import React from 'react';
-// import { layout } from './Layout.js';
-// import { redrawCanvas } from './boundary/Boundary.js'
-// import Model from './model/Model.js';
-// import {configuration_1} from './model/Puzzle.js';
-// import {Up, Down, Left, Right} from './model/Model.js';
-// import {move, reset} from './controller/Controller.js';
-
-
-// let [model, setModel] = null;
 let model = null
 let setModel = null;
 
@@ -87,6 +76,3 @@ function App() {
     </main>
   );
 }
-
-
-// export default App;
