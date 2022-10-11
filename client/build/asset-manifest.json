@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.dd73d909.css",
-    "main.js": "/static/js/main.bd06a3cd.js",
+    "main.js": "/static/js/main.05e7d8aa.js",
     "static/media/iStock-grocery-store.jpg": "/static/media/iStock-grocery-store.f191d1736390b4c6bc43.jpg",
     "static/media/logo.svg": "/static/media/logo.221a04f8eca85ef3f9894de082cc42e1.svg",
     "index.html": "/index.html",
     "main.dd73d909.css.map": "/static/css/main.dd73d909.css.map",
-    "main.bd06a3cd.js.map": "/static/js/main.bd06a3cd.js.map"
+    "main.05e7d8aa.js.map": "/static/js/main.05e7d8aa.js.map"
   },
   "entrypoints": [
     "static/css/main.dd73d909.css",
-    "static/js/main.bd06a3cd.js"
+    "static/js/main.05e7d8aa.js"
   ]
 }
