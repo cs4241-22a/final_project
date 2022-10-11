@@ -1,6 +1,6 @@
 import express from "express";
 import Cells from './DB_Schema/cellSchema';
-import Users, { IUser } from './DB_Schema/userSchema';
+import Users, { IUser } from './DB_Schema/userSchema.js';
 import mongoose, { Collection } from "mongoose";
 
 const port = '3000';
