@@ -11,9 +11,7 @@ const auth = require('../middleware/Authorization')
 // Ideally stored in a database
 let refreshTokens = []
 
-authRouter.get('/game/:authToken', (req, res, next) => {
-    req.headers['authorization'] = req.params.authToken
-    auth(req, res, next)
+authRouter.get('/game/:authToken', auth, (req, res, next) => {
     if (req.user) {
         res.redirect('/game')
     } else {

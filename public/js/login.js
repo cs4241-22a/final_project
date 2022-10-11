@@ -21,14 +21,16 @@ loginForm.addEventListener('submit', async e => {
     })
 
     const responseJSON = await response.json()
-    console.log(responseJSON)
+    //console.log("ASDDDSADDSD ", responseJSON)
     if (responseJSON.status == "FAILED") {
         alert(responseJSON.message)
+        loginForm.elements['loginPassword'].value = ""
     }
 
     if (responseJSON.status == "SUCCESS") {
         localStorage.setItem('auth', JSON.stringify({ username: responseJSON.username, accessToken: responseJSON.accessToken }))
 
+        console.log("success")
         //TODO
         window.location = `/auth/game/${responseJSON.accessToken}`
     }

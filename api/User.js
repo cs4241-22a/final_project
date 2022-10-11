@@ -117,14 +117,16 @@ userRouter.post('/login', (req, res) => {
                                     data: result,
                                     accessToken: accessToken
                                 })
-                            } else {
+                            }
+                            else {
                                 console.error("invalid password")
                                 res.json({
                                     status: "FAILED",
                                     message: "Invalid password entered!"
                                 })
                             }
-                        }).catch(e => {
+                        })
+                        .catch(e => {
                             console.error("error comparing password")
                             res.json({
                                 status: "FAILED",
