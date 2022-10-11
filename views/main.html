@@ -14,7 +14,7 @@
   <body class="hero has-background-warning-light is-fullheight py-2">
     <main class="container is-fluid has-background-warning-light">
       <div class="container has-background-warning box">
-        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3">
+        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3 box is-flex-shrink-5">
           <h1 class="is-size-4">Welcome to PushBox!</h1>
           <button class="js-modal-trigger button is-info mx-3"  data-target="instructions">
             Instructions
@@ -51,8 +51,8 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Moves</th>
-                  <th>Time</th>
+                  <th>Fewest Moves</th>
+                  <th>Fastest Time</th>
                 </tr>
                 <tr>
                   <td>Name</td>
@@ -74,7 +74,8 @@
           <p class="is-size-3"><b>Instructions:</b></p>
           <p class="my-3 mx-5">You can use the arrow keys or the on-screen buttons to move the character.
           The goal is to push each pair of matching colored blocks together to remove them from the board. <br>You may not push more than one block at a time,
-            and the goal is to clear the board in as few moves as possible.</p>
+            and the goal is to clear the board in as few moves as possible.</p> 
+          <aside>Press 'Submit' after finishing a level to submit your score to the leaderboard. Submit better scores to update your standing, only your best times and move counts will be stored.</aside>
         </div>
       </div>
 
@@ -92,9 +93,9 @@
         //clicks = document.querySelector("#clicks"),
         CPS = document.querySelector("#result");
       let json = {
-          Name: 0,
+          Name: "PHOLDER",
           Moves: model.numMoves,
-          Time: 0,
+          Time: timePassed,
           Level: model.level,
           User: 0,
         },
@@ -114,11 +115,23 @@
       return false;
     };
   
-    function startTimer($) {
+    function startTimer() {
+      beginTime = new Date().getTime();
       console.log("START");
+      let timerTracker = setInterval(function () {
+        timePassed = (new Date().getTime() - beginTime) / 1000;
+
+        //after game finished
+        if (model.victory) {
+          clearInterval(timerTracker);
+          console.log(timePassed);
+        }
+      }, 1);
     }
     
     document.addEventListener('DOMContentLoaded', () => {
+      
+      updateTable();
       
       // Functions to open and close a modal
       function openModal($el) {
@@ -190,15 +203,27 @@
     
     const instBtn = document.getElementById("instBtn");
     
-    window.onload = function () {
-      // updateTable();
-      // const UID = (async () => {
-      // const data = await getUID();
-      // return data
-      //})()
-    };
+    function changeSort(index){
+      if (index == 0){
+        sortType = "Moves"
+      } else {
+        sortType = "Times"
+      }
+      updateTable();
+    }
+    
+    function changeLevel(index){
+      model.level = index + 1;
+      sortLevel = index + 1;
+      let newModel = reset(model);
+      setModel(newModel);
+      updateTable();
+    }
     
     var firstMove = true;
+    var timePassed = 0;
+    var sortType = "Move";
+    var sortLevel = 1;
     
     // function getUID() {
     //   fetch("/getuid", {
@@ -210,53 +235,56 @@
     //     });
     // }
 
-//     function updateTable() {
-//       let lastSpot = document.documentElement.scrollTop || document.body.scrollTop;
-//       let table = document.getElementById("scoreList");
-//       table.innerHTML =
-//         "<thead><tr><th>Name</th><th>Clicks</th><th>Rating</th><th>Delete?</th></tr></thead>";
-//       fetch("/getScores", {
-//         method: "GET",
-//       })
-//         .then((response) => response.json())
-//         .then(function (json) {
-//           for (let response of json) {
-//             let i = 0;
-//             for (i = 1; i < table.rows.length; i++) {
-//               if (
-//                 parseInt(response.Clicks, 10) >
-//                 parseInt(table.rows.item(i).cells.item(1).innerHTML, 10)
-//               ) {
-//                 //this ensures the leaderboard is sorted
-//                 break;
-//               }
-//             }
-//             let row = table.insertRow(i);
-//             let Name = row.insertCell(0);
-//             let Clicks = row.insertCell(1);
-//             let Rating = row.insertCell(2);
-//             let End = row.insertCell(3);
+    function updateTable() {
+      let table = document.getElementById("scoreList");
+      table.innerHTML =
+        "<thead><tr><th>Name</th><th>Fewest Moves</th><th>Fastest Time</th></tr></thead>";
+      fetch("/getScores", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then(function (json) {
+          console.log(json);
+          for (let response of json) {
+            if (parseInt(response.Level,10) == parseInt(sortLevel,10)){
+              let i = 0;
+              if (sortType == "Moves"){
+                for (i = 1; i < table.rows.length; i++) {
+                  if (
+                    parseFloat(response.Moves) >
+                    parseFloat(table.rows.item(i).cells.item(1).innerHTML)
+                  ) {
+                    //this ensures the leaderboard is sorted
+                    break;
+                  }
+                }
+              } else {
+                for (i = 1; i < table.rows.length; i++) {
+                  if (
+                    parseFloat(response.Time) >
+                    parseFloat(table.rows.item(i).cells.item(2).innerHTML)
+                  ) {
+                    //this ensures the leaderboard is sorted
+                    break;
+                  }
+                }
+              }
 
-//             row.cells[0].innerHTML = response.Name;
-//             row.cells[1].innerHTML = response.Clicks;
-//             row.cells[2].innerHTML = response.Rating;
+              let row = table.insertRow(i);
+              let Name = row.insertCell(0);
+              let FMoves = row.insertCell(1);
+              let FTime = row.insertCell(2);
 
-//             if (parseInt(response.Delete) == 1) {
-//               var btn = document.createElement("button");
-//               btn.type = "button";
-//               btn.innerHTML = "Delete this score";
-//               btn.className = "delete is-medium";
-//               btn.onclick = (function (entry) {
-//                 return function () {
-//                   chooseUser(response.Name);
-//                 };
-//               })(response.Name);
-//               End.appendChild(btn);
-//             }
-//           }
-//         window.scrollTo(0,lastSpot);
-//         });
-//     }
+              row.cells[0].innerHTML = response.Name;
+              row.cells[1].innerHTML = response.Moves;
+              row.cells[2].innerHTML = response.Time;
+            }
+              
+
+
+          }
+        });
+    }
 
 //     function chooseUser(usr) {
 //       fetch("/remove", {

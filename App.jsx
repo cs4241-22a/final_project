@@ -74,7 +74,7 @@ function App() {
           <label className="box has-background-black-ter has-text-white-ter mt-5 mr-2">
                   {"number of moves: " + model.numMoves}
           </label>
-          <button id="formButton" onClick={(e) => add()} className="button is-success">submit</button>
+          <button id="formButton" onClick={(e) => add()} className="button is-success">Submit</button>
           <button className="button is-danger" 
                   onClick={(e) => resetHandler()} 
                   >Reset
