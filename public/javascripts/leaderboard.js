@@ -62,6 +62,18 @@ window.onload = function() {
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             scoreCell.innerHTML = "Average Time";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+
+            for(let i = 0; i < response.length; i++)
+            {
+                var row = table.insertRow(1);
+                var userCell = row.insertCell(0);
+                var scoreCell = row.insertCell(1);
+
+                userCell.innerHTML = response[i].owner_id;
+                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.innerHTML = response[i].score;
+                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            }
     })
     })
 
@@ -86,6 +98,18 @@ window.onload = function() {
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             scoreCell.innerHTML = "Time";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+
+            for(let i = 0; i < response.length; i++)
+            {
+                var row = table.insertRow(1);
+                var userCell = row.insertCell(0);
+                var scoreCell = row.insertCell(1);
+
+                userCell.innerHTML = response[i].owner_id;
+                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.innerHTML = response[i].score;
+                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            }
     })
     })
 }
