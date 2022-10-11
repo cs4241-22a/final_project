@@ -21,7 +21,7 @@ export function ActiveEmoji() {
   }
 
   return (
-    <Box sx={{ position: "absolute", bottom: 0, p: 0, m: "12px" }}>
+    <Box position="absolute" bottom={0} p={0} m="12px">
       {selectActive ? <EmojiPicker onEmojiClick={setEmoji} /> : null}
       <Tooltip title={emojiName} placement="right" onClick={setSelecting}>
         <IconButton size="large">
