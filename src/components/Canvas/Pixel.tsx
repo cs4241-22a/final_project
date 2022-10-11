@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 
-const boxSX = {
+const container = {
   "&:hover": {
     border: "1px solid grey",
-    color: "gray",
   },
 };
 
@@ -29,7 +28,7 @@ export function Pixel({ size, activeEmoji }: PixelProps) {
       width={size}
       height={size}
       onClick={update}
-      sx={boxSX}
+      sx={container}
     >
       <Emoji unified={emoji} size={size * 0.8} />
     </Box>

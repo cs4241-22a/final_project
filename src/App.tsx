@@ -24,3 +24,11 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+// Steps on what to do:
+// - npm install
+// - npm run build
+// - npm start
+// - change login to false
+// - finish login page (use https://mui.com/core/)
+//     - dont worry about component folder rn. just build it all in the LoginScreen.tsx file

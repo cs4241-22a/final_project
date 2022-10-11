@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import EmojiPicker, { EmojiClickData, Emoji } from "emoji-picker-react";
+import EmojiPicker, { EmojiClickData, Emoji, Theme } from "emoji-picker-react";
 
 /* Credit: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component */
-function useOutsideAlerter(
+function HandleBlur(
   ref: React.MutableRefObject<any>,
   set: React.Dispatch<React.SetStateAction<boolean>>
 ) {
@@ -31,7 +31,7 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
   const [selectActive, setSelectActive] = useState<boolean>(false);
 
   const focusRef = useRef(null);
-  useOutsideAlerter(focusRef, setSelectActive);
+  HandleBlur(focusRef, setSelectActive);
 
   function set(emojiData: EmojiClickData, event: MouseEvent) {
     setEmojiName(
@@ -48,11 +48,11 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
 
   return (
     <Box position="absolute" bottom={0} p={0} m="12px">
-      {selectActive ? (
+      {selectActive && (
         <div ref={focusRef}>
-          <EmojiPicker onEmojiClick={set} />
+          <EmojiPicker onEmojiClick={set} theme={Theme.AUTO} />
         </div>
-      ) : null}
+      )}
       <Tooltip title={emojiName} placement="right" onClick={setSelecting}>
         <IconButton size="large">
           <Emoji unified={activeEmoji} size={64} />

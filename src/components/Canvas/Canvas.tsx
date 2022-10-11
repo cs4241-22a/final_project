@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { ActiveEmoji } from "./ActiveEmoji";
 import { GridMemo } from "./Grid";
 import { Box, Toolbar } from "@mui/material";
@@ -13,8 +13,8 @@ export type CanvasProps = {
 };
 
 export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
-  const grid = useRef([...Array(size * size)].map(() => ""));
   const [activeEmoji, setActiveEmoji] = useState("1f600");
+  const grid = useRef([...Array(size * size)].map(() => ""));
 
   return (
     <Box
