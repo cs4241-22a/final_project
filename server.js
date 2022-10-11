@@ -65,6 +65,10 @@ app.get("/user-data", (req, resp) => {
                 if (err) {
                     throw err;
                 } else {
+                    if (!res || !res.userData) {
+                        resp.status(404);
+                        resp.end();
+                    }
                     // Found user document
                     const body = {
                         cannedJarredData: res.userData.cannedJarredData,
@@ -154,15 +158,14 @@ app.post("/add-item", (req, resp) => {
                     if (!array) {
                         resp.end();
                     }
+                    console.log("Array valid");
                     array.push(data.itemName);
-                    db.collection("users").updateOne({"_id": userId}, { $set: {field: array} }, (err, result) => {
+                    db.collection("users").updateOne({"_id": userId}, { $set: {[field]: array} }, (err, result) => {
+                        console.log(result);
                         if (err) {
                             throw err;
                         } else {
-                            const body = {
-                                error: false
-                            }
-                            resp.json(JSON.stringify(body));
+                            resp.status(200);
                             resp.end();
                         }
                     });
@@ -242,7 +245,7 @@ app.post("/remove-item", (req, resp) => {
                         resp.end();
                     }
                     array = array.filter(i => i !== data.itemName);
-                    db.collection("users").updateOne({"_id": userId}, { $set: {field: array} }, (err, result) => {
+                    db.collection("users").updateOne({"_id": userId}, { $set: {[field]: array} }, (err, result) => {
                         if (err) {
                             throw err;
                         } else {
