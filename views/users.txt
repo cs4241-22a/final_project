@@ -77,8 +77,8 @@
 		"youngest": 23
 		"oldest": 26
 		"distance": 3000
-		"user": 
-		"pic":
+		"user": iFoughtALizard10
+		"pic": https://unsplash.com/photos/iFgRcqHznqg
 	},
 	"User6": {
 		"firstName": 
