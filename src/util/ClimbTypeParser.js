@@ -16,4 +16,13 @@ export default class ClimbTypeUtils {
             return "Boulder"
         }
     }
+
+    getType(type) {
+        console.log()
+        if (type[type.selectedIndex].value === "boulder") {
+            return "boulder";
+        } else if (type[type.selectedIndex].value === "lead" || type[type.selectedIndex].value === "leadtoprope" || type[type.selectedIndex].value === "toprope") {
+            return "rope"
+        }
+    }
 }

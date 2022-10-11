@@ -5,7 +5,7 @@ import GymMap from "./visuals/GymMap";
 
 let instance = null
 
-export default class App
+export default class App                                               
 {
     constructor()
     {
@@ -30,18 +30,34 @@ export default class App
             
             
         });
+
+        window.addEventListener('load', () => {
+            console.log("Window loaded")
+            const applyButton = document.getElementById("apply")
+            applyButton.onclick = () => {this.applyFilters()}
+        })
+
+    }
+
+    applyFilters() {
+        let gradesSelect = document.querySelector("#grades"),
+            climbTypeSelect = document.querySelector("#climbType")
+
+        let gradeValue = gradesSelect[gradesSelect.selectedIndex].value,
+            climbTypeValue = climbTypeSelect[climbTypeSelect.selectedIndex].value
+
+        console.log("called apply with: " + gradeValue + ", " + climbTypeValue)
+
+        this.onFilterUpdate(gradeValue, climbTypeValue)
     }
 
     /**
      * Called when filters are applied
      */
-    onFilterUpdate()
-    {
-        let gradeFilter = ""
-        let typeFilter = ""
+    onFilterUpdate(gradeChoice, typeChoice) {
 
         //Updates the filtered list of climbs
-        this.filteredClimbManager.updateFilters(gradeFilter, typeFilter)
+        this.filteredClimbManager.updateFilters(gradeChoice, typeChoice)
 
         //Sets the interactive map section highlights
         this.gymMap.updateHighlightedSections(this.filteredClimbManager.getSectionsOfClimbs())

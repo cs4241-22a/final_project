@@ -33,7 +33,7 @@ const addClimb = function(e) {
         colorValue = color[color.selectedIndex].value,
         sectionValue = section[section.selectedIndex].value
 
-    const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, getType(type), isLead(type), isTopRope(type))
+    const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, climbTypeUtils.getType(type), isLead(type), isTopRope(type))
 
 
     mongoManager.addRoute(newClimb)
@@ -96,13 +96,4 @@ function handleDeleteClick(climb) {
     console.log("handleDeleteClick called")
     mongoManager.removeRoute(climb)
         .then(() => getTableData())
-}
-
-function getType(type) {
-    console.log()
-    if (type[type.selectedIndex].value === "boulder") {
-        return "boulder";
-    } else if (type[type.selectedIndex].value === "lead" || type[type.selectedIndex].value === "leadtoprope" || type[type.selectedIndex].value === "toprope") {
-        return "rope"
-    }
 }
