@@ -14,11 +14,102 @@ app.use( cookie({
 }))
 
 
+const current = [
+{
+    firstName: "Ben",
+    lastName: "Jamin",
+    address: "123 Banana Road",
+    email: "barjam@att.net",
+    age: "19",
+    hobbies: "DJ-ing, gaming, coding",
+    firstProject: "Visualizer for music",
+    currentProject: "Decoder for music",
+    status: "mingle",
+    youngest: "18",
+    oldest: "21",
+    distance: "20",
+    user: "benJamin4DaBananas",
+    pic: "https://unsplash.com/photos/kfN-BBbWTWo"
+},
+{
+    firstName: "Winston",
+    lastName: "Tesla",
+    address: "246 Overwatch Boulevard",
+    email: "webteam@icloud.com",
+    age: "25",
+    hobbies: "Climbing, Coding",
+    firstProject: "Team Analyzer Based on Enneagram Types",
+    currentProject: "Climbing Path Simulator",
+    status: "mingle",
+    youngest: "21",
+    oldest: "28",
+    distance: "300",
+    user: "winstonTinSpace",
+    pic: "https://unsplash.com/photos/pAtA8xe_iVM"
+},
+{
+    firstName: "Sunwoo",
+    lastName: "Han",
+    address: "324 Haven Avenue",
+    email: "shang@yahoo.com",
+    age: "23",
+    hobbies: "Cooking, Skydiving, Coding",
+    firstProject: "Cooking Simulator",
+    currentProject: "Health Application for Skydivers",
+    status: "date",
+    youngest: "22",
+    oldest: "26",
+    distance: "4000",
+    user: "jettMommy30",
+    pic: "https://unsplash.com/photos/dE6c9RZoyL8"
+},
+{
+    firstName: "Zyanya",
+    lastName: "Mondragón",
+    address: "389 Ascent Street",
+    email: "empress40@me.com",
+    age: "24",
+    hobbies: "Axe Throwing, Spending Time with Family, Coding",
+    firstProject: "Family Tree Analyzer",
+    currentProject: "None",
+    status: "date",
+    youngest: "21",
+    oldest: "26",
+    distance: "2000",
+    user: "empress1997",
+    pic: "https://unsplash.com/photos/mEZ3PoFGs_k"
+},
+{
+    firstName: "Shaun",
+    lastName: "Chi",
+    address: "130 Ta Lo Circle",
+    email: "10rings@me.com",
+    age: "25",
+    hobbies: "Karaoke, Martial Arts, Coding",
+    firstProject: "Calculator Application",
+    currentProject: "Map Editor Application for Overseas",
+    status: "mingle",
+    youngest: "23",
+    oldest: "26",
+    distance: "3000",
+    user: "iFoughtALizard10",
+    pic: "https://unsplash.com/photos/iFgRcqHznqg"
+}
+]
+
 const clientId = '903729e701c50a0a540c';
 const clientSecret = '11c4d32e3febd2e660acae7b806438ff3c44384f';
 
 const axios = require('axios');
 let token = null;
+
+
+// app.get('/test', (req, res) => {
+//
+//     for (let i = 0; i < 5; i++){
+//         client.db( 'Final' ).collection( 'profiles' ).insertOne(current[i]);
+//     }
+// })
 
 app.get('/github', (req, res) => {
     // res.redirect("main.html");

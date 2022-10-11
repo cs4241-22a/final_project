@@ -6,6 +6,13 @@ window.onload = function() {
 
     let profile = null;
 
+    let age = null;
+
+    // fetch('/test', {
+    //     method: 'GET',
+    //     headers: {'Content-Type': 'application/json'}
+    // })
+
     fetch('/getUser', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -24,6 +31,7 @@ window.onload = function() {
             json.forEach((item) => {
                 if (item.user === user) {
                     profile = item;
+                    age = item.age;
                 }
             })
         })
@@ -36,7 +44,7 @@ window.onload = function() {
         .then((json) => {
             json.forEach((item) => {
                 if(item.user != user){
-                    if (( parseInt(profile.age)>= parseInt(item.youngest)) && (parseInt(profile.age) <= parseInt(item.oldest))){
+                    if ((( item.age >= (profile.youngest)) && (item.age <= (profile.oldest))) && (( profile.age >= (item.youngest)) && (profile.age <= (item.oldest)))){
                         if (profile.status === item.status){
                             console.log(item);
                         }
