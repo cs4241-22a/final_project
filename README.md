@@ -5,7 +5,6 @@ Authors:
 - Mark Renzi
 
 TODO:
-- make output scalable
 - add scoreboard functionality
 - add more levels
   - maybe add procedural level generation
