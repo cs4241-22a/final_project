@@ -11,7 +11,8 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   maxWidth: 400,
   color: theme.palette.text.primary,
 }));
-  
+
+
 const replies = []
 
   class BasicPost extends React.Component {
@@ -34,8 +35,8 @@ const replies = []
       
     }
     
-    postReply = e => {
-      e.preventDefault();
+    postReply = () => {
+      // e.preventDefault();
       replies.push(<BasicReply></BasicReply>)
       console.log(replies)
     }
@@ -52,22 +53,24 @@ const replies = []
           </Grid>
           </Grid>
 
-
-          <form onSubmit={e => {this.setState({...this.state.add, title: e.target.value}) }}> 
-          <label htmlFor="reply" />
-          <br />
-          <input
-            id = "reply"
-            type="text"
-            name="reply"
-            placeholder="235 character limit"
-          />
-          <br />
-          <button onClick={this.postReply} className="button-34" type="submit">
-            Reply
-          </button>
-          </form>
-
+          <Box
+                  component="form"
+              sx={{
+                  '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
+                  }}
+                  noValidate
+                  autoComplete="off"
+              >
+                  <Typography id="createBlog" variant="h6" component="h2">
+                      "Username" Posted: "Title" at "time"
+                  </Typography>
+                  
+                  {/* <BlogDesc></BlogDesc> */}
+                  
+                  <TextField fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Reply here..." multiline variant="filled"/>
+                  <Button add={this.state.add} onClick={this.postReply}>Post your reply!</Button>
+                  <Button onClick={e => { this.setState({...this.state.data, description: e.target.value}) }}>Load replies!</Button>
+              </Box>
           <div>
               {<ul> {replies.map(item => <ul>{item}</ul> )} </ul>}
           </div>

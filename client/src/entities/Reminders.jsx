@@ -74,7 +74,7 @@ class Reminders extends React.Component {
                     <Box
                             component="form"
                         sx={{
-                            '& > :not(style)': { m: 1, width: '45ch', height: '10ch'},
+                            '& > :not(style)': { m: 0, width: '45ch', height: '10ch'},
                             }}
                             noValidate
                             autoComplete="off"
@@ -86,9 +86,11 @@ class Reminders extends React.Component {
                             {/* <BlogDesc></BlogDesc> */}
                             
                             <TextField onChange={e => {
+                                this.setState({...this.state.data, title: e.target.value})
+                            }} fullWidth inputProps={{ maxLength: 250 }} id="blogTitle" label="Enter title here..." multiline variant="filled"/>
+                            <TextField onChange={e => {
                                 this.setState({...this.state.data, description: e.target.value})
-                                //console.log(data)
-                            }} fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Start typing here..." multiline variant="filled"/>
+                            }} fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Enter blog here..." multiline variant="filled"/>
                             <Button onClick={this.addBlog}>Post your blog!</Button>
                             <Button onClick={this.handleClose}>Cancel</Button>
                         </Box>
