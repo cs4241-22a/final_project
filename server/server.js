@@ -1,6 +1,9 @@
 import express from "express";
 import Users from './DB_Schema/userSchema.js';
 import mongoose from "mongoose";
+import * as dotenv from "dotenv";
+// load .env file
+dotenv.config();
 const port = '3000';
 // Setup static express server
 const app = express();

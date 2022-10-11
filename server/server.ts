@@ -2,6 +2,10 @@ import express from "express";
 import Cells from './DB_Schema/cellSchema';
 import Users, { IUser } from './DB_Schema/userSchema.js';
 import mongoose, { Collection } from "mongoose";
+import * as dotenv from "dotenv"
+
+// load .env file
+dotenv.config();
 
 const port = '3000';
 
@@ -13,7 +17,6 @@ app.use(express.static('build'));
 const listenPort = process.env.PORT || port;
 app.listen(listenPort);
 console.log(`Listening on port ${listenPort}`);
-
 
 
 //Setup mongoDB connection
