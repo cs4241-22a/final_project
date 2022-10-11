@@ -12,28 +12,13 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
   
+const replies = []
 
-const postReply = event => {
-  event.preventDefault();
-  this.state.replyTable.push(<BasicReply></BasicReply>)
+const postReply = e => {
+  e.preventDefault();
+  replies.push(<BasicReply></BasicReply>)
+  console.log(replies)
 }
-
-
-
-// const replyForm = <form>
-// <label htmlFor="reply" />
-// <br />
-// <input
-//   id = "reply"
-//   type="text"
-//   name="reply"
-//   placeholder="235 character limit"
-// />
-// <br />
-// <button onClick={postReply} className="button-34" role="button">
-//   Reply
-// </button>
-// </form>;
 
   
   class BasicPost extends React.Component {
@@ -53,7 +38,6 @@ const postReply = event => {
           time: "",
           _id: ""
         },
-        replyTable: [],
       }
       
     }
@@ -61,44 +45,41 @@ const postReply = event => {
     render() {
       return (
         <div> <StyledPaper sx={{ my: 1, mx: 'auto', p: 2, }} >
-        <Grid container wrap="nowrap" spacing={2}>
-        <Grid item>
-        <Avatar>W</Avatar>
-        </Grid>
-        <Grid item xs>
-        <Typography>{"hifaf awwfaf aw fafaw fwa all!"}</Typography>
-        </Grid>
-        </Grid>
+          <Grid container wrap="nowrap" spacing={2}>
+          <Grid item>
+          <Avatar>W</Avatar>
+          </Grid>
+          <Grid item xs>
+          <Typography>{"hifaf awwfaf aw fafaw fwa all!"}</Typography>
+          </Grid>
+          </Grid>
 
-        <div id="insertReplyPosts">
-            {<ul> {this.state.replyTable.map(item => <ul>{item}</ul> )} </ul>}
-        </div>
 
-        <form>
-        <label htmlFor="reply" />
-        <br />
-        <input
-          id = "reply"
-          type="text"
-          name="reply"
-          placeholder="235 character limit"
-        />
-        <br />
-        <button onSubmit={postReply} className="button-34" type="submit">
-          Reply
-        </button>
-        </form>
-    
-        </StyledPaper>
+          <form>
+          <label htmlFor="reply" />
+          <br />
+          <input
+            id = "reply"
+            type="text"
+            name="reply"
+            placeholder="235 character limit"
+          />
+          <br />
+          <button onClick={postReply} className="button-34" type="submit">
+            Reply
+          </button>
+          </form>
 
-        {/* //replies */}
-        
+          <div>
+              {<ul> {replies.map(item => <ul>{item}</ul> )} </ul>}
+          </div>
+      
+          </StyledPaper>
+
         </div>
         
         );
       };
-      
-      
       
     }
     export default BasicPost;
