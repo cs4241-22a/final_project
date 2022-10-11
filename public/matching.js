@@ -44,6 +44,9 @@ window.onload = function() {
         .then((json) => {
             json.forEach((item) => {
                 if(item.user != user){
+                    const img = new Image();
+                    img.src = item.pic;
+                    document.body.appendChild(img);
                     if ((( item.age >= (profile.youngest)) && (item.age <= (profile.oldest))) && (( profile.age >= (item.youngest)) && (profile.age <= (item.oldest)))){
                         if (profile.status === item.status){
                             console.log(item);
