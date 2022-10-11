@@ -29,7 +29,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Footer />
       <Routes>
         <Route exact path='/' element={<Login getUser={getUser} user={user}/> } />
         <Route path='/home' element={<Home getUser={getUser} user={user}/>} />
@@ -40,6 +39,7 @@ function App() {
         <Route path='/login' element={<Login getUser={getUser} user={user}/>} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
+      <Footer />
     </Router>
   );
   }

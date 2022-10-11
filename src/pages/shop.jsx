@@ -3,6 +3,10 @@ import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import gompei from '../../public/gompei.png';
+import Popup from '../components/DetailPopup';
 
 const Shop = (props) => {
 
@@ -14,13 +18,25 @@ useEffect(() => {
   if (!props.user.name) {
     navigate('/login');
   }
-  fetch("/getAllProducts", {
-    method: "GET",
-  }).then(async (response) => {
-  let res = await response.json()
-  setProducts(res)
-})
+  else {
+    fetch("/getAllProducts", {
+      method: "GET",
+    }).then(async (response) => {
+    let res = await response.json()
+    setProducts(res)
+  }).then(fetch("/shop", {
+    method:"GET"
+  }))
+  }
+  
 }, [])
+
+//Popup stuff
+const [isOpen, setIsOpen] = useState(false);
+
+const togglePopup = () => {
+  setIsOpen(!isOpen);
+}
 
   return (
     <div
@@ -30,13 +46,20 @@ useEffect(() => {
         alignItems: 'Left',
         height: '100vh',
         padding: '2%'
-      }}
-    >
-      <h1>The GoatAShop</h1>
-      <div class="d-flex">
+      }}>
+
+      <h1>The GoataShop</h1>
+      <div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
+
+      <Row m={1} md={3} className="g-4">
       {products.map(product => 
-      <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="" />
+      <Col>
+      <Card style={{ width: '18rem' }} onClick = {togglePopup}>
+        <Row>
+          <Col>
+      <Card.Img variant="top" src={gompei} />
+      </Col>
+      <Col>
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>
@@ -44,9 +67,22 @@ useEffect(() => {
         </Card.Text>
         <Button variant="primary">Contact</Button>
       </Card.Body>
+      </Col>
+      </Row>
     </Card>
-       )}
+    </Col>
+    
+       )}    </Row>
+
     </div>
+
+       {isOpen && <Popup
+        content={<>
+          <img src={gompei} />
+        </>}
+        handleClose={togglePopup}
+      />}
+
     </div>
   );
 };
