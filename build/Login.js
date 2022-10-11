@@ -30,7 +30,6 @@ function Login(props) {
       body: JSON.stringify({user, pass})
     }).then((response) => response.json()).then((json) => {
       console.log(json.result);
-      debugger;
       if (json.result !== "") {
         setLoginStatus(json.result);
       } else {

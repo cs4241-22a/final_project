@@ -7,7 +7,11 @@ class App extends React.Component {
   constructor( props ) {
     super( props )
     // initialize our state
-    this.state = { loggedin: true, currUser:"", arr: [] }
+    this.state = { 
+      loggedin: true, 
+      currUser:"", 
+      arr: [],
+      displayMakePost: false }
     this.loginStatus();
     this.load();
   }
@@ -17,7 +21,7 @@ class App extends React.Component {
       method:'post', 
       'no-cors': true, 
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({"name": "user"}) 
+      body: JSON.stringify({"name": "posts"}) 
     })
     .then( response => response.json() )
     .then( json => {
@@ -36,6 +40,19 @@ class App extends React.Component {
       this.setState({ loggedin: json.login, currUser: json.user }) 
     })
   }
+
+  showMakePost() {
+    if(this.state.displayMakePost) {
+      return (
+        <form id="makePost">
+          <label for="makePostComment">What would you like to hear?</label>
+          <input id="makePostComment" type="text" />
+          <button type="submit" /* onclick: send post */>Submit</button>
+          <button type="button" onClick={() => this.setState({displayMakePost: false})}>Cancel</button>
+        </form>
+      );
+    }
+}
   
   render() {
     if(this.state.loggedin == false) {
@@ -48,9 +65,13 @@ class App extends React.Component {
         <h1>
             Hello {this.state.currUser}
         </h1>
-        <ul>
-          {this.state.arr.map((entry) => <li>hello {entry.name}</li>)}
-        </ul>
+        <div id="displayPosts">
+          <button type="button" onClick={() => this.setState({displayMakePost: true})}>Post</button>
+          {this.showMakePost()}
+          <ul>
+            {this.state.arr.map((entry) => <li>hello {entry.name}</li>)}
+          </ul>
+        </div>
         </>
       );
     }
