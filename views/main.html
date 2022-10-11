@@ -173,8 +173,7 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(json),
-        }).then(function (response) {
-          // do something with the reponse
+        }).then((responseJson) => {
           updateTable();
         });
       }

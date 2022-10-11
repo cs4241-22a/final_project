@@ -182,12 +182,12 @@ app.post("/add", (req, res) => {
           if (parseFloat(doc.Time) > parseFloat(toMongo.Time)) {
             collection.updateOne({User:_USERID}, { $set: {Time:toMongo.Time}});
           }
-          collection.updateOne({User:_USERID}, { $set: {Name:toMongo.Name}});
+          collection.updateOne({User:_USERID}, { $set: {Name:toMongo.Name}}).then((result) => res.json(result));
         } else {
           collection.insertOne(toMongo).then((result) => res.json(result));
         }
       });
-      
+      return true;
     // }
   });
 });
