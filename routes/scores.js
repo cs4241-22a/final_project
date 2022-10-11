@@ -32,4 +32,28 @@ router.post('/addResult', function (req, res, next) {
     })
 });
 
+router.get("/getCPSScores", function(req, res, next) {
+    console.log("Getting scores for CPS: %s", req.body)
+    Results.find({game_type: "cps"}).lean().exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetReactionScores", function(req, res, next) {
+    console.log("Getting scores for Reaction: %s", req.body)
+    Results.find({game_type: "reaction"}).lean().exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetAccuracyScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.find({game_type: "accuracy"}).lean().exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
 module.exports = router;

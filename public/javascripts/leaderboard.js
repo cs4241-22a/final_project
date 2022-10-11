@@ -5,13 +5,14 @@ window.onload = function() {
     const table = document.getElementById("leaderboard-table");
 
     cpsBtn.addEventListener('click', function () {
-        fetch('/cpsScores',{
+        fetch('/GetCPSScores',{
             method: 'GET'
           })
           .then( function (response ) {
             return response.json();
           })
           .then( function (response){
+            console.log(response)
             while(table.rows.length !== 0)
             {
                 table.deleteRow(0);
@@ -25,11 +26,23 @@ window.onload = function() {
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             scoreCell.innerHTML = "Clicks Per Second";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+
+            for(let i = 0; i < response.length; i++)
+            {
+                var row = table.insertRow(1);
+                var userCell = row.insertCell(0);
+                var scoreCell = row.insertCell(1);
+
+                userCell.innerHTML = response[i].owner_id;
+                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.innerHTML = response[i].score;
+                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            }
     })
     })
 
     reactionBtn.addEventListener('click', function () {
-        fetch('/reactionScores',{
+        fetch('/GetReactionScores',{
             method: 'GET'
           })
           .then( function (response ) {
@@ -53,7 +66,7 @@ window.onload = function() {
     })
 
     accuracyBtn.addEventListener('click', function () {
-        fetch('/accuracyScores',{
+        fetch('/GetAccuracyScores',{
             method: 'GET'
           })
           .then( function (response ) {

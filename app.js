@@ -15,6 +15,7 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var gamesRouter = require('./routes/games');
 var scoresRouter = require('./routes/scores');
+const { Timestamp, Int32 } = require('mongodb');
 
 var app = express();
 
@@ -22,7 +23,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env['URI'])
     .then(() =>  console.log('Connected to MongoDB'))
     .catch((err) => console.error(err));
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,24 +53,6 @@ app.use(function(req, res, next) {
   res.locals.csrfToken = req.csrfToken();
   next();
 });
-
-app.get('/cpsScores', function(req, res) {
-  // collection.find({ username: req.session.username}).toArray().then(result => {
-  //   res.end(JSON.stringify(result));
-  // });
-})
-
-app.get('/reactionScores', function(req, res) {
-  // collection.find({ username: req.session.username}).toArray().then(result => {
-  //   res.end(JSON.stringify(result));
-  // });
-})
-
-app.get('/accuracyScores', function(req, res) {
-  // collection.find({ username: req.session.username}).toArray().then(result => {
-  //   res.end(JSON.stringify(result));
-  // });
-})
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
