@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Pet = new mongoose.Schema({
     name: String,
     hat: Number,
-    color: Number,
+    color: String,
     species: Number,
     level: Number,
     xp: Number,

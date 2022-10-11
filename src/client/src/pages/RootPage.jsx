@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
+import Pet from '../components/Pet';
 import Sidebar from '../components/Sidebar';
 
 const RootPage = () => {
@@ -43,20 +44,39 @@ const RootPage = () => {
         })
     }, [])
 
-    const handleResourceClick = ({filePath, resourceType}) => {
-        switch(resourceType){
+
+    const handleResourceClick = ({ resourceID, resourceType }) => {
+        const newCustom = {
+            hat: hat,
+            color: color,
+            species: species
+        }
+        switch (resourceType) {
             case "HAT":
-                setHat(filePath);
+                setHat(resourceID);
+                newCustom.hat = resourceID;
                 break;
             case "COLOR":
-                setColor(filePath);
+                setColor(resourceID);
+                newCustom.color = resourceID;
                 break;
             case "SPECIES":
-                setSpecies(filePath);
+                setSpecies(resourceID);
+                newCustom.species = resourceID;
                 break;
             default:
                 break;
         }
+        fetch("/api/pet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newCustom)
+        }).then((response) => {
+            console.log(response);
+        })
+
     }
 
     const handleClick = () => {
@@ -68,7 +88,7 @@ const RootPage = () => {
         }).then((response) => {
             response.json().then((data) => {
                 setXP(data.xp);
-                if(data.level != level){
+                if (data.level != level) {
                     setLevel(data.level);
                     setXPToNextLevel(data.xpToNextLevel);
                 }
@@ -84,14 +104,14 @@ const RootPage = () => {
                 //Verify?
             })
         })
-        
+
     }
 
     return (
         <div className="min-h-screen flex flex-row bg-gray-100">
-            <Sidebar petName={petName} level={level} onResourceClick={handleResourceClick}/>
+            <Sidebar petName={petName} level={level} onResourceClick={handleResourceClick} />
             <div className='flex justify-center items-center flex-col w-full gap-4 bg-gray-800'>
-                <img onClick={() => handleClick()} src="https://clipartix.com/wp-content/uploads/2019/02/black-cat-clipart-2-2019-9.png" alt="Pet" width="200px" />
+                <Pet hatID={hat} speciesID={species} colorID={color} onClick={handleClick} />
                 <progress id="file" value={xp} max={xpToNextLevel}> {xp} </progress>
                 <div className="my-4 text-center">
                     <p id="totalXP" className="text-2xl">Total XP: <span className="font-bold text-blue-600">{xp}</span></p>
