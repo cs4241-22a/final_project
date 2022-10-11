@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Login: Gompei Clicker</title>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="login-button-container">
+			<button id="login">
+				<img src="/GitHub-Logo.png" />
+				Click this giant button to login with Github
+			</button>
+		</div>
+		<script>
+			window.onload = function () {
+				document.querySelector("button").onclick = login;
+			};
 
-<div class="align-self-center .justify-content-center">
-    <a  href="/auth/github" id="github-button" class="btn btn-block btn-social btn-github">
-        <i class="fa fa-github"></i> Click here if not redirected...
-    </a>
-</div>
-<script>
-    document.querySelector('#github-button').click()
-</script>
-</body>
+			function login() {
+				window.location.href = "/auth/github";
+			}
+		</script>
+	</body>
 </html>

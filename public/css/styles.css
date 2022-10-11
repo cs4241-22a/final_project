@@ -1,4 +1,4 @@
-.UpgradePanelBackground{
+.UpgradePanelBackground {
 	background-color: orange;
 	min-width: 400px;
 	border: solid #a97006 0.1em;
@@ -6,9 +6,12 @@
 	padding-bottom: 0.25em;
 }
 
-tr:nth-child(even) {background: #CCC}
-tr:nth-child(odd) {background: #FFF}
-
+tr:nth-child(even) {
+	background: #ccc;
+}
+tr:nth-child(odd) {
+	background: #fff;
+}
 
 .main-table > tr {
 	background-color: orange;
@@ -18,24 +21,23 @@ tr:nth-child(odd) {background: #FFF}
 	max-height: 70vh;
 }
 
-
 .main-table > tr > div > label:nth-child(2) {
 	padding-right: 1em;
 	padding-left: 1em;
 	font-weight: bold;
 }
 
-
 /*CSS Grid stuff*/
-.container-foo {  display: grid;
+.container-foo {
+	display: grid;
 	grid-template-columns: 1fr 0.5fr 1.5fr;
 	grid-template-rows: min-content min-content min-content;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	grid-template-areas:
-    "clicker clicker upgrades"
-    "clicker clicker upgrades"
-    "footer footer footer";
+		"clicker clicker upgrades"
+		"clicker clicker upgrades"
+		"footer footer footer";
 }
 
 .clicker {
@@ -50,4 +52,28 @@ tr:nth-child(odd) {background: #FFF}
 	grid-area: upgrades;
 }
 
-.footer { grid-area: footer; }
+.footer {
+	grid-area: footer;
+}
+
+button#login {
+	width: 98vw;
+	height: 98vh;
+	font-size: 24px;
+	background-color: orange;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+div.login-button-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+button#login > img {
+	width: 25%;
+	height: auto;
+	margin-bottom: 1.5em;
+}
