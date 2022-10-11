@@ -1,11 +1,8 @@
 
 
 window.onload = function() {
-
     let user = null;
-
     let profile = null;
-
     let age = null;
 
     // fetch('/test', {
@@ -43,13 +40,26 @@ window.onload = function() {
         .then(response => (response.json()))
         .then((json) => {
             json.forEach((item) => {
+                const img = new Image();
+                img.src = item.pic;
+                img.style.width = "150px";
+                img.style.height = "150px";
+                img.style.borderRadius = "50%";
+                img.style.backgroundClip = "padding-box";
+                img.style.backgroundPosition = "center";
+                document.body.appendChild(img);
+                let name = document.createElement("p");
+                name.innerHTML = item.firstName;
+                document.body.appendChild(name);
                 if(item.user != user){
-                    const img = new Image();
-                    img.src = item.pic;
-                    document.body.appendChild(img);
+
                     if ((( item.age >= (profile.youngest)) && (item.age <= (profile.oldest))) && (( profile.age >= (item.youngest)) && (profile.age <= (item.oldest)))){
                         if (profile.status === item.status){
+
                             console.log(item);
+
+
+
                         }
                     }
                 }
