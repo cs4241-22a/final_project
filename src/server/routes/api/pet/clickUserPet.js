@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     if(initialPet.xp >= initialPet.xpToNextLevel) {
         initialPet.level += 1;
         initialPet.xp = 0;
-        initialPet.xpToNextLevel = Math.floor(initialPet.xpToNextLevel * 1.5);
+        initialPet.xpToNextLevel = Math.floor(initialPet.xpToNextLevel * 1.45);
     }
 
     const resultPet = await Pet.findOneAndUpdate({ githubUsername }, initialPet);
