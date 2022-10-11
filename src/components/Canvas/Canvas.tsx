@@ -38,6 +38,8 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
             gridTemplateColumns={`repeat(${size}, 1fr)`}
             width={canvasSize}
             height={canvasSize}
+            border="1px solid black"
+            boxShadow={3}
             sx={{ backgroundColor: "white" }}
           >
             <GridMemo
