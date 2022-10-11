@@ -141,6 +141,10 @@ app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/build/pages/register.html');
 });
 
+app.get('/addrecipe', (req, res) => {
+    res.sendFile(__dirname + '/build/pages/addrecipe.html');
+});
+
 // middleware for authentication; should only affect the data modification routes
 app.use((req, res, next) => {
     if (Recipe !== null && User !== null) {
@@ -166,15 +170,21 @@ const getRecipesFromUsername = async (usernameToFind) => {
 
 app.post('/add', express.json(), async (req, res) => {
     const data = req.body
-    data.username = req.session.username
-    Recipe.insertOne(req.body)
-    .then(result => res.json(result));
+    if(req.session.username == null) {
+        res.redirect('/')
+    } else {
+        data.username = req.session.username
+        Recipe.collection.insertOne(data)
+            .then( function() {
+                res.redirect('/')
+            });
+    }
 });
 
-app.post('/update', express.json(), (req, res) => {
-    recipecollection.find({ name: { $exists: true } }).toArray()
-        .then(result => res.json(result));
-})
+//app.post('/update', express.json(), (req, res) => {
+//    recipecollection.find({ name: { $exists: true } }).toArray()
+//        .then(result => res.json(result));
+//})
 
 app.patch('/update', express.json(), async (req, res) => {
     const userId = await getIdFromUsername(req.session.username);

@@ -29,7 +29,7 @@ const addARecipe = function() {
         },
         body: JSON.stringify( body )
     })
-        .then( response => response.json() )
+        .then(response => window.location.replace(response.url))
 
     return false
 }
