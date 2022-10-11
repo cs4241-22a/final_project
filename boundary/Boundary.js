@@ -26,25 +26,28 @@ class Rectangle {
  * @returns 
  */
 function redrawCanvas(model, canvasObj, appObj) {
-    //for testing purpose
+    //for testing purposes
     if (typeof canvasObj === "undefined") {return;}
 
     const ctx = canvasObj.getContext('2d');
 
-    //for testing purpose
+    //for testing purposes
     if (ctx === null) {return;}
 
     //clear the canvas area
     ctx.clearRect(0,0,canvasObj.width, canvasObj.height)
   
     if (model.puzzle && !model.victory) {
-        isDraw = false;
-        drawPuzzle(ctx, model.puzzle);
+      isDraw = false;
+      drawPuzzle(ctx, model.puzzle);
     }
     else {
-        ctx.fillStyle = "red";
-        ctx.font = "30px Arial";
-        ctx.fillText("Congrats! You have won the puzzle!",60,220);
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvasObj.width, canvasObj.height);  
+      ctx.fillStyle = "red";
+      ctx.font = "30px Segoe UI";
+      ctx.textAlign = "center";
+      ctx.fillText("FINISH!",255,240);
     }
 }
 
@@ -53,7 +56,7 @@ function redrawCanvas(model, canvasObj, appObj) {
 function drawPuzzle(ctx, puzzle) {
     
     const img = new Image();
-    img.src = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F12%2F16%2Fanime-cat-names-1204854078-2000.jpg"
+    img.src = "./assets/2.jpg"
     ctx.shadowColor = "black";
 
     puzzle.squares.forEach(square => {
@@ -66,7 +69,7 @@ function drawPuzzle(ctx, puzzle) {
     img.onload = function() {
         if (!isDraw) {
         
-            ctx.drawImage(img, 400, 150, 1200, 1200, rect.x, rect.y, rect.width, rect.height);
+            ctx.drawImage(img, rect.x, rect.y, rect.width, rect.height);
             isDraw = true
         }
     }
