@@ -1,9 +1,21 @@
 require('dotenv').config();
 const express = require('express'),
-      app     = express();
+      app     = express(),
+      cookie  = require( 'cookie-session' ),
+      crypto = require("crypto");
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+app.use( express.urlencoded({ extended:true }))
+const key1 = crypto.randomBytes(64).toString("hex");
+const key2 = crypto.randomBytes(64).toString("hex");
+app.use( cookie({
+  name: 'final-project',
+  keys: [key1, key2]
+}))
+let loggedIn = false;
+let currUser = "";
 
 app.use(express.json());
 app.use(express.static('build'));
@@ -28,6 +40,36 @@ app.use((req,res,next) => {
   } else {
     res.status(503).send()
   }
+})
+
+app.post('/loggingIn', (req,res) => {
+  if(req.body.user === "user" && req.body.pass === "pass") {
+    req.session.login = true;
+    loggedIn = true;
+    currUser = req.body.user;
+  }else{
+    req.session.login = false;
+    loggedIn = false;
+  }
+  res.json({login: loggedIn});
+});
+app.post('/register', (req,res) => {
+  console.log(JSON.stringify(req.body));
+  if(req.body.user !== "" /* && user doesnt already exist*/) {
+    /* Add user to database */
+    req.session.login = true;
+    loggedIn = true;
+    currUser = req.body.user;
+    res.json({result: ""});
+  }else{
+    req.session.login = false;
+    loggedIn = false;
+    res.json({result: "This account already exists"});
+  }
+});
+
+app.get('/loginStatus', (req,res) => {
+  res.json({login: loggedIn, user: currUser});
 })
 
 // Sends json array of all documents in the collection specified by req.body.name

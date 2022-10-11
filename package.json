@@ -12,11 +12,14 @@
     "build": "snowpack build"
   },
   "dependencies": {
+    "cookie-session": "^2.0.0",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "mongodb": "^4.10.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "snowpack": "^3.8.8"
