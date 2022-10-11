@@ -3,10 +3,10 @@ import { Box } from "@mui/material";
 
 export function CanvasScreen() {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box display="flex">
       <Header />
       <Sidebar />
-      <Canvas />
+      <Canvas size={50} />
     </Box>
   );
 }
