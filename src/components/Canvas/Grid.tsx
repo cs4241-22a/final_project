@@ -1,27 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pixel } from "./Pixel";
 
 export type GridProps = {
   grid: string[];
   size: number;
   activeEmoji: string;
-  zoomToElement: Function;
+  setActiveElement: Function;
 };
 
-function Grid({ grid, size, activeEmoji, zoomToElement }: GridProps) {
+function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
   return (
     <React.Fragment>
-      {grid.map((e, i) => {
-        console.log("here");
-        return (
-          <Pixel
-            key={i}
-            size={size}
-            activeEmoji={activeEmoji}
-            zoomToElement={zoomToElement}
-          ></Pixel>
-        );
-      })}
+      {grid.map((e, i) => (
+        <Pixel
+          key={i}
+          size={size}
+          activeEmoji={activeEmoji}
+          setActiveElement={setActiveElement}
+          index={i}
+        ></Pixel>
+      ))}
     </React.Fragment>
   );
 }

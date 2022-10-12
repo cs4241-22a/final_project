@@ -9,7 +9,7 @@ export function Header() {
     >
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, m: "6px" }}>
-          Welcome to Emoji Place 🚀
+          Welcome to Emoji Place! 🚀
         </Typography>
         <Button variant="text" sx={{ px: 0 }}>
           <LogoutIcon />

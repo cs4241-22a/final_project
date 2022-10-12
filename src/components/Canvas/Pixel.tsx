@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useRef } from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 
@@ -11,14 +12,20 @@ const container = {
 export type PixelProps = {
   size: number;
   activeEmoji: string;
-  zoomToElement: Function;
+  setActiveElement: Function;
+  index: number;
 };
 
-export function Pixel({ size, activeEmoji, zoomToElement }: PixelProps) {
+export function Pixel({
+  size,
+  activeEmoji,
+  setActiveElement,
+  index,
+}: PixelProps) {
   const [emoji, setEmoji] = useState("");
 
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    zoomToElement(event.currentTarget);
+    setActiveElement(event.currentTarget);
   }
 
   return (

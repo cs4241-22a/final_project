@@ -40,6 +40,7 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
       )
     );
     setActiveEmoji(emojiData.unified);
+    setSelectActive(false);
   }
 
   function setSelecting(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
