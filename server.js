@@ -11,6 +11,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cookie({
+    name: 'session',
+    keys: [process.env.KEY1, process.env.KEY2]
+}));
+
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -84,7 +89,7 @@ app.post('/login', (req, res) => {
     const password = req.body.password;
     User.find({ $and: [{ password: { $exists: true } }, { username: user }] })
         .then(result => {
-            if (password === result[0].password) { // only one user/password combo should exist for each user
+            if (password === result[0].password) { //only one user/password combo should exist for each user
                 req.session.login = true;
                 req.session.username = req.body.username;
                 res.redirect('/');
@@ -157,13 +162,8 @@ app.use((req, res, next) => {
 app.get('/logout', (req, res) => {
     req.session.login = false;
     req.session.username = false;
-    res.redirect('/')
+    res.redirect('/');
 })
-
-app.use(cookie({
-    name: 'session',
-    keys: [process.env.KEY1, process.env.KEY2]
-}));
 
 // recipe db interaction
 
@@ -180,14 +180,14 @@ const getRecipesFromUsername = async (usernameToFind) => {
 };
 
 app.post('/add', express.json(), async (req, res) => {
-    const data = req.body
-    if(req.session.username == null) {
-        res.redirect('/')
+    const data = req.body;
+    if (req.session.username == null) {
+        res.redirect('/');
     } else {
-        data.username = req.session.username
+        data.username = req.session.username;
         Recipe.collection.insertOne(data)
-            .then( function() {
-                res.redirect('/')
+            .then(function () {
+                res.redirect('/');
             });
     }
 });
