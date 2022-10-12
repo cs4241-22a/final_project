@@ -11,6 +11,7 @@ README
   Additional Instructions: The project is rather user-friendly. To Register, click the register button to go to the register page, enter your new username and password, and click register again. To sign in, click Sign In, enter your username and password, and click Sign In again. Once signed in, you can view the playlists of songs, and can upvote/downvote songs, as well as click the Add Song button to add a new song to its respective playlist.
 
 3. An outline of the technologies you used and how you used them.
+  
   We used MongoDB for a database, as well as bootstrap for CSS. We also used express for server-frontend communication. We also used Node.js for the server.
 
 4. What challenges you faced in completing the project.
