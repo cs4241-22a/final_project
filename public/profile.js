@@ -12,7 +12,8 @@ window.onload = function () {
             console.log(text);
             const img = new Image();
             img.src = text;
-            document.body.appendChild(img);
+            document.getElementById("profilePic").lastElementChild;
+            document.getElementById("profilePic").appendChild(img);
         })
 
 
@@ -36,26 +37,72 @@ window.onload = function () {
             json.forEach((item) => {
                 if (item.user === user) {
 
-                    const firstName = item.firstName;
-                    const lastName = item.lastName;
-                    const address = item.address;
-                    const email = item.email;
-                    const age = item.age;
-                    const hobbies = item.hobbies;
-                    const firstProject = item.firstProject;
-                    const currentProject = item.currentProject;
-                    const mingle = item.mingle;
-                    const date = item.date;
-                    const youngest = item.youngest;
-                    const oldest = item.oldest;
-                    const distance = item.distance;
-                    const orientation = item.orientation;
+                    let profileList = document.createElement("ul");
+                    let fPList = document.createElement("ul");
+                    let cPList = document.createElement("ul");
 
+                    const fName = document.createElement("li");
+                    const fullName = "Name: " + item.firstName + " " + item.lastName;
+                    fName.innerHTML = fullName;
+                    profileList.appendChild(fName);
+                    
+                    const addressItem = document.createElement("li");
+                    const address = "Address: " + item.address;
+                    addressItem.innerHTML = address;
+                    profileList.appendChild(addressItem);
+
+                    const emailItem = document.createElement("li");
+                    const email = "Email: " + item.email;
+                    emailItem.innerHTML = email;
+                    profileList.appendChild(emailItem);
+
+                    const ageItem = document.createElement("li");
+                    const age = "Age: " + item.age;
+                    ageItem.innerHTML = age;
+                    profileList.appendChild(ageItem);
+
+                    const hobbiesItem = document.createElement("li");
+                    const hobbies = "Hobbies: " + item.hobbies;
+                    hobbiesItem.innerHTML = hobbies;
+                    profileList.appendChild(hobbiesItem);
+
+                    const statusItem = document.createElement("li");
+                    const statusDescription = "Status: " + item.status;
+                    statusItem.innerHTML = statusDescription;
+                    profileList.appendChild(statusItem);
+
+                    const youngestItem = document.createElement("li");
+                    const youngestDescription = "Youngest: " + item.youngest;
+                    youngestItem.innerHTML = youngestDescription;
+                    profileList.appendChild(youngestItem);
+
+                    const oldestItem = document.createElement("li");
+                    const oldestDescription = "Oldest: " + item.oldest;
+                    oldestItem.innerHTML = oldestDescription;
+                    profileList.appendChild(oldestItem);
+
+                    const distanceItem = document.createElement("li");
+                    const distanceDescription = "Distance: " + item.distance;
+                    distanceItem.innerHTML = distanceDescription;
+                    profileList.appendChild(distanceItem);
+
+                    const firstProjectItem = document.createElement("li");
+                    const firstProjectDesc = "Name of First Project: " + item.firstProject;
+                    firstProjectItem.innerHTML = firstProjectDesc;
+                    fPList.appendChild(firstProjectItem);
+
+                    const currentProjectItem = document.createElement("li");
+                    const currentProject = "Name of Current Project: " + item.currentProject;
+                    currentProjectItem.innerHTML = currentProject;
+                    cPList.appendChild(currentProjectItem);
 
                     console.log(item);
-                    let current = document.createElement("p");
-                    current.innerHTML = JSON.stringify(item);
-                    document.body.appendChild(current);
+                    document.getElementById("profileDesc").lastElementChild;
+                    document.getElementById("profileDesc").appendChild(profileList);
+                    document.getElementById("firstProjectList").lastElementChild;
+                    document.getElementById("firstProjectList").appendChild(fPList);
+                    document.getElementById("currentProjectList").lastElementChild;
+                    document.getElementById("currentProjectList").appendChild(cPList);
                 }
             })
         })

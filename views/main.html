@@ -14,7 +14,7 @@
         <p id="loggedIn"></p>
         <a href="profile.html>">Profile</a>
     </div>
-    <span style="font-size:30px;cursor:pointer" onClick="openNav()">&#9776;</span>
+    <span style="font-size:30px;cursor:pointer;color: white" onclick="openNav()">&#9776;</span>
 <div class="row">
     <div style="background-color: rgba(245, 245, 220, 0.8);" class="col">
         <h2 style="text-align: center;">Personal Information</h2>
@@ -38,14 +38,14 @@
             <label for="hobbies">Hobbies:</label>
             <input type="text" id="hobbies" name="hobbies" required><br><br>
             <label for="fProject">First Project:</label>
-            <input type="text" id="fProject" name="fProject" required><br><br>
+            <textarea id="fProject" name="fProject" cols="num" rows="num" required></textarea><br><br><br>
             <label for="currProject">Current Project:</label>
-            <input type="text" id="currProject" name="currProject" required><br><br>
+            <textarea id="currProject" name="currProject" cols="num" rows="num" required></textarea><br><br><br>
             <p style="text-align: center;">Mingle or Looking to Date?</p>
-            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="status" value = "mingle" required>
+            <input style="margin-left: 30%;" type="radio" id="mingleStatus" name="status" value = "Mingle" required>
 <!--        value="Mingle" value="Date"-->
             <label for="mingleStatus">Mingle</label>
-            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="status" value="date" required>
+            <input style="margin-left: 10%;" type="radio" id="toDateStatus" name="status" value="Date" required>
             <label for="toDateStatus">Date</label><br><br>
 <!--        </form>-->
     </div>
