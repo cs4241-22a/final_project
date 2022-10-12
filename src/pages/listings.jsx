@@ -90,7 +90,6 @@ function previewFile() {
   
 	reader.addEventListener("load", () => {
 	  // convert image file to base64 string
-	  preview.src = reader.result;
 	  setImage(reader.result)
 
 	}, false);
@@ -111,10 +110,6 @@ function previewFile() {
 	event.preventDefault(event);
 	console.log(event.target.name.value)
 	let obj = event.target;
-	console.log(obj.pic)
-
-	console.log('2')
-	console.log(img)
 
 	const json = {
 		img: img,
@@ -132,7 +127,9 @@ function previewFile() {
 		body,
 	}).then(async(response) =>{
 		let res = await response.json()
-	})
+	}).then(
+		setProducts([json, ...products])
+	).then(setIsAdd(!isAdd))
 }
 return (	
 	<div
@@ -155,21 +152,21 @@ return (
     </button>
       {products.map(product => 
       <Col>
-      <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
-        <Row>
-          <Col>
-      <Card.Img variant="top" src={product.img} />
-      </Col>
-      <Col>
-      <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Text>
-        {product.description}
-        </Card.Text>
-      </Card.Body>
-      </Col>
-      </Row>
-    </Card>
+		<Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
+			<Row>
+				<Col>
+					<Card.Img variant="top" src={product.img} />
+				</Col>
+				<Col>
+					<Card.Body>
+						<Card.Title>{product.name}</Card.Title>
+						<Card.Text>
+						{product.description}
+						</Card.Text>
+					</Card.Body>
+				</Col>
+			</Row>
+		</Card>
     </Col>
        )}    
     

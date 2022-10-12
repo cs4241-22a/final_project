@@ -4,7 +4,6 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import gompei from '../../public/gompei.png';
 import Popup from '../components/DetailPopup';
 
 const Shop = (props) => {
@@ -57,7 +56,7 @@ function togglePopup(product) {
       <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
         <Row>
           <Col>
-      <Card.Img variant="top" src={gompei} />
+      <Card.Img variant="top" src={product.img} />
       </Col>
       <Col>
       <Card.Body>
@@ -77,7 +76,7 @@ function togglePopup(product) {
         
     {isOpen && <Popup
       content={<>
-        <img src={gompei}/>
+        <img src={product.img}/>
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>

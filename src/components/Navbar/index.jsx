@@ -1,5 +1,5 @@
 import React from 'react';
-import header from '../../../public/GoataShop-header.jpg'
+import header from '../../../public/goat.png'
 
 import {
   Nav,
@@ -14,7 +14,8 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        <Bars />
+      <img src={header} />
+        {/* <Bars /> */}
         <NavMenu>
           <NavLink to='/home'>
             Home
