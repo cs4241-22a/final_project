@@ -73,4 +73,36 @@ router.get("/GetUsers", function(req, res, next) {
     })
 })
 
+router.get("/getPersonalCPSScores", function(req, res, next) {
+    console.log("Getting scores for CPS: %s", req.body)
+    Results.getResultsForUserId(req.body.owner_id).exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetPersonalReactionScores", function(req, res, next) {
+    console.log("Getting scores for Reaction: %s", req.body)
+    Results.getResultsForUserId(req.body.owner_id).exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetPersonalAccuracyScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.getResultsForUserId(req.body.owner_id).exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetPersonalAimScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.getResultsForUserId(req.body.owner_id).exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
 module.exports = router;
