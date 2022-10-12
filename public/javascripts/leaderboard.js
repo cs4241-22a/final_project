@@ -23,9 +23,9 @@ window.onload = function() {
             var scoreCell = row.insertCell(1);
             
             userCell.innerHTML = "Username";
-            userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            userCell.style = "scope=\"col\"; font-weight=bold";
             scoreCell.innerHTML = "Number Clicks";
-            scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            scoreCell.style = "scope=\"col\"; font-weight=bold";
 
 
             for(let i = 0; i < response.length; i++)
@@ -35,9 +35,9 @@ window.onload = function() {
                 var scoreCell = row.insertCell(1);
 
                 userCell.innerHTML = response[i].owner_id;
-                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                userCell.style = "scope=\"row\"";
                 scoreCell.innerHTML = response[i].score;
-                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.style = "scope=\"row\"";
             }
             fetch('/GetUsers',{
                 method: 'GET'
@@ -81,9 +81,9 @@ window.onload = function() {
             var scoreCell = row.insertCell(1);
             
             userCell.innerHTML = "Username";
-            userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            userCell.style = "scope=\"col\"; font-weight=bold";
             scoreCell.innerHTML = "Average Time";
-            scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            scoreCell.style = "scope=\"col\"; font-weight=bold";
 
             for(let i = 0; i < response.length; i++)
             {
@@ -92,9 +92,9 @@ window.onload = function() {
                 var scoreCell = row.insertCell(1);
 
                 userCell.innerHTML = response[i].owner_id;
-                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                userCell.style = "scope=\"row\"";
                 scoreCell.innerHTML = response[i].score;
-                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.style = "scope=\"row\"";
             }
             fetch('/GetUsers',{
                 method: 'GET'
@@ -138,9 +138,9 @@ window.onload = function() {
             var scoreCell = row.insertCell(1);
             
             userCell.innerHTML = "Username";
-            userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            userCell.style = "scope=\"col\"; font-weight=bold";
             scoreCell.innerHTML = "Average Time";
-            scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            scoreCell.style = "scope=\"col\"; font-weight=bold";
 
 
             for(let i = 0; i < response.length; i++)
@@ -150,9 +150,9 @@ window.onload = function() {
                 var scoreCell = row.insertCell(1);
                 
                 userCell.innerHTML = response[i].owner_id;
-                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                userCell.style = "scope=\"row\"";
                 scoreCell.innerHTML = response[i].score;
-                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.style = "scope=\"row\"";
             }
             fetch('/GetUsers',{
                 method: 'GET'
@@ -196,9 +196,9 @@ window.onload = function() {
             var scoreCell = row.insertCell(1);
             
             userCell.innerHTML = "Username";
-            userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            userCell.style = "scope=\"col\"; font-weight=bold";
             scoreCell.innerHTML = "Total Time";
-            scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+            scoreCell.style = "scope=\"col\"; font-weight=bold";
 
 
             for(let i = 0; i < response.length; i++)
@@ -208,9 +208,9 @@ window.onload = function() {
                 var scoreCell = row.insertCell(1);
                 
                 userCell.innerHTML = response[i].owner_id;
-                userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                userCell.style = "scope=\"row\"";
                 scoreCell.innerHTML = response[i].score;
-                scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+                scoreCell.style = "scope=\"row\"";
             }
             fetch('/GetUsers',{
                 method: 'GET'
