@@ -11,11 +11,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cookie({
-    name: 'session',
-    keys: [process.env.KEY1, process.env.KEY2]
-}));
-
 mongoose.connect(`mongodb+srv://${process.env.USER1}:${process.env.PASS}@${process.env.HOST}/final_project?retryWrites=true&w=majority`);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -89,7 +84,7 @@ app.post('/login', (req, res) => {
     const password = req.body.password;
     User.find({ $and: [{ password: { $exists: true } }, { username: user }] })
         .then(result => {
-            if (password === result[0].password) { //only one user/password combo should exist for each user
+            if (password === result[0].password) { // only one user/password combo should exist for each user
                 req.session.login = true;
                 req.session.username = req.body.username;
                 res.redirect('/');
@@ -103,7 +98,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-    
+
     User.find({ username: user })
         .then(result => {
             console.log("r " + result)
@@ -150,6 +145,11 @@ app.use((req, res, next) => {
     }
 });
 
+app.use(cookie({
+    name: 'session',
+    keys: [process.env.KEY1, process.env.KEY2]
+}));
+
 // recipe db interaction
 
 // takes a username (assumed to be unique) and returns the MongoDB id associated with it
@@ -165,10 +165,10 @@ const getRecipesFromUsername = async (usernameToFind) => {
 };
 
 app.post('/add', express.json(), async (req, res) => {
-    const data = req.body
-    data.username = req.session.username
-    Recipe.insertOne(req.body)
-    .then(result => res.json(result));
+    const data = req.body;
+    data.username = req.session.username;
+    Recipe.collection.insertOne(req.body)
+        .then(result => res.json(result));
 });
 
 app.post('/update', express.json(), (req, res) => {

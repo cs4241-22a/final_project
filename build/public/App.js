@@ -109,4 +109,42 @@ class App extends React.Component {
     })));
   }
 }
+const modifyRecipe = function() {
+  const inputs = {
+    title: document.getElementById("#title"),
+    ingredients: document.getElementById("#ingredients"),
+    directions: document.getElementById("#directions"),
+    prepTime: document.getElementById("#preptime"),
+    numPeople: document.getElementById("#numpeople")
+  };
+  const body = {
+    title: inputs.title.value,
+    ingredients: inputs.ingredients.value,
+    directions: inputs.directions.value,
+    prepTime: inputs.prepTime.value,
+    numPeople: inputs.numPeople.value
+  };
+  fetch("/update", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).then((response) => response.json());
+  return false;
+};
+const deleteRecipe = function() {
+  const title = document.getElementById("#title");
+  const body = {
+    title: title.value
+  };
+  fetch("/delete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).then((response) => response.json());
+  return false;
+};
 export default App;
