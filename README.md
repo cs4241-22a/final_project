@@ -14,7 +14,9 @@ Users are encouraged to navigate through our static informative content on the r
 
 ## Navigating our application
 
-Please create a new account for webworm by visiting this link: before logging in. You should be redirected to this page if you are not logged in. If you are unable to proceed after creating an account it likely means your username and password are already taken, and that you will need to select a different username and password. Kindly navigate between our introduction, resource, and quiz tabs to explore all features of our application. After taking the quiz, you can visit the large link on the bottom of the page to examine your previous quiz results. 
+Please create a new account for webworm by visiting this link: https://webworm.glitch.me/create-user before logging in. 
+
+You should be redirected to this page if you are not logged in. If you are unable to proceed after creating an account it likely means your username and password are already taken, and that you will need to select a different username and password. Kindly navigate between our introduction, resource, and quiz tabs to explore all features of our application. After taking the quiz, you can visit the large link on the bottom of the page to examine your previous quiz results. 
 
 ## Technologies and Design 
 Our website displays dynamic behavior by:
