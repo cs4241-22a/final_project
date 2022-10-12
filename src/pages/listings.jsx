@@ -29,6 +29,7 @@ useEffect(() => {
 const [isEdit, setIsEdit] = useState(false);
 const [isAdd, setIsAdd] = useState(false);
 const [isOpen, setIsOpen] = useState(false);
+const [isDelete, setIsDelete] = useState(false);
 const [product, setProduct] = useState([]);
 const [img, setImage] = useState('');
 
@@ -41,7 +42,6 @@ function toggleEditPopup(product) {
 	console.log(product.name)
 	console.log("Open Edit Window")
 	setIsEdit(!isEdit);
-	setIsOpen(!isOpen);
 	setProduct(product);
   };
 
@@ -53,35 +53,46 @@ function toggleEditPopup(product) {
 	console.log(product)
   };
 
-function editProduct (e, product){
+  function toggleDeletePopup(product){
+	console.log("Open Delete Confirmation Window")
+	setIsDelete(!isDelete);
+	setProduct(product);
+  }
+
+const editProduct = (e) => {
 	console.log("Editing")
+	setIsOpen(!isOpen);
 	let obj = e.target
+
 	let json = { 
-		name:obj.name.value,
+		img:product.img,
+		name: obj.name.value,
 		category:obj.category.value,
 		description:obj.description.value,
 		price:obj.price.value
 	};
 	let body = JSON.stringify(json);
 
-	fetch("/table/" + product.id, {
+	fetch("/listing/" + product._id, {
 		method: "PATCH",
 		headers: { "Content-Type": "application/json" },
 		body,
 	  }).then(async (response) => {
-		await response.json();
-	  })//.then(location.reload());
+		let res = await response.json()
+		console.log(res)
+		setProduct(json)
+	  }).then(setIsEdit(!isEdit))//.then(location.reload())
 };
 
-function deleteProduct(e, product){
-	e.preventDefault(e)
+const deleteProduct = (e) =>{
 	console.log("HELOOOOOOO")
 	console.log("Deleting")
-	// fetch("/listing/" + product.id, {
-	// 	method: "DELETE",
-	//   }).then(async (response) => {
-	// 	await response.json();
-	//   })//.then(location.reload());
+	setIsOpen(!isOpen)
+	fetch("/listing/" + product._id, {
+		method: "DELETE",
+	  }).then(async (response) => {
+		await response.json();
+	  }).then(setIsDelete(!isDelete))//.then(location.reload());
 };
 
 function previewFile() {
@@ -112,7 +123,6 @@ function previewFile() {
 	event.preventDefault(event);
 	console.log(event.target.name.value)
 	let obj = event.target;
-    console.log(obj)
 	
 	const json = {
 		img: img,
@@ -225,16 +235,27 @@ return (
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
-		<button variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
-		<button variant="primary" id="del" onclick={(e)=> deleteProduct(e, product)}>Delete</button>
+		<button className="form-control btn btn-primary" variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
+		<button className="form-control btn btn-primary" variant="primary" id="del" onclick={()=>setIsDelete(!isDelete)}>Del</button>
 	  </>}
       handleClose={togglePopup}
+    />}
+
+	
+{isDelete && <Popup
+      content={<>
+        <img src={product.img}/>
+        <h3>$ Are you sure you want to delete the Product</h3>
+		<button className="form-control btn btn-primary" variant="primary" id="ConfirmDelete" onclick={deleteProduct}>Confirm</button>
+		<button className="form-control btn btn-primary" variant="primary" id="Cancel" onclick={(e)=>setIsDelete(!isDelete)}>Cancel</button>
+	  </>}
+      handleClose={setIsDelete(!isDelete)}
     />}
 
 
    {isEdit && <Popup
 	  content={<>
-	  <form onSubmit={(e) => editProduct(e, product)}>
+	  <form onSubmit={editProduct}>
 	  <div className="form-group">
 	  <label htmlFor="edit-name">Product Name</label>
         <input
@@ -242,18 +263,24 @@ return (
 		  defaultValue={product.name}
           id="name"
         />
+		 </div>
+      <div className="form-group">
 		<label htmlFor="edit-category">Category</label>
 		<input
           className="form-control"
 		  defaultValue={product.category}
-          id="categry"
+          id="category"
         />
+		 </div>
+      <div className="form-group">
 		<label htmlFor="edit-description">Description</label>
 		<input
           className="form-control"
 		  defaultValue={product.description}
           id="description"
         />
+		 </div>
+      <div className="form-group">
 		<label htmlFor="edit-price">Price</label>
 		<input
           className="form-control"
@@ -261,6 +288,8 @@ return (
           id="price"
 		  type="number"
         />
+		 </div>
+      <div className="form-group">
 		<button className="form-control btn btn-primary" type="submit">
 			Edit Product
 		</button>
@@ -269,10 +298,8 @@ return (
 	  </>}
 	  handleClose={toggleEditPopup}
 	  />}
-
     </div>
   );
-  
 };
 
 

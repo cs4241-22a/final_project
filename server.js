@@ -175,6 +175,10 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
   productCollection
     .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
+      if (result)
+      {
+        console.log("found product");
+      }
       productCollection
         .deleteOne({
           _id: mongodb.ObjectId(req.params.id),
@@ -183,15 +187,26 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
     });
 });
 //edit
-app.patch("/table/:id", ensureAuthenticated, (req, res) => {
-  collection
-    .findOne({ _id: mongodb.ObjectId(req.params.id) })
+app.patch("/listing/:id", ensureAuthenticated, (req, res) => {
+  console.log("Editing")
+  console.log(req.params.id)
+  productCollection
+    .findOne({ _id:mongodb.ObjectId(req.params.id) })
     .then((result) => {
+      if (result)
+      {
+        console.log("found product");
+      }
+      else
+      {
+        console.log("can't find it"); 
+      }
       productCollection
         .updateOne(
           { _id: mongodb.ObjectId(req.params.id) },
           {
             $set: {
+              img: req.body.img,
               name: req.body.name,
               category: req.body.category,
               description: req.body.description,
@@ -199,7 +214,9 @@ app.patch("/table/:id", ensureAuthenticated, (req, res) => {
             },
           }
         )
-        .then((result) => res.json(result));
+        .then((result) => 
+        {
+          res.json(result)});
     });
 });
 
