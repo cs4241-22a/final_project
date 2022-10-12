@@ -15,6 +15,7 @@ const express = require('express')
 const compression = require('compression')
 const app = express()
 const mongodb = require('mongodb')
+const path = require('path')
 
 require('dotenv').config()
 
