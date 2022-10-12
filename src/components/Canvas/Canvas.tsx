@@ -28,9 +28,7 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
 
       grid.current[idx] = activeEmoji;
 
-      console.log(activeEmoji);
-
-      // activeElement.innerHTML = "<p>\u" + " + activeElement + " + "</p>";
+      activeElement.innerHTML = `<img src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${activeEmoji}.png" alt="grinning" class="__EmojiPicker__ epr-emoji-img" loading="eager" style="font-size: 12.8px; height: 12.8px; width: 12.8px;">`;
     }
   }
   useEffect(() => {

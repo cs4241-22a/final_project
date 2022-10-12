@@ -23,12 +23,8 @@ export function Pixel({
   setActiveElement,
   index,
 }: PixelProps) {
-  const [emoji, setEmoji] = useState(initEmoji);
-  const [user, setUser] = useState(initUser);
-
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     setActiveElement(event.currentTarget);
-    console.log(index);
   }
 
   return (
