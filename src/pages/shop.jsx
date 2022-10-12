@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -68,12 +67,24 @@ function togglePopup(product) {
         </Card.Text>
         <Button variant="primary">Contact</Button>
       </Card.Body>
+      </Col>
+      </Row>
     </Card>
     </Col>
-    
-       )}    </Row>
-
+       )}    
+    </Row>
     </div>
+        
+    {isOpen && <Popup
+      content={<>
+        <img src={gompei}/>
+        <h1>{product.name}</h1>
+        <h3>${product.price}</h3>
+        <p>{product.description}</p>
+      </>}
+      handleClose={togglePopup}
+    />}
+
     </div>
   );
 };
