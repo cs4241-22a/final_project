@@ -20,7 +20,7 @@ export default class FilteredClimbsManager
         this.grade = grade
         this.type = type
 
-        this.filteredRoutes = this.app.routes.filter(route => {return this.isCorrectGrade(route) & this.isCorrectType(route)})
+        this.filteredRoutes = this.app.routes.filter(route => {return this.isCorrectGrade(route) && this.isCorrectType(route)})
     }
 
     /**
@@ -50,11 +50,33 @@ export default class FilteredClimbsManager
      * @param {String} route - the climb route to check 
      * @returns 
      */
+    /**
+     * lead
+     * toprope
+     * leadtoprope
+     * boulder
+     */
     isCorrectType(route)
     {
         if(!route)
             return true;
 
-        return route.type == this.type
+        switch(this.type)
+        {
+            case "lead":
+                return route.canLead
+
+            case "toprope":
+                return route.canTopRope
+
+            case "leadtoprope":
+                return route.canLead && route.canTopRope
+
+            case "boulder":
+                return route.type == "boulder"
+                
+        }
+
+        return false
     }
 }
