@@ -1,4 +1,4 @@
-#README
+README
 1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
   Link: https://final-project-lnbsr.glitch.me/ 
   Description: We created a website on which a user can login and view playlists of the top songs of various genres. They can also add songs to each genre, as well as upvote or downvote individual songs. Users can register, and the songs/votes data is persistent between sessions and users.
