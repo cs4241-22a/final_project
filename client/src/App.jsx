@@ -8,35 +8,14 @@ class App extends React.Component {
     this.state = { good: false };
   }
 
-  componentDidMount() {
-    this.checkAuth()
-  }
   
-  checkAuth() {
-    fetch('/auth/getusername', {
-      method: 'GET'
-    })
-    .then(response => response.json())
-    .then(response => {
-      this.setState({ good: response.username !== undefined })
-    })
-  }
 
-  render() {
-    if (this.state.good) {
-      return (
-        <>
-          <Reminders></Reminders>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Login/>
-        </>
-      );  
-    }
-  }
+render() {
+  return (
+    <>
+      <Reminders/>
+    </>
+  );  
 }
-
+}
 export default App;

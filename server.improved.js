@@ -20,11 +20,6 @@ app.use(express.json)
 
 
 
-
-
-
-
-
 //MONGODB with Mongooose
 const db = 'mongodb+srv://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST;
 mongoose
@@ -47,17 +42,6 @@ mongoose.Schema({
 imageUrl: String
 })
 );
-
-
-
-
-
-
-
-
-
-
-
 
 
 //////////////////// GET DATA ////////////////////

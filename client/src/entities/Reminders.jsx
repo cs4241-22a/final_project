@@ -1,12 +1,9 @@
-import React from "react";
 import ReactDOM, { render } from "react-dom";
 import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
 import BasicPost from "./post";
 import React, { useState, useEffect } from "react";
-import Reminders from "./entities/Reminders";
-import '../src/App.css'
 import {Image} from 'cloudinary-react'
 import axios from 'axios';
 
