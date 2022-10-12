@@ -33,6 +33,7 @@ class VerificationCheck extends React.Component {
         })
         .then(res => res.json())
         .then((response) => {
+            console.log('in verification')
             console.log(response)
             if (data.get('Verification') === response.verification) {
                 const context = this.context;
