@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 
@@ -16,7 +16,7 @@ export type PixelProps = {
   index: number;
 };
 
-function Pixel({
+export function Pixel({
   initEmoji,
   initUser,
   size,
@@ -42,10 +42,6 @@ function Pixel({
       onClick={update}
       sx={container}
       id={`${index}`}
-    >
-      <Emoji unified={emoji} size={size * 0.8} />
-    </Box>
+    ></Box>
   );
 }
-
-export const PixelMemo = React.memo(Pixel);

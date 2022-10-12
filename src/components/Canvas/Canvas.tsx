@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { createRef, useState, useRef, useEffect } from "react";
 import { Box, Toolbar, Fab } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {
@@ -28,10 +28,11 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
 
       grid.current[idx] = activeEmoji;
 
-      console.log(grid.current[idx]);
+      console.log(activeEmoji);
+
+      // activeElement.innerHTML = "<p>\u" + " + activeElement + " + "</p>";
     }
   }
-
   useEffect(() => {
     if (prevActiveElement === undefined) {
       prevActiveElement = activeElement;
@@ -65,12 +66,13 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
         zoomAnimation={{ animationType: "easeOutQuad" }}
       >
         {({ zoomToElement }: any) => (
-          <div
+          <Box
             onClick={() => {
               if (zoom === undefined) {
                 zoom = zoomToElement;
               }
             }}
+            height="100%"
           >
             <TransformComponent
               wrapperStyle={{
@@ -97,7 +99,7 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
                 />
               </Box>
             </TransformComponent>
-          </div>
+          </Box>
         )}
       </TransformWrapper>
       <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />

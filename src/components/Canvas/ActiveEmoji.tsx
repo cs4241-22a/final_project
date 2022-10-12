@@ -39,6 +39,7 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
         letter.toUpperCase()
       )
     );
+    console.log(emojiData);
     setActiveEmoji(emojiData.unified);
     setSelectActive(false);
   }
