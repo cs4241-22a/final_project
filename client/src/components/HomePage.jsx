@@ -114,6 +114,7 @@ function Topbar({fetchCartData}) {
         })
       } else {
         setHomeCart("ERROR!");
+        window.location = "/login";
       }
     })
   }, [])
@@ -130,10 +131,23 @@ function Topbar({fetchCartData}) {
     }
   }
 
+  function handleLogout() {
+    fetch("/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({})
+    }).then((res) => {
+      if (res.status === 200) {
+        window.location = "/login"
+      }
+    })
+  }
+
   return (
     <div className="navbar navbar-light bg-light border">
       <img src={Logo} alt="Go Grocery" className="topbar-logo"/>
       <p>Your home cart: {homeCart}</p>
+      <button className="m-2 btn btn-secondary" onClick={() => handleLogout()}>Logout</button>
       <div className="form-inline">
         <input id="cart-code" className="form-control mr-sm-2 bg-secondary input-text" type="search" placeholder={cartCode} aria-label="Search" />
         <button class="m-2 btn btn-secondary" onClick={() => changeCart()}>Change Cart</button>
@@ -149,7 +163,7 @@ function Topbar({fetchCartData}) {
           <option>Produce</option>
           <option>Other</option>
         </select>
-        <button class="m-2 btn btn-primary" onClick={() => {addItem(document.getElementById("item"), document.getElementById("item-type-select"))}}>Add to List</button>
+        <button className="m-2 btn btn-primary" onClick={() => {addItem(document.getElementById("item"), document.getElementById("item-type-select"))}}>Add to List</button>
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ export default function LoginPage(props) {
   const [mail, setMail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const [loginError, setLoginError] = useState(true);
+  const [loginError, setLoginError] = useState(false);
 
   async function handleSubmit() {
     const data = {
@@ -22,12 +22,11 @@ export default function LoginPage(props) {
       loginResponse.json().then((loginData) => {
         const loginJson = JSON.parse(loginData);
         if (loginJson.error) {
-          window.location = "/login";
-          setLoginError("The email/password you entered was incorrect");
+          setLoginError(true);
         } else {
           // Login was successful!
+          setLoginError(false);
           window.location = "/home" + (loginJson.homeCart ? ("#" + loginJson.homeCart) : "");
-          setLoginError(null)
         }
       })
     })
@@ -84,6 +83,9 @@ export default function LoginPage(props) {
           </p>
 
         </div>
+      </div>
+      <div class={"alert alert-danger " + (loginError ? "" : "hidden")} role="alert">
+        The email or password you entered is incorrect.
       </div>
     </div>
   )

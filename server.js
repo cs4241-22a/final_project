@@ -53,43 +53,44 @@ app.get("/cart-data", (req, resp) => {
     if (!userId) {
         resp.status(401);
         resp.end();
-    }
-    console.log("Session valid. getting user data")
-    client.connect((err, client) => {
-        if (err) {
-            throw err;
-        } else {
-            // If DB connection is successful
-            const db = client.db("database");
-            const cartCode = req.query["cart"];
-            console.log("Fetching cart: " + cartCode);
-            db.collection("carts").findOne({"code": cartCode}, {}, (err, res) => {
-                if (err) {
-                    throw err;
-                } else {
-                    if (!res || !res.cannedJarredData) {
-                        resp.status(404);
-                        resp.end();
+    } else {
+        console.log("Session valid. getting user data")
+        client.connect((err, client) => {
+            if (err) {
+                throw err;
+            } else {
+                // If DB connection is successful
+                const db = client.db("database");
+                const cartCode = req.query["cart"];
+                console.log("Fetching cart: " + cartCode);
+                db.collection("carts").findOne({"code": cartCode}, {}, (err, res) => {
+                    if (err) {
+                        throw err;
                     } else {
-                        // Found user document
-                        const body = {
-                            cannedJarredData: res.cannedJarredData,
-                            dairyData: res.dairyData,
-                            dryBakingData: res.dryBakingData,
-                            frozenData: res.frozenData,
-                            grainsData: res.grainsData,
-                            meatData: res.meatData,
-                            produceData: res.produceData,
-                            otherData: res.otherData
+                        if (!res || !res.cannedJarredData) {
+                            resp.status(404);
+                            resp.end();
+                        } else {
+                            // Found user document
+                            const body = {
+                                cannedJarredData: res.cannedJarredData,
+                                dairyData: res.dairyData,
+                                dryBakingData: res.dryBakingData,
+                                frozenData: res.frozenData,
+                                grainsData: res.grainsData,
+                                meatData: res.meatData,
+                                produceData: res.produceData,
+                                otherData: res.otherData
+                            }
+                            resp.json(JSON.stringify(body));
+                            resp.status(200);
+                            resp.end();
                         }
-                        resp.json(JSON.stringify(body));
-                        resp.status(200);
-                        resp.end();
                     }
-                }
-            })
-        }
-    })
+                })
+            }
+        })
+    }
 })
 
 app.get("/home-cart", (req, resp) => {
@@ -100,36 +101,37 @@ app.get("/home-cart", (req, resp) => {
     if (!userId) {
         resp.status(401);
         resp.end();
-    }
-    console.log("Session valid. getting user data")
-    client.connect((err, client) => {
-        if (err) {
-            throw err;
-        } else {
-            // If DB connection is successful
-            const db = client.db("database");
-            const cartCode = req.query["cart"];
-            console.log("Fetching cart: " + cartCode);
-            db.collection("users").findOne({"_id": userId}, {}, (err, res) => {
-                if (err) {
-                    throw err;
-                } else {
-                    if (!res) {
-                        resp.status(404);
-                        resp.end();
+    } else {
+        console.log("Session valid. getting user data")
+        client.connect((err, client) => {
+            if (err) {
+                throw err;
+            } else {
+                // If DB connection is successful
+                const db = client.db("database");
+                const cartCode = req.query["cart"];
+                console.log("Fetching cart: " + cartCode);
+                db.collection("users").findOne({"_id": userId}, {}, (err, res) => {
+                    if (err) {
+                        throw err;
                     } else {
-                        // Found user document
-                        const body = {
-                            homeCart: res.homeCart
+                        if (!res) {
+                            resp.status(404);
+                            resp.end();
+                        } else {
+                            // Found user document
+                            const body = {
+                                homeCart: res.homeCart
+                            }
+                            resp.json(JSON.stringify(body));
+                            resp.status(200);
+                            resp.end();
                         }
-                        resp.json(JSON.stringify(body));
-                        resp.status(200);
-                        resp.end();
                     }
-                }
-            })
-        }
-    })
+                })
+            }
+        })
+    }
 })
 
 app.post("/add-item", (req, resp) => {
@@ -143,79 +145,80 @@ app.post("/add-item", (req, resp) => {
     if (!userId) {
         resp.status(401);
         resp.end();
-    }
-    console.log("Session valid. Adding item")
+    } else {
+        console.log("Session valid. Adding item")
 
-    client.connect((err, client) => {
-        if (err) {
-            throw err;
-        } else {
-            // If DB connection is successful
-            const db = client.db("database");
-            db.collection("carts").findOne({"code": data.cartCode}, {}, (err, res) => {
-                if (err) {
-                    throw err;
-                } else {
-                    // Found user document
-                    // Edit correct field 
-                    let array = null;
-                    let field = null;
-                    switch(data.itemType) {
-                        case itemTypes.CANNEDJARRED:
-                            array = res.cannedJarredData;
-                            field = "cannedJarredData";
-                            break;
-                        case itemTypes.DAIRY:
-                            array = res.dairyData;
-                            field = "dairyData";
-                            break;
-                        case itemTypes.DRYBAKING:
-                            array = res.dryBakingData;
-                            field = "dryBakingData";
-                            break;
-                        case itemTypes.FROZEN:
-                            array = res.frozenData;
-                            field = "frozenData";
-                            break;
-                        case itemTypes.GRAINS:
-                            array = res.grainsData;
-                            field = "grainsData";
-                            break;
-                        case itemTypes.MEAT:
-                            array = res.meatData;
-                            field = "meatData";
-                            break;
-                        case itemTypes.PRODUCE:
-                            array = res.produceData;
-                            field = "produceData";
-                            break;
-                        case itemTypes.OTHER:
-                            array = res.otherData;
-                            field = "otherData";
-                            break;
-                        default:
-                            array = null;
-                            field = null;
-                            break;
-                    }
-                    if (!array) {
-                        resp.end();
-                    }
-                    console.log("Array valid");
-                    array.push(data.itemName);
-                    db.collection("carts").updateOne({"code": data.cartCode}, { $set: {[field]: array} }, (err, result) => {
-                        console.log(result);
-                        if (err) {
-                            throw err;
-                        } else {
-                            resp.status(200);
+        client.connect((err, client) => {
+            if (err) {
+                throw err;
+            } else {
+                // If DB connection is successful
+                const db = client.db("database");
+                db.collection("carts").findOne({"code": data.cartCode}, {}, (err, res) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        // Found user document
+                        // Edit correct field 
+                        let array = null;
+                        let field = null;
+                        switch(data.itemType) {
+                            case itemTypes.CANNEDJARRED:
+                                array = res.cannedJarredData;
+                                field = "cannedJarredData";
+                                break;
+                            case itemTypes.DAIRY:
+                                array = res.dairyData;
+                                field = "dairyData";
+                                break;
+                            case itemTypes.DRYBAKING:
+                                array = res.dryBakingData;
+                                field = "dryBakingData";
+                                break;
+                            case itemTypes.FROZEN:
+                                array = res.frozenData;
+                                field = "frozenData";
+                                break;
+                            case itemTypes.GRAINS:
+                                array = res.grainsData;
+                                field = "grainsData";
+                                break;
+                            case itemTypes.MEAT:
+                                array = res.meatData;
+                                field = "meatData";
+                                break;
+                            case itemTypes.PRODUCE:
+                                array = res.produceData;
+                                field = "produceData";
+                                break;
+                            case itemTypes.OTHER:
+                                array = res.otherData;
+                                field = "otherData";
+                                break;
+                            default:
+                                array = null;
+                                field = null;
+                                break;
+                        }
+                        if (!array) {
                             resp.end();
                         }
-                    });
-                }
-            })
-        }
-    })
+                        console.log("Array valid");
+                        array.push(data.itemName);
+                        db.collection("carts").updateOne({"code": data.cartCode}, { $set: {[field]: array} }, (err, result) => {
+                            console.log(result);
+                            if (err) {
+                                throw err;
+                            } else {
+                                resp.status(200);
+                                resp.end();
+                            }
+                        });
+                    }
+                })
+            }
+        })
+    }
 })
 
 app.post("/remove-item", (req, resp) => {
@@ -229,78 +232,91 @@ app.post("/remove-item", (req, resp) => {
     if (!userId) {
         resp.status(401);
         resp.end();
-    }
-    console.log("Session valid. Removing item")
+    } else {
+        console.log("Session valid. Removing item")
     
-    client.connect((err, client) => {
-        if (err) {
-            throw err;
-        } else {
-            // If DB connection is successful
-            const db = client.db("database");
-            db.collection("carts").findOne({"code": data.cartCode}, {}, (err, res) => {
-                if (err) {
-                    throw err;
-                } else {
-                    // Found user document
-                    // Edit correct field 
-                    let array = null;
-                    let field = null;
-                    switch(data.itemType) {
-                        case itemTypes.CANNEDJARRED:
-                            array = res.cannedJarredData;
-                            field = "cannedJarredData";
-                            break;
-                        case itemTypes.DAIRY:
-                            array = res.dairyData;
-                            field = "dairyData";
-                            break;
-                        case itemTypes.DRYBAKING:
-                            array = res.dryBakingData;
-                            field = "dryBakingData";
-                            break;
-                        case itemTypes.FROZEN:
-                            array = res.frozenData;
-                            field = "frozenData";
-                            break;
-                        case itemTypes.GRAINS:
-                            array = res.grainsData;
-                            field = "grainsData";
-                            break;
-                        case itemTypes.MEAT:
-                            array = res.meatData;
-                            field = "meatData";
-                            break;
-                        case itemTypes.PRODUCE:
-                            array = res.produceData;
-                            field = "produceData";
-                            break;
-                        case itemTypes.OTHER:
-                            array = res.otherData;
-                            field = "otherData";
-                            break;
-                        default:
-                            array = null;
-                            field = null;
-                            break;
-                    }
-                    if (!array) {
-                        resp.status(404);
-                        resp.end();
-                    }
-                    array = array.filter(i => i !== data.itemName);
-                    db.collection("carts").updateOne({"code": data.cartCode}, { $set: {[field]: array} }, (err, result) => {
-                        if (err) {
-                            throw err;
-                        } else {
-                            resp.status(200);
+        client.connect((err, client) => {
+            if (err) {
+                throw err;
+            } else {
+                // If DB connection is successful
+                const db = client.db("database");
+                db.collection("carts").findOne({"code": data.cartCode}, {}, (err, res) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        // Found user document
+                        // Edit correct field 
+                        let array = null;
+                        let field = null;
+                        switch(data.itemType) {
+                            case itemTypes.CANNEDJARRED:
+                                array = res.cannedJarredData;
+                                field = "cannedJarredData";
+                                break;
+                            case itemTypes.DAIRY:
+                                array = res.dairyData;
+                                field = "dairyData";
+                                break;
+                            case itemTypes.DRYBAKING:
+                                array = res.dryBakingData;
+                                field = "dryBakingData";
+                                break;
+                            case itemTypes.FROZEN:
+                                array = res.frozenData;
+                                field = "frozenData";
+                                break;
+                            case itemTypes.GRAINS:
+                                array = res.grainsData;
+                                field = "grainsData";
+                                break;
+                            case itemTypes.MEAT:
+                                array = res.meatData;
+                                field = "meatData";
+                                break;
+                            case itemTypes.PRODUCE:
+                                array = res.produceData;
+                                field = "produceData";
+                                break;
+                            case itemTypes.OTHER:
+                                array = res.otherData;
+                                field = "otherData";
+                                break;
+                            default:
+                                array = null;
+                                field = null;
+                                break;
+                        }
+                        if (!array) {
+                            resp.status(404);
                             resp.end();
                         }
-                    });
-                }
-            })
-        }
-    })
+                        array = array.filter(i => i !== data.itemName);
+                        db.collection("carts").updateOne({"code": data.cartCode}, { $set: {[field]: array} }, (err, result) => {
+                            if (err) {
+                                throw err;
+                            } else {
+                                resp.status(200);
+                                resp.end();
+                            }
+                        });
+                    }
+                })
+            }
+        })
+    }
+})
+
+app.post("/logout", (req, resp) => {
+    const sessionId = req.cookies.session.substring(1);
+    if (sessionId) {
+        sessions.delete(sessionId);
+        resp.status(200);
+        resp.end();
+    } else {
+        resp.status(404);
+        resp.end();
+    }
 })
 
 app.post("/login", (req, resp) => {
