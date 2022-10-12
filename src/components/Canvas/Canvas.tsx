@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { ActiveEmoji } from "./ActiveEmoji";
-import { GridMemo } from "./Grid";
-import { Box, Toolbar } from "@mui/material";
+import { Box, Toolbar, Fab } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 import {
   TransformWrapper,
   TransformComponent,
 } from "@pronestor/react-zoom-pan-pinch";
+import { ActiveEmoji } from "./ActiveEmoji";
+import { GridMemo } from "./Grid";
 
 export type CanvasProps = {
   canvasSize?: number;
@@ -49,7 +50,6 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
         maxScale={7}
         doubleClick={{ disabled: true }}
         zoomAnimation={{ animationType: "easeOutQuad" }}
-        wheel={{ step: 0.1 }}
       >
         {({ zoomToElement }: any) => (
           <TransformComponent
@@ -81,6 +81,24 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
         )}
       </TransformWrapper>
       <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />
+      {activeElement && (
+        <Fab
+          color="primary"
+          aria-label="add"
+          variant="extended"
+          sx={{
+            background: "white",
+            position: "absolute",
+            bottom: 0,
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          onClick={() => console.log("lcoed")}
+        >
+          <CheckIcon sx={{ mr: 1 }} />
+          Add emoji
+        </Fab>
+      )}
     </Box>
   );
 }
