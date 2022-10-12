@@ -8,7 +8,7 @@ export default class GymMap
         this.svgContainer = d3.select(document.getElementById(parentDivID))
         this.d3 = d3
         this._loadSvg()
-        this._TOTAL_SECTIONS = 6
+        this._TOTAL_SECTIONS = 28
         this._HIGHLIGHT_COLOR = "rgba(152,255,152,0.5)"
 
     }
@@ -31,16 +31,18 @@ export default class GymMap
      */
     updateHighlightedSections(sectionsSelected)
     {
+        //Note: sections are not zero indexed
+
         //Reset colors
         let sectionColors = []
-        for(let i = 0; i < this._TOTAL_SECTIONS; i++)
+        for(let i = 1; i <= this._TOTAL_SECTIONS; i++)
             sectionColors[i] = "white"
         
         //Set selected section colors
         sectionsSelected.forEach(section => sectionColors[section] = this._HIGHLIGHT_COLOR)
 
         //update svg colors
-        for(let section = 0; section < this._TOTAL_SECTIONS; section++){
+        for(let section = 1; section <= this._TOTAL_SECTIONS; section++){
             d3.select("#gymMap").select(`#section${section}`).style("fill", sectionColors[section])
         }
     }

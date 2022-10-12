@@ -11,18 +11,30 @@
 <body>
 <h1 class="text-center">Climbing Map</h1>
 <div class="row">
-    <div class="col m-2" id="filters">
-        <p>Select a few filters to display where those climbs are in the gym.</p>
-        <label for="grades">Grade</label>
-        <select id="grades" name="grades"></select>
-        <label for="climbType">Climb Type</label>
-        <select id="climbType" name="climbType">
-            <option value="lead">Lead Only</option>
-            <option value="toprope">Top Rope Only</option>
-            <option value="leadtoprope">Lead or Top Rope</option>
-            <option value="boulder">Boulder</option>
-        </select>
-        <button id="apply" type="button" class="rounded">Apply</button>
+    <div class="col m-2" id="userInputArea">
+        <div class="row pb-3" id="filters">
+            <p>Select a few filters to display where those climbs are in the gym.</p>
+            <label for="grades" class="fw-bold">Grade</label>
+            <select id="grades" name="grades" class="m-2"></select>
+            <label for="climbType" class="fw-bold">Climb Type</label>
+            <select id="climbType" name="climbType" class="m-2">
+                <option value="lead">Lead Only</option>
+                <option value="toprope">Top Rope Only</option>
+                <option value="leadtoprope">Lead or Top Rope</option>
+                <option value="boulder">Boulder</option>
+            </select>
+            <button id="apply" type="button" class="rounded m-2">Apply</button>
+        </div>
+        <div class="row m-1" id="displayClimbs">
+            <h2>Climbs</h2>
+            <table id="climbsTable">
+                <tr>
+                    <th>Grade</th>
+                    <th>Color</th>
+                    <th>Section</th>
+                </tr>
+            </table>
+        </div>
     </div>
     <div id="gymMap" class="col-8 border"></div>
 </div>
