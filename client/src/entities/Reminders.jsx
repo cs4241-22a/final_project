@@ -174,22 +174,14 @@ class Reminders extends React.Component {
                             return (
                                 <Container component="main" style={{paddingBottom: 50}}>
                                     <Grid container spacing={5} alignItems="flex-end">
-                                    <Grid
-                                        item
-                                        key={item.date}
-                                        xs={12}
-                                        md={4}
-                                        >
+                                    <Grid item key={item.date} xs={12} md={4}>
                                         <Card>
                                             <CardHeader
-                                            title={item.title}
-                                            subheader={"Posted by " + item.name + " @ " + item.date}
-                                            sx={{
-                                                backgroundColor: (theme) =>
-                                                theme.palette.mode === 'light'
-                                                    ? theme.palette.grey[200]
-                                                    : theme.palette.grey[700],
-                                            }}
+                                                title={item.title}
+                                                subheader={"Posted by " + item.name + " @ " + item.date}
+                                                sx={{
+                                                    backgroundColor: '#D3D3D3'
+                                                }}
                                             />
                                             <CardContent style={{display: "flex", flexDirection: "column",}}>
                                                 <Typography variant="h6">
@@ -254,10 +246,6 @@ class Reminders extends React.Component {
                                 Upload
                             </Button>
                         </label>
-                        {/*<Button variant="contained" component="label" onClick={this.handleOpen} style={{margin: 25}}>
-                            Upload Photo
-                            <input type="file" hidden onChange={(e) => this.setState({image: e.target.files[0]})}/>
-        </Button>*/}
                         <Button variant="contained" onClick={(e) => {
                             this.setState({date: new Date().toLocaleString()}, () => {
                                 this.uploadImage()

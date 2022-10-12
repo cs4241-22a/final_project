@@ -52,7 +52,7 @@ class App extends React.Component {
             <Route exact path='/home' element={< Home />}></Route>
             <Route exact path='/create' element={< CreateAccount />}></Route>
             <Route exact path='/verification' element={< VerificationCheck />}></Route>
-            <Route exact path='/main' element={< Reminders />}></Route>
+            <Route exact path='/' element={< Reminders />}></Route>
 
           </Routes>
         </BrowserRouter>
