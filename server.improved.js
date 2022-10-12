@@ -21,7 +21,11 @@ require('dotenv').config()
 
 app.use(express.json())
 app.use(compression())
-app.use(express.static('./client/build'))
+app.use(express.static('dist'));
+
+app.get('*', (request, response) => {
+  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 // CONNECT TO DATABASE
 let username
@@ -50,13 +54,6 @@ const connect = async () => {
 }
 
 connect()
-
-app.get('/', (req, res) => {
-  res.status(200).json({
-      status: 'success'
-  });
-
-});
 
 // POST BLOG ONTO DATABASE
 app.post('/api/postblog', async (req, res) => {
