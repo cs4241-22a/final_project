@@ -26,7 +26,7 @@ class VerificationCheck extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
+        console.log('IN THIS VERIFICATION BETFORE GET')
         fetch('/api/getVerification', {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
