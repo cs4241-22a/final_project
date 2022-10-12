@@ -93,21 +93,11 @@ class App extends React.Component {
                     numPeople: 4,
                     user: 'test2'
                 }
-            ]
+            ],
+            user: false
         };
         console.log("State:");
         console.log(this.state);
-        //this.load();
-    }
-
-    load() {
-        fetch('/recipedata', {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(response => response.json())
-            .then(res => this.setState(prevState => ({ recipes: [...prevState.recipes, ...res] })));
     }
 
     componentDidMount() {
@@ -116,20 +106,38 @@ class App extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json())
-            .then(res => {
-                console.log(res);
-                this.setState({ ...this.state, recipes: [...this.state.recipes, ...res] });
-                console.log("Current state");
-                console.log(this.state);
-            });
+        })
+        .then(response => response.json())
+        .then(res => {
+            console.log(res);
+            this.setState({ ...this.state, recipes: [...this.state.recipes, ...res] });
+            console.log("Current state");
+            console.log(this.state);
+        });
+
+
+        fetch('/getUser', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            if (!response.ok) { // should mean not logged in
+                return false;
+            }
+            else return response.json()
+        })
+        .then(data => {
+            this.setState({ user: data })
+        })
     }
 
     render() {
         return (
             <div className="App">
-                <Header />
-                {/* originally id was in the App div, but want the header to span entire page */}
+                {/* todo: set loggedIn based off of if there's a current user. accountButtons is true on main page, false on login + register */}
+                <Header accountButtons={true} loggedIn={this.state.user != false} />
                 <body id='basic'>
                     <Table items={this.state.recipes} />
                 </body>

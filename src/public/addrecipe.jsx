@@ -14,9 +14,17 @@ const addARecipe = function() {
         numPeople: document.getElementById('numpeople')
     }
 
+    //parse the ingredients into an array
+    let ingArr = inputs.ingredients.value.split(',')
+    //remove leading and trailing spaces from each ingredient
+    let finalArr = []
+    for(let i = 0; i < ingArr.length; i++) {
+        finalArr.push(ingArr[i].trim())
+    }
+
     const body = {
         title: inputs.title.value,
-        ingredients: inputs.ingredients.value,
+        ingredients: finalArr,
         directions: inputs.directions.value,
         prepTime: inputs.prepTime.value,
         numPeople: inputs.numPeople.value
@@ -29,7 +37,7 @@ const addARecipe = function() {
         },
         body: JSON.stringify( body )
     })
-        .then( response => response.json() )
+        .then(response => window.location.replace(response.url))
 
     return false
 }

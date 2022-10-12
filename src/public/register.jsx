@@ -61,7 +61,7 @@ class Register extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header accountButtons={false} />
                 <div className="center account-form d-grid gap-2">
                     <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Username</Form.Label>

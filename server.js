@@ -101,7 +101,6 @@ app.post('/register', (req, res) => {
 
     User.find({ username: user })
         .then(result => {
-            console.log("r " + result)
             if (result.length === 0) {
                 //if username not found create new user and login
                 let user_login = {
@@ -115,6 +114,7 @@ app.post('/register', (req, res) => {
                         res.redirect('/');
                     })
             } else {
+                req.session.login = false;
                 res.end(JSON.stringify("Username already in use. Please select a different one."));
             }
         })
@@ -136,6 +136,15 @@ app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/build/pages/register.html');
 });
 
+app.get('/addrecipe', (req, res) => {
+    res.sendFile(__dirname + '/build/pages/addrecipe.html');
+});
+
+app.get("/getUser", (req, res) => {
+    if (req.session.login && req.session.username != null) { res.end(JSON.stringify(req.session.username)); }
+    else res.status(401).send();
+})
+
 // middleware for authentication; should only affect the data modification routes
 app.use((req, res, next) => {
     if (Recipe !== null && User !== null) {
@@ -144,6 +153,12 @@ app.use((req, res, next) => {
         res.status(503).send();
     }
 });
+
+app.get('/logout', (req, res) => {
+    req.session.login = false;
+    req.session.username = false;
+    res.redirect('/')
+})
 
 app.use(cookie({
     name: 'session',
@@ -165,16 +180,22 @@ const getRecipesFromUsername = async (usernameToFind) => {
 };
 
 app.post('/add', express.json(), async (req, res) => {
-    const data = req.body;
-    data.username = req.session.username;
-    Recipe.collection.insertOne(req.body)
-        .then(result => res.json(result));
+    const data = req.body
+    if(req.session.username == null) {
+        res.redirect('/')
+    } else {
+        data.username = req.session.username
+        Recipe.collection.insertOne(data)
+            .then( function() {
+                res.redirect('/')
+            });
+    }
 });
 
-app.post('/update', express.json(), (req, res) => {
-    recipecollection.find({ name: { $exists: true } }).toArray()
-        .then(result => res.json(result));
-})
+//app.post('/update', express.json(), (req, res) => {
+//    recipecollection.find({ name: { $exists: true } }).toArray()
+//        .then(result => res.json(result));
+//})
 
 app.patch('/update', express.json(), async (req, res) => {
     const userId = await getIdFromUsername(req.session.username);
