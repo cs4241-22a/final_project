@@ -32,7 +32,7 @@ class VerificationCheck extends React.Component {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
         });
-        const json = await response.json();
+        const json = await response;
 
         if (data.get('Verification') === json.verification) {
             const context = this.context;

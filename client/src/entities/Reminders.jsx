@@ -58,7 +58,7 @@ class Reminders extends React.Component {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
         });
-        const json = await response.json();
+        const json = await response;
         this.setState({currentBlogs: json})
     }
 
