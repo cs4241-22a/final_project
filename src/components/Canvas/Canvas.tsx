@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { createRef, useState, useRef, useEffect } from "react";
 import { Box, Toolbar, Fab } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {
@@ -38,10 +38,9 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
       const operation: CellOperation = {index: idx, newCell: newCell};
       socket.send(JSON.stringify(operation));
 
-      console.log(grid.current[idx]);
+      activeElement.innerHTML = `<img src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${activeEmoji}.png" alt="grinning" class="__EmojiPicker__ epr-emoji-img" loading="eager" style="font-size: 12.8px; height: 12.8px; width: 12.8px;">`;
     }
   }
-
   useEffect(() => {
     if (prevActiveElement === undefined) {
       prevActiveElement = activeElement;
@@ -75,12 +74,13 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
         zoomAnimation={{ animationType: "easeOutQuad" }}
       >
         {({ zoomToElement }: any) => (
-          <div
+          <Box
             onClick={() => {
               if (zoom === undefined) {
                 zoom = zoomToElement;
               }
             }}
+            height="100%"
           >
             <TransformComponent
               wrapperStyle={{
@@ -107,7 +107,7 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
                 />
               </Box>
             </TransformComponent>
-          </div>
+          </Box>
         )}
       </TransformWrapper>
       <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />
