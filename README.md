@@ -2,7 +2,7 @@
 
 *Jacob Chlebowski - jachlebowski@wpi.edu, Miles Gregg - mgregg@wpi.edu, Zaq Humphrey - zihumphrey@wpi.edu*
 
-Heroku --> link
+Heroku --> link <br>
 YouTube--> link
 
 
