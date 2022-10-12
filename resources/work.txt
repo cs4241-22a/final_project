@@ -1,6 +1,9 @@
 Chayanne
-- finish html/css for tomorrow
-- start svelte move
+- id the divs
+- finalize content there 
+- triple check the navbar
+- changing html to svelte
+- find img
 
 Hailey
 - make webpack
