@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>input { display:block }</style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A page to view the songs in each playlist"
+    />
+    <title>Playlist Page</title>
+    <script src="/top.js" defer></script>
+  </head>
+  <body class="bg-light">
+    <h1 class="text-primary ms-1">Top Songs Playlists</h1>
+    
+    <form>
+      <button type="addSong" id="addSong">
+        Add Song
+      </button>
+    </form>
+    
+    <h2 class="text-secondary text-dark">Rap</h2>
+    <section class="Rap">
+      <table
+            id="rapTable"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Song</th>
+              <th>artist</th>
+              <th>Rank</th>
+              <th>Up Vote</th>
+              <th>Down Vote</th>
+            </tr>
+      </table>
+    </section>
+    
+    <h2 class="text-secondary text-dark">R&B</h2>
+    <section class="R&B">
+      <table
+            id="R&BTable"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Song</th>
+              <th>artist</th>
+              <th>Rank</th>
+              <th>Up Vote</th>
+              <th>Down Vote</th>
+            </tr>
+      </table>
+    </section>
+    
+    <h2 class="text-secondary text-dark">Pop</h2>
+    <section class="Pop">
+      <table
+            id="popTable"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Song</th>
+              <th>artist</th>
+              <th>Rank</th>
+              <th>Up Vote</th>
+              <th>Down Vote</th>
+            </tr>
+      </table>
+    </section>
+    
+    <h2 class="text-secondary text-dark">Rock</h2>
+    <section class="Rock">
+      <table
+            id="rockTable"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Song</th>
+              <th>artist</th>
+              <th>Rank</th>
+              <th>Up Vote</th>
+              <th>Down Vote</th>
+            </tr>
+      </table>
+    </section>
+    
+    <h2 class="text-secondary text-dark">Country</h2>
+    <section class="Country">
+      <table
+            id="countryTable"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Song</th>
+              <th>artist</th>
+              <th>Rank</th>
+              <th>Up Vote</th>
+              <th>Down Vote</th>
+            </tr>
+      </table>
+    </section>
+    
+    
+    
+    <!--
+     <table
+            id="results"
+            class="table table-striped table-hove table-bordered table-sm table-dark"
+          >
+            <tr>
+              <th>Destination</th>
+              <th>Distance to Destination</th>
+              <th>Average Speed</th>
+              <th>Time to Destination</th>
+              <th>delete</th>
+              <th>modify</th>
+            </tr>
+-->
+    
+    <form>
+      <label>
+        <button type="logout" id="logout">
+          Log Out
+        </button>
+      </label>
+    </form>
+
+  </body>
+</html>
