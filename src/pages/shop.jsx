@@ -68,26 +68,12 @@ function togglePopup(product) {
         </Card.Text>
         <Button variant="primary">Contact</Button>
       </Card.Body>
-      </Col>
-      </Row>
     </Card>
     </Col>
     
        )}    </Row>
 
     </div>
-    )}
-        
-    {isOpen && <Popup
-      content={<>
-        <img src={gompei}/>
-        <h1>{product.name}</h1>
-        <h3>${product.price}</h3>
-        <p>{product.description}</p>
-      </>}
-      handleClose={togglePopup}
-    />}
-
     </div>
   );
 };
