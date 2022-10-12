@@ -162,19 +162,24 @@ class Reminders extends React.Component {
                         </Toolbar>
                     </AppBar>
                 </Box>
-                <ThemeProvider theme={theme}>
-                    <Container component="main" maxWidth="xl">
-                        <Button variant="contained" onClick={this.handleOpen} disabled={this.context.profile == null || this.context.profile == undefined}>
-                            Make a Post
-                        </Button>
-                        <Button variant="contained" onClick={this.goToLogin}>
-                            Login
-                        </Button>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    style={{ minHeight: '100vh' }}
+                >
+                     <Button style={{marginBottom: 25}} variant="contained" onClick={this.handleOpen} disabled={this.context.profile == null || this.context.profile == undefined}>
+                        Make a Post
+                    </Button>
+                    <Button style={{marginBottom: 25}} variant="contained" onClick={this.goToLogin}>
+                        Login
+                    </Button>
+                    <Grid item xs={3}>
                         {this.state.currentBlogs.reverse().map(item => {
-                            return (
-                                <Container component="main" style={{paddingBottom: 50}}>
-                                    <Grid container spacing={5} alignItems="flex-end">
-                                    <Grid item key={item.date} xs={12} md={4}>
+                                return (
+                                    <Container style={{paddingBottom: 50, width: 500, height: 500}}>
                                         <Card>
                                             <CardHeader
                                                 title={item.title}
@@ -190,16 +195,15 @@ class Reminders extends React.Component {
                                                 <Image
                                                     cloudName='deuj95eph'
                                                     publicId={item.photo}
+                                                    style={{ width: 300, height: 300}}
                                                 />
                                             </CardContent>
                                         </Card>
-                                        </Grid>
-                                    </Grid>
-                                </Container>
-                            )
-                        })}
-                    </Container>
-                </ThemeProvider>
+                                    </Container>
+                                )
+                            })}
+                    </Grid>
+                </Grid> 
 
                 <Dialog onClose={this.handleClose} open={this.state.open} fullWidth={ true } maxWidth={"md"}>
                     <div style={{width: '75%', marginLeft: 'auto', marginRight: 'auto'}}>
@@ -259,81 +263,6 @@ class Reminders extends React.Component {
             </>
         )
     }
-    
-    /*
-    render() {
-        return (
-        <div style={centerStyle}>
-            <div>
-                <Box sx={{ height:"fit-content", width: 'fit-content', maxWidth: 500, borderRadius:3, borderWidth:1, border:5, borderColor:"navy" }}>
-                    <Typography variant="h3" gutterBottom>
-                    Blogger
-                    </Typography>
-                </Box>
-                <Fab style={{ backgroundColor:"green", color:"black", width:75, height:75}} onClick={this.handleOpen}>Make a post!</Fab>
-                <Modal
-                    id="modalPost"
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    aria-labelledby="postMaker"
-                    aria-describedby="blogDescr"
-                >
-                    <Box sx={style}>
-                    <Box
-                            component="form"
-                        sx={{
-                            '& > :not(style)': { m: 0, width: '45ch', height: '10ch'},
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Typography id="createBlog" variant="h6" component="h2">
-                                Create your blog:
-                            </Typography>
-                                                    
-                            <TextField onChange={e => {
-                                this.setState({...this.state.data, title: e.target.value})
-                            }} fullWidth inputProps={{ maxLength: 250 }} id="blogTitle" label="Enter title here..." multiline variant="filled"/>
-                            <TextField onChange={e => {
-                                this.setState({...this.state.data, description: e.target.value})
-                            }} fullWidth inputProps={{ maxLength: 250 }} id="blogDescr" label="Enter blog here..." multiline variant="filled"/>
-                            <Button onClick={this.addBlog}>Post your blog!</Button>
-                            <Button onClick={this.handleClose}>Cancel</Button>
-                        </Box>
-                    </Box>
-                </Modal>
-            </div>
-
-
-
-            <div>
-              <h1 >React Image Upload</h1>
-              <div >
-                <div>
-                  <span>Browse</span>
-                  <input type="file" name="image" onChange={(e) => this.setState({image: e.target.files[0]})}/>
-                </div>
-              </div>
-          </div>
-
-          
-          <div>
-            <button onClick={this.uploadImage}>Upload Image</button>
-          </div>
-
-          <Image
-            cloudName='deuj95eph'
-            publicId={this.state.returnImage}
-          />
-
-
-
-            <div>
-                {<ul> {blogs.map(item => <ul>{item}</ul> )} </ul>}
-            </div>
-        </div>
-        );
-    };*/
 }
 
 export default withRouter(Reminders);
