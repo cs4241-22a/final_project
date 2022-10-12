@@ -36,7 +36,7 @@ export default class GymMap
         //Reset colors
         let sectionColors = []
         for(let i = 1; i <= this._TOTAL_SECTIONS; i++)
-            sectionColors[i] = "white"
+            sectionColors[i] = "#E2E2E2"
         
         //Set selected section colors
         sectionsSelected.forEach(section => sectionColors[section] = this._HIGHLIGHT_COLOR)
