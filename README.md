@@ -2,7 +2,7 @@
 
 *Jacob Chlebowski - jachlebowski@wpi.edu, Miles Gregg - mgregg@wpi.edu, Zaq Humphrey - zihumphrey@wpi.edu*
 
-Heroku -->
+Heroku --> link
 
 
 ![**Login Page**](https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true)
