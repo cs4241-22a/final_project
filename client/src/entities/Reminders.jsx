@@ -11,32 +11,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 import { MainContext } from '../MainContext';
 import {withRouter} from './withRouter'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const url = 'api.cloudinary.com/v1_1/deuj95ephL/image/upload';
 const preset = 'images';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-const centerStyle = {
-    display: 'flex',
-    alignItems: "center",
-    direction: "row",
-    flexDirection: 'column',
-    background: "lightgrey"
-  };
-
+const theme = createTheme();
 
 const blogs = []
 
@@ -56,10 +39,17 @@ class Reminders extends React.Component {
             currentBlogs: [],
             name: ''
         }
-        this.checkAuth = this.checkAuth.bind(this)
+        //this.checkAuth = this.checkAuth.bind(this)
+        this.goToLogin = this.goToLogin.bind(this)
     }
 
-    checkAuth() {
+    goToLogin(event) {
+        event.preventDefault();
+        console.log('here!')
+        this.props.navigate('/login')
+    }
+
+    /*checkAuth() {
         if (this.context.profile == null || this.context.profile == undefined) {
             console.log('here mate')
             this.props.navigate('/login')
@@ -67,7 +57,7 @@ class Reminders extends React.Component {
         } else {
             this.setState({name: this.context.profile.name.split("@")[0]})
         }
-    }
+    }*/
 
     componentDidMount() {
         this.getAllBlogs()
@@ -81,11 +71,16 @@ class Reminders extends React.Component {
         .then(response => {
             this.setState({currentBlogs: response})
             console.log(this.state.currentBlogs)
-            this.checkAuth()
+            //this.checkAuth()
         })
     }
 
     uploadImage = () => {
+        if (this.state.image.length <= 0 || this.state.title.length <= 0 || this.state.description <= 0) {
+            alert("Missing field")
+            return
+        }
+
         const formData = new FormData();
         console.log(this.state.image)
         formData.append('file',this.state.image)
@@ -100,9 +95,11 @@ class Reminders extends React.Component {
                     body: JSON.stringify({ title: this.state.title,
                                            description: this.state.description,
                                            date: this.state.date,
-                                           photo: response.data.url })
+                                           photo: response.data.url,
+                                           name: this.context.profile.name.split("@")[0] })
                 }).then((response) => {
                     if (response.status === 200) {
+                        this.getAllBlogs()
                         //this.props.navigate('/verification')
                     }
                 })
@@ -143,12 +140,12 @@ class Reminders extends React.Component {
 
     handleOpen = e =>{
         e.preventDefault()
-        this.setState({open : true})
+        this.setState({open : true, image:'', returnImage:''})
     }
     
     handleClose = e =>{
         e.preventDefault()
-        this.setState({open: false})
+        this.setState({open: false, image:'', returnImage:''})
         //console.log(this.state.data)
     }
 
@@ -159,51 +156,57 @@ class Reminders extends React.Component {
                     <AppBar position="static">
                         <Toolbar variant="dense">
                             <Typography variant="h6" color="inherit" component="div">
-                                Blogger - Logged in as: {this.state.name}
+                                Blogger - {this.context.profile == null ? "Not logged in" : "Logged in as: " + this.context.profile.name.split("@")[0]}
                             </Typography>
                         </Toolbar>
                     </AppBar>
                 </Box>
-                <Button variant="contained" onClick={this.handleOpen}>
-                    Make a Post
-                </Button>
-                {this.state.currentBlogs.reverse().map(item => {
-                    return (
-                        <Container component="main" style={{paddingBottom: 50}}>
-                            <Grid container spacing={5} alignItems="flex-end">
-                            <Grid
-                                item
-                                key={item.date}
-                                xs={12}
-                                //sm={tier.title === 'Enterprise' ? 12 : 6}
-                                md={4}
-                                >
-                                <Card>
-                                    <CardHeader
-                                    title={item.title}
-                                    subheader={item.date}
-                                    sx={{
-                                        backgroundColor: (theme) =>
-                                        theme.palette.mode === 'light'
-                                            ? theme.palette.grey[200]
-                                            : theme.palette.grey[700],
-                                    }}
-                                    />
-                                    <CardContent style={{display: "flex", flexDirection: "column",}}>
-                                        <Typography variant="h6">
-                                            {item.description}
-                                        </Typography>
-                                        <Image
-                                            cloudName='deuj95eph'
-                                            publicId={item.photo}
-                                        />
-                                    </CardContent>
-                                </Card>
-                                </Grid>
-                            </Grid>
-                        </Container>
-                    )
-                })}
+                <ThemeProvider theme={theme}>
+                    <Container component="main" maxWidth="xl">
+                        <Button variant="contained" onClick={this.handleOpen} disabled={this.context.profile == null || this.context.profile == undefined}>
+                            Make a Post
+                        </Button>
+                        <Button variant="contained" onClick={this.goToLogin}>
+                            Login
+                        </Button>
+                        {this.state.currentBlogs.reverse().map(item => {
+                            return (
+                                <Container component="main" style={{paddingBottom: 50}}>
+                                    <Grid container spacing={5} alignItems="flex-end">
+                                    <Grid
+                                        item
+                                        key={item.date}
+                                        xs={12}
+                                        md={4}
+                                        >
+                                        <Card>
+                                            <CardHeader
+                                            title={item.title}
+                                            subheader={"Posted by " + item.name + " @ " + item.date}
+                                            sx={{
+                                                backgroundColor: (theme) =>
+                                                theme.palette.mode === 'light'
+                                                    ? theme.palette.grey[200]
+                                                    : theme.palette.grey[700],
+                                            }}
+                                            />
+                                            <CardContent style={{display: "flex", flexDirection: "column",}}>
+                                                <Typography variant="h6">
+                                                    {item.description}
+                                                </Typography>
+                                                <Image
+                                                    cloudName='deuj95eph'
+                                                    publicId={item.photo}
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                        </Grid>
+                                    </Grid>
+                                </Container>
+                            )
+                        })}
+                    </Container>
+                </ThemeProvider>
 
                 <Dialog onClose={this.handleClose} open={this.state.open} fullWidth={ true } maxWidth={"md"}>
                     <div style={{width: '75%', marginLeft: 'auto', marginRight: 'auto'}}>
