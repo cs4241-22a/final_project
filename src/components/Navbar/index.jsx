@@ -1,4 +1,6 @@
 import React from 'react';
+import header from '../../../public/GoataShop-header.jpg'
+
 import {
   Nav,
   NavLink,

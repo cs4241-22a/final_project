@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Listings from './pages/listings';
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <Router>
+      <Header />
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Login getUser={getUser} user={user}/> } />
