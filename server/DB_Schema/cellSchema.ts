@@ -5,7 +5,7 @@ import * as mongoose from "mongoose"
 export interface ICell{
     emoji:String,
     timeStamp:Date,
-    user: mongoose.Types.ObjectId
+    user: mongoose.Types.ObjectId | undefined
 }
 
 

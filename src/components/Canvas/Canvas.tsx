@@ -7,6 +7,8 @@ import {
 } from "@pronestor/react-zoom-pan-pinch";
 import { ActiveEmoji } from "./ActiveEmoji";
 import { GridMemo } from "./Grid";
+import socket, {initSocket} from "../../util/SocketConnection";
+import {PixelProps} from "./Pixel";
 
 export type CanvasProps = {
   canvasSize?: number;
@@ -23,9 +25,16 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
 
   const grid = useRef([...Array(size * size)].map(() => ""));
 
+  // Initialize websocket connection
+  initSocket();
+
   function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     setChosenEmoji(activeEmoji);
-    console.log(document.hasFocus());
+
+    // @ts-ignore
+    const currentPixel = activeElement!.parentElement.props as PixelProps
+
+    console.log(activeElement);
   }
 
   useEffect(() => {
