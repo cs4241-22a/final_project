@@ -1,6 +1,6 @@
 
 
-window.onload = function() {
+window.onload = async function() {
     let user = null;
     let profile = null;
     let age = null;
@@ -11,7 +11,7 @@ window.onload = function() {
     //     headers: {'Content-Type': 'application/json'}
     // })
 
-    fetch('/getUser', {
+    await fetch('/getUser', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
@@ -20,7 +20,7 @@ window.onload = function() {
             user = text;
             console.log(user);
         })
-    fetch('/getprofile', {
+    await fetch('/getprofile', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
