@@ -11,13 +11,14 @@ const container = {
 export type PixelProps = {
   size: number;
   activeEmoji: string;
+  zoomToElement: Function;
 };
 
-export function Pixel({ size, activeEmoji }: PixelProps) {
+export function Pixel({ size, activeEmoji, zoomToElement }: PixelProps) {
   const [emoji, setEmoji] = useState("");
 
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    setEmoji(activeEmoji);
+    zoomToElement(event.currentTarget);
   }
 
   return (

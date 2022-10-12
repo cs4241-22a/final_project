@@ -5,6 +5,7 @@ import { Box, Toolbar } from "@mui/material";
 import {
   TransformWrapper,
   TransformComponent,
+  ReactZoomPanPinchRef,
 } from "@pronestor/react-zoom-pan-pinch";
 
 export type CanvasProps = {
@@ -13,8 +14,16 @@ export type CanvasProps = {
 };
 
 export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
-  const [activeEmoji, setActiveEmoji] = useState("1f600");
+  const [activeEmoji, setActiveEmoji] = useState<string>("1f600");
+  const [zoom, setZoom] = useState<number>(0);
   const grid = useRef([...Array(size * size)].map(() => ""));
+
+  function setZoomScale(
+    ref: ReactZoomPanPinchRef,
+    event: TouchEvent | MouseEvent
+  ) {
+    setZoom(ref.state.scale);
+  }
 
   return (
     <Box
@@ -25,30 +34,39 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
       height="100vh"
     >
       <Toolbar />
-      <TransformWrapper initialScale={1} minScale={1} maxScale={8}>
-        <TransformComponent
-          wrapperStyle={{
-            height: "100%",
-            width: "100%",
-          }}
-        >
-          <Box
-            display="grid"
-            gridTemplateRows={`repeat(${size}, 1fr)`}
-            gridTemplateColumns={`repeat(${size}, 1fr)`}
-            width={canvasSize}
-            height={canvasSize}
-            border="1px solid black"
-            boxShadow={3}
-            sx={{ backgroundColor: "white" }}
+      <TransformWrapper
+        initialScale={3}
+        minScale={0.75}
+        maxScale={7}
+        onZoomStop={setZoomScale}
+      >
+        {({ zoomIn, zoomToElement }: any) => (
+          <TransformComponent
+            wrapperStyle={{
+              height: "100%",
+              width: "100%",
+              backgroundColor: "#333333",
+            }}
           >
-            <GridMemo
-              grid={grid.current}
-              size={canvasSize / size}
-              activeEmoji={activeEmoji}
-            />
-          </Box>
-        </TransformComponent>
+            <Box
+              display="grid"
+              gridTemplateRows={`repeat(${size}, 1fr)`}
+              gridTemplateColumns={`repeat(${size}, 1fr)`}
+              width={canvasSize}
+              height={canvasSize}
+              border="1px solid black"
+              boxShadow={3}
+              sx={{ backgroundColor: "white" }}
+            >
+              <GridMemo
+                grid={grid.current}
+                size={canvasSize / size}
+                activeEmoji={activeEmoji}
+                zoomToElement={zoomToElement}
+              />
+            </Box>
+          </TransformComponent>
+        )}
       </TransformWrapper>
       <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />
     </Box>
