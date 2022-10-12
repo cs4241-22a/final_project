@@ -50,6 +50,11 @@ const connect = async () => {
 
 connect()
 
+app.get('/', (req, res) => {
+  console.log('in main page')
+  res.sendFile(path.join(__dirname, '/private/index.html'))
+})
+
 // POST BLOG ONTO DATABASE
 app.post('/api/postblog', async (req, res) => {
   console.log(req.body)
