@@ -1,6 +1,8 @@
 Cole Manning, Mason Powell, Ben Sakac, Greg Klimov
 http://gompei-clicker-final-project.glitch.me
 
+Video: https://www.youtube.com/watch?v=mUVeiCJihdE
+
 **A brief description:**
 
 Our project is a “Cookie Clicker”-esque game, but with Gompei as the object to be clicked. As you click Gompei you will gain “goat bucks” for each click. You can purchase ‘upgrades’ to automate or improve your clicking. You can login via Github OAuth and your upgrades and scores will be saved either once every minute or manually. 
