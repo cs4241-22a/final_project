@@ -5,14 +5,13 @@ window.onload = function() {
     const table = document.getElementById("leaderboard-table");
 
     cpsBtn.addEventListener('click', function () {
-        fetch('/GetCPSScores',{
+        fetch('/getCPSScores',{
             method: 'GET'
           })
           .then( function (response ) {
             return response.json();
           })
           .then( function (response){
-            console.log(response)
             while(table.rows.length !== 0)
             {
                 table.deleteRow(0);
@@ -24,7 +23,7 @@ window.onload = function() {
             
             userCell.innerHTML = "Username";
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
-            scoreCell.innerHTML = "Clicks Per Second";
+            scoreCell.innerHTML = "Number Clicks";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
 
             // var length = 10;
@@ -32,10 +31,10 @@ window.onload = function() {
             // {
             //     length = response.length;
             // }
-            
-            for(let i = 0; i < length; i++)
+
+            for(let i = 0; i < response.length; i++)
             {
-                var row = table.insertRow(1);
+                var row = table.insertRow(i+1);
                 var userCell = row.insertCell(0);
                 var scoreCell = row.insertCell(1);
 
@@ -44,7 +43,6 @@ window.onload = function() {
                 scoreCell.innerHTML = response[i].score;
                 scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             }
-
             fetch('/GetUsers',{
                 method: 'GET'
               })
@@ -66,7 +64,7 @@ window.onload = function() {
                     table.rows[i].cells[0].innerHTML = username;
                 }
             })
-        })
+    })
     })
 
     reactionBtn.addEventListener('click', function () {
@@ -99,7 +97,7 @@ window.onload = function() {
 
             for(let i = 0; i < response.length; i++)
             {
-                var row = table.insertRow(1);
+                var row = table.insertRow(i+1);
                 var userCell = row.insertCell(0);
                 var scoreCell = row.insertCell(1);
 
@@ -162,7 +160,7 @@ window.onload = function() {
 
             for(let i = 0; i < response.length; i++)
             {
-                var row = table.insertRow(1);
+                var row = table.insertRow(i+1);
                 var userCell = row.insertCell(0);
                 var scoreCell = row.insertCell(1);
                 
