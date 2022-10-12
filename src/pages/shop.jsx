@@ -81,7 +81,9 @@ function togglePopup(product) {
     {isOpen && <Popup
       content={<>
         <img src={gompei}/>
-        <h2>{product.name}</h2>
+        <h1>{product.name}</h1>
+        <h3>${product.price}</h3>
+        <p>{product.description}</p>
       </>}
       handleClose={togglePopup}
     />}
