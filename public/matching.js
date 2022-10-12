@@ -40,6 +40,7 @@ window.onload = function() {
     })
         .then(response => (response.json()))
         .then((json) => {
+            console.log()
             json.forEach((item) => {
 
                 if(item.user != user){
@@ -65,6 +66,17 @@ window.onload = function() {
                             age.innerHTML = item.age;
 
                             let button = document.createElement("p");
+                            button.onclick = function() {
+                                fetch('/viewProfile', {
+                                    method: 'POST',
+                                    headers: {'Content-Type': 'application/json'},
+                                    body: JSON.stringify(item),
+                                })
+                                    .then(response => {
+                                        window.location.href = "./userProfile.html"
+                                    });
+                            }
+                                // viewProfile(item);
                             button.innerHTML = "<p><button>View Profile</button></p>"
 
                             const img = new Image();
@@ -87,4 +99,8 @@ window.onload = function() {
                 }
             })
         })
+}
+
+function viewProfile(match) {
+
 }
