@@ -5,7 +5,7 @@
 Heroku --> link
 
 
-<img src="https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" width="1000" height="500" />
+<img src="https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" width="800" height="500" />
 
 ![**Login Page**](https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true=10x10)
 
