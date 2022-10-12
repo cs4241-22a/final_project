@@ -7,6 +7,8 @@ export default function LoginPage(props) {
   const [mail, setMail] = useState(null);
   const [password, setPassword] = useState(null);
 
+  const [loginError, setLoginError] = useState(true);
+
   async function handleSubmit() {
     const data = {
       email: mail,
@@ -21,9 +23,11 @@ export default function LoginPage(props) {
         const loginJson = JSON.parse(loginData);
         if (loginJson.error) {
           window.location = "/login";
+          setLoginError("The email/password you entered was incorrect");
         } else {
           // Login was successful!
           window.location = "/home" + (loginJson.homeCart ? ("#" + loginJson.homeCart) : "");
+          setLoginError(null)
         }
       })
     })
