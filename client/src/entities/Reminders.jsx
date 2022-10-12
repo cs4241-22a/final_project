@@ -4,6 +4,17 @@ import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, Te
 import Modal from '@mui/material/Modal';
 import { rootShouldForwardProp } from "@mui/material/styles/styled";
 import BasicPost from "./post";
+import React, { useState, useEffect } from "react";
+import Reminders from "./entities/Reminders";
+import '../src/App.css'
+import {Image} from 'cloudinary-react'
+import axios from 'axios';
+
+
+const url = 'api.cloudinary.com/v1_1/deuj95ephL/image/upload';
+const preset = 'images';
+
+
 
 
 const style = {
@@ -34,9 +45,45 @@ class Reminders extends React.Component {
         super(props)
         this.state = {
             open: 0,
-            data: {name: "", description: ""}
+            data: {name: "", description: ""},
+            image:'',
+            returnImage:''
         }
     }
+
+    uploadImage = () => {
+        const formData = new FormData();
+        console.log(this.state.image)
+        formData.append('file',this.state.image)
+        formData.append("upload_preset","images")
+    
+        axios.post("https://api.cloudinary.com/v1_1/deuj95eph/image/upload",formData)
+        .then((response) => {
+            this.setState({returnImage: response.data.url})
+            console.log(response)
+        });
+      }
+
+
+      async onSubmit(){
+        const formData = new FormData();
+        formData.append('file', this.image);
+        formData.append('upload_preset', preset);
+        try {
+          this.setState({setLoading: true})
+          const res = await axios.post(url, formData);
+          const imageUrl = res.data.secure_url;
+          console.log("before")
+          const image = await axios.post('http://localhost:3001/upload', {
+            imageUrl
+          });
+          console.log("after")
+           this.setState({setLoading: false})
+           this.setState({setImage: image.data})
+        } catch (err) {
+          console.error(err);
+        }
+      };
 
     addBlog = () => {
         blogs.push(<BasicPost></BasicPost>)
@@ -97,6 +144,28 @@ class Reminders extends React.Component {
                     </Box>
                 </Modal>
             </div>
+
+
+
+            <div>
+              <h1 >React Image Upload</h1>
+              <div >
+                <div>
+                  <span>Browse</span>
+                  <input type="file" name="image" onChange={(e) => this.setState({image: e.target.files[0]})}/>
+                </div>
+              </div>
+          </div>
+
+          
+          <div>
+            <button onClick={this.uploadImage}>Upload Image</button>
+          </div>
+
+          <Image
+            cloudName='deuj95eph'
+            publicId={this.state.returnImage}
+          />
 
 
 
