@@ -28,6 +28,7 @@ yarn-error.log*
 server/*.js
 
 server/Routes/*.js
+server/DB_Schema/*.js
 
 # Environment file
 .env
