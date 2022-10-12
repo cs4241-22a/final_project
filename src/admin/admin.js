@@ -31,13 +31,19 @@ const addClimb = function(e) {
 
     const gradeValue = grade.value.toUpperCase(),
         colorValue = color[color.selectedIndex].value,
-        sectionValue = section[section.selectedIndex].value
+        sectionValue = section[section.selectedIndex].value,
+        typeValue = climbTypeUtils.getType(type)
 
-    const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, climbTypeUtils.getType(type), isLead(type), isTopRope(type))
+    const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, typeValue, isLead(type), isTopRope(type))
 
+    console.log("Climb gradeValue is: " + gradeValue + ", Climb typeValue is: " + typeValue)
 
-    mongoManager.addRoute(newClimb)
-        .then(() => getTableData())
+    if (isValidClimb(gradeValue, typeValue)) {
+        mongoManager.addRoute(newClimb)
+            .then(() => getTableData())
+    } else {
+        window.alert("Climb Grade and Type are not compatible.")
+    }
 
 }
 
@@ -96,4 +102,14 @@ function handleDeleteClick(climb) {
     console.log("handleDeleteClick called")
     mongoManager.removeRoute(climb)
         .then(() => getTableData())
+}
+
+function isValidClimb(grade, type) {
+    if(grade.includes("V") && (type === "boulder")) {
+        return true;
+    } else if(grade.includes("5.") && (type === "rope")) {
+        return true;
+    } else {
+        return false
+    }
 }
