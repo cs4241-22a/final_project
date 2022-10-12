@@ -23,11 +23,7 @@ app.use(express.json())
 app.use(compression())
 //app.use(express.static('dist'));
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+app.use(express.static('client/build'))
 
 // CONNECT TO DATABASE
 let username
@@ -56,6 +52,10 @@ const connect = async () => {
 }
 
 connect()
+
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 // POST BLOG ONTO DATABASE
 app.post('/api/postblog', async (req, res) => {
