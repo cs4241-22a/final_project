@@ -41,6 +41,7 @@ function toggleEditPopup(product) {
 	console.log(product.name)
 	console.log("Open Edit Window")
 	setIsEdit(!isEdit);
+	setIsOpen(!isOpen);
 	setProduct(product);
   };
 
@@ -69,17 +70,18 @@ function editProduct (e, product){
 		body,
 	  }).then(async (response) => {
 		await response.json();
-	  }).then(location.reload());
+	  })//.then(location.reload());
 };
 
-function deleteProduct(product){
+function deleteProduct(e, product){
+	e.preventDefault(e)
 	console.log("HELOOOOOOO")
 	console.log("Deleting")
-	fetch("/listing/" + product.id, {
-		method: "DELETE",
-	  }).then(async (response) => {
-		await response.json();
-	  }).then(location.reload());
+	// fetch("/listing/" + product.id, {
+	// 	method: "DELETE",
+	//   }).then(async (response) => {
+	// 	await response.json();
+	//   })//.then(location.reload());
 };
 
 function previewFile() {
@@ -110,7 +112,8 @@ function previewFile() {
 	event.preventDefault(event);
 	console.log(event.target.name.value)
 	let obj = event.target;
-
+    console.log(obj)
+	
 	const json = {
 		img: img,
 		name:obj.name.value,
@@ -223,31 +226,38 @@ return (
         <h3>${product.price}</h3>
         <p>{product.description}</p>
 		<button variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
-		<button variant="primary" id="delete" onclick={(e)=>deleteProduct(product)}>Delete</button>
-      
-	  {isEdit && <Popup
+		<button variant="primary" id="del" onclick={(e)=> deleteProduct(e, product)}>Delete</button>
+	  </>}
+      handleClose={togglePopup}
+    />}
+
+
+   {isEdit && <Popup
 	  content={<>
 	  <form onSubmit={(e) => editProduct(e, product)}>
 	  <div className="form-group">
 	  <label htmlFor="edit-name">Product Name</label>
         <input
           className="form-control"
-		  value="Hello"
+		  defaultValue={product.name}
           id="name"
         />
 		<label htmlFor="edit-category">Category</label>
 		<input
           className="form-control"
+		  defaultValue={product.category}
           id="categry"
         />
 		<label htmlFor="edit-description">Description</label>
 		<input
           className="form-control"
+		  defaultValue={product.description}
           id="description"
         />
 		<label htmlFor="edit-price">Price</label>
 		<input
           className="form-control"
+		  defaultValue={product.price}
           id="price"
 		  type="number"
         />
@@ -259,9 +269,6 @@ return (
 	  </>}
 	  handleClose={toggleEditPopup}
 	  />}
-	  </>}
-      handleClose={togglePopup}
-    />}
 
     </div>
   );
