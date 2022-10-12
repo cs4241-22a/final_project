@@ -52,6 +52,14 @@ form.onsubmit = function(event) {
 
     console.log(input);
 
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
 }
 
 
