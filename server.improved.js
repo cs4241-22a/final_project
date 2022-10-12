@@ -126,7 +126,9 @@ app.post('/api/login', async (req, res) => {
 // VERIFICATION CODE
 app.get('/api/getVerification', (req, res) => {
   res.writeHeader(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({'verification': verificationCode, 'username': username, 'password': password, 'type': type}))
+  let object = {'verification': verificationCode, 'username': username, 'password': password, 'type': type}
+  console.log(object)
+  res.end(JSON.stringify(object))
 })
 
 // CREATE NEW ACCOUNT
