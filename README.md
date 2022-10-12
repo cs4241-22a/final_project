@@ -2,7 +2,10 @@
 
 *Jacob Chlebowski - jachlebowski@wpi.edu, Miles Gregg - mgregg@wpi.edu, Zaq Humphrey - zihumphrey@wpi.edu*
 
-Heroku -->
+Heroku --> link
+
+
+<img src="https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" height="400" width="600"/>
 
 We created a blog that will allow users to post various topics of their choosing and interact with other users. This static web page will be easy to navigate and feature seamless transitions with various content that users post. Overall, this project is technically open to whoever wants to voice their opinions/statements to the world.
 
@@ -13,5 +16,9 @@ Node.js will be used to connect to the javascript requests, and will be implemen
 
 ## Technical Achievements
 - **Two Factor Authentication**: This allows for users to have a secure login when signing into the Blogger page. A code is sent to the user's respective email upon attempting to sign in.
+
+
+<img src="https://github.com/MilesGregg/final_project/blob/main/verification.png" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/verification.png" width="500" height="300" />
+
 
 - **Heroku Implementation**: Website is successfully upload to [Heroku](https://www.heroku.com/) and can be accessed via the link above.
