@@ -15,7 +15,7 @@ export function UserCard({ user }: UserCardProps) {
         avatar={<Avatar alt="user icon" sx={{ width: 30, height: 30 }} />}
         title={user}
         titleTypographyProps={{ fontSize: 16 }}
-        sx={{ p: "10px" }}
+        p="10px"
       />
     </Card>
   );

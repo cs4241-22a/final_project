@@ -1,37 +1,47 @@
-import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState, useRef } from "react";
+import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
+import { IndeterminateCheckBox } from "@mui/icons-material";
 
-const boxSX = {
-  textAlign: "left",
+const container = {
   "&:hover": {
     border: "1px solid grey",
-    color: "gray",
   },
 };
 
 export type PixelProps = {
+  initEmoji: string;
+  initUser: string;
   size: number;
-  activeEmoji: string;
+  setActiveElement: Function;
+  index: number;
 };
 
-export function Pixel({ size, activeEmoji }: PixelProps) {
-  const [emoji, setEmoji] = useState("");
+export function Pixel({
+  initEmoji,
+  initUser,
+  size,
+  setActiveElement,
+  index,
+}: PixelProps) {
+  const [emoji, setEmoji] = useState(initEmoji);
+  const [user, setUser] = useState(initUser);
 
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    // check for update here
-    setEmoji(activeEmoji);
+    setActiveElement(event.currentTarget);
   }
 
   return (
     <Box
       display="flex"
       alignItems="center"
+      component="div"
       justifyContent="center"
       width={size}
       height={size}
       onClick={update}
-      sx={boxSX}
+      sx={container}
+      id={`${index}`}
     >
       <Emoji unified={emoji} size={size * 0.8} />
     </Box>

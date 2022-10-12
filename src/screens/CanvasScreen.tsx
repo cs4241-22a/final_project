@@ -5,7 +5,7 @@ export function CanvasScreen() {
   return (
     <Box display="flex">
       <Header />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Canvas size={50} />
     </Box>
   );

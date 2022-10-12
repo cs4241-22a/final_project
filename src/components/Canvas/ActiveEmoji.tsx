@@ -1,6 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import EmojiPicker, { EmojiClickData, Emoji } from "emoji-picker-react";
+import EmojiPicker, { EmojiClickData, Emoji, Theme } from "emoji-picker-react";
+
+/* Credit: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component */
+function HandleBlur(
+  ref: React.MutableRefObject<any>,
+  set: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent | TouchEvent) {
+      if (ref?.current && !ref?.current?.contains(event.target)) {
+        set(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, set]);
+}
 
 export type ActiveEmojiProps = {
   setActiveEmoji: React.Dispatch<React.SetStateAction<string>>;
@@ -11,6 +30,9 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
   const [emojiName, setEmojiName] = useState<string>("Grinning");
   const [selectActive, setSelectActive] = useState<boolean>(false);
 
+  const focusRef = useRef(null);
+  HandleBlur(focusRef, setSelectActive);
+
   function set(emojiData: EmojiClickData, event: MouseEvent) {
     setEmojiName(
       emojiData.names[0].replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
@@ -18,6 +40,7 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
       )
     );
     setActiveEmoji(emojiData.unified);
+    setSelectActive(false);
   }
 
   function setSelecting(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -26,7 +49,11 @@ export function ActiveEmoji({ setActiveEmoji, activeEmoji }: ActiveEmojiProps) {
 
   return (
     <Box position="absolute" bottom={0} p={0} m="12px">
-      {selectActive ? <EmojiPicker onEmojiClick={set} /> : null}
+      {selectActive && (
+        <div ref={focusRef}>
+          <EmojiPicker onEmojiClick={set} theme={Theme.AUTO} />
+        </div>
+      )}
       <Tooltip title={emojiName} placement="right" onClick={setSelecting}>
         <IconButton size="large">
           <Emoji unified={activeEmoji} size={64} />

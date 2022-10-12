@@ -5,13 +5,21 @@ export type GridProps = {
   grid: string[];
   size: number;
   activeEmoji: string;
+  setActiveElement: Function;
 };
 
-function Grid({ grid, size, activeEmoji }: GridProps) {
+function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
   return (
     <React.Fragment>
       {grid.map((e, i) => (
-        <Pixel key={i} size={size} activeEmoji={activeEmoji}></Pixel>
+        <Pixel
+          key={i}
+          index={i}
+          initEmoji=""
+          initUser=""
+          size={size}
+          setActiveElement={setActiveElement}
+        ></Pixel>
       ))}
     </React.Fragment>
   );
