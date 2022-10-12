@@ -1,5 +1,4 @@
 import { AppBar, Typography, Toolbar, Grid, Box, Button, TextField } from '@mui/material';
-import BasicPost from "./post";
 import React from "react";
 import {Image} from 'cloudinary-react'
 import axios from 'axios';
@@ -11,17 +10,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
 import { MainContext } from '../MainContext';
 import {withRouter} from './withRouter'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const url = 'api.cloudinary.com/v1_1/deuj95ephL/image/upload';
-const preset = 'images';
-
-const theme = createTheme();
-
-const blogs = []
+import { createTheme } from '@mui/material/styles';
 
 class Reminders extends React.Component {
     static contextType = MainContext;
@@ -30,7 +21,6 @@ class Reminders extends React.Component {
         super(props)
         this.state = {
             open: false,
-            //data: {name: "", date: "", description: ""},
             title: '',
             date: '',
             description: '',
@@ -40,7 +30,6 @@ class Reminders extends React.Component {
             name: '',
             localImage: ''
         }
-        //this.checkAuth = this.checkAuth.bind(this)
         this.goToLogin = this.goToLogin.bind(this)
     }
 
@@ -49,16 +38,6 @@ class Reminders extends React.Component {
         console.log('here!')
         this.props.navigate('/login')
     }
-
-    /*checkAuth() {
-        if (this.context.profile == null || this.context.profile == undefined) {
-            console.log('here mate')
-            this.props.navigate('/login')
-            this.setState({name: null})
-        } else {
-            this.setState({name: this.context.profile.name.split("@")[0]})
-        }
-    }*/
 
     componentDidMount() {
         this.getAllBlogs()
@@ -101,43 +80,11 @@ class Reminders extends React.Component {
                 }).then((response) => {
                     if (response.status === 200) {
                         this.getAllBlogs()
-                        //this.props.navigate('/verification')
                     }
                 })
             }
-            //this.setState({returnImage: response.data.url})
-            //console.log(response)
         });
-        //console.log(this.state.title)
-        //console.log(this.state.description)
-        //console.log(this.state.date)
       }
-
-
-      async onSubmit(){
-        const formData = new FormData();
-        formData.append('file', this.image);
-        formData.append('upload_preset', preset);
-        try {
-          this.setState({setLoading: true})
-          const res = await axios.post(url, formData);
-          const imageUrl = res.data.secure_url;
-          console.log("before")
-          const image = await axios.post('http://localhost:3001/upload', {
-            imageUrl
-          });
-          console.log("after")
-           this.setState({setLoading: false})
-           this.setState({setImage: image.data})
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-    addBlog = () => {
-        blogs.push(<BasicPost></BasicPost>)
-        console.log(blogs)
-    }
 
     handleOpen = e =>{
         e.preventDefault()
