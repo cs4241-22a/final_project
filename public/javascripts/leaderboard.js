@@ -27,7 +27,13 @@ window.onload = function() {
             scoreCell.innerHTML = "Clicks Per Second";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
 
-            for(let i = 0; i < response.length; i++)
+            // var length = 10;
+            // if(response.length < 10)
+            // {
+            //     length = response.length;
+            // }
+            
+            for(let i = 0; i < length; i++)
             {
                 var row = table.insertRow(1);
                 var userCell = row.insertCell(0);
