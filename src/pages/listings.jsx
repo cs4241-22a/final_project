@@ -3,8 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import gompei from '../../public/gompei.png';
-
+import Compressor from 'compressorjs';
 import Popup from '../components/DetailPopup';
 
 const Listings = (props) => {
@@ -16,13 +15,14 @@ useEffect(() => {
   if (!props.user.name) {
     navigate('/login');
   }
+  else {
   navigate('/listings')
   fetch("/getListings", {
     method: "GET",
   }).then(async (response) => {
   let res = await response.json()
   setProducts(res)
-})
+})}
 }, [])
 
 //Popup stuff
@@ -30,6 +30,7 @@ const [isEdit, setIsEdit] = useState(false);
 const [isAdd, setIsAdd] = useState(false);
 const [isOpen, setIsOpen] = useState(false);
 const [product, setProduct] = useState([]);
+const [img, setImage] = useState('');
 
 function togglePopup(product) {
   setIsOpen(!isOpen);
@@ -84,18 +85,55 @@ function deleteProduct(product){
 function previewFile() {
 	const preview = document.querySelector('img');
 	const file = document.querySelector('input[type=file]').files[0];
+	
 	const reader = new FileReader();
   
 	reader.addEventListener("load", () => {
 	  // convert image file to base64 string
 	  preview.src = reader.result;
+	  setImage(reader.result)
+
 	}, false);
   
 	if (file) {
-	  reader.readAsDataURL(file);
+		new Compressor(file, {
+			quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
+			success: (compressedResult) => {
+			  // compressedResult has the compressed file.
+			  // Use the compressed file to upload the images to your server.        
+			  reader.readAsDataURL(compressedResult);
+			},
+		  });
 	}
   }
 
+  const onSubmit = (event) => {
+	event.preventDefault(event);
+	console.log(event.target.name.value)
+	let obj = event.target;
+	console.log(obj.pic)
+
+	console.log('2')
+	console.log(img)
+
+	const json = {
+		img: img,
+		name:obj.name.value,
+		category:obj.category.value,
+		description:obj.description.value,
+		price:obj.price.value
+	};
+	let body = JSON.stringify(json);
+
+	console.log(body)
+	fetch("/addListing", {
+		method:"POST",
+		headers: { "Content-Type": "application/json" },
+		body,
+	}).then(async(response) =>{
+		let res = await response.json()
+	})
+}
 return (	
 	<div
 	style={{
@@ -120,7 +158,7 @@ return (
       <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
         <Row>
           <Col>
-      <Card.Img variant="top" src={gompei} />
+      <Card.Img variant="top" src={product.img} />
       </Col>
       <Col>
       <Card.Body>
@@ -142,8 +180,7 @@ return (
       content={<>
         <form onSubmit={onSubmit}>
       <div className="form-group">
-	  <input className="form-control" type="file" onChange ={previewFile} /><br />
-
+	  <input className="form-control" type="file" accept=".png,.jpg" id="pic" onChange ={previewFile} /><br />
         <label htmlFor="name">Product Name</label>
         <input 
         className="form-control" 
@@ -184,7 +221,7 @@ return (
 
     {isOpen && <Popup
       content={<>
-        <img src={gompei}/>
+        <img src={product.img}/>
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
@@ -231,53 +268,9 @@ return (
 
     </div>
   );
+  
 };
-const reader = new FileReader();
 
-function getBinaryFromFile(file) {
-	return new Promise((resolve, reject) => {
 
-		reader.addEventListener("load", () => resolve(reader.result));
-		reader.addEventListener("error", err => reject(err));
-
-		reader.readAsDataURL(file);
-		
-	});
-}
-
-const onSubmit = (event) => {
-	event.preventDefault(event);
-	console.log(event.target.name.value)
-	let obj = event.target;
-
-	// function openFile(evt) {
-	// 	const fileObject = evt.target.files[0];
-	// 	console.log(fileObject)
-		
-	// 	let binary = getBinaryFromFile(fileObject)
-	// 	console.log(binary)
-			
-	// }
-	console.log('2')
-	console.log(reader.result)
-
-	const json = {
-		img: reader.result,
-		name:obj.name.value,
-		category:obj.category.value,
-		description:obj.description.value,
-		price:obj.price.value
-	};
-	let body = JSON.stringify(json);
-
-	console.log(body)
-	fetch("/addListing", {
-		method:"POST",
-		headers: { "Content-Type": "application/json" },
-		body,
-	}).then(async(response) =>{
-		let res = await response.json()
-	})
-}
 
 export default Listings;
