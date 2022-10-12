@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pixel } from "./Pixel";
 
 export type GridProps = {
@@ -14,10 +14,11 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
       {grid.map((e, i) => (
         <Pixel
           key={i}
-          size={size}
-          activeEmoji={activeEmoji}
-          setActiveElement={setActiveElement}
           index={i}
+          initEmoji=""
+          initUser=""
+          size={size}
+          setActiveElement={setActiveElement}
         ></Pixel>
       ))}
     </React.Fragment>

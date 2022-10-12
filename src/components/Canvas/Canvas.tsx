@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Box, Toolbar, Fab } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {
@@ -14,13 +14,19 @@ export type CanvasProps = {
 };
 
 let prevActiveElement: HTMLElement | undefined = undefined;
-let zoom: Function;
+let zoom: Function | undefined = undefined;
 
 export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
   const [activeEmoji, setActiveEmoji] = useState("1f600");
+  const [chosenEmoji, setChosenEmoji] = useState("");
   const [activeElement, setActiveElement] = useState<HTMLElement>();
 
   const grid = useRef([...Array(size * size)].map(() => ""));
+
+  function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    setChosenEmoji(activeEmoji);
+    console.log(document.hasFocus());
+  }
 
   useEffect(() => {
     if (prevActiveElement === undefined) {
@@ -32,7 +38,10 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
       activeElement!.style.border = "1px solid black";
       prevActiveElement = activeElement;
     }
-    zoom(activeElement);
+
+    if (zoom !== undefined) {
+      zoom(activeElement);
+    }
   }, [activeElement]);
 
   return (
@@ -52,32 +61,39 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
         zoomAnimation={{ animationType: "easeOutQuad" }}
       >
         {({ zoomToElement }: any) => (
-          <TransformComponent
-            wrapperStyle={{
-              height: "100%",
-              width: "100%",
-              backgroundColor: "#333333",
+          <div
+            onClick={() => {
+              if (zoom === undefined) {
+                zoom = zoomToElement;
+              }
             }}
           >
-            {(zoom = zoomToElement)}
-            <Box
-              display="grid"
-              gridTemplateRows={`repeat(${size}, 1fr)`}
-              gridTemplateColumns={`repeat(${size}, 1fr)`}
-              width={canvasSize}
-              height={canvasSize}
-              border="1px solid black"
-              boxShadow={3}
-              sx={{ backgroundColor: "white" }}
+            <TransformComponent
+              wrapperStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor: "#333333",
+              }}
             >
-              <GridMemo
-                grid={grid.current}
-                size={canvasSize / size}
-                activeEmoji={activeEmoji}
-                setActiveElement={setActiveElement}
-              />
-            </Box>
-          </TransformComponent>
+              <Box
+                display="grid"
+                gridTemplateRows={`repeat(${size}, 1fr)`}
+                gridTemplateColumns={`repeat(${size}, 1fr)`}
+                width={canvasSize}
+                height={canvasSize}
+                border="1px solid black"
+                boxShadow={3}
+                sx={{ backgroundColor: "white" }}
+              >
+                <GridMemo
+                  grid={grid.current}
+                  size={canvasSize / size}
+                  activeEmoji={activeEmoji}
+                  setActiveElement={setActiveElement}
+                />
+              </Box>
+            </TransformComponent>
+          </div>
         )}
       </TransformWrapper>
       <ActiveEmoji setActiveEmoji={setActiveEmoji} activeEmoji={activeEmoji} />
@@ -93,7 +109,7 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
-          onClick={() => console.log("lcoed")}
+          onClick={updateEmoji}
         >
           <CheckIcon sx={{ mr: 1 }} />
           Add emoji
