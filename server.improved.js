@@ -23,10 +23,10 @@ app.use(express.json())
 app.use(compression())
 //app.use(express.static('dist'));
 
-app.use(express.static('./client/build'))
+app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('*', (request, response) => {
-  response.sendFile(path.join(__dirname, 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // CONNECT TO DATABASE
