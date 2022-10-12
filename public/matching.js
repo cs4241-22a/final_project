@@ -19,6 +19,7 @@ window.onload = async function() {
         .then(text => {
             user = text;
             console.log(user);
+            document.getElementById("loggedIn").innerHTML = "Logged in as: " + user;
         })
     await fetch('/getprofile', {
         method: 'GET',
