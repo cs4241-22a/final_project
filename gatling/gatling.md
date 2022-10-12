@@ -28,7 +28,9 @@ Detailed results can be viewed in the /results folder.
 
 ## Comparison of Loadtest Performance
 
-Localhost
+### Localhost
 ![LoadTest in local environment](LoadTest-Local.png "LoadTest in local environment")
-Heroku
+
+
+### Heroku
 ![LoadTest in Heroku](LoadTest-Heroku.png "LoadTest in Heroku")
