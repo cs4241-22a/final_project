@@ -107,6 +107,10 @@ app.post('/collDocs', (req,res) => {
   db.collection(req.body.name).find({ }).toArray()
   .then(result => res.json(result));
 });
+app.post('/collDoc', (req,res) => {
+  db.collection(req.body.collName).find({ _id: ObjectId(req.body._id)}).toArray()
+  .then(result => res.json(result));
+});
 
 // Add a document to the relative collection containing req.body
 app.post('/addPost', (req,res) => {

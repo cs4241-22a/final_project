@@ -1,4 +1,4 @@
-import React from "./_snowpack/pkg/react.js";
+import React, {createRef} from "./_snowpack/pkg/react.js";
 import "./global.css.proxy.js";
 import {Navigate} from "./_snowpack/pkg/react-router-dom.js";
 class App extends React.Component {
@@ -10,7 +10,8 @@ class App extends React.Component {
       posts: [],
       displayMakePost: false,
       displayMakeResponse: [],
-      displayViewResponses: []
+      displayViewResponses: [],
+      tempRespData: []
     };
     this.loginStatus();
     this.load();
@@ -73,9 +74,11 @@ class App extends React.Component {
         this.setState({displayMakeResponse: arr});
       }
     }, "Respond"), /* @__PURE__ */ React.createElement("input", {
+      id: "viewrespbtn",
       type: "button",
       value: this.state.displayViewResponses[i] === true ? "Hide Responses" : "View Responses",
       onClick: (e) => {
+        this.load();
         let arr = this.state.displayViewResponses;
         if (arr[i] === true) {
           arr[i] = false;
@@ -83,6 +86,23 @@ class App extends React.Component {
         } else {
           arr[i] = true;
           this.setState({displayViewResponses: arr});
+        }
+        if (this.state.posts[i].responses !== void 0) {
+          let repdataArr = this.state.tempRespData;
+          repdataArr[i] = [];
+          this.setState({tempRespData: repdataArr});
+          for (let j = 0; j < this.state.posts[i].responses.length; j++) {
+            fetch("/collDoc", {
+              method: "post",
+              "no-cors": true,
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({collName: "responses", _id: this.state.posts[i].responses[j]})
+            }).then((result) => result.json()).then((json) => {
+              let dataArr = this.state.tempRespData;
+              dataArr[i].push(json[0]);
+              this.setState({tempRespData: dataArr});
+            });
+          }
         }
       }
     }), this.showViewResponses(i), this.showMakeResponse(i));
@@ -107,10 +127,11 @@ class App extends React.Component {
         body: JSON.stringify({_id: this.state.posts[i]._id, responseid: json.insertedId})
       });
     });
+    document.getElementById("viewrespbtn").click();
+    document.getElementById("viewrespbtn").click();
     let arr = this.state.displayMakeResponse;
     arr[i] = false;
     this.setState({displayMakeResponse: arr});
-    this.load();
   }
   showMakeResponse(i) {
     if (this.state.displayMakeResponse[i]) {
@@ -145,12 +166,19 @@ class App extends React.Component {
     }
   }
   showViewResponses(i) {
-    if (this.state.displayViewResponses[i]) {
-      return /* @__PURE__ */ React.createElement("ul", null, this.state.posts[i].responses.map((entry) => {
-        if (entry !== null && Object.keys(entry).length !== 0)
-          return /* @__PURE__ */ React.createElement("li", null, entry);
+    if (this.state.displayViewResponses[i] && this.state.tempRespData[i] !== void 0 && this.state.tempRespData[i].length > 0) {
+      const jsx = /* @__PURE__ */ React.createElement("ul", null, this.state.tempRespData[i].map((entry, j) => {
+        if (entry !== null && Object.keys(entry).length !== 0) {
+          console.log(this.state.tempRespData);
+          return this.showResponseData(i, j);
+        }
       }));
+      return jsx;
     }
+  }
+  showResponseData(i, j) {
+    debugger;
+    return /* @__PURE__ */ React.createElement("li", null, "Song: ", this.state.tempRespData[i][j].song, "Artist: ", this.state.tempRespData[i][j].artist, "Comment: ", this.state.tempRespData[i][j].comment);
   }
   render() {
     if (this.state.loggedin == false) {
