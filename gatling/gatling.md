@@ -25,3 +25,10 @@ For the Tests I generated a random dataset. We want dynamic data so that all use
 The tests were executed locally. Thus, the above statements are only valid for the performance of the web application itself. Depending on which hosting platform is used, the throughput deteriorates.
 
 Detailed results can be viewed in the /results folder.
+
+## Comparison of Loadtest Performance
+
+Localhost
+![LoadTest in local environment](LoadTest-Local.png "LoadTest in local environment")
+Heroku
+![LoadTest in Heroku](LoadTest-Heroku.png "LoadTest in Heroku")
