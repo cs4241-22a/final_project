@@ -161,6 +161,7 @@ app.post("/addListing", ensureAuthenticated, (req, res) => {
   productCollection
     .insertOne({
       userid: req.user._json.Id,
+      email: req.user._json.EmailAddress,
       name: req.body.name,
       category: req.body.category,
       description: req.body.description,

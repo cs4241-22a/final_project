@@ -28,6 +28,15 @@ useEffect(() => {
   
 }, [])
 
+
+function Mailto({ email, subject, body, ...props }) {
+  return (
+    <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
+      {props.children}
+    </a>
+  );
+}
+
 //Popup stuff
 const [isOpen, setIsOpen] = useState(false);
 const [product, setProduct] = useState([]);
@@ -80,6 +89,9 @@ function togglePopup(product) {
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
+        <Mailto email={product.email} subject="Hello" body="Hello world!">
+        Email me if interested!
+      </Mailto>,
       </>}
       handleClose={togglePopup}
     />}
