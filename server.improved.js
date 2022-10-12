@@ -162,6 +162,6 @@ app.post('/api/createuser', (req, res) => {
   });
 })
 
-app.listen(3001, (e) => {
+app.listen(process.env.PORT || 3000, (e) => {
   console.log('started up server')
 })
