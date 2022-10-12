@@ -170,15 +170,35 @@ app.post("/addListing", ensureAuthenticated, (req, res) => {
     .then((result) => res.json(result));
 });
 
-//TODO In progress, no code in listing.jsx yet
+//delete
 app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
   productCollection
     .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
-      collection
+      productCollection
         .deleteOne({
           _id: mongodb.ObjectId(req.params.id),
         })
+        .then((result) => res.json(result));
+    });
+});
+//edit
+app.patch("/table/:id", ensureAuthenticated, (req, res) => {
+  collection
+    .findOne({ _id: mongodb.ObjectId(req.params.id) })
+    .then((result) => {
+      productCollection
+        .updateOne(
+          { _id: mongodb.ObjectId(req.params.id) },
+          {
+            $set: {
+              name: req.body.name,
+              category: req.body.category,
+              description: req.body.description,
+              price: req.body.price,
+            },
+          }
+        )
         .then((result) => res.json(result));
     });
 });

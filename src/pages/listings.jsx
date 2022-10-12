@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Container} from '../Container';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import gompei from '../../public/gompei.png';
-import image from '../Form/index';
+
+import Popup from '../components/DetailPopup';
 
 const Listings = (props) => {
 const [products, setProducts] = useState([]);
@@ -26,6 +25,77 @@ useEffect(() => {
 })
 }, [])
 
+//Popup stuff
+const [isEdit, setIsEdit] = useState(false);
+const [isAdd, setIsAdd] = useState(false);
+const [isOpen, setIsOpen] = useState(false);
+const [product, setProduct] = useState([]);
+
+function togglePopup(product) {
+  setIsOpen(!isOpen);
+  setProduct(product);
+};
+
+function toggleEditPopup(product) {
+	console.log(product.name)
+	console.log("Open Edit Window")
+	setIsEdit(!isEdit);
+	setProduct(product);
+  };
+
+  function toggleAddPopup(product) {
+	console.log(product.name)
+	console.log("Open Add Window")
+	setIsAdd(!isAdd);
+	setProduct(product);
+	console.log(product)
+  };
+
+function editProduct (e, product){
+	console.log("Editing")
+	let obj = e.target
+	let json = { 
+		name:obj.name.value,
+		category:obj.category.value,
+		description:obj.description.value,
+		price:obj.price.value
+	};
+	let body = JSON.stringify(json);
+
+	fetch("/table/" + product.id, {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+		body,
+	  }).then(async (response) => {
+		await response.json();
+	  }).then(location.reload());
+};
+
+function deleteProduct(product){
+	console.log("HELOOOOOOO")
+	console.log("Deleting")
+	fetch("/listing/" + product.id, {
+		method: "DELETE",
+	  }).then(async (response) => {
+		await response.json();
+	  }).then(location.reload());
+};
+
+function previewFile() {
+	const preview = document.querySelector('img');
+	const file = document.querySelector('input[type=file]').files[0];
+	const reader = new FileReader();
+  
+	reader.addEventListener("load", () => {
+	  // convert image file to base64 string
+	  preview.src = reader.result;
+	}, false);
+  
+	if (file) {
+	  reader.readAsDataURL(file);
+	}
+  }
+
 return (	
 	<div
 	style={{
@@ -37,10 +107,17 @@ return (
 	}}
 	>
 	<h1>Viewing Your Current Listings</h1>
-	<div class="d-flex">
+	<div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
+	  <Row m={1} md={3} className="g-4">
+	  <button
+      className="btn btn-lg btn-danger center modal-button"
+      onClick={() => toggleAddPopup(product)}
+    >
+      Add Product
+    </button>
       {products.map(product => 
-	  <Col>
-      <Card style={{ width: '18rem' }}>
+      <Col>
+      <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
         <Row>
           <Col>
       <Card.Img variant="top" src={gompei} />
@@ -51,17 +128,109 @@ return (
         <Card.Text>
         {product.description}
         </Card.Text>
-		<Button variant="primary" onclick={() =>console.log(product.name)}>Edit</Button>
-		<Button variant="primary">Delete</Button>      </Card.Body>
+      </Card.Body>
       </Col>
       </Row>
     </Card>
     </Col>
-       )}
+       )}    
+    
+    </Row>
     </div>
-	<Container triggerText={'Add Product'} onSubmit={onSubmit}/>
-	</div>
-);
+    
+    {isAdd && <Popup
+      content={<>
+        <form onSubmit={onSubmit}>
+      <div className="form-group">
+	  <input className="form-control" type="file" onChange ={previewFile} /><br />
+
+        <label htmlFor="name">Product Name</label>
+        <input 
+        className="form-control" 
+        id="name" />
+      </div>
+      <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <input
+          className="form-control"
+          id="category"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <input
+          className="form-control"
+          id="description"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="price">Price</label>
+        <input
+          className="form-control"
+          id="price"
+          type="number"
+        />
+      </div>
+      <div className="form-group">
+        <button className="form-control btn btn-primary" type="submit">
+          Add Product
+        </button>
+      </div>
+    </form>
+      </>}
+      handleClose={toggleAddPopup}
+    />}
+
+
+    {isOpen && <Popup
+      content={<>
+        <img src={gompei}/>
+        <h1>{product.name}</h1>
+        <h3>${product.price}</h3>
+        <p>{product.description}</p>
+		<button variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
+		<button variant="primary" id="delete" onclick={(e)=>deleteProduct(product)}>Delete</button>
+      
+	  {isEdit && <Popup
+	  content={<>
+	  <form onSubmit={(e) => editProduct(e, product)}>
+	  <div className="form-group">
+	  <label htmlFor="edit-name">Product Name</label>
+        <input
+          className="form-control"
+		  value="Hello"
+          id="name"
+        />
+		<label htmlFor="edit-category">Category</label>
+		<input
+          className="form-control"
+          id="categry"
+        />
+		<label htmlFor="edit-description">Description</label>
+		<input
+          className="form-control"
+          id="description"
+        />
+		<label htmlFor="edit-price">Price</label>
+		<input
+          className="form-control"
+          id="price"
+		  type="number"
+        />
+		<button className="form-control btn btn-primary" type="submit">
+			Edit Product
+		</button>
+		</div>
+		</form>
+	  </>}
+	  handleClose={toggleEditPopup}
+	  />}
+	  </>}
+      handleClose={togglePopup}
+    />}
+
+    </div>
+  );
 };
 const reader = new FileReader();
 
@@ -80,9 +249,6 @@ const onSubmit = (event) => {
 	event.preventDefault(event);
 	console.log(event.target.name.value)
 	let obj = event.target;
-
-	document.getElementById("audio-upload").addEventListener("change", previewFile);
-
 
 	// function openFile(evt) {
 	// 	const fileObject = evt.target.files[0];
