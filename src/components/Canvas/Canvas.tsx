@@ -18,14 +18,18 @@ let zoom: Function | undefined = undefined;
 
 export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
   const [activeEmoji, setActiveEmoji] = useState("1f600");
-  const [chosenEmoji, setChosenEmoji] = useState("");
   const [activeElement, setActiveElement] = useState<HTMLElement>();
 
   const grid = useRef([...Array(size * size)].map(() => ""));
 
   function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    setChosenEmoji(activeEmoji);
-    console.log(document.hasFocus());
+    if (activeElement !== undefined) {
+      const idx = parseInt(activeElement.id);
+
+      grid.current[idx] = activeEmoji;
+
+      console.log(grid.current[idx]);
+    }
   }
 
   useEffect(() => {
