@@ -18,7 +18,7 @@ Node.js will be used to connect to the javascript requests, and will be implemen
 - **Two Factor Authentication**: This allows for users to have a secure login when signing into the Blogger page. A code is sent to the user's respective email upon attempting to sign in.
 
 
-<img src="https://github.com/MilesGregg/final_project/blob/main/verification.png" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/verification.png" width="800" height="500" />
+<img src="https://github.com/MilesGregg/final_project/blob/main/verification.png" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/verification.png" width="500" height="500" />
 
 
 - **Heroku Implementation**: Website is successfully upload to [Heroku](https://www.heroku.com/) and can be accessed via the link above.
