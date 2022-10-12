@@ -1,49 +1,67 @@
-# Final Project
-*Due October 13th (final day of the term)*
+# Final Project - Pet the .jpeg
+*Due before the start of class, October 13th (final day of the term)*
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+# Group
+<li>Alex Bolduc
+<li>Lena Dias
+<li>Sean O'Connor
+<li>Jonathan Metcalf
+<li>Darian Tavana
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+# Details
+1. A brief description of what you created, and a link to the project itself
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+https://pet-the-jpeg.glitch.me/
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+<b>Please run the page only in Firefox.</b>
 
-### Deliverables
+Pet the .jpeg is an interactive web application where users raise their own pet. Users level up their pet by repeatedly clicking it. As the pet’s level increases, it becomes more challenging to continue to level up by requiring more clicks to do so. By leveling up, the pet unlocks new attributes that can be customized to change its visual appearance. Customizations include hats, colors, and different pet species. The progress of users is saved on a database, so they can continue their progress the next time they log in. There are two main pages: the log-in page and the pet interaction page.
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
-
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
-
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
-
-There are no other scheduled checkpoints for your project. 
-
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
-
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
-
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
 2. Any additional instructions that might be needed to fully use your project (login information etc.)
+
+To log into the project, a Github account is required as it is supported by GitHub OAuth and thus requires access to a valid GitHub account. 
+
 3. An outline of the technologies you used and how you used them.
+
+Technologies and libraries that are used include Express, MongoDB, React, Passport, and Tailwind. Express is used for middleware and to handle server requests, MongoDB is used to store user authentication data along with user pet data, React is used to manage client-side functionality, Passport for Github user authentication, and Tailwind is used for CSS across pages.
+
 4. What challenges you faced in completing the project.
+
+One challenge we faced was coloring the SVGs dynamically based on what color the user selected. Using external SVG files through the svg <use> tag allows access to the underlying svg source in Firefox which allows us to dynamically change a CSS rule through javascript to change the color of parts of the SVG. Unfortunately, there were some issues with it working on all browsers we tested. Interestingly, it worked on Firefox, but not Edge or Chrome. We were unable to resolve this issue, largely due to the inaccessibility of elements within browser-inserted shadow DOMs. Users in a browser other than Firefox will be alerted to use the correct browser.
+
+Another challenge we came across was connecting our React frontend with our Express backend. Specifically, designing our backend to support storing and serving all the content necessary on the frontend proved to be a challenge. As a result, our group spent significant time brainstorming how our backend should be structured. 
+
 5. What each group member was responsible for designing / developing.
+
+- Alex Bolduc 
+  - Front-end React functionality.
+    - Pet clicking
+    - Adding customizations to the pet
+    - Getting unlocked customizations into sidebar
+  - Connection between front and back end state management
+  - Laying out page HTML and CSS
+  - Small backend tweaks to work better with frontend
+
+- Lena Dias 
+  - Creation of pixel art assets
+  - Bug testing and research
+  - Implemented Glitch.me compatibility  
+
+- Sean O'Connor 
+  - Concept designs of application using Figma
+  - Designed and created the original login and main page frontend HTML and CSS
+  
+- Jonathan Metcalf 
+  - Implemented Github OAuth
+  - Set up default pet creation
+  - Added custom middleware for checking database connection and whether the user is logged in
+
+- Darian Tavana 
+  - Created the skeleton for the Express backend
+  - Implemented database functionality with Mongoose schemas
+  - Implemented /api routes 
+
 6. A link to your project video.
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+https://youtu.be/lVR4lealp8o
 
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
