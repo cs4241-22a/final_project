@@ -41,7 +41,7 @@ window.onload = function() {
         numClicks = 0
         clickWindow.addEventListener('click', handleClick)
 
-        count = 10; // 10 Seconds
+        count = 100; // 10 Seconds
         counter = setInterval(timeLeft, 100); //10 will  run it every 100th of a second
     }
     
