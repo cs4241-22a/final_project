@@ -1,11 +1,12 @@
 import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const GameHistory = () => {
   return (
-    <div>
-      <h1>Game History</h1>
-      <p>Gather a history of games, and maybe play them back?</p>
-    </div>
+    <Container className="ghContainer">
+      <h1>game history</h1>
+      <p>gather a history of games, and maybe play them back?</p>
+    </Container>
   )
 }
 

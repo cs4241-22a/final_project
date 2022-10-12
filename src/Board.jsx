@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 import { Stage, Layer, Rect, Image, Text, Ellipse } from 'react-konva'
 import useImage from 'use-image'
 import FenParser from '@chess-fu/fen-parser'
 import { makeFen } from 'chessops/fen'
+import { makeSan } from 'chessops/san'
 import { Navigate } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { Button, Container, Row, Col } from 'react-bootstrap'
 
 export async function playComputerMove(chess, engine, movetime, level) {
   const fen = makeFen(chess.toSetup())
   const move = await getBestMove(fen, engine, movetime, level)
+  const san = makeSan(chess, move)
   chess.play(move)
-  return chess
+  return chess, san
 }
 
 function getPosition(index, color) {
@@ -30,7 +32,7 @@ async function getBestMove(pos, engine, movetime, level) {
         position: pos,
         engine: engine,
         movetime: movetime,
-        level: level
+        level: level,
       })
   )
 
@@ -60,6 +62,13 @@ async function getBestMove(pos, engine, movetime, level) {
 }
 
 export default function Board(props) {
+  const ref = useRef(null)
+  const [width, setWidth] = useState(0)
+
+  useLayoutEffect(() => {
+    setWidth(ref.current.offsetWidth)
+  }, [])
+
   const [dragging, setDragging] = useState(-1)
   const [blPawn, status1] = useImage('./pieces/p.png')
   const [blRook, status2] = useImage('./pieces/r.png')
@@ -74,7 +83,9 @@ export default function Board(props) {
   const [wKnight, status10] = useImage('./pieces/wn.png')
   const [wQueen, status11] = useImage('./pieces/wq.png')
   const [wKing, status12] = useImage('./pieces/wk.png')
-
+  const [winImg] = useImage('./pieces/WinImage.svg')
+  const [loseImg] = useImage('./pieces/LoseImage.svg')
+  const [drewImg] = useImage('./pieces/DrewImage.svg')
   function allLoaded() {
     const values = [
       status1,
@@ -96,10 +107,7 @@ export default function Board(props) {
     return true
   }
 
-  let size = props.dimensions.width * 0.4
-  if (size < 200) {
-    size = props.dimensions.width * 0.9
-  }
+  let size = width * 0.95
   const squares = generateChessBoard()
 
   function getHover() {
@@ -141,8 +149,19 @@ export default function Board(props) {
     }
   }
 
-  async function onMove() {
-    await playComputerMove(props.game, props.engine, 1000, props.level)
+  async function onMove(playerMove) {
+    if (props.game.isEnd()) {
+      props.setGameOver(true)
+      sendResult()
+      return
+    }
+    const san = await playComputerMove(props.game, props.engine, 1000, props.level)
+    props.setHistory([...props.history, playerMove, san])
+    if (props.game.isEnd()) {
+      props.setGameOver(true)
+      sendResult()
+      return
+    }
     props.flipTurn()
   }
 
@@ -150,7 +169,8 @@ export default function Board(props) {
     const squares = []
     for (let square = 0; square < 64; square++) {
       const [row, col] = getPosition(square, props.playAs)
-      const color = (row + col) % 2 === 0 ? '#f0d9b5' : '#b58863'
+      const color = (row + col) % 2 === 0 ? '#cce8dB' : '#beb4d6'
+      /* prev colors: #F0D9B5, #B58863 */
       squares.push({
         id: `S(${square}})`,
         x: row * (size / 8),
@@ -208,163 +228,239 @@ export default function Board(props) {
     return true
   }
 
+  function handleResign() {
+    props.setGameOver(true)
+    sendResult()
+    endGame()
+  }
+
+  function sendResult() {
+    let result = 'draw'
+    if (props.game.outcome === 'white' && props.playAs === 'white') {
+      result = 'win'
+    } else if (props.game.outcome === 'black' && props.playAs === 'black') {
+      result = 'win'
+    } else {
+      result = 'loss'
+    }
+
+    fetch('http://176.31.253.185:4000/result', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        engine: props.engine,
+        engineStrength: props.level,
+        colorPlayed: props.playAs,
+        game: '1. e4 e5',
+        result: result,
+      },
+    })
+    //.then((response) => response.json())
+    //.then((json) => console.log(json))
+  }
+
   function endGame() {
     props.endGame()
   }
 
-  return props.gameRunning ? (
-    allLoaded() ? (
-      <div>
-        <Button variant="danger" onClick={endGame}>
-          Resign
-        </Button>
-        <Button variant="secondary" onClick={() => {}}>
-          Undo
-        </Button>
-        <Stage width={size} height={size}>
-          <Layer>
-            {squares.map((entry) => (
-              <>
-                <Rect
-                  x={entry.x}
-                  y={entry.y}
-                  id={entry.id}
-                  width={entry.width}
-                  height={entry.height}
-                  fill={entry.fill}
-                  key={entry.id}
-                ></Rect>
-                <Text
-                  key={`T${entry.square}`}
-                  x={entry.x}
-                  y={entry.y}
-                  text={
-                    props.playAs === 'white' ? entry.square : 63 - entry.square
-                  }
-                ></Text>
-              </>
-            ))}
-            {generatePieces(makeFen(props.game.toSetup())).map((piece) => (
-              <Image
-                x={piece.x}
-                y={piece.y}
-                width={piece.width}
-                height={piece.height}
-                image={piece.image}
-                id={piece.id}
-                key={piece.id}
-                draggable={true}
-                onDragStart={(e) => {
-                  setDragging(piece.square)
-                }}
-                onDragEnd={(e) => {
-                  setDragging(-1)
-                  let cancelled = false
+  function getResultPicture() {
+    if (props.game.outcome === undefined) {
+      return drewImg
+    }
+    if (props.game.outcome === 'white' && props.playAs === 'white') {
+      return winImg
+    }
+    if (props.game.outcome === 'black' && props.playAs === 'black') {
+      return winImg
+    }
+    return loseImg
+  }
 
-                  if (!canMove()) {
-                    cancelled = true
-                  }
+  return (
+    <Container id="board_container" ref={ref}>
+      {props.gameRunning ? (
+        allLoaded() ? (
+          <>
+            <Row>
+              <Stage width={size} height={size}>
+                <Layer>
+                  {squares.map((entry) => (
+                    <>
+                      <Rect
+                        x={entry.x}
+                        y={entry.y}
+                        id={entry.id}r
+                        width={entry.width}
+                        height={entry.height}
+                        fill={entry.fill}
+                        key={entry.id}
+                      ></Rect>
+                      <Text
+                        key={`T${entry.square}`}
+                        x={entry.x}
+                        y={entry.y}
+                        text={
+                          props.playAs === 'white'
+                            ? entry.square
+                            : 63 - entry.square
+                        }
+                      ></Text>
+                    </>
+                  ))}
+                  {generatePieces(makeFen(props.game.toSetup())).map(
+                    (piece) => (
+                      <Image
+                        x={piece.x}
+                        y={piece.y}
+                        width={piece.width}
+                        height={piece.height}
+                        image={piece.image}
+                        id={piece.id}
+                        key={piece.id}
+                        draggable={true}
+                        onDragStart={(e) => {
+                          setDragging(piece.square)
+                        }}
+                        onDragEnd={(e) => {
+                          setDragging(-1)
+                          let cancelled = false
 
-                  let newX = Math.floor(
-                    (e.target.attrs.x + size / 16) / (size / 8)
-                  )
-                  let newY =
-                    7 - Math.floor((e.target.attrs.y + size / 16) / (size / 8))
+                          if (!canMove()) {
+                            cancelled = true
+                          }
 
-                  if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-                    cancelled = true
-                  }
+                          let newX = Math.floor(
+                            (e.target.attrs.x + size / 16) / (size / 8)
+                          )
+                          let newY =
+                            7 -
+                            Math.floor(
+                              (e.target.attrs.y + size / 16) / (size / 8)
+                            )
 
-                  let newSquare = 8 * newY + newX
+                          if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+                            cancelled = true
+                          }
 
-                  if (props.playAs === 'black') {
-                    newSquare = 63 - newSquare
-                  }
+                          let newSquare = 8 * newY + newX
 
-                  const move = {
-                    from: piece.square,
-                    to: newSquare,
-                  }
+                          if (props.playAs === 'black') {
+                            newSquare = 63 - newSquare
+                          }
 
-                  if (props.game.board.get(piece.square).role === 'pawn') {
-                    const [row, col] = getPosition(newSquare, props.playAs)
-                    if (col === 0 || col === 7) {
-                      move.promotion = 'queen'
-                    }
-                  }
+                          const move = {
+                            from: piece.square,
+                            to: newSquare,
+                          }
 
-                  const context = props.game.ctx()
-                  const legal = props.game.isLegal(move, context)
-                  if (!legal) {
-                    cancelled = true
-                  }
+                          if (
+                            props.game.board.get(piece.square).role === 'pawn'
+                          ) {
+                            const [row, col] = getPosition(
+                              newSquare,
+                              props.playAs
+                            )
+                            if (col === 0 || col === 7) {
+                              move.promotion = 'queen'
+                            }
+                          }
 
-                  if (!cancelled) {
-                    log(piece.square, newSquare)
-                    e.target.x(newX * (size / 8))
-                    e.target.y((7 - newY) * (size / 8))
-                    props.game.play(move)
-                    props.flipTurn()
-                    piece.square = newSquare
-                    onMove()
-                  } else {
-                    e.target.x(piece.x)
-                    e.target.y(piece.y)
-                  }
-                }}
-                scaleX={dragging === piece.square ? 1.2 : 1}
-                scaleY={dragging === piece.square ? 1.2 : 1}
-              />
-            ))}
-            {getHover().map((sq) => {
-              const [row, col] =
-                props.playAs === 'white'
-                  ? getPosition(sq)
-                  : getPosition(63 - sq)
-              const x = row * (size / 8) + size / 16
-              const y = col * (size / 8) + size / 16
-              return (
-                <Ellipse
-                  x={x}
-                  y={y}
-                  radiusX={size / 32}
-                  radiusY={size / 32}
-                  fill={'#78afe3'}
-                  opacity={0.5}
-                  key={`H${sq}`}
-                ></Ellipse>
-              )
-            })}
-          </Layer>
-          {props.game.isEnd() ? (
-            <Layer opacity={0.8} onClick={endGame}>
-              <Rect
-                x={size / 8}
-                y={size / 8}
-                width={(6 * size) / 8}
-                height={(6 * size) / 8}
-                fill={'white'}
-              />
-              <Text
-                x={size / 2 - size / 8}
-                y={size / 8 + size / 16}
-                text={'THE GAME IS OVER'}
-                fontSize={20}
-              />
-              <Text
-                x={size / 2 - size / 8}
-                y={size / 8 + size / 8}
-                text={'CLICK TO RETURN TO HOME'}
-                fontSize={20}
-              />
-            </Layer>
-          ) : null}
-        </Stage>
-      </div>
-    ) : (
-      <h1>Loading Game...</h1>
-    )
-  ) : (
-    <Navigate to="/" />
+                          const context = props.game.ctx()
+                          const legal = props.game.isLegal(move, context)
+                          if (!legal) {
+                            cancelled = true
+                          }
+
+                          if (!cancelled) {
+                            log(piece.square, newSquare)
+                            e.target.x(newX * (size / 8))
+                            e.target.y((7 - newY) * (size / 8))
+                            const san = makeSan(props.game, move)
+                            props.setHistory([...props.history, san])
+                            props.game.play(move)
+                            props.flipTurn()
+                            piece.square = newSquare
+                            onMove(san)
+                          } else {
+                            e.target.x(piece.x)
+                            e.target.y(piece.y)
+                          }
+                        }}
+                        scaleX={dragging === piece.square ? 1.2 : 1}
+                        scaleY={dragging === piece.square ? 1.2 : 1}
+                      />
+                    )
+                  )}
+                  {getHover().map((sq) => {
+                    const [row, col] =
+                      props.playAs === 'white'
+                        ? getPosition(sq)
+                        : getPosition(63 - sq)
+                    const x = row * (size / 8) + size / 16
+                    const y = col * (size / 8) + size / 16
+                    return (
+                      <Ellipse
+                        x={x}
+                        y={y}
+                        radiusX={size / 32}
+                        radiusY={size / 32}
+                        fill={'#78afe3'}
+                        opacity={0.5}
+                        key={`H${sq}`}
+                      ></Ellipse>
+                    )
+                  })}
+                </Layer>
+                {props.gameOver ? (
+                  <Layer onClick={endGame}>
+                    <Rect opacity={0.6}
+                      x={0}
+                      y={0}
+                      width={size}
+                      height={size}
+                      fill={'white'}
+                    />
+                    <Image
+                      x={0}
+                      y={0}
+                      width={size}
+                      height={size}
+                      image={getResultPicture()}
+                    />
+                  </Layer>
+                ) : null}
+              </Stage>
+            </Row>
+            <Row style={{ padding: '20px' }}>
+              <Col>
+                <Button
+                  variant="danger"
+                  onClick={handleResign}
+                  style={{ minWidth: '100%' }}
+                >
+                  resign
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  variant="secondary"
+                  onClick={() => {}}
+                  style={{ minWidth: '100%' }}
+                >
+                  undo last move
+                </Button>
+              </Col>
+            </Row>
+          </>
+        ) : (
+          <h1>loading game...</h1>
+        )
+      ) : (
+        <Navigate to="/" />
+      )}
+    </Container>
   )
 }

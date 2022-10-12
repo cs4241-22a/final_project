@@ -9,14 +9,8 @@ import About from './pages/About'
 import GameHistory from './pages/GameHistory'
 import Home from './pages/Home'
 import Stats from './pages/Stats'
-
-function getWindowDimentions() {
-  const { innerWidth: width, innerHeight: height } = window
-  return {
-    width,
-    height,
-  }
-}
+import GameViewer from './GameViewer'
+import './css/style.css'
 
 export default function App(props) {
   const [game, setGame] = useState(
@@ -27,29 +21,20 @@ export default function App(props) {
     ).unwrap()
   )
   const [turn, setTurn] = useState(game.turn)
-  const [engine, setEngine] = useState("StockFish")
+  const [history, setHistory] = useState([])
+  const [engine, setEngine] = useState('StockFish')
   const [level, setLevel] = useState(10)
   const [playAs, setPlayAs] = useState('white')
   const [gameRunning, setGameRunning] = useState(false)
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimentions()
-  )
+  const [gameOver, setGameOver] = useState(false)
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimentions())
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  function beginGame(color, elo) {
+  function beginGame() {
     setGame(Chess.default())
+    setHistory([])
     setTurn('white')
-    setPlayAs(color)
     setGameRunning(true)
-    if (color === 'black') {
+    setGameOver(false)
+    if (playAs === 'black') {
       playComputerMove(game, engine, 1000, level).then((chess) => {
         setGame(chess)
       })
@@ -62,48 +47,49 @@ export default function App(props) {
   }
 
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Container fluid id="appContainer">
         <NavBar />
-        <Container fluid>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Home
-                  begin={beginGame}
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Home
+                begin={beginGame}
+                gameRunning={gameRunning}
+                setLevel={setLevel}
+                setEngine={setEngine}
+                setPlayAs={setPlayAs}
+              />
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/gamehistory" element={<GameHistory />} />
+          <Route
+            path="/play"
+            element={
+              <>
+                <Board
+                  game={game}
+                  flipTurn={() => setTurn(game.turn)}
+                  playAs={playAs}
                   gameRunning={gameRunning}
-                  setLevel={setLevel}
-                  setEngine={setEngine}
+                  endGame={endGame}
+                  engine={engine}
+                  level={level}
+                  gameOver={gameOver}
+                  setGameOver={setGameOver}
+                  history={history}
+                  setHistory={setHistory}
                 />
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/stats" element={<Stats />} />
-            <Route path="/gamehistory" element={<GameHistory />} />
-            <Route
-              path="/play"
-              element={
-                <div className="row">
-                  <div className="w-75 mx-auto">
-                    <Board
-                      game={game}
-                      flipTurn={() => setTurn(game.turn)}
-                      playAs={playAs}
-                      gameRunning={gameRunning}
-                      endGame={endGame}
-                      dimensions={windowDimensions}
-                      engine={engine}
-                      level={level}
-                    />
-                  </div>
-                </div>
-              }
-            />
-          </Routes>
-        </Container>
-      </BrowserRouter>
-    </>
+                <GameViewer history={history} />
+              </>
+            }
+          />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   )
 }

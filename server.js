@@ -10,6 +10,7 @@ const passport = require('passport')
 const expressSession = require('express-session')
 const LocalStrategy = require('passport-local')
 const connectEnsureLogin = require('connect-ensure-login')
+const favicon = require('serve-favicon')
 
 const inDev = true
 
@@ -40,8 +41,8 @@ const UserSchema = new Schema(
         colorPlayed: String, //What color played
         game: String, //SAN of the game
         result: String, // "win" "loss" or "draw"
-      },
-    ],
+      }
+    ]
   },
   { collection: 'users' }
 )
@@ -64,6 +65,7 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use( favicon( path.join( __dirname, 'public', 'favicon.ico' ) ) );
 
 //Auth Setup
 passport.use(
@@ -106,6 +108,28 @@ app.get('/bestmove', cors(), async (req, res) => {
   await engine.quit()
 })
 
+app.post('/result', cors(), async (req, res) => {
+  const engineName = req.body.engine
+  const engineStrength = req.body.level
+  const colorPlayed = req.body.colorPlayed
+  const game = req.body.game
+  const result = req.body.result
+  const gameToAdd = {
+    engine: engineName,
+    engineStrength: engineStrength,
+    colorPlayed: colorPlayed,
+    game: game,
+    result: result
+  }
+
+  //const user = new User({_id: '0', username: "test", gameHistory: []})
+  const user = await User.findById('0')  // req.user._id
+
+  user.gameHistory.push(gameToAdd)
+  await user.save()
+  res.end()
+})
+
 app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login.html'))
 app.post(
   '/auth/callback',
@@ -116,6 +140,7 @@ app.post(
 )
 
 app.use(express.static('build'))
+app.use(express.static('public'))
 //Server Startup
 console.log(`Starting Server on Port ${process.env.port}`)
 app.listen(process.env.port)

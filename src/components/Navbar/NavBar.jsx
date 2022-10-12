@@ -7,10 +7,12 @@ import Container from 'react-bootstrap/Container'
 const NavBar = () => {
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="white" expand="lg">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Home</Navbar.Brand>
+            <Navbar.Brand>
+              home
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -21,13 +23,13 @@ const NavBar = () => {
               </LinkContainer>
 */}
               <LinkContainer to="/about">
-                <Nav.Link>About</Nav.Link>
+                <Nav.Link>about</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/stats">
-                <Nav.Link>Stats</Nav.Link>
+                <Nav.Link>stats</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/gamehistory">
-                <Nav.Link>Game History</Nav.Link>
+                <Nav.Link>game history</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
