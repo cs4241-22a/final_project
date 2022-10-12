@@ -23,7 +23,6 @@ app.use(express.json())
 app.use(compression())
 //app.use(express.static('dist'));
 
-
 app.use(express.static('./client/build'))
 
 app.get('*', (request, response) => {
