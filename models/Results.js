@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 let ResultsSchema = new Schema(
     {
         owner_id: {type: String, required: true},
-        game_type: {type: String, required: true, enum: ["cps", "accuracy", "reaction"]},
+        game_type: {type: String, required: true, enum: ["cps", "accuracy", "reaction", "aimtraining"]},
         score: { 
             type: Number, 
             required: [true, "A score is required!"]},
