@@ -22,8 +22,6 @@ app.use(express.json())
 app.use(compression())
 app.use(express.static('./client/build'))
 
-console.log(process.env.HOST)
-
 // CONNECT TO DATABASE
 let username
 let password
