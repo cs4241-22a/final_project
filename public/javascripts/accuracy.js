@@ -24,7 +24,7 @@ window.onload = function() {
     
     function countdown(i){
         if (i !== 0){
-            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2.. 1..." : "NAAA"
+            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2... 1..." : "NAAA"
             i -= 1
             console.log(i)
             setTimeout(function() {countdown(i)}, 1100)
@@ -54,14 +54,13 @@ window.onload = function() {
                 method:'POST',
                 headers: {"X-CSRF-TOKEN": csrf, "Content-Type": "application/json"},
                 body: JSON.stringify(result)
+            }).then(async function( response ) {
+                var data = await response.json()
+                console.log( data )
+                console.log("response ^")
+
+                window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
             })
-                .then(async function( response ) {
-                    var data = await response.json()
-                    console.log( data )
-                    console.log("response ^")
-                    const evt = new CustomEvent("updateData", {detail: {data: data}, bubbles: true, composed: false, cancelable: false})
-                    document.dispatchEvent(evt)
-                })
             
             clicks = []
             startBtn.disabled = false
