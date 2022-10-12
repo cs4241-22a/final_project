@@ -24,7 +24,7 @@ window.onload = function() {
     
     function countdown(i){
         if (i !== 0){
-            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2.. 1..." : "NAAA"
+            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2... 1..." : "NAAA"
             i -= 1
             console.log(i)
             setTimeout(function() {countdown(i)}, 1100)
