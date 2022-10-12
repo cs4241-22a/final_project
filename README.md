@@ -31,7 +31,7 @@ Another challenge we came across was connecting our React frontend with our Expr
 
 5. What each group member was responsible for designing / developing.
 
-Alex Bolduc 
+- Alex Bolduc 
   - Front-end React functionality.
     - Pet clicking
     - Adding customizations to the pet
@@ -39,18 +39,22 @@ Alex Bolduc
   - Connection between front and back end state management
   - Laying out page HTML and CSS
   - Small backend tweaks to work better with frontend
-Lena Dias 
+
+- Lena Dias 
   - Creation of pixel art assets
   - Bug testing and research
   - Implemented Glitch.me compatibility  
-Sean O'Connor 
+
+- Sean O'Connor 
   - Concept designs of application using Figma
   - Designed and created the original login and main page frontend HTML and CSS
-Jonathan Metcalf 
+  
+- Jonathan Metcalf 
   - Implemented Github OAuth
   - Set up default pet creation
   - Added custom middleware for checking database connection and whether the user is logged in
-Darian Tavana 
+
+- Darian Tavana 
   - Created the skeleton for the Express backend
   - Implemented database functionality with Mongoose schemas
   - Implemented /api routes 
