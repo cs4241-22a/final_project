@@ -5,7 +5,7 @@
 Heroku --> link
 
 
-![**Login Page**](https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true|width=10)
+![**Login Page**](https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true|height=10)
 
 We created a blog that will allow users to post various topics of their choosing and interact with other users. This static web page will be easy to navigate and feature seamless transitions with various content that users post. Overall, this project is technically open to whoever wants to voice their opinions/statements to the world.
 
