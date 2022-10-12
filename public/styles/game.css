@@ -1,0 +1,42 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.gameContainer {
+    border: 2px solid black;
+    width: 75vw;
+    height: 75vh;
+    position: relative;
+    background-color:aqua;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+.backgroundContainer {
+    width: 100%;
+    height: 100%;
+    z-index: 1
+}
+.target {
+    width: 5vw;
+    height: 5vw;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    background-color: red;
+    position:absolute;
+    z-index: 2;
+    border:none;
+}
+
+.hide {
+    visibility: hidden;
+}
+

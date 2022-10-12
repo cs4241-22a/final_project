@@ -148,10 +148,35 @@ userRouter.post('/login', (req, res) => {
             })
     }
 })
-// set highscore 
-userRouter.post('/setHighscore', (req, res) => {
-    const { username, accessToken, score } = req.body
+// get highscore 
+userRouter.get('/getHighscore/:username', (req, res) => {
+    const username = req.params.username
 
+    User.find({ username })
+        .then(data => {      // doing stuff with the data returned from database
+            if (data.length) {  // checking if there is data
+                const resJson = {
+                    username: data[0].username,
+                    highscore: data[0].highscore
+                }
+                res.json({
+                    status: "SUCCESS",
+                    message: "Got user highscore",
+                    data: JSON.stringify(resJson)
+                })
+            } else {
+                res.json({
+                    status: "FAILED",
+                    message: "Invalid credentials entered"
+                })
+            }
+        })
+        .catch(e => { // could not find matching username in database
+            res.json({
+                status: "FAILED",
+                message: "An error occured while checking for existing user"
+            })
+        })
 
 })
 

@@ -14,6 +14,7 @@ let refreshTokens = []
 authRouter.get('/game/:authToken', auth, (req, res, next) => {
     if (req.user) {
         res.redirect('/game')
+        next()
     } else {
         res.redirect('/login')
     }

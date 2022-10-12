@@ -10,8 +10,6 @@ const User = require('./../models/User')
 
 leaderboardRouter.get('/getLeaderboard', (req, res) => {
 
-
-
     User.find()
         .then(data => {
             if (data.length) {
