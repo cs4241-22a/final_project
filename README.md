@@ -11,7 +11,7 @@
 # Details
 1. A brief description of what you created, and a link to the project itself
 https://pet-the-jpeg.glitch.me/
-**Please run the page only in Firefox.
+<b>Please run the page only in Firefox.</b>
 
 Pet the .jpeg is an interactive web application where users raise their own pet. Users level up their pet by repeatedly clicking it. As the pet’s level increases, it becomes more challenging to continue to level up by requiring more clicks to do so. By leveling up, the pet unlocks new attributes that can be customized to change its visual appearance. Customizations include hats, colors, and different pet species. The progress of users is saved on a database, so they can continue their progress the next time they log in. There are two main pages: the log-in page and the pet interaction page.
 
@@ -31,7 +31,7 @@ Another challenge we came across was connecting our React frontend with our Expr
 
 5. What each group member was responsible for designing / developing.
 
-<li>Alex Bolduc 
+Alex Bolduc 
   - Front-end React functionality.
     - Pet clicking
     - Adding customizations to the pet
@@ -39,18 +39,18 @@ Another challenge we came across was connecting our React frontend with our Expr
   - Connection between front and back end state management
   - Laying out page HTML and CSS
   - Small backend tweaks to work better with frontend
-<li>Lena Dias 
+Lena Dias 
   - Creation of pixel art assets
   - Bug testing and research
   - Implemented Glitch.me compatibility  
-<li>Sean O'Connor 
+Sean O'Connor 
   - Concept designs of application using Figma
   - Designed and created the original login and main page frontend HTML and CSS
-<li>Jonathan Metcalf 
+Jonathan Metcalf 
   - Implemented Github OAuth
   - Set up default pet creation
   - Added custom middleware for checking database connection and whether the user is logged in
-<li>Darian Tavana 
+Darian Tavana 
   - Created the skeleton for the Express backend
   - Implemented database functionality with Mongoose schemas
   - Implemented /api routes 
