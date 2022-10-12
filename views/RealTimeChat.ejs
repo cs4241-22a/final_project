@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+  <meta />
+</head>
+<body>
+  <h1>Welcom to chat room</h1>
+  <p type="hidden" id="UserID"><%= ID %></p>
+  <p id="username"><%= username %></p>
+  <p id="timenow"></p>
+  <div id="message"></div>
+  <input type="text" id="send_text" placeholder="Please input msg you want to send"> </input>
+    <button id="send_button">Send</button>
+  <script>
+    const ws = new WebSocket("ws://localhost:3001");
+    const ID = document.querySelector("#UserID").innerHTML;
+    const MsgDiv = document.querySelector("#message");
+    const send_text = document.querySelector("#send_text");
+    const username = document.querySelector("#username").innerHTML;
+
+    const refresh = 1000;
+    const options = { hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    const TimeNow = function () {
+      let Now = new Date();
+      Now = Now.toLocaleDateString("en-US", options)
+      document.querySelector("#timenow").innerHTML = Now;
+      RefreshTime();
+    };
+    const RefreshTime = function () {
+      setTimeout(TimeNow, refresh);
+    };
+
+    ws.addEventListener("open", () => {
+      console.log("WS is running");
+      TimeNow();
+      let Time = document.querySelector("#timenow").innerHTML;
+      let txt = "Hello, Just joined!"
+      let json = {ID: ID, Time: Time, txt: txt, username: username}
+      let msg = JSON.stringify(json)
+      ws.send(msg);
+    });
+    ws.addEventListener("message", (e) => {
+      let msg = document.createElement("p");
+      console.log(e)
+      let body = JSON.parse(e.data)
+      let ID = body.ID;
+      let Time = body.Time;
+      let txt = body.txt;
+      let username = body.username
+        //Please add code BELOW to update the formats! Data contains 4 fields, txt: acutal data sent, ID: user's ID, username: username (use this to 
+        //displace the username! ID is 16 digit hash, used to add friends)
+      msg.innerText = `${username} says       ${txt}            at ${Time}`;
+      MsgDiv.appendChild(msg);
+    });
+
+    const Send_message = function() {
+        let txt = send_text.value
+        let Time = document.querySelector("#timenow").innerHTML;
+        send_text.value = ''
+        let json = {ID: ID, Time: Time, txt: txt, username: username}
+        let msg = JSON.stringify(json)
+        ws.send(msg);
+    }
+    window.onload = function () {
+        const send_but = document.querySelector("#send_button");
+        send_but.onclick = Send_message;
+    }
+  </script>
+</body>
