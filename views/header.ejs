@@ -20,25 +20,25 @@
             </a>
             
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/reaction" class="nav-link px-2 text-white-80 link-secondary">Reaction Time</a></li>
+                <li><a href="/reaction" class="nav-link px-2 text-white link-secondary">Reaction Time</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/cps" class="nav-link px-2 text-white-80 link-secondary">Clicks Per Second</a></li>
+                <li><a href="/cps" class="nav-link px-2 text-white link-secondary">Clicks Per Second</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/accuracy" class="nav-link px-2 text-white-80 link-secondary">Accuracy</a></li>
+                <li><a href="/accuracy" class="nav-link px-2 text-white link-secondary">Accuracy</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/aimtraining" class="nav-link px-2 text-white-80 link-secondary">Aim Training</a></li>
+                <li><a href="/aimtraining" class="nav-link px-2 text-white link-secondary">Aim Training</a></li>
             </ul>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                <li><a href="/leaderboard" class="nav-link px-2 text-white-80 link-secondary">Leaderboard</a></li>
+                <li><a href="/leaderboard" class="nav-link px-2 text-white link-secondary">Leaderboard</a></li>
             </ul>
 
             <%if (user) {%>
             <div class="dropdown text-end">
                 <input type="hidden" value="<%= user.id %>" id="user">
-                <a href="#" class="d-block link-light text-muted text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-light text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src=<%= user.profilePhoto %> alt="mdo" width="32" height="32" class="rounded-circle me-2">
                     <%= user.username %>
                 </a>
