@@ -21,7 +21,12 @@ require('dotenv').config()
 app.use(express.json())
 app.use(compression())
 
-console.log(process.env.HOST)
+app.use(express.static('client/build'));
+
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 
 // CONNECT TO DATABASE
 let username
