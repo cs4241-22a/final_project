@@ -38,7 +38,6 @@ app.get('/signup', (req, res) => { // changed createaccount to signup cause that
 })
 // leaderboard page
 app.get('/leaderboard', (req, res) => {
-    console.log(req.user)
     res.render('leaderboard') // will change when these pages exist
 })
 // game page

@@ -4,3 +4,6 @@ window.onload = () => {
     console.log(auth)
 }
 
+document.querySelectorAll('target').forEach(target => {
+
+})

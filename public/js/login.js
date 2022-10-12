@@ -21,7 +21,6 @@ loginForm.addEventListener('submit', async e => {
     })
 
     const responseJSON = await response.json()
-    //console.log("ASDDDSADDSD ", responseJSON)
     if (responseJSON.status == "FAILED") {
         alert(responseJSON.message)
         loginForm.elements['loginPassword'].value = ""

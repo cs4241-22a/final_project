@@ -5,7 +5,6 @@ const auth = (req, res, next) => {
     const authHeader = req.params.authToken
     const token = authHeader //&& authHeader.split(' ')[1]
     if (token == null) {
-        console.log('token == null')
         return res.json({
             status: "FAILED",
             message: "accessToken == null"
