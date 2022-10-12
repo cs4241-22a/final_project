@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body style="background-image: url('/unsplash-7rXu_HJO9D8-unsplash.jpg');">
+<div id="sideNavBar" class="sidenav">
+    <a href="javascript:void(0)" class="collapseBtn" onclick="closeNav()">&times;</a>
+    <p id="loggedIn"></p>
+    <a href=#home>Home</a>
+    <a href="/main.html">Main</a>
+    <a href="/profile.html>">Profile</a>
+</div>
+<span style="font-size:30px;cursor:pointer;color: white" onclick="openNav()">&#9776;</span>
+<div>
+    <h1 style="background-color: rgba(245, 245, 220, 0.8);">Profile</h1>
+</div>
+<div>
+    <a id="githubHeader">
+    <h2 style="background-color: rgba(245, 245, 220, 0.8); text-align: center; border: 2px solid #fff;">Visit my Github Page!</h2>
+    </a>
+</div>
+<div class="row">
+    <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
+        <h2>Here's Me</h2>
+        <p id="profilePic" style="text-align: center;"></p>
+    </div>
+    <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
+        <h2>All About Me</h2>
+        <p id="profileDesc"></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
+        <h2>First Project</h2>
+        <p id="firstProjectList"></p>
+    </div>
+    <div class="col" style="background-color: rgba(245, 245, 220, 0.8);">
+        <h2>Current Project</h2>
+        <p id="currentProjectList"></p>
+    </div>
+</div>
+<script src="/viewProfile.js"></script>
+</body>
+</html>
