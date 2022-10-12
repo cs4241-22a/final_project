@@ -1,9 +1,32 @@
-<h1>Welcome to friends slide</h1>
+<!DOCTYPE html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href=
+    "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity=
+          "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <link href=
+          "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet" />
+    <title>Your Friends</title>
+</head>
+
+<body class="bg-dark text-center text-white container">
+
+<h1>Your Connections Here</h1>
+
 <h5><%= myID %></h5>
 <form method = 'POST' action = '/friends/add_friend' >
     FriendID: <input type = 'text' name = 'friend_id' required></input> <br />
-    <input type="submit" value="Add friend"/>
+    <input type="submit" value="Add friend" class="btn btn-primary"/>
 </form>
+
 <% friend_list.forEach(friend => { %>
     <li><%= friend[0] %></li>
     <form method='GET' action = '/friendplan/<%= friend[1] %>'>
@@ -11,12 +34,14 @@
         <input type="submit" value="See Plan"/>
     </form>
 <% }) %>
+
 <h2>friend requests Pending</h2>
 <% friend_pending.forEach(friend => { %>
     <li><%= friend[0] %></li>
 
     <li><%= friend[1] %></li>
 <% }) %>
+
 <h2>friend requests From</h2>
 <% friend_req.forEach(req => { %>
     <li><%= req[0] %></li>
@@ -25,3 +50,4 @@
         <input type="submit" value="Accept">
     </form>
 <% }) %>
+</body>

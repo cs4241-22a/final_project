@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<head> </head>
+<!-- heads here -->
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href=
+  "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity=
+        "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous" />
+  <link href=
+        "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+        rel="stylesheet" />
+</head>
+
+<!-- body GUI here-->
+<body class="bg-dark text-white text-center">
+  <h1>Plan from friends <%= msg %></h1>
+  <% body.forEach(function(plan){ %>
+  <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
+  <form>
+    Note:<%= plan.Note %><br /><br />
+    Start Time:<%= moment(plan.Start_Time) %><br /><br />
+    End Time:<%= moment(plan.End_Time) %><br /><br />
+    Added: <%= moment(plan.Submit_Time).fromNow() %>
+  </form>
+  <% }) %>
+</body>
+
+<!-- function here -->
 <script>
   const refresh = 1000;
   const ChangeEndTime = function () {
     document.querySelector("#end_time").value =
-      document.querySelector("#start_time").value;
+            document.querySelector("#start_time").value;
     document.querySelector("#end_time").min =
-      document.querySelector("#start_time").value;
+            document.querySelector("#start_time").value;
   };
   const TimeNow = function () {
     let Now = new Date();
@@ -28,8 +60,8 @@
     now.setSeconds(null);
 
     document.querySelector("#start_time").value = now
-      .toISOString()
-      .slice(0, -1);
+            .toISOString()
+            .slice(0, -1);
     document.querySelector("#start_time").min = now.toISOString().slice(0, -1);
     // document.querySelector('#start_time').step = 60 * 15;
     document.querySelector("#end_time").value = now.toISOString().slice(0, -1);
@@ -37,15 +69,3 @@
     // document.querySelector('#end_time').step = 60 * 15;
   };
 </script>
-<body>
-  <h1>Plan from friend <%= msg %></h1>
-  <% body.forEach(function(plan){ %>
-  <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
-  <form>
-    Note:<%= plan.Note %><br /><br />
-    Start Time:<%= moment(plan.Start_Time) %><br /><br />
-    End Time:<%= moment(plan.End_Time) %><br /><br />
-    Added: <%= moment(plan.Submit_Time).fromNow() %>
-  </form>
-  <% }) %>
-</body>
