@@ -38,7 +38,29 @@ window.onload = function() {
                 scoreCell.innerHTML = response[i].score;
                 scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             }
-    })
+
+            fetch('/GetUsers',{
+                method: 'GET'
+              })
+              .then( function (res ) {
+                return res.json();
+              })
+              .then( function (res){
+                console.log(res);
+                for(let i = 1; i < table.rows.length; i++)
+                {
+                    var username = "";
+                    for(let j = 0; j < res.length; j++)
+                    {
+                        if(res[j].id === table.rows[i].cells[0].innerHTML)
+                        {
+                            username = res[j].username;
+                        }
+                    }
+                    table.rows[i].cells[0].innerHTML = username;
+                }
+            })
+        })
     })
 
     reactionBtn.addEventListener('click', function () {
@@ -74,6 +96,27 @@ window.onload = function() {
                 scoreCell.innerHTML = response[i].score;
                 scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             }
+            fetch('/GetUsers',{
+                method: 'GET'
+              })
+              .then( function (res ) {
+                return res.json();
+              })
+              .then( function (res){
+                console.log(res);
+                for(let i = 1; i < table.rows.length; i++)
+                {
+                    var username = "";
+                    for(let j = 0; j < res.length; j++)
+                    {
+                        if(res[j].id === table.rows[i].cells[0].innerHTML)
+                        {
+                            username = res[j].username;
+                        }
+                    }
+                    table.rows[i].cells[0].innerHTML = username;
+                }
+            })
     })
     })
 
@@ -104,12 +147,33 @@ window.onload = function() {
                 var row = table.insertRow(1);
                 var userCell = row.insertCell(0);
                 var scoreCell = row.insertCell(1);
-
+                
                 userCell.innerHTML = response[i].owner_id;
                 userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
                 scoreCell.innerHTML = response[i].score;
                 scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             }
+            fetch('/GetUsers',{
+                method: 'GET'
+              })
+              .then( function (res ) {
+                return res.json();
+              })
+              .then( function (res){
+                console.log(res);
+                for(let i = 1; i < table.rows.length; i++)
+                {
+                    var username = "";
+                    for(let j = 0; j < res.length; j++)
+                    {
+                        if(res[j].id === table.rows[i].cells[0].innerHTML)
+                        {
+                            username = res[j].username;
+                        }
+                    }
+                    table.rows[i].cells[0].innerHTML = username;
+                }
+            })
     })
     })
 }
