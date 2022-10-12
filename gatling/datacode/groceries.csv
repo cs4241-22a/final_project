@@ -1,0 +1,1001 @@
+item,type
+item0,Canned / Jarred Goods
+item1,Dairy
+item2,Dry / Baking Goods
+item3,Frozen
+item4,Grains
+item5,Meat
+item6,Produce
+item7,Other
+item8,Canned / Jarred Goods
+item9,Dairy
+item10,Dry / Baking Goods
+item11,Frozen
+item12,Grains
+item13,Meat
+item14,Produce
+item15,Other
+item16,Canned / Jarred Goods
+item17,Dairy
+item18,Dry / Baking Goods
+item19,Frozen
+item20,Grains
+item21,Meat
+item22,Produce
+item23,Other
+item24,Canned / Jarred Goods
+item25,Dairy
+item26,Dry / Baking Goods
+item27,Frozen
+item28,Grains
+item29,Meat
+item30,Produce
+item31,Other
+item32,Canned / Jarred Goods
+item33,Dairy
+item34,Dry / Baking Goods
+item35,Frozen
+item36,Grains
+item37,Meat
+item38,Produce
+item39,Other
+item40,Canned / Jarred Goods
+item41,Dairy
+item42,Dry / Baking Goods
+item43,Frozen
+item44,Grains
+item45,Meat
+item46,Produce
+item47,Other
+item48,Canned / Jarred Goods
+item49,Dairy
+item50,Dry / Baking Goods
+item51,Frozen
+item52,Grains
+item53,Meat
+item54,Produce
+item55,Other
+item56,Canned / Jarred Goods
+item57,Dairy
+item58,Dry / Baking Goods
+item59,Frozen
+item60,Grains
+item61,Meat
+item62,Produce
+item63,Other
+item64,Canned / Jarred Goods
+item65,Dairy
+item66,Dry / Baking Goods
+item67,Frozen
+item68,Grains
+item69,Meat
+item70,Produce
+item71,Other
+item72,Canned / Jarred Goods
+item73,Dairy
+item74,Dry / Baking Goods
+item75,Frozen
+item76,Grains
+item77,Meat
+item78,Produce
+item79,Other
+item80,Canned / Jarred Goods
+item81,Dairy
+item82,Dry / Baking Goods
+item83,Frozen
+item84,Grains
+item85,Meat
+item86,Produce
+item87,Other
+item88,Canned / Jarred Goods
+item89,Dairy
+item90,Dry / Baking Goods
+item91,Frozen
+item92,Grains
+item93,Meat
+item94,Produce
+item95,Other
+item96,Canned / Jarred Goods
+item97,Dairy
+item98,Dry / Baking Goods
+item99,Frozen
+item100,Grains
+item101,Meat
+item102,Produce
+item103,Other
+item104,Canned / Jarred Goods
+item105,Dairy
+item106,Dry / Baking Goods
+item107,Frozen
+item108,Grains
+item109,Meat
+item110,Produce
+item111,Other
+item112,Canned / Jarred Goods
+item113,Dairy
+item114,Dry / Baking Goods
+item115,Frozen
+item116,Grains
+item117,Meat
+item118,Produce
+item119,Other
+item120,Canned / Jarred Goods
+item121,Dairy
+item122,Dry / Baking Goods
+item123,Frozen
+item124,Grains
+item125,Meat
+item126,Produce
+item127,Other
+item128,Canned / Jarred Goods
+item129,Dairy
+item130,Dry / Baking Goods
+item131,Frozen
+item132,Grains
+item133,Meat
+item134,Produce
+item135,Other
+item136,Canned / Jarred Goods
+item137,Dairy
+item138,Dry / Baking Goods
+item139,Frozen
+item140,Grains
+item141,Meat
+item142,Produce
+item143,Other
+item144,Canned / Jarred Goods
+item145,Dairy
+item146,Dry / Baking Goods
+item147,Frozen
+item148,Grains
+item149,Meat
+item150,Produce
+item151,Other
+item152,Canned / Jarred Goods
+item153,Dairy
+item154,Dry / Baking Goods
+item155,Frozen
+item156,Grains
+item157,Meat
+item158,Produce
+item159,Other
+item160,Canned / Jarred Goods
+item161,Dairy
+item162,Dry / Baking Goods
+item163,Frozen
+item164,Grains
+item165,Meat
+item166,Produce
+item167,Other
+item168,Canned / Jarred Goods
+item169,Dairy
+item170,Dry / Baking Goods
+item171,Frozen
+item172,Grains
+item173,Meat
+item174,Produce
+item175,Other
+item176,Canned / Jarred Goods
+item177,Dairy
+item178,Dry / Baking Goods
+item179,Frozen
+item180,Grains
+item181,Meat
+item182,Produce
+item183,Other
+item184,Canned / Jarred Goods
+item185,Dairy
+item186,Dry / Baking Goods
+item187,Frozen
+item188,Grains
+item189,Meat
+item190,Produce
+item191,Other
+item192,Canned / Jarred Goods
+item193,Dairy
+item194,Dry / Baking Goods
+item195,Frozen
+item196,Grains
+item197,Meat
+item198,Produce
+item199,Other
+item200,Canned / Jarred Goods
+item201,Dairy
+item202,Dry / Baking Goods
+item203,Frozen
+item204,Grains
+item205,Meat
+item206,Produce
+item207,Other
+item208,Canned / Jarred Goods
+item209,Dairy
+item210,Dry / Baking Goods
+item211,Frozen
+item212,Grains
+item213,Meat
+item214,Produce
+item215,Other
+item216,Canned / Jarred Goods
+item217,Dairy
+item218,Dry / Baking Goods
+item219,Frozen
+item220,Grains
+item221,Meat
+item222,Produce
+item223,Other
+item224,Canned / Jarred Goods
+item225,Dairy
+item226,Dry / Baking Goods
+item227,Frozen
+item228,Grains
+item229,Meat
+item230,Produce
+item231,Other
+item232,Canned / Jarred Goods
+item233,Dairy
+item234,Dry / Baking Goods
+item235,Frozen
+item236,Grains
+item237,Meat
+item238,Produce
+item239,Other
+item240,Canned / Jarred Goods
+item241,Dairy
+item242,Dry / Baking Goods
+item243,Frozen
+item244,Grains
+item245,Meat
+item246,Produce
+item247,Other
+item248,Canned / Jarred Goods
+item249,Dairy
+item250,Dry / Baking Goods
+item251,Frozen
+item252,Grains
+item253,Meat
+item254,Produce
+item255,Other
+item256,Canned / Jarred Goods
+item257,Dairy
+item258,Dry / Baking Goods
+item259,Frozen
+item260,Grains
+item261,Meat
+item262,Produce
+item263,Other
+item264,Canned / Jarred Goods
+item265,Dairy
+item266,Dry / Baking Goods
+item267,Frozen
+item268,Grains
+item269,Meat
+item270,Produce
+item271,Other
+item272,Canned / Jarred Goods
+item273,Dairy
+item274,Dry / Baking Goods
+item275,Frozen
+item276,Grains
+item277,Meat
+item278,Produce
+item279,Other
+item280,Canned / Jarred Goods
+item281,Dairy
+item282,Dry / Baking Goods
+item283,Frozen
+item284,Grains
+item285,Meat
+item286,Produce
+item287,Other
+item288,Canned / Jarred Goods
+item289,Dairy
+item290,Dry / Baking Goods
+item291,Frozen
+item292,Grains
+item293,Meat
+item294,Produce
+item295,Other
+item296,Canned / Jarred Goods
+item297,Dairy
+item298,Dry / Baking Goods
+item299,Frozen
+item300,Grains
+item301,Meat
+item302,Produce
+item303,Other
+item304,Canned / Jarred Goods
+item305,Dairy
+item306,Dry / Baking Goods
+item307,Frozen
+item308,Grains
+item309,Meat
+item310,Produce
+item311,Other
+item312,Canned / Jarred Goods
+item313,Dairy
+item314,Dry / Baking Goods
+item315,Frozen
+item316,Grains
+item317,Meat
+item318,Produce
+item319,Other
+item320,Canned / Jarred Goods
+item321,Dairy
+item322,Dry / Baking Goods
+item323,Frozen
+item324,Grains
+item325,Meat
+item326,Produce
+item327,Other
+item328,Canned / Jarred Goods
+item329,Dairy
+item330,Dry / Baking Goods
+item331,Frozen
+item332,Grains
+item333,Meat
+item334,Produce
+item335,Other
+item336,Canned / Jarred Goods
+item337,Dairy
+item338,Dry / Baking Goods
+item339,Frozen
+item340,Grains
+item341,Meat
+item342,Produce
+item343,Other
+item344,Canned / Jarred Goods
+item345,Dairy
+item346,Dry / Baking Goods
+item347,Frozen
+item348,Grains
+item349,Meat
+item350,Produce
+item351,Other
+item352,Canned / Jarred Goods
+item353,Dairy
+item354,Dry / Baking Goods
+item355,Frozen
+item356,Grains
+item357,Meat
+item358,Produce
+item359,Other
+item360,Canned / Jarred Goods
+item361,Dairy
+item362,Dry / Baking Goods
+item363,Frozen
+item364,Grains
+item365,Meat
+item366,Produce
+item367,Other
+item368,Canned / Jarred Goods
+item369,Dairy
+item370,Dry / Baking Goods
+item371,Frozen
+item372,Grains
+item373,Meat
+item374,Produce
+item375,Other
+item376,Canned / Jarred Goods
+item377,Dairy
+item378,Dry / Baking Goods
+item379,Frozen
+item380,Grains
+item381,Meat
+item382,Produce
+item383,Other
+item384,Canned / Jarred Goods
+item385,Dairy
+item386,Dry / Baking Goods
+item387,Frozen
+item388,Grains
+item389,Meat
+item390,Produce
+item391,Other
+item392,Canned / Jarred Goods
+item393,Dairy
+item394,Dry / Baking Goods
+item395,Frozen
+item396,Grains
+item397,Meat
+item398,Produce
+item399,Other
+item400,Canned / Jarred Goods
+item401,Dairy
+item402,Dry / Baking Goods
+item403,Frozen
+item404,Grains
+item405,Meat
+item406,Produce
+item407,Other
+item408,Canned / Jarred Goods
+item409,Dairy
+item410,Dry / Baking Goods
+item411,Frozen
+item412,Grains
+item413,Meat
+item414,Produce
+item415,Other
+item416,Canned / Jarred Goods
+item417,Dairy
+item418,Dry / Baking Goods
+item419,Frozen
+item420,Grains
+item421,Meat
+item422,Produce
+item423,Other
+item424,Canned / Jarred Goods
+item425,Dairy
+item426,Dry / Baking Goods
+item427,Frozen
+item428,Grains
+item429,Meat
+item430,Produce
+item431,Other
+item432,Canned / Jarred Goods
+item433,Dairy
+item434,Dry / Baking Goods
+item435,Frozen
+item436,Grains
+item437,Meat
+item438,Produce
+item439,Other
+item440,Canned / Jarred Goods
+item441,Dairy
+item442,Dry / Baking Goods
+item443,Frozen
+item444,Grains
+item445,Meat
+item446,Produce
+item447,Other
+item448,Canned / Jarred Goods
+item449,Dairy
+item450,Dry / Baking Goods
+item451,Frozen
+item452,Grains
+item453,Meat
+item454,Produce
+item455,Other
+item456,Canned / Jarred Goods
+item457,Dairy
+item458,Dry / Baking Goods
+item459,Frozen
+item460,Grains
+item461,Meat
+item462,Produce
+item463,Other
+item464,Canned / Jarred Goods
+item465,Dairy
+item466,Dry / Baking Goods
+item467,Frozen
+item468,Grains
+item469,Meat
+item470,Produce
+item471,Other
+item472,Canned / Jarred Goods
+item473,Dairy
+item474,Dry / Baking Goods
+item475,Frozen
+item476,Grains
+item477,Meat
+item478,Produce
+item479,Other
+item480,Canned / Jarred Goods
+item481,Dairy
+item482,Dry / Baking Goods
+item483,Frozen
+item484,Grains
+item485,Meat
+item486,Produce
+item487,Other
+item488,Canned / Jarred Goods
+item489,Dairy
+item490,Dry / Baking Goods
+item491,Frozen
+item492,Grains
+item493,Meat
+item494,Produce
+item495,Other
+item496,Canned / Jarred Goods
+item497,Dairy
+item498,Dry / Baking Goods
+item499,Frozen
+item500,Grains
+item501,Meat
+item502,Produce
+item503,Other
+item504,Canned / Jarred Goods
+item505,Dairy
+item506,Dry / Baking Goods
+item507,Frozen
+item508,Grains
+item509,Meat
+item510,Produce
+item511,Other
+item512,Canned / Jarred Goods
+item513,Dairy
+item514,Dry / Baking Goods
+item515,Frozen
+item516,Grains
+item517,Meat
+item518,Produce
+item519,Other
+item520,Canned / Jarred Goods
+item521,Dairy
+item522,Dry / Baking Goods
+item523,Frozen
+item524,Grains
+item525,Meat
+item526,Produce
+item527,Other
+item528,Canned / Jarred Goods
+item529,Dairy
+item530,Dry / Baking Goods
+item531,Frozen
+item532,Grains
+item533,Meat
+item534,Produce
+item535,Other
+item536,Canned / Jarred Goods
+item537,Dairy
+item538,Dry / Baking Goods
+item539,Frozen
+item540,Grains
+item541,Meat
+item542,Produce
+item543,Other
+item544,Canned / Jarred Goods
+item545,Dairy
+item546,Dry / Baking Goods
+item547,Frozen
+item548,Grains
+item549,Meat
+item550,Produce
+item551,Other
+item552,Canned / Jarred Goods
+item553,Dairy
+item554,Dry / Baking Goods
+item555,Frozen
+item556,Grains
+item557,Meat
+item558,Produce
+item559,Other
+item560,Canned / Jarred Goods
+item561,Dairy
+item562,Dry / Baking Goods
+item563,Frozen
+item564,Grains
+item565,Meat
+item566,Produce
+item567,Other
+item568,Canned / Jarred Goods
+item569,Dairy
+item570,Dry / Baking Goods
+item571,Frozen
+item572,Grains
+item573,Meat
+item574,Produce
+item575,Other
+item576,Canned / Jarred Goods
+item577,Dairy
+item578,Dry / Baking Goods
+item579,Frozen
+item580,Grains
+item581,Meat
+item582,Produce
+item583,Other
+item584,Canned / Jarred Goods
+item585,Dairy
+item586,Dry / Baking Goods
+item587,Frozen
+item588,Grains
+item589,Meat
+item590,Produce
+item591,Other
+item592,Canned / Jarred Goods
+item593,Dairy
+item594,Dry / Baking Goods
+item595,Frozen
+item596,Grains
+item597,Meat
+item598,Produce
+item599,Other
+item600,Canned / Jarred Goods
+item601,Dairy
+item602,Dry / Baking Goods
+item603,Frozen
+item604,Grains
+item605,Meat
+item606,Produce
+item607,Other
+item608,Canned / Jarred Goods
+item609,Dairy
+item610,Dry / Baking Goods
+item611,Frozen
+item612,Grains
+item613,Meat
+item614,Produce
+item615,Other
+item616,Canned / Jarred Goods
+item617,Dairy
+item618,Dry / Baking Goods
+item619,Frozen
+item620,Grains
+item621,Meat
+item622,Produce
+item623,Other
+item624,Canned / Jarred Goods
+item625,Dairy
+item626,Dry / Baking Goods
+item627,Frozen
+item628,Grains
+item629,Meat
+item630,Produce
+item631,Other
+item632,Canned / Jarred Goods
+item633,Dairy
+item634,Dry / Baking Goods
+item635,Frozen
+item636,Grains
+item637,Meat
+item638,Produce
+item639,Other
+item640,Canned / Jarred Goods
+item641,Dairy
+item642,Dry / Baking Goods
+item643,Frozen
+item644,Grains
+item645,Meat
+item646,Produce
+item647,Other
+item648,Canned / Jarred Goods
+item649,Dairy
+item650,Dry / Baking Goods
+item651,Frozen
+item652,Grains
+item653,Meat
+item654,Produce
+item655,Other
+item656,Canned / Jarred Goods
+item657,Dairy
+item658,Dry / Baking Goods
+item659,Frozen
+item660,Grains
+item661,Meat
+item662,Produce
+item663,Other
+item664,Canned / Jarred Goods
+item665,Dairy
+item666,Dry / Baking Goods
+item667,Frozen
+item668,Grains
+item669,Meat
+item670,Produce
+item671,Other
+item672,Canned / Jarred Goods
+item673,Dairy
+item674,Dry / Baking Goods
+item675,Frozen
+item676,Grains
+item677,Meat
+item678,Produce
+item679,Other
+item680,Canned / Jarred Goods
+item681,Dairy
+item682,Dry / Baking Goods
+item683,Frozen
+item684,Grains
+item685,Meat
+item686,Produce
+item687,Other
+item688,Canned / Jarred Goods
+item689,Dairy
+item690,Dry / Baking Goods
+item691,Frozen
+item692,Grains
+item693,Meat
+item694,Produce
+item695,Other
+item696,Canned / Jarred Goods
+item697,Dairy
+item698,Dry / Baking Goods
+item699,Frozen
+item700,Grains
+item701,Meat
+item702,Produce
+item703,Other
+item704,Canned / Jarred Goods
+item705,Dairy
+item706,Dry / Baking Goods
+item707,Frozen
+item708,Grains
+item709,Meat
+item710,Produce
+item711,Other
+item712,Canned / Jarred Goods
+item713,Dairy
+item714,Dry / Baking Goods
+item715,Frozen
+item716,Grains
+item717,Meat
+item718,Produce
+item719,Other
+item720,Canned / Jarred Goods
+item721,Dairy
+item722,Dry / Baking Goods
+item723,Frozen
+item724,Grains
+item725,Meat
+item726,Produce
+item727,Other
+item728,Canned / Jarred Goods
+item729,Dairy
+item730,Dry / Baking Goods
+item731,Frozen
+item732,Grains
+item733,Meat
+item734,Produce
+item735,Other
+item736,Canned / Jarred Goods
+item737,Dairy
+item738,Dry / Baking Goods
+item739,Frozen
+item740,Grains
+item741,Meat
+item742,Produce
+item743,Other
+item744,Canned / Jarred Goods
+item745,Dairy
+item746,Dry / Baking Goods
+item747,Frozen
+item748,Grains
+item749,Meat
+item750,Produce
+item751,Other
+item752,Canned / Jarred Goods
+item753,Dairy
+item754,Dry / Baking Goods
+item755,Frozen
+item756,Grains
+item757,Meat
+item758,Produce
+item759,Other
+item760,Canned / Jarred Goods
+item761,Dairy
+item762,Dry / Baking Goods
+item763,Frozen
+item764,Grains
+item765,Meat
+item766,Produce
+item767,Other
+item768,Canned / Jarred Goods
+item769,Dairy
+item770,Dry / Baking Goods
+item771,Frozen
+item772,Grains
+item773,Meat
+item774,Produce
+item775,Other
+item776,Canned / Jarred Goods
+item777,Dairy
+item778,Dry / Baking Goods
+item779,Frozen
+item780,Grains
+item781,Meat
+item782,Produce
+item783,Other
+item784,Canned / Jarred Goods
+item785,Dairy
+item786,Dry / Baking Goods
+item787,Frozen
+item788,Grains
+item789,Meat
+item790,Produce
+item791,Other
+item792,Canned / Jarred Goods
+item793,Dairy
+item794,Dry / Baking Goods
+item795,Frozen
+item796,Grains
+item797,Meat
+item798,Produce
+item799,Other
+item800,Canned / Jarred Goods
+item801,Dairy
+item802,Dry / Baking Goods
+item803,Frozen
+item804,Grains
+item805,Meat
+item806,Produce
+item807,Other
+item808,Canned / Jarred Goods
+item809,Dairy
+item810,Dry / Baking Goods
+item811,Frozen
+item812,Grains
+item813,Meat
+item814,Produce
+item815,Other
+item816,Canned / Jarred Goods
+item817,Dairy
+item818,Dry / Baking Goods
+item819,Frozen
+item820,Grains
+item821,Meat
+item822,Produce
+item823,Other
+item824,Canned / Jarred Goods
+item825,Dairy
+item826,Dry / Baking Goods
+item827,Frozen
+item828,Grains
+item829,Meat
+item830,Produce
+item831,Other
+item832,Canned / Jarred Goods
+item833,Dairy
+item834,Dry / Baking Goods
+item835,Frozen
+item836,Grains
+item837,Meat
+item838,Produce
+item839,Other
+item840,Canned / Jarred Goods
+item841,Dairy
+item842,Dry / Baking Goods
+item843,Frozen
+item844,Grains
+item845,Meat
+item846,Produce
+item847,Other
+item848,Canned / Jarred Goods
+item849,Dairy
+item850,Dry / Baking Goods
+item851,Frozen
+item852,Grains
+item853,Meat
+item854,Produce
+item855,Other
+item856,Canned / Jarred Goods
+item857,Dairy
+item858,Dry / Baking Goods
+item859,Frozen
+item860,Grains
+item861,Meat
+item862,Produce
+item863,Other
+item864,Canned / Jarred Goods
+item865,Dairy
+item866,Dry / Baking Goods
+item867,Frozen
+item868,Grains
+item869,Meat
+item870,Produce
+item871,Other
+item872,Canned / Jarred Goods
+item873,Dairy
+item874,Dry / Baking Goods
+item875,Frozen
+item876,Grains
+item877,Meat
+item878,Produce
+item879,Other
+item880,Canned / Jarred Goods
+item881,Dairy
+item882,Dry / Baking Goods
+item883,Frozen
+item884,Grains
+item885,Meat
+item886,Produce
+item887,Other
+item888,Canned / Jarred Goods
+item889,Dairy
+item890,Dry / Baking Goods
+item891,Frozen
+item892,Grains
+item893,Meat
+item894,Produce
+item895,Other
+item896,Canned / Jarred Goods
+item897,Dairy
+item898,Dry / Baking Goods
+item899,Frozen
+item900,Grains
+item901,Meat
+item902,Produce
+item903,Other
+item904,Canned / Jarred Goods
+item905,Dairy
+item906,Dry / Baking Goods
+item907,Frozen
+item908,Grains
+item909,Meat
+item910,Produce
+item911,Other
+item912,Canned / Jarred Goods
+item913,Dairy
+item914,Dry / Baking Goods
+item915,Frozen
+item916,Grains
+item917,Meat
+item918,Produce
+item919,Other
+item920,Canned / Jarred Goods
+item921,Dairy
+item922,Dry / Baking Goods
+item923,Frozen
+item924,Grains
+item925,Meat
+item926,Produce
+item927,Other
+item928,Canned / Jarred Goods
+item929,Dairy
+item930,Dry / Baking Goods
+item931,Frozen
+item932,Grains
+item933,Meat
+item934,Produce
+item935,Other
+item936,Canned / Jarred Goods
+item937,Dairy
+item938,Dry / Baking Goods
+item939,Frozen
+item940,Grains
+item941,Meat
+item942,Produce
+item943,Other
+item944,Canned / Jarred Goods
+item945,Dairy
+item946,Dry / Baking Goods
+item947,Frozen
+item948,Grains
+item949,Meat
+item950,Produce
+item951,Other
+item952,Canned / Jarred Goods
+item953,Dairy
+item954,Dry / Baking Goods
+item955,Frozen
+item956,Grains
+item957,Meat
+item958,Produce
+item959,Other
+item960,Canned / Jarred Goods
+item961,Dairy
+item962,Dry / Baking Goods
+item963,Frozen
+item964,Grains
+item965,Meat
+item966,Produce
+item967,Other
+item968,Canned / Jarred Goods
+item969,Dairy
+item970,Dry / Baking Goods
+item971,Frozen
+item972,Grains
+item973,Meat
+item974,Produce
+item975,Other
+item976,Canned / Jarred Goods
+item977,Dairy
+item978,Dry / Baking Goods
+item979,Frozen
+item980,Grains
+item981,Meat
+item982,Produce
+item983,Other
+item984,Canned / Jarred Goods
+item985,Dairy
+item986,Dry / Baking Goods
+item987,Frozen
+item988,Grains
+item989,Meat
+item990,Produce
+item991,Other
+item992,Canned / Jarred Goods
+item993,Dairy
+item994,Dry / Baking Goods
+item995,Frozen
+item996,Grains
+item997,Meat
+item998,Produce
+item999,Other
