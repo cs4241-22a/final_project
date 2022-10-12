@@ -11,6 +11,16 @@ class App extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    fetch('/', {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(response => {
+      console.log(response.status)
+    })
+  }
+
   setProfile = (profile) => {
     this.setState({ profile })
   }

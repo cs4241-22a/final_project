@@ -23,16 +23,50 @@ class VerificationCheck extends React.Component {
         this.state = { badVerifcation: false }
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        console.log('IN THIS VERIFICATION BETFORE GET')
 
-        fetch('/api/getVerification', {
+        const response = await fetch('/api/getVerification', {
+            method:'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const json = await response.json();
+
+        if (data.get('Verification') === json.verification) {
+            const context = this.context;
+            const profileData = {
+                name: json.username
+            }
+            context.setProfile(profileData);
+
+            if (json.type === 'login') {
+                this.props.navigate('/')
+            } else {
+                fetch('/api/createUserDatabase', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: json.username,
+                                        password: json.password })
+                }).then((response) => {
+                    if (response.status === 200) {
+                        this.props.navigate('/')
+                    }
+                })
+            }
+        } else {
+            this.setState({ badVerifcation: true })
+            console.log('BAD Verification!!!!!!!!!!!!!!!!!!!!!')
+        }
+
+        /*fetch('/api/getVerification', {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
         })
         .then(res => res.json())
         .then((response) => {
+            console.log('in verification')
             console.log(response)
             if (data.get('Verification') === response.verification) {
                 const context = this.context;
@@ -59,7 +93,7 @@ class VerificationCheck extends React.Component {
                 this.setState({ badVerifcation: true })
                 console.log('BAD Verification!!!!!!!!!!!!!!!!!!!!!')
             }
-        })
+        })*/
     }
 
     render() {
