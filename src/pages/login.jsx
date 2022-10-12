@@ -13,8 +13,8 @@ const Login = (props) => {
     }
   }, [props.user]);
   return (
-    <Container id="login" style={{display: 'flex', flexDirection: 'column', maxWidth: 'fit-content', alignItems: 'center'}}>
-        <h1 style={{margin: '1rem'}}>Welcome to GoataShop!</h1>
+    <Container id="login" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+        <h1 style={{margin: '1rem', fontWeight: 'bold'}}>Welcome to GoataShop!</h1>
         <img src={gompei} alt="BigCo Inc. logo"/>
         <a href="/auth/outlook">
           <Button style={{width: '15rem', height: '5rem', borderRadius: '1rem', backgroundColor: '#ac2b37', color: 'white', margin: '1rem', border: '0'}}>

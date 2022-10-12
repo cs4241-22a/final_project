@@ -175,8 +175,7 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
   productCollection
     .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
-      if (result)
-      {
+      if (result) {
         console.log("found product");
       }
       productCollection
@@ -188,18 +187,15 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
 });
 //edit
 app.patch("/listing/:id", ensureAuthenticated, (req, res) => {
-  console.log("Editing")
-  console.log(req.params.id)
+  console.log("Editing");
+  console.log(req.params.id);
   productCollection
-    .findOne({ _id:mongodb.ObjectId(req.params.id) })
+    .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
-      if (result)
-      {
+      if (result) {
         console.log("found product");
-      }
-      else
-      {
-        console.log("can't find it"); 
+      } else {
+        console.log("can't find it");
       }
       productCollection
         .updateOne(
@@ -214,9 +210,9 @@ app.patch("/listing/:id", ensureAuthenticated, (req, res) => {
             },
           }
         )
-        .then((result) => 
-        {
-          res.json(result)});
+        .then((result) => {
+          res.json(result);
+        });
     });
 });
 
@@ -255,9 +251,14 @@ app.get(
   }
 );
 
-app.get("/logout", ensureAuthenticated, function (req, res) {
-  req.logout();
-  res.redirect("/login");
+app.post("/logout", ensureAuthenticated, function (req, res, next) {
+  console.log(req);
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/home");
+  });
 });
 
 function ensureAuthenticated(req, res, next) {

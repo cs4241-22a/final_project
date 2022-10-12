@@ -39,7 +39,7 @@ function App() {
         <Route path='/listings' element={<Listings getUser={getUser} user={user}/>} />
         <Route path='/goal' element={<Goal />} />
         <Route path='/login' element={<Login getUser={getUser} user={user}/>} />
-        <Route path='/logout' element={<Logout />} />
+        <Route path='/logout' element={<Logout getUser={getUser} user={user}/>} />
       </Routes>
       {/* <Footer /> */}
     </Router>
