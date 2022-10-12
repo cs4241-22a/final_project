@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import gompei from '../../public/gompei.png';
-import Popup from '../components/DetailPopup';
 
 const Shop = (props) => {
 
@@ -15,28 +14,20 @@ const navigate = useNavigate();
 
 useEffect(() => {
   props.getUser()
+  console.log(!props.user.name)
   if (!props.user.name) {
     navigate('/login');
   }
   else {
+    navigate('/shop')
     fetch("/getAllProducts", {
       method: "GET",
     }).then(async (response) => {
     let res = await response.json()
     setProducts(res)
-  }).then(fetch("/shop", {
-    method:"GET"
-  }))
-  }
+  })}
   
 }, [])
-
-//Popup stuff
-const [isOpen, setIsOpen] = useState(false);
-
-const togglePopup = () => {
-  setIsOpen(!isOpen);
-}
 
   return (
     <div
@@ -46,15 +37,16 @@ const togglePopup = () => {
         alignItems: 'Left',
         height: '100vh',
         padding: '2%'
-      }}>
-
+      }}
+    >
       <h1>The GoataShop</h1>
       <div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
 
-      <Row m={1} md={3} className="g-4">
+      <Row md={4} className="g-4">
       {products.map(product => 
+     
       <Col>
-      <Card style={{ width: '18rem' }} onClick = {togglePopup}>
+      <Card style={{ width: '18rem' }}>
         <Row>
           <Col>
       <Card.Img variant="top" src={gompei} />
@@ -75,14 +67,6 @@ const togglePopup = () => {
        )}    </Row>
 
     </div>
-
-       {isOpen && <Popup
-        content={<>
-          <img src={gompei} />
-        </>}
-        handleClose={togglePopup}
-      />}
-
     </div>
   );
 };

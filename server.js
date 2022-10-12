@@ -108,7 +108,6 @@ app.get("/login", (req, res) => {
 //Website Page
 app.get("/home", ensureAuthenticated, (req, res) => {
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
-  console.log(res);
 });
 
 app.get("/shop", ensureAuthenticated, (req, res) => {
@@ -152,7 +151,6 @@ app.get("/getListings", ensureAuthenticated, (req, res) => {
     .find({ userid: req.user._json.Id })
     .toArray()
     .then((result) => {
-      console.log(result);
       res.json(result);
     });
 });
@@ -167,6 +165,7 @@ app.post("/addListing", ensureAuthenticated, (req, res) => {
       category: req.body.category,
       description: req.body.description,
       price: req.body.price,
+      img: req.body.pic,
     })
     .then((result) => res.json(result));
 });

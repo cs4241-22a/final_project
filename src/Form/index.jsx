@@ -1,8 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export const Form = ({ onSubmit }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  function getBinaryFromFile(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => resolve(reader.result));
+        reader.addEventListener("error", err => reject(err));
+
+        reader.readAsBinaryString(file);
+    });
+    
+}
   return (
     <form onSubmit={onSubmit}>
+    <div>
+      <h1>Upload and Display Image usign React Hook's</h1>
+      {selectedImage && (
+        <div>
+        {/* <img alt="not found" width={"250px"} src={URL.createObjectURL(selectedImage)} /> */}
+        <br />
+        <button onClick={()=>setSelectedImage(null)}>Remove</button>
+        </div>
+      )}
+      <br />
+     
+      <br /> 
+      <div className="form-group">
+      <input
+        id="audio-upload"
+        className='form-control'
+        type="file"
+         accept=".jpg,.png"
+         onchange="previewFile()"
+      />
+      
+    </div>
+    </div>        
+          
       <div className="form-group">
         <label htmlFor="name">Product Name</label>
         <input 

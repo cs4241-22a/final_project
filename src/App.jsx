@@ -39,7 +39,7 @@ function App() {
         <Route path='/login' element={<Login getUser={getUser} user={user}/>} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
   }
