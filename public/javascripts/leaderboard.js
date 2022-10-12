@@ -139,7 +139,7 @@ window.onload = function() {
             
             userCell.innerHTML = "Username";
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
-            scoreCell.innerHTML = "Total Time";
+            scoreCell.innerHTML = "Average Time";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
 
 
