@@ -15,6 +15,7 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var gamesRouter = require('./routes/games');
 var scoresRouter = require('./routes/scores');
+const { Timestamp, Int32 } = require('mongodb');
 
 var app = express();
 
@@ -22,7 +23,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env['URI'])
     .then(() =>  console.log('Connected to MongoDB'))
     .catch((err) => console.error(err));
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

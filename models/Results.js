@@ -21,6 +21,10 @@ ResultsSchema.statics.getAllResultsForGame = function(game) {
     return this.find({game_type: game})
 }
 
+ResultsSchema.statics.getTopResultsForGame = function(game_type, n_scores) {
+    return this.find({game_type: game_type}).sort({score: "desc"}).limit(n_scores)
+}
+
 ResultsSchema.statics.getResultsForUserId = function(user_id) {
     return this.find({owner_id: user_id})
 }
