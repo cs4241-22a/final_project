@@ -146,8 +146,8 @@ app.get('/addrecipe', (req, res) => {
 });
 
 app.get("/getUser", (req, res) => {
-    if (req.session.login && req.session.username != null) { res.end(JSON.stringify(req.session.username)); }
-    else res.status(401).send();
+    if (req.session.login && req.session.username != null) { res.send({ "result": req.session.username }); }
+    else res.send({ "result": false });
 })
 
 // middleware for authentication; should only affect the data modification routes

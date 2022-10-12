@@ -123,20 +123,16 @@ class App extends React.Component {
             },
         })
         .then(response => {
-            if (!response.ok) { // should mean not logged in
-                return false;
-            }
-            else return response.json()
+            return response.json()
         })
         .then(data => {
-            this.setState({ user: data })
+            this.setState({ user: data.result })
         })
     }
 
     render() {
         return (
             <div className="App">
-                {/* todo: set loggedIn based off of if there's a current user. accountButtons is true on main page, false on login + register */}
                 <Header accountButtons={true} loggedIn={this.state.user != false} />
                 <body id='basic'>
                     <Table items={this.state.recipes} />

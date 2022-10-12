@@ -97,12 +97,9 @@ class App extends React.Component {
         "Content-Type": "application/json"
       }
     }).then((response) => {
-      if (!response.ok) {
-        return false;
-      } else
-        return response.json();
+      return response.json();
     }).then((data) => {
-      this.setState({user: data});
+      this.setState({user: data.result});
     });
   }
   render() {
