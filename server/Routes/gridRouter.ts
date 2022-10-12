@@ -10,14 +10,14 @@ const grid = Array<ICell>(GRIDSIZE);
  */
 const router = express.Router();
 
-router.get("/", (req:Request, res:Response)=>{
-  if(grid[0] === undefined){
-    populateArray()
+router.get("/", (req: Request, res: Response) => {
+  if (grid[0] === undefined) {
+    populateArray();
   }
-  res.send('hello')
-})
+  res.send("hello");
+});
 
-async function populateArray(){
+async function populateArray() {
   await Cell.find({}, (error: any, docs: ICell[]) => {
     //if there are not the right number of cells in the DB
     if (docs.length < GRIDSIZE) {
@@ -26,7 +26,7 @@ async function populateArray(){
         grid[i] = new Cell({ index: i });
       }
       //overwrite the grid collection in the DB with the server representation
-      Cell.deleteMany({})
+      Cell.deleteMany({});
       Cell.insertMany(grid).then(() => {
         console.log("a ton of new entries in the DB");
       });
@@ -40,13 +40,12 @@ async function populateArray(){
   }).clone(); //cloning makes the query repeatable
 }
 
-
 router.post("/updateCell", (req: Request, res: Response) => {
   req.on("data", (data) => {
     data = JSON.parse(data);
     grid[data.index].emoji = data.emoji;
     grid[data.index].timeStamp = new Date(Date.now());
-    grid[data.index].user = req.session.user!._id;
+    grid[data.index].user = "";
     updateCell(new Cell({ ...grid[data.index] }));
   });
 });
