@@ -2,6 +2,8 @@
 
 The following scenarios test if the web application can handle higher user numbers and database accesses.
 
+For the Tests I generated a random dataset. We want dynamic data so that all users don't play the same and we end up with a behavior completely different from the live system (caching, JIT...)
+
 ### 1. LoadTest
         tests if 100 users can load, write and remove data simultaneosly 
         -> was able to handle all 400 requests in 9seconds (50% in t<800ms)
