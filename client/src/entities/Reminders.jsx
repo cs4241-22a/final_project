@@ -41,7 +41,7 @@ class Reminders extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: 0,
+            open: false,
             data: {name: "", description: ""},
             image:'',
             returnImage:''
