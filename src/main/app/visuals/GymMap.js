@@ -6,9 +6,10 @@ export default class GymMap
     {
         //Selecting the parent div
         this.svgContainer = d3.select(document.getElementById(parentDivID))
-
+        this.d3 = d3
         this._loadSvg()
         this._TOTAL_SECTIONS = 6
+        this._HIGHLIGHT_COLOR = "rgba(152,255,152,0.5)"
 
     }
 
@@ -21,7 +22,6 @@ export default class GymMap
         d3.svg("./gym_map.svg")
         .then(data => {
             d3.select("#gymMap").node().append(data.documentElement)
-            //d3.select("#gymMap").select("#zone2").style("fill", "red")
         })
     }
 
@@ -35,9 +35,11 @@ export default class GymMap
         let sectionColors = []
         for(let i = 0; i < this._TOTAL_SECTIONS; i++)
             sectionColors[i] = "white"
+        
+        //Set selected section colors
+        sectionsSelected.forEach(section => sectionColors[section] = this._HIGHLIGHT_COLOR)
 
-        sectionsSelected.forEach(section => sectionColors[section] = "red")
-
+        //update svg colors
         for(let section = 0; section < this._TOTAL_SECTIONS; section++){
             d3.select("#gymMap").select(`#section${section}`).style("fill", sectionColors[section])
         }
