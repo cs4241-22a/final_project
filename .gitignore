@@ -21,10 +21,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 .vscode/
 
 # Ignore compiled javascript
 server/*.js
 
+server/Routes/*.js
+
 # Environment file
 .env
+
+# Environment file
+/.env
+./.env
