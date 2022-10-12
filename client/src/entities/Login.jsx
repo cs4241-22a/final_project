@@ -12,9 +12,10 @@ import {withRouter} from './withRouter'
 const theme = createTheme();
 
 class Login extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleCreate = this.handleCreate.bind(this)
     }
 
     handleSubmit(event) {
@@ -31,6 +32,11 @@ class Login extends React.Component {
                 this.props.navigate('/verification')
             }
         })
+    }
+
+    handleCreate(event) {
+        event.preventDefault()
+        this.props.navigate('/create')
     }
 
     render() {
@@ -70,7 +76,6 @@ class Login extends React.Component {
                             id="password"
                             autoComplete="current-password"
                             />
-                            <Link href='/create'>{"Create Account"}</Link>
                             <Button
                             type="submit"
                             fullWidth
@@ -80,6 +85,17 @@ class Login extends React.Component {
                             Login
                             </Button>
                         </Box>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            onClick={(e) => {
+                                this.handleCreate(e)
+                            }}
+                        >
+                            Create Account
+                        </Button>
                     </Box>
                 </Container>
             </ThemeProvider>
