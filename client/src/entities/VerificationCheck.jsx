@@ -7,10 +7,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {withRouter} from './withRouter'
+import { MainContext } from '../MainContext';
 
 const theme = createTheme();
 
 class VerificationCheck extends React.Component {
+    static contextType = MainContext;
+    state = {
+        profile: null,
+    }
+
     constructor() {
         super()
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,8 +35,14 @@ class VerificationCheck extends React.Component {
         .then((response) => {
             console.log(response)
             if (data.get('Verification') === response.verification) {
+                const context = this.context;
+                const profileData = {
+                    name: response.username
+                }
+                context.setProfile(profileData);
+
                 if (response.type === 'login') {
-                    this.props.navigate('/home')
+                    this.props.navigate('/main')
                     /*fetch('/api/actuallogin', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -49,7 +61,7 @@ class VerificationCheck extends React.Component {
                                             password: response.password })
                     }).then((response) => {
                         if (response.status === 200) {
-                            this.props.navigate('/home')
+                            this.props.navigate('/main')
                         }
                     })
                 }

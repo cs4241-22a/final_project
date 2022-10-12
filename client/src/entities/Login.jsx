@@ -28,7 +28,7 @@ class Login extends React.Component {
                                     type: 'login' })
         }).then((response) => {
             if (response.status === 200) {
-                //this.props.navigate('/verification')
+                this.props.navigate('/verification')
             }
         })
     }

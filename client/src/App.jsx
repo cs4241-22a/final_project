@@ -34,13 +34,13 @@ class App extends React.Component {
     super(props)
   }
 
+  setProfile = (profile) => {
+    this.setState({ profile })
+  }
+
   state = { 
     profile: null,
     setProfile: this.setProfile
-  }
-
-  setProfile = (profile) => {
-    this.setProfile({ profile })
   }
 
   render() {

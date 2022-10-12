@@ -1,25 +1,18 @@
-import ReactDOM, { render } from "react-dom";
-import { styled, Avatar, Fab, AppBar, Typography, Toolbar, Grid, Box, Button, TextField, TableBody, TableRow, TableCell, TableContainer, Table, Paper, TableHead } from '@mui/material';
-import Modal from '@mui/material/Modal';
-import { rootShouldForwardProp } from "@mui/material/styles/styled";
+import { AppBar, Typography, Toolbar, Grid, Box, Button, TextField } from '@mui/material';
 import BasicPost from "./post";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {Image} from 'cloudinary-react'
 import axios from 'axios';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { blue } from '@mui/material/colors';
 
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
+import { MainContext } from '../MainContext';
+import {withRouter} from './withRouter'
 
 const url = 'api.cloudinary.com/v1_1/deuj95ephL/image/upload';
 const preset = 'images';
@@ -48,6 +41,8 @@ const centerStyle = {
 const blogs = []
 
 class Reminders extends React.Component {
+    static contextType = MainContext;
+
     constructor(props) {
         super(props)
         this.state = {
@@ -58,11 +53,27 @@ class Reminders extends React.Component {
             description: '',
             image:'',
             returnImage:'',
-            currentBlogs: []
+            currentBlogs: [],
+            name: ''
+        }
+        this.checkAuth = this.checkAuth.bind(this)
+    }
+
+    checkAuth() {
+        if (this.context.profile == null || this.context.profile == undefined) {
+            console.log('here mate')
+            this.props.navigate('/login')
+            this.setState({name: null})
+        } else {
+            this.setState({name: this.context.profile.name.split("@")[0]})
         }
     }
 
     componentDidMount() {
+        this.getAllBlogs()
+    }
+
+    getAllBlogs = () => {
         fetch('/api/getblogs', {
             method: 'GET'
         })
@@ -70,6 +81,7 @@ class Reminders extends React.Component {
         .then(response => {
             this.setState({currentBlogs: response})
             console.log(this.state.currentBlogs)
+            this.checkAuth()
         })
     }
 
@@ -98,8 +110,6 @@ class Reminders extends React.Component {
             //this.setState({returnImage: response.data.url})
             //console.log(response)
         });
-        
-        
         //console.log(this.state.title)
         //console.log(this.state.description)
         //console.log(this.state.date)
@@ -149,7 +159,7 @@ class Reminders extends React.Component {
                     <AppBar position="static">
                         <Toolbar variant="dense">
                             <Typography variant="h6" color="inherit" component="div">
-                                Blogger
+                                Blogger - Logged in as: {this.state.name}
                             </Typography>
                         </Toolbar>
                     </AppBar>
@@ -329,6 +339,6 @@ class Reminders extends React.Component {
     };*/
 }
 
-export default Reminders;
+export default withRouter(Reminders);
 
 
