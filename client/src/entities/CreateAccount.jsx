@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {withRouter} from './withRouter'
 
@@ -23,13 +24,10 @@ class CreateAccount extends React.Component {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: data.get('email'),
-                                   password: data.get('password') })
+                                   password: data.get('password'),
+                                   type: 'create' })
         }).then((response) => {
             if (response.status === 200) {
-                //console.log('succesfully posted delete')
-                //this.updateTable()
-                
-
                 this.props.navigate('/verification')
             }
         })
@@ -72,13 +70,14 @@ class CreateAccount extends React.Component {
                     id="password"
                     autoComplete="current-password"
                     />
+                    <Link href='/login'>{"Have an account? Login Here!"}</Link>
                     <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     >
-                    Sign In
+                    Create Account
                     </Button>
                 </Box>
                 </Box>

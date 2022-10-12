@@ -29,16 +29,30 @@ class VerificationCheck extends React.Component {
         .then((response) => {
             console.log(response)
             if (data.get('Verification') === response.verification) {
-                fetch('/api/createUserDatabase', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: response.body.username,
-                                        password: response.body.password })
-                }).then((response) => {
-                    if (response.status === 200) {
-                        this.props.navigate('/home')
-                    }
-                })
+                if (response.type === 'login') {
+                    this.props.navigate('/home')
+                    /*fetch('/api/actuallogin', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: response.username,
+                                            password: response.password })
+                    }).then((response) => {
+                        if (response.status === 200) {
+                            
+                        }
+                    })*/
+                } else {
+                    fetch('/api/createUserDatabase', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: response.username,
+                                            password: response.password })
+                    }).then((response) => {
+                        if (response.status === 200) {
+                            this.props.navigate('/home')
+                        }
+                    })
+                }
             } else {
                 this.setState({ badVerifcation: true })
                 console.log('BAD Verification!!!!!!!!!!!!!!!!!!!!!')

@@ -26,6 +26,7 @@ console.log(process.env.HOST)
 // CONNECT TO DATABASE
 let username
 let password
+let type
 
 let usersDB
 let postsDB
@@ -42,22 +43,96 @@ const connect = async () => {
     console.error(e)
   }
 
-  usersDB = client.db("webware").collection("users")
-  postsDB = client.db("webware").collection("posts")
-  //console.log(remindersDB)
+  //usersDB = client.db("webware").collection("users")
+  //postsDB = client.db("webware").collection("posts")
+  usersDB = client.db("blog").collection("users")
+  postsDB = client.db("blog").collection("posts")
+  //console.log(usersDB)
 }
 
 connect()
 
-let verificationCode
 
-app.post('/api/createUserDatabase', (req, res) => {
+
+// POST BLOG ONTO DATABASE
+app.post('/api/postblog', async (req, res) => {
   console.log(req.body)
+  await postsDB.insertMany([req.body])
+  res.writeHead(200, "OK", {'Content-Type': 'application/json'})
+  res.end()
+  //console.log(req.body)
 })
 
+// GET ALL POSTS
+app.get('/api/getblogs', async (req, res) => {
+  console.log('getting user data!')
+  const output = await postsDB.find({ }).toArray()
+  console.log(output)
+  res.writeHeader(200, {'Content-Type': 'application/json'})
+  res.end(JSON.stringify(output))
+})
+
+let verificationCode
+
+// LOGIN
+app.post('/api/login', async (req, res) => {
+  let error = false
+  await usersDB.findOne({'name': req.body.name, 'password': req.body.password}).then(data => {
+    if (data === null) {
+      res.writeHead(404, "Username or Password Wrong", {'Content-Type': 'application/json'})
+      res.end()
+      error = true
+    } else {
+      res.writeHead(200, "OK", {'Content-Type': 'application/json'})
+      res.end()
+    }
+  })
+
+  if (!error) {
+    let result = ""
+
+    for (let i = 0; i <= 5; i++) {
+      result += Math.floor(Math.random() * 10).toString()
+    }
+    verificationCode = result
+
+    const message = {
+      from: "blogposter323@gmail.com",
+      to: req.body.name,
+      subject: "Blog Poster Verification Code",
+      text: ("Your Verification code is: " + result)
+    }
+    
+    transport.sendMail(message, (err, info) => {
+      if (err) {
+        console.log(err)
+        res.writeHead(404, "Email Error", {'Content-Type': 'application/json'})
+        res.end()
+      } else {
+        console.log(info)
+        username = req.body.name // delete later????
+        password = req.body.password
+        type = req.body.type
+        res.writeHead(200, "OK", {'Content-Type': 'application/json'})
+        res.end()
+      }
+    })
+  }
+});
+
+// VERIFICATION CODE
 app.get('/api/getVerification', (req, res) => {
   res.writeHeader(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({'verification': verificationCode, 'username': username, 'password': password}))
+  res.end(JSON.stringify({'verification': verificationCode, 'username': username, 'password': password, 'type': type}))
+})
+
+// CREATE NEW ACCOUNT
+app.post('/api/createUserDatabase', async (req, res) => {
+  console.log(req.body)
+  await usersDB.insertMany([req.body])
+  res.writeHead(200, "OK", {'Content-Type': 'application/json'})
+  res.end()
+  //console.log(req.body)
 })
 
 app.post('/api/createuser', (req, res) => {
@@ -84,8 +159,9 @@ app.post('/api/createuser', (req, res) => {
       res.end()
     } else {
       console.log(info)
-      username = req.body.name
+      username = req.body.name // delete later????
       password = req.body.password
+      type = req.body.type
       res.writeHead(200, "OK", {'Content-Type': 'application/json'})
       res.end()
     }
