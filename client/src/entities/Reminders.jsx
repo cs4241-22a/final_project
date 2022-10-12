@@ -37,7 +37,8 @@ class Reminders extends React.Component {
             image:'',
             returnImage:'',
             currentBlogs: [],
-            name: ''
+            name: '',
+            localImage: ''
         }
         //this.checkAuth = this.checkAuth.bind(this)
         this.goToLogin = this.goToLogin.bind(this)
@@ -234,12 +235,17 @@ class Reminders extends React.Component {
                         <Typography variant="h6">
                             {this.state.image.name}
                         </Typography>
+                        <img id="preview" src={this.state.localImage}> 
+                        </img>
                         <input
                             style={{ display: "none" }}
                             id="contained-button-file"
                             type="file"
                             name="image" onChange={(e) => {
+                                if (e.target.files[0] != null) {
+                                this.setState({localImage: URL.createObjectURL(e.target.files[0])})
                                 this.setState({image: e.target.files[0]})
+                                }
                                 console.log(e.target.files[0])
                             }}
                         />
