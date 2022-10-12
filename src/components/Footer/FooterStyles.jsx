@@ -3,13 +3,14 @@ import styled from 'styled-components';
 export const Box = styled.div`
 padding: 1rem;
 background: black;
-position: fixed;
+position: relative;
 left:0;
 bottom:0;
 right:0;
 width: 100%;
 max-height: fit-content;
-
+overflowY: scroll;
+overflowX: scroll;
 @media (max-width: 1000px) {
 	padding: 1rem;
 }

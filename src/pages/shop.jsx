@@ -33,10 +33,12 @@ useEffect(() => {
 
 //Popup stuff
 const [isOpen, setIsOpen] = useState(false);
+const [product, setProduct] = useState([]);
 
-const togglePopup = () => {
+function togglePopup(product) {
   setIsOpen(!isOpen);
-}
+  setProduct(product);
+};
 
   return (
     <div
@@ -44,7 +46,6 @@ const togglePopup = () => {
         display: 'block',
         justifyContent: 'Left',
         alignItems: 'Left',
-        height: '100vh',
         padding: '2%'
       }}>
 
@@ -54,7 +55,7 @@ const togglePopup = () => {
       <Row m={1} md={3} className="g-4">
       {products.map(product => 
       <Col>
-      <Card style={{ width: '18rem' }} onClick = {togglePopup}>
+      <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
         <Row>
           <Col>
       <Card.Img variant="top" src={gompei} />
@@ -75,16 +76,20 @@ const togglePopup = () => {
        )}    </Row>
 
     </div>
-
-       {isOpen && <Popup
-        content={<>
-          <img src={gompei} />
-        </>}
-        handleClose={togglePopup}
-      />}
+    )}
+        
+    {isOpen && <Popup
+      content={<>
+        <img src={gompei}/>
+        <h1>{product.name}</h1>
+        <h3>${product.price}</h3>
+        <p>{product.description}</p>
+      </>}
+      handleClose={togglePopup}
+    />}
 
     </div>
   );
 };
-  
+
 export default Shop;

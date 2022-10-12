@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
+import logo from '../../public/goat.gif'
 
 const Home = (props) => {
   const navigate = useNavigate();
@@ -17,12 +18,14 @@ const Home = (props) => {
         justifyContent: 'Left',
         alignItems: 'Left',
         height: '100vh',
-        padding: '2%'
+        padding: '2%',
+        backgroundImage: `url(${logo})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
       }}
     >
-      <h1>Welcome to GoataShop</h1>
-      <h2>For when you really GoataShop</h2>
-      <p>{props.user.name}</p>
+      <span><h1 style={{backgroundColor: '#AC2B37'}}>Welcome {props.user.name} to GoataShop</h1></span>
+      <span><h2 style={{backgroundColor: '#AC2B37'}}>For when you really GoataShop</h2></span>
     </div>
   );
 };
