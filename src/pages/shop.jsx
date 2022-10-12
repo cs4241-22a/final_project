@@ -44,7 +44,6 @@ const togglePopup = () => {
         display: 'block',
         justifyContent: 'Left',
         alignItems: 'Left',
-        height: '100vh',
         padding: '2%'
       }}>
 
