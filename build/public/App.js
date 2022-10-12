@@ -19,6 +19,19 @@ class Table extends React.Component {
   }
 }
 class App extends React.Component {
+  getUser = async () => {
+    const user = await fetch("/getUser", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      this.state.user = data.result;
+    });
+    return user;
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +87,7 @@ class App extends React.Component {
           user: "test2"
         }
       ],
-      user: false
+      user: this.getUser()
     };
     console.log("State:");
     console.log(this.state);
@@ -90,16 +103,6 @@ class App extends React.Component {
       this.setState({...this.state, recipes: [...this.state.recipes, ...res]});
       console.log("Current state");
       console.log(this.state);
-    });
-    fetch("/getUser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((response) => {
-      return response.json();
-    }).then((data) => {
-      this.setState({user: data.result});
     });
   }
   render() {
