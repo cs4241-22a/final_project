@@ -91,6 +91,12 @@ window.onload = function() {
             scoreCell.innerHTML = "Average Time";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
 
+            // var length = 10;
+            // if(response.length < 10)
+            // {
+            //     length = response.length;
+            // }
+
             for(let i = 0; i < response.length; i++)
             {
                 var row = table.insertRow(1);
@@ -147,6 +153,12 @@ window.onload = function() {
             userCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
             scoreCell.innerHTML = "Time";
             scoreCell.style = "padding-left: 30px;padding-right: 40px;font-weight: bold;";
+
+            // var length = 10;
+            // if(response.length < 10)
+            // {
+            //     length = response.length;
+            // }
 
             for(let i = 0; i < response.length; i++)
             {
