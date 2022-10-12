@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 
@@ -9,29 +9,35 @@ const container = {
 };
 
 export type PixelProps = {
+  initEmoji: string;
+  initUser: string;
   size: number;
-  activeEmoji: string;
-  zoomToElement: Function;
+  setActiveElement: Function;
+  index: number;
 };
 
-export function Pixel({ size, activeEmoji, zoomToElement }: PixelProps) {
-  const [emoji, setEmoji] = useState("");
-
+export function Pixel({
+  initEmoji,
+  initUser,
+  size,
+  setActiveElement,
+  index,
+}: PixelProps) {
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    zoomToElement(event.currentTarget);
+    setActiveElement(event.currentTarget);
   }
 
   return (
     <Box
       display="flex"
       alignItems="center"
+      component="div"
       justifyContent="center"
       width={size}
       height={size}
       onClick={update}
       sx={container}
-    >
-      <Emoji unified={emoji} size={size * 0.8} />
-    </Box>
+      id={`${index}`}
+    ></Box>
   );
 }
