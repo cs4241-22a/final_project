@@ -104,27 +104,26 @@ app.get('/loginStatus', (req,res) => {
 
 // Sends json array of all documents in the collection specified by req.body.name
 app.post('/collDocs', (req,res) => {
-  // db.collection(req.body.name).find({ }).toArray()
-  // .then(result => res.json(result));
-  res.json([{name:"Hugh"}, {name:"Jass"}])
+  db.collection(req.body.name).find({ }).toArray()
+  .then(result => res.json(result));
 });
 
 // Add a document to the relative collection containing req.body
 app.post('/addPost', (req,res) => {
-  db.collection("Post").insertOne(req.body).then(result => res.json(result))
+  db.collection("posts").insertOne(req.body).then(result => res.json(result))
 });
 app.post('/addResp', (req,res) => {
-  db.collection("Response").insertOne(req.body).then(result => res.json(result))
+  db.collection("responses").insertOne(req.body).then(result => res.json(result))
 });
 
 // Delete a document from the relative collection specified by its _id
 app.post('/deletePost', (req,res) => {
-  db.collection("Post")
+  db.collection("posts")
     .deleteOne({_id: ObjectId(req.body._id)})
     .then(result => res.json(result))
 })
 app.post('/deleteResp', (req,res) => {
-  db.collection("Response")
+  db.collection("responses")
     .deleteOne({ _id: ObjectId(req.body._id)})
     .then(result => res.json(result))
 })
@@ -132,15 +131,24 @@ app.post('/deleteResp', (req,res) => {
 
 // Update a document in the relative collection with data passed into req.body
 app.post('/updatePost', (req,res) => {
-  db.collection("Post")
+  db.collection("posts")
     .updateOne(
       {_id: ObjectId(req.body._id)},
       {$set: {user: req.body.user, comment: req.body.comment, responses: req.body.responses}}
     )
     .then(result => res.json(result))
 })
+app.post('/updatePostNewResponse', (req, res) => {
+  console.log(JSON.stringify(req.body.responseid))
+  db.collection("posts")
+    .updateOne(
+      {_id: ObjectId(req.body._id)},
+      {$push: {responses: req.body.responseid}}
+    )
+    .then(result => res.json(result))
+})
 app.post('/updateResp', (req,res) => {
-  db.collection("Response")
+  db.collection("responses")
     .updateOne(
       {_id: ObjectId(req.body._id)},
       {$set: {user: req.body.user, song: req.body.song, artist: req.body.artist, comment: req.body.comment}}
