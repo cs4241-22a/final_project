@@ -40,11 +40,13 @@ class Reminders extends React.Component {
     }
 
     componentDidMount() {
+        console.log('component mounted')
         this.getAllBlogs()
     }
-
-    async getAllBlogs() {
-        /*fetch('/api/getblogs', {
+    
+    getAllBlogs = () => {
+        console.log('about to get')
+        fetch('/api/getblogs', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -52,14 +54,7 @@ class Reminders extends React.Component {
             this.setState({currentBlogs: response})
             console.log(this.state.currentBlogs)
             //this.checkAuth()
-        })*/
-
-        const response = await fetch('/api/getblogs', {
-            method:'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-        const json = await response.json();
-        this.setState({currentBlogs: json})
+        }).catch(console.log)
     }
 
     uploadImage = () => {
