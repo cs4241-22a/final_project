@@ -1,0 +1,46 @@
+{
+  
+  "name": "final_project",
+  
+  "version": "1",
+  
+  "description": "",
+  
+  "main": "index.js",
+  
+  "scripts": {
+  
+    
+  "build": "webpack"
+  
+  },
+  
+  "keywords": [],
+  
+  "author": "",
+  
+  "license": "ISC",
+  
+  "devDependencies": {
+  
+    
+  "webpack": "^5.74.0",
+  
+    
+  "webpack-cli": "^4.10.0"
+  
+  },
+  
+  "dependencies": {
+  
+    
+  "loadash": "^1.0.0",
+  
+    
+  "svelte": "^3.51.0",
+  
+    
+  "svelte-loader": "^3.1.3"
+  
+  }
+}
