@@ -15,10 +15,10 @@ Node.js will be used to connect to the javascript requests, and will be implemen
 
 Some of the technologies we took advantage of included MongoDB and Cloudinary. MongoDB was helpful for our posts for users while the Cloudinary was necessary for posting images/photos to our blogger. Cloudinary was the most challenging part of the project since we have to understand how to make use of the key and ID (many tutorials were outdated). In the end, we were successful with the implementation
 
-Group members and tasks:
-Miles- Server implementation and two factor authentication
-Zaq-   Back end and front end development
-Jacob- Cloudinary Cloud Storage, MongoDB database, and README
+## Group members and tasks:<br>
+Miles- Server implementation and two factor authentication<br>
+Zaq-   Back end and front end development<br>
+Jacob- Cloudinary Cloud Storage, MongoDB database, and README<br>
 
 
 ## Technical Achievements
