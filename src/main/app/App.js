@@ -61,6 +61,8 @@ export default class App
 
         //Sets the interactive map section highlights
         this.gymMap.updateHighlightedSections(this.filteredClimbManager.getSectionsOfClimbs())
+
+        this.populateClimbsList(this.filteredClimbManager.filteredRoutes)
     }
 
      /**
@@ -74,6 +76,36 @@ export default class App
         const gradesFilter = document.getElementById('grades');
         routeGrades.forEach(grade => {
             gradesFilter.options[gradesFilter.options.length] = new Option(grade, grade)
+        })
+    }
+
+    populateClimbsList(climbs) {
+        const table = document.getElementById("climbsTable");
+
+        console.log("Got table: " + table)
+
+        const rowCount = table.rows.length;
+        for (let i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i);
+        }
+
+        climbs.forEach(function(x) {
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            const row = table.insertRow(-1);
+
+// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            const newGradeCell = row.insertCell(0);
+            const newColorCell = row.insertCell(1);
+            const newSectionCell = row.insertCell(2);
+
+// Add some text to the new cells:
+            newGradeCell.innerHTML = x.grade;
+            newColorCell.innerHTML = x.color;
+            newColorCell.style.background = x.color;
+            if (x.color === "Black") {
+                newColorCell.style.color = "White";
+            }
+            newSectionCell.innerHTML = x.section;
         })
     }
     /*
