@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
-import { IndeterminateCheckBox } from "@mui/icons-material";
 
 const container = {
   "&:hover": {
@@ -17,7 +16,7 @@ export type PixelProps = {
   index: number;
 };
 
-export function Pixel({
+function Pixel({
   initEmoji,
   initUser,
   size,
@@ -29,6 +28,7 @@ export function Pixel({
 
   function update(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     setActiveElement(event.currentTarget);
+    console.log(index);
   }
 
   return (
@@ -47,3 +47,5 @@ export function Pixel({
     </Box>
   );
 }
+
+export const PixelMemo = React.memo(Pixel);

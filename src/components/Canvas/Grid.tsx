@@ -1,5 +1,5 @@
 import React from "react";
-import { Pixel } from "./Pixel";
+import { PixelMemo } from "./Pixel";
 
 export type GridProps = {
   grid: string[];
@@ -12,14 +12,14 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
   return (
     <React.Fragment>
       {grid.map((e, i) => (
-        <Pixel
+        <PixelMemo
           key={i}
           index={i}
           initEmoji=""
           initUser=""
           size={size}
           setActiveElement={setActiveElement}
-        ></Pixel>
+        ></PixelMemo>
       ))}
     </React.Fragment>
   );
