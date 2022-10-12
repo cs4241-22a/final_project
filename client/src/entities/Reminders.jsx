@@ -61,10 +61,12 @@ class Reminders extends React.Component {
     }*/
 
     componentDidMount() {
+        console.log('component mounted')
         this.getAllBlogs()
     }
 
     getAllBlogs = () => {
+        console.log('about to get')
         fetch('/api/getblogs', {
             method: 'GET'
         })
@@ -73,7 +75,7 @@ class Reminders extends React.Component {
             this.setState({currentBlogs: response})
             console.log(this.state.currentBlogs)
             //this.checkAuth()
-        })
+        }).catch(console.log)
     }
 
     uploadImage = () => {
