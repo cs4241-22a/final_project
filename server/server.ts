@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import {WebSocketServer} from "ws";
 import http from "http";
 import EventEmitter from "events";
+import {CellOperation} from "./serverDataTypes";
 
 // load .env file
 dotenv.config();
@@ -13,7 +14,7 @@ const defaultPort = '3000';
 
 // Current Canvas
 const canvasSize = 50;
-const canvas= <ICell[]>Array.from({length: canvasSize*canvasSize})
+const canvas = <ICell[]>Array.from({length: canvasSize*canvasSize})
 	.fill(<ICell>{user: undefined, timeStamp: new Date(), emoji: ''});
 
 // Pixel updated event
@@ -30,8 +31,14 @@ wss.on('connection', (ws) => {
 	console.log("New Client connected");
 
 	ws.on('message', (message) => {
-		console.log(`Got message: ${message}`);
-		ws.send(`Got message: ${message}`);
+		const operation = <CellOperation>JSON.parse(message.toString());
+
+		console.log(`Got message:`);
+		console.log(operation);
+
+		canvas[operation.index] = operation.newCell;
+
+		console.log(canvas);
 	});
 
 	ws.on('close', event => {

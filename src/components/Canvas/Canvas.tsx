@@ -9,6 +9,8 @@ import { ActiveEmoji } from "./ActiveEmoji";
 import { GridMemo } from "./Grid";
 import socket, {initSocket} from "../../util/SocketConnection";
 import {PixelProps} from "./Pixel";
+import {ICell} from "../../../server/DB_Schema/cellSchema";
+import {CellOperation} from "../../../server/serverDataTypes";
 
 export type CanvasProps = {
   canvasSize?: number;
@@ -28,16 +30,13 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
   initSocket();
 
   function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    setChosenEmoji(activeEmoji);
-
-    // @ts-ignore
-    const currentPixel = activeElement!.parentElement.props as PixelProps
-
-    console.log(activeElement);
     if (activeElement !== undefined) {
       const idx = parseInt(activeElement.id);
 
       grid.current[idx] = activeEmoji;
+      const newCell: ICell = {user: undefined, emoji: activeEmoji, timeStamp: new Date()};
+      const operation: CellOperation = {index: idx, newCell: newCell};
+      socket.send(JSON.stringify(operation));
 
       console.log(grid.current[idx]);
     }
