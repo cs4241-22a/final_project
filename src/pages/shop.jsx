@@ -76,7 +76,6 @@ function togglePopup(product) {
        )}    </Row>
 
     </div>
-    )}
         
     {isOpen && <Popup
       content={<>
