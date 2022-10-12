@@ -23,10 +23,9 @@ app.use(compression())
 
 app.use(express.static('client/build'));
 
-app.get('*', (request, response) => {
+app.get('/', (request, response) => {
 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
+})
 
 // CONNECT TO DATABASE
 let username
