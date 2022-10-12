@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import header from '../../../public/goat.png'
 
 import {
   Nav,
   NavLink,
-  Bars,
   NavMenu,
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
   
-const Navbar = () => {
+const Navbar = (props) => {
+  useEffect(() => {
+    props.getUser()
+  }, []);
   return (
     <>
       <Nav>
@@ -30,9 +32,10 @@ const Navbar = () => {
             My Messages
           </NavLink>
         </NavMenu>
+        {props.user.name ?
         <NavBtn>
           <NavBtnLink to='/logout'>Log Out</NavBtnLink>
-        </NavBtn>
+        </NavBtn> : <></>}
       </Nav>
     </>
   );

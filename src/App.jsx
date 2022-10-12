@@ -30,7 +30,7 @@ function App() {
   return (
     <Router>
       {/* <Header /> */}
-      <Navbar />
+      <Navbar getUser={getUser} user={user}/>
       <Routes>
         <Route exact path='/' element={<Login getUser={getUser} user={user}/> } />
         <Route path='/home' element={<Home getUser={getUser} user={user}/>} />
