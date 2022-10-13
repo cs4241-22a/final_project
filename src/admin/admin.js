@@ -30,7 +30,7 @@ function isTopRope(type) {
 
 const addClimb = function(e) {
     e.preventDefault()
-    console.log("calling addclimb")
+    
     const grade = document.querySelector( '#grade' ),
         color = document.querySelector( '#color' ),
         section = document.querySelector( '#section' ),
@@ -42,8 +42,6 @@ const addClimb = function(e) {
         typeValue = climbTypeUtils.getType(type)
 
     const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, typeValue, isLead(type), isTopRope(type))
-
-    console.log("Climb gradeValue is: " + gradeValue + ", Climb typeValue is: " + typeValue)
 
     if (isValidClimb(gradeValue, typeValue)) {
         mongoManager.addRoute(newClimb)
@@ -60,8 +58,6 @@ const getTableData = function() {
 }
 
 const initTable = function (json) {
-    console.log("Initializing table with " + JSON.stringify(json))
-
     // Find a <table> element with id="myTable":
     const table = document.getElementById("dataTable");
 
@@ -100,13 +96,11 @@ const initTable = function (json) {
         }
         newSectionCell.innerHTML = x.section;
         newTypeCell.innerHTML = climbTypeUtils.parseClimbType(x);
-        console.log(x)
     })
 
 }
 
 function handleDeleteClick(climb) {
-    console.log("handleDeleteClick called")
     mongoManager.removeRoute(climb)
         .then(() => getTableData())
 }

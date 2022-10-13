@@ -34,7 +34,6 @@ export default class App
         });
 
         window.addEventListener('load', () => {
-            console.log("Window loaded")
             const applyButton = document.getElementById("apply")
             applyButton.onclick = () => {this.applyFilters()}
         })
@@ -47,8 +46,6 @@ export default class App
 
         let gradeValue = gradesSelect[gradesSelect.selectedIndex].value,
             climbTypeValue = climbTypeSelect[climbTypeSelect.selectedIndex].value
-
-        console.log("called apply with: " + gradeValue + ", " + climbTypeValue)
 
         this.onFilterUpdate(gradeValue, climbTypeValue)
     }
@@ -84,8 +81,6 @@ export default class App
     populateClimbsList(climbs) {
         const table = document.getElementById("climbsTable");
 
-        console.log("Got table: " + table)
-
         const rowCount = table.rows.length;
         for (let i = rowCount - 1; i > 0; i--) {
             table.deleteRow(i);
@@ -117,13 +112,10 @@ export default class App
                 colorValue = data.Color,
                 sectionValue = data.Section,
                 typeValue = this.getType(data.Type)
-            console.log(data)
+                
             const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, typeValue, this.isLead(data.Type), this.isTR(data.Type));
             this.mongoManger.addRoute(newClimb)
 
-            console.log("Grade is " + gradeValue + " Color is " + colorValue +
-                " Section is " + sectionValue + " Type is " + typeValue +
-                " canLead is " + this.isLead(data.Type) + " canTR is " + this.isTR(data.Type));
         }.bind(this))
     }
 
