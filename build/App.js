@@ -1,5 +1,5 @@
 import React from "./_snowpack/pkg/react.js";
-import "./global.css.proxy.js";
+import "./blk-design-system-react.css.proxy.js";
 import {Navigate} from "./_snowpack/pkg/react-router-dom.js";
 class App extends React.Component {
   constructor(props) {

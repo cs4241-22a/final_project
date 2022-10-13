@@ -37,7 +37,12 @@ function Login(props) {
       }
     });
   }
-  return /* @__PURE__ */ React.createElement("form", null, /* @__PURE__ */ React.createElement("h2", null, "Log in"), /* @__PURE__ */ React.createElement("label", {
+  return /* @__PURE__ */ React.createElement("form", {
+    id: "loginForm"
+  }, /* @__PURE__ */ React.createElement("h2", {
+    class: "loginText"
+  }, "Log in"), /* @__PURE__ */ React.createElement("label", {
+    id: "loginFields",
     for: "user"
   }, "Username:"), /* @__PURE__ */ React.createElement("input", {
     type: "text",
@@ -45,6 +50,7 @@ function Login(props) {
     name: "user",
     onChange: (e) => setUser(e.target.value)
   }), /* @__PURE__ */ React.createElement("label", {
+    id: "loginFields2",
     for: "pass"
   }, "Password: "), /* @__PURE__ */ React.createElement("input", {
     type: "password",
@@ -52,10 +58,12 @@ function Login(props) {
     name: "pass",
     onChange: (e) => setPass(e.target.value)
   }), /* @__PURE__ */ React.createElement("input", {
+    id: "loginButtons",
     type: "submit",
     value: "log in",
     onClick: (e) => logIn(e)
   }), /* @__PURE__ */ React.createElement("input", {
+    id: "loginButtons2",
     type: "submit",
     value: "register",
     onClick: (e) => register(e)
