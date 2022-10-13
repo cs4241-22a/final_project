@@ -45,4 +45,4 @@ Link to back-end repo: https://github.com/JustForFun29/publify-final
 
 (5) As mentioned above I've finished this project by myself.
 
-(6)
+(6) https://youtu.be/2W8hF66Ro6g
