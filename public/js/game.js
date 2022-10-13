@@ -146,6 +146,7 @@ const init = () => {
         timeBetweenTargets: 250, //milliseconds
         scorePenalty: .4
     }
+
     deactivateTargets()
 
 
