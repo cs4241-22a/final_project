@@ -1,19 +1,3 @@
-# Final Project
-*Due October 13th (final day of the term)*
-
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
-
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
 # Final Project - Publify
 
 (1/2) I created web application called "Publify" which is a web platform where you can create account and share your stories/knowledge/achievements and anything else that you want. The navigation is pretty straightforward - you can read posts even without logging in, but in case if you want to share your own post or write comments you would have to either log in or register a new account. When you published your post you can edit it anytime. For any story you can add image called preview, that will be seen by everyone on the home page. 
