@@ -58,7 +58,7 @@ function togglePopup(product) {
       <h1>The GoataShop</h1>
       <div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
 
-      <Row md={4} className="g-4">
+      <Row m={1} md={3} className="g-4">
       {products.map(product => 
      
       <Col>
@@ -85,13 +85,13 @@ function togglePopup(product) {
         
     {isOpen && <Popup
       content={<>
-        <img src={product.img}/>
+        <img src={product.img} style={{width: '15rem', height: '15rem'}}/>
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
-        <Mailto email={product.email} subject="Hello" body="Hello world!">
+        <Mailto email={product.email} subject="GoataShop" body="Hi">
         Email me if interested!
-      </Mailto>,
+      </Mailto>
       </>}
       handleClose={togglePopup}
     />}

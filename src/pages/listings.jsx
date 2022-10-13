@@ -53,11 +53,6 @@ function toggleEditPopup(product) {
 	console.log(product)
   };
 
-  function toggleDeletePopup(product){
-	console.log("Open Delete Confirmation Window")
-	setIsDelete(!isDelete);
-	setProduct(product);
-  }
 
 const editProduct = (e) => {
 	console.log("Editing")
@@ -71,8 +66,18 @@ const editProduct = (e) => {
 		description:obj.description.value,
 		price:obj.price.value
 	};
+
 	let body = JSON.stringify(json);
 
+	let updatedProducts = products.map(p => {
+		if (p._id == product._id) {
+			return json
+		}
+		return p
+	});
+
+	setProducts(updatedProducts);
+	
 	fetch("/listing/" + product._id, {
 		method: "PATCH",
 		headers: { "Content-Type": "application/json" },
@@ -81,8 +86,13 @@ const editProduct = (e) => {
 		let res = await response.json()
 		console.log(res)
 		setProduct(json)
-	  }).then(setIsEdit(!isEdit))//.then(location.reload())
+	  }).then(setIsEdit(!isEdit))
 };
+
+function deleteProducts (products) {
+	let updatedProducts = products.filter(p => p._id != product._id)
+	setProducts(updatedProducts)
+}
 
 const deleteProduct = (e) =>{
 	console.log("HELOOOOOOO")
@@ -92,7 +102,9 @@ const deleteProduct = (e) =>{
 		method: "DELETE",
 	  }).then(async (response) => {
 		await response.json();
-	  }).then(setIsDelete(!isDelete))//.then(location.reload());
+	  }).then(setIsDelete(!isDelete))
+	  .then(deleteProducts(products))
+	
 };
 
 function previewFile() {
@@ -155,14 +167,14 @@ return (
 	}}
 	>
 	<h1>Viewing Your Current Listings</h1>
-	<div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
-	  <Row m={1} md={3} className="g-4">
-	  <button
-      className="btn btn-lg btn-danger center modal-button"
+	<button
+      className="btn btn-secondary"
       onClick={() => toggleAddPopup(product)}
     >
       Add Product
     </button>
+	<div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
+	  <Row m={1} md={3} className="g-4">
       {products.map(product => 
       <Col>
 		<Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
@@ -175,6 +187,12 @@ return (
 						<Card.Title>{product.name}</Card.Title>
 						<Card.Text>
 						{product.description}
+						</Card.Text>
+						<Card.Text>
+						{product.category}
+						</Card.Text>
+						<Card.Text>
+						${product.price}
 						</Card.Text>
 					</Card.Body>
 				</Col>
@@ -231,12 +249,12 @@ return (
 
     {isOpen && <Popup
       content={<>
-        <img src={product.img}/>
+        <img src={product.img} style={{width: '15rem', height: '15rem'}}/>
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
 		<button className="form-control btn btn-primary" variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
-		<button className="form-control btn btn-primary" variant="primary" id="del" onclick={()=>setIsDelete(!isDelete)}>Del</button>
+		<button className="form-control btn btn-primary" variant="primary" id="del" onClick={deleteProduct}>Del</button>
 	  </>}
       handleClose={togglePopup}
     />}
@@ -244,10 +262,10 @@ return (
 	
 {isDelete && <Popup
       content={<>
-        <img src={product.img}/>
+        <img src={product.img} style={{width: '15rem', height: '15rem'}}/>
         <h3>$ Are you sure you want to delete the Product</h3>
-		<button className="form-control btn btn-primary" variant="primary" id="ConfirmDelete" onclick={deleteProduct}>Confirm</button>
-		<button className="form-control btn btn-primary" variant="primary" id="Cancel" onclick={(e)=>setIsDelete(!isDelete)}>Cancel</button>
+		<button className="form-control btn btn-primary" variant="primary" id="ConfirmDelete" onClick={deleteProduct}>Confirm</button>
+		<button className="form-control btn btn-primary" variant="primary" id="Cancel" onClick={(e)=>setIsDelete(!isDelete)}>Cancel</button>
 	  </>}
       handleClose={setIsDelete(!isDelete)}
     />}
