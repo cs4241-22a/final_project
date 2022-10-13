@@ -21,7 +21,6 @@ function App() {
       method: "GET",
     }).then(async (response) => {
     let res = await response.json()
-    console.log(res)
     setUser(res)
   })
 }

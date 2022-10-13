@@ -9,7 +9,6 @@ const Logout = (props) => {
         method: "POST",
       }).then(async (response) => {
       let res = await response.json()
-      console.log(res)
       navigate('/login')
     }).then(navigate('/login')).then(location.reload())
     

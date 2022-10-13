@@ -41,8 +41,7 @@ passport.use(
     {
       clientID: process.env.OUTLOOK_CLIENT_ID,
       clientSecret: process.env.OUTLOOK_CLIENT_SECRET,
-      // tenant: "589c76f5-ca15-41f9-884b-55ec15a0672a",
-      callbackURL: `http://localhost:3000/auth/outlook/callback`,
+      callbackURL: `https://goatashop.herokuapp.com/auth/outlook/callback`,
     },
     function (accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...
@@ -93,15 +92,11 @@ client
 
 //Default page //TODO doesn't change landing page :(
 app.get("/", (req, res) => {
-  console.log("HI-/landing");
-  console.log(req.isAuthenticated());
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
 //Login Page
 app.get("/login", (req, res) => {
-  console.log("HI-/login");
-  console.log(req.isAuthenticated());
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
@@ -127,10 +122,8 @@ app.get("/username", (req, res) => {
     user.products = [];
     userCollection.findOne({ userid: user.userid }).then((result) => {
       if (result) {
-        console.log("found it in db");
         res.json(result);
       } else {
-        console.log("not registered. adding an entry to db");
         userCollection.insertOne(req.body);
         res.json(user);
       }
@@ -139,18 +132,15 @@ app.get("/username", (req, res) => {
 });
 
 app.get("/getAllProducts", ensureAuthenticated, (req, res) => {
-  console.log(req.user._json.Id);
   productCollection
     .find({})
     .toArray()
     .then((result) => {
-      console.log(result);
       res.json(result);
     });
 });
 
 app.get("/getListings", ensureAuthenticated, (req, res) => {
-  console.log(req.user._json.Id);
   productCollection
     .find({ userid: req.user._json.Id })
     .toArray()
@@ -160,8 +150,6 @@ app.get("/getListings", ensureAuthenticated, (req, res) => {
 });
 
 app.post("/addListing", ensureAuthenticated, (req, res) => {
-  console.log("Adding");
-  console.log(req.user._json.Id);
   productCollection
     .insertOne({
       userid: req.user._json.Id,
@@ -181,7 +169,6 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
     .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
       if (result) {
-        console.log("found product");
       }
       productCollection
         .deleteOne({
@@ -192,16 +179,9 @@ app.delete("/listing/:id", ensureAuthenticated, (req, res) => {
 });
 //edit
 app.patch("/listing/:id", ensureAuthenticated, (req, res) => {
-  console.log("Editing");
-  console.log(req.params.id);
   productCollection
     .findOne({ _id: mongodb.ObjectId(req.params.id) })
     .then((result) => {
-      if (result) {
-        console.log("found product");
-      } else {
-        console.log("can't find it");
-      }
       productCollection
         .updateOne(
           { _id: mongodb.ObjectId(req.params.id) },
@@ -222,7 +202,6 @@ app.patch("/listing/:id", ensureAuthenticated, (req, res) => {
 });
 
 app.get("/listings", ensureAuthenticated, (req, res) => {
-  console.log(req.user._json.DisplayName);
   res.sendFile("index.html", { user: req.user, root: __dirname + "/build/" });
 });
 
@@ -257,7 +236,6 @@ app.get(
 );
 
 app.post("/logout", ensureAuthenticated, function (req, res, next) {
-  console.log(req);
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -270,6 +248,5 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  console.log("not authenticated");
   res.redirect("/login");
 }

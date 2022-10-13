@@ -13,7 +13,6 @@ const navigate = useNavigate();
 
 useEffect(() => {
   props.getUser()
-  console.log(!props.user.name)
   if (!props.user.name) {
     navigate('/login');
   }
