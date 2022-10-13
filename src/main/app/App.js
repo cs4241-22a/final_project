@@ -2,6 +2,8 @@ import ClimbTypeUtils from "../../util/ClimbTypeParser";
 import FilteredClimbsManager from "../../util/FilteredClimbsManager";
 import MongoManager from "../../util/MongoManager";
 import GymMap from "./visuals/GymMap";
+import * as d3 from 'd3'
+import Climb from './route/Climb'
 
 let instance = null
 
@@ -107,6 +109,50 @@ export default class App
             }
             newSectionCell.innerHTML = x.section;
         })
+    }
+
+    readClimbsCSV() {
+        d3.csv('./climbsAtMainGymCRG.csv', function (data) {
+            const gradeValue = data.Grade.toUpperCase(),
+                colorValue = data.Color,
+                sectionValue = data.Section,
+                typeValue = this.getType(data.Type)
+            console.log(data)
+            const newClimb = new Climb(null, gradeValue, colorValue, sectionValue, typeValue, this.isLead(data.Type), this.isTR(data.Type));
+            this.mongoManger.addRoute(newClimb)
+
+            console.log("Grade is " + gradeValue + " Color is " + colorValue +
+                " Section is " + sectionValue + " Type is " + typeValue +
+                " canLead is " + this.isLead(data.Type) + " canTR is " + this.isTR(data.Type));
+        }.bind(this))
+    }
+
+    isTR(type) {
+        if (type === "ltr" || type === "tr") {
+            return true;
+        }else if (type === "b") {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    isLead(type) {
+        if (type === "ltr" || type === "l") {
+            return true;
+        }else if (type === "b") {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    getType(type) {
+        if (type === "ltr" || type === "tr" || type === "l") {
+            return "rope";
+        } else if (type === "b") {
+            return "boulder"
+        }
     }
     /*
     //Add the option to the select
