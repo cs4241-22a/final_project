@@ -42,7 +42,7 @@ passport.use(
       clientID: process.env.OUTLOOK_CLIENT_ID,
       clientSecret: process.env.OUTLOOK_CLIENT_SECRET,
       // tenant: "589c76f5-ca15-41f9-884b-55ec15a0672a",
-      callbackURL: `https://goatashop.herokuapp.com/home`,
+      callbackURL: `https://goatashop.herokuapp.com/auth/outlook/callback`,
     },
     function (accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...
