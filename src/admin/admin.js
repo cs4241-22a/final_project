@@ -8,6 +8,11 @@ window.onload = function() {
     const addButton = document.querySelector('#submitButton')
     addButton.onclick = addClimb
 
+    const sectionSelect = document.querySelector('#section')
+    for(let i=1; i<29; i++) {
+        sectionSelect.options[sectionSelect.options.length] = new Option(i.toString(), i.toString())
+    }
+
     new GymMap("gymMap")
 }
 
