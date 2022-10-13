@@ -1,7 +1,11 @@
 #Interactive Climbing Gym Map
 Created by: Travis Thompson + Colby Frechette
 
+Website Link:
 http://142.93.202.135/
+
+Video Link:
+https://www.youtube.com/watch?v=YD8O8OOUIMM
 
 For this project, we created an interactive climbing gym map to display where climbs exist in a gym. Currently, most climbing gyms have no indication of where certain grades are located in a gym, leaving a climber to wander around looking for climbs they would like to try. With our program, route setters can add climbs to the database with the admin page, and climbers can easily find the climbs they want to try with a multitude of actions. Hovering over sections  as well as utilizing filters can be used to locate climbs, allowing the user to find the type of climb they would like to try, as well as the grade.
 
