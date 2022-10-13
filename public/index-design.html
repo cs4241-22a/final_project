@@ -18,52 +18,69 @@
         <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
     </head>
     <body>
-        <container class="is-fixed-top">
+        <div class="container is-fixed-top is-fluid" id="navbar">
             <br>
             <h1 class="title has-text-centered">HOW TO SURVIVE CS@WPI</h1>
-            <nav class="navbar" role="navigation">
+            <nav class="navbar is-link" role="navigation">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="https://www.pictureofhotdog.com/">
+                    <a class="navbar-item" href="https://www.pictureofhotdog.com/" id="nav_icon">
                         <img src="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
                     </a>
                 </div>
                 <div class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item">
+                        <a class="navbar-item" id="full_stack_nav">
                             Full Stack/Design
                         </a>      
-                        <a class="navbar-item">
+                        <a class="navbar-item" id="theory_nav">
                             Theory
                         </a>
-                        <a class="navbar-item">
+                        <a class="navbar-item" id="cyber_nav">
                             Cybersecurity
                         </a>
                     </div>
                 </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button is-primary" href="#" id="login_nav">
+                                <span>LOGIN</span>
+                                </a>
+                            </p>
+                            <p class="control">
+                                <a class="button is-dark" href="#" id="register_nav">
+                                <span>REGISTER</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </nav>
-        </container>
+        </div>
         <br>
-        <container>
-            <!-- Start Carousel -->
-            <div id="opening-slideshow" class="carousel">
+        <br>
+        <div class="container" id="carousel">
+            <!-- Start Carousel fix with cdn links after hosting-->
+            <div id="opening_slideshow" class="carousel">
                 <div class="item-1">
-                    <img src="./resources/bird_placeholder1.jpg">
+                    <img src="/resources/bird_placeholder1.jpg">
                 </div>
                 <div class="item-2">
-                    <img src="./resources/bird_placeholder2.jpg">
+                    <img src="/resources/bird_placeholder2.jpg">
                 </div>
                 <div class="item-3">
-                    <img src="./resources/bird_placeholder3.jpg">
+                    <img src="/resources/bird_placeholder3.jpg">
                 </div>
                 <div class="item-4">
-                    <img src="./resources/bird_placeholder4.jpg">
+                    <img src="/resources/bird_placeholder4.jpg">
                 </div>
                 <div class="item-5">
-                    <img src="./resources/bird_placeholder5.jpg">
+                    <img src="/resources/bird_placeholder5.jpg">
                 </div>
             </div>
             <!-- End Carousel -->
-        </container>
+        </div>
 		<script>
             bulmaCarousel.attach('#opening-slideshow', {
                 slidesToScroll: 1,
@@ -72,7 +89,7 @@
             });
 		</script>
         <br>
-        <section class="hero is-info">
+        <section class="hero is-info" id="body_hero">
             <div class="hero-body has-text-centered">
                 <h3 class="title is-3 has-text-centered">About Us</h3>
                 <p>How to Survive CS@WPI is a set of resources for WPI students to enhance the courseload and work being done as a Computer Science Student.</p>
@@ -82,16 +99,15 @@
             </div>
           </section>
         <br>
-        <container>
+        <div class="container" id="home_cards">
             <div class="columns is-vcentered is desktop">
-                <div class="column">
+                <div class="column" id="latest_cards">
                     <h1 class="title is-2 has-text-centered">Latest</h1>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    CyberChef
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -101,10 +117,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser.
+                                    <a href="https://gchq.github.io/CyberChef/">https://gchq.github.io/CyberChef/</a>
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#cybersecurity</a> <!--TODO: link hashtags-->
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -113,11 +131,10 @@
                         </div>
                     </div>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    SQLZoo
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -127,10 +144,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    Wiki-based interactive tutorials to learn SQL
+                                    <a href="https://sqlzoo.net/wiki/SQL_Tutorial">https://sqlzoo.net/wiki/SQL_Tutorial</a> 
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#backend</a> <a href="#">#sql</a>
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -139,11 +158,10 @@
                         </div>
                     </div>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    DiscreteMath.org
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -153,10 +171,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    An open content source to learn discrete math. 
+                                    <a href="https://discretemath.org/">https://discretemath.org/</a>
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#theory</a> <!--TODO: link hashtags-->
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -165,14 +185,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="column">
+                <div class="column" id="top_cards">
                     <h1 class="title is-2 has-text-centered">Top</h1>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    HCI Bib
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -182,10 +201,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    HCI resources (albeit a bit outdated)
+                                    <a href="http://hcibib.org/">http://hcibib.org/</a> 
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#frontend</a> <a href="#">#hci</a>
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -194,11 +215,10 @@
                         </div>
                     </div>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    Cyber Awareness Challenge
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -208,10 +228,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    Training used by Department of Defense workers to be aware of common cyber security threats.
+                                    <a href="https://public.cyber.mil/training/cyber-awareness-challenge/">https://public.cyber.mil/training/cyber-awareness-challenge/</a>
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#cybersecurity</a> <!--TODO: link hashtags-->
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -220,11 +242,10 @@
                         </div>
                     </div>
                     <div class="column">
-                        <!--TODO: edit-->
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
-                                    Component
+                                    Teach Yourself CS
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
@@ -234,10 +255,12 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                                    Massive guide to learn lots of underlying knowlegdge of Computer Science.
+                                    <a href="https://teachyourselfcs.com/">https://teachyourselfcs.com/</a>
                                     <br>
-                                    Added: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                    <a href="#">#theory</a> <!--TODO: link hashtags-->
+                                    <br>
+                                    Added: <time datetime="2022-10-10">12:10 PM - 10 Oct 2022</time>
                                 </div>
                             </div>
                             <footer class="card-footer">
@@ -246,13 +269,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="column has-background-primary">
+                <div class="column has-background-primary" id="submit_resource">
                     <h1 class="title is-2 has-text-centered">Submit A Resource</h1>
                     <!--Submit Resource Form-->
                     <div class="field">
                         <label class="label">Name</label>
                         <div class="control">
-                          <input class="input" type="text" placeholder="Name">
+                          <input class="input" type="text" placeholder="Name" id="name">
                         </div>
                       </div>
                       
@@ -260,7 +283,7 @@
                       <div class="field">
                         <label class="label">Email</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="email" placeholder="Email input">
+                          <input class="input" type="email" placeholder="Email input" id="email">
                           <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                           </span>
@@ -273,7 +296,7 @@
                       <div class="field">
                         <label class="label">Resource Title</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="text" placeholder="Title">
+                          <input class="input" type="text" placeholder="Title" id="resource_title">
                           <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                           </span>
@@ -286,7 +309,7 @@
                       <div class="field">
                         <label class="label">Resource Link</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="url" placeholder="URL">
+                          <input class="input" type="url" placeholder="URL" id="resource_link">
                           <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                           </span>
@@ -300,7 +323,7 @@
                         <label class="label">What Subject is this?</label>
                         <div class="control">
                           <div class="select">
-                            <select>
+                            <select id="subject">
                               <option>Fullstack/Design</option>
                               <option>Theory</option>
                               <option>Cybersecurity</option>
@@ -312,46 +335,24 @@
                       <div class="field">
                         <label class="label">Give a small description of the resource</label>
                         <div class="control">
-                          <textarea class="textarea" placeholder="Textarea"></textarea>
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <div class="control">
-                          <label class="checkbox">
-                            <input type="checkbox">
-                            I agree to the <a href="#">terms and conditions</a>
-                          </label>
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <div class="control">
-                          <label class="radio">
-                            <input type="radio" name="question">
-                            Yes
-                          </label>
-                          <label class="radio">
-                            <input type="radio" name="question">
-                            No
-                          </label>
+                          <textarea class="textarea" placeholder="Textarea" id="desc"></textarea>
                         </div>
                       </div>
                       
                       <div class="field is-grouped">
                         <div class="control">
-                          <button class="button is-link">Submit</button>
+                          <button class="button is-link" id="submit">Submit</button>
                         </div>
                         <div class="control">
-                          <button class="button is-link is-light">Cancel</button>
+                          <button class="button is-link is-light" id="cancel">Cancel</button>
                         </div>
                       </div>    
                 </div>
               </div>
-        </container>
+        </div>
         <br>
         <br>
-        <footer class="footer">
+        <footer class="footer" id="footer">
             <div class="content has-text-centered">
               <p>
                 <strong>How to Survive CS@WPI</strong> by Hailey Anderson & Chayanne Sandoval-Williams.

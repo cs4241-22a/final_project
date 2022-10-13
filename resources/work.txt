@@ -1,9 +1,7 @@
 Chayanne
-- id the divs
-- finalize content there 
-- triple check the navbar
 - changing html to svelte
 - find img
+
 
 BIG: hosting the site
 
