@@ -3,16 +3,53 @@
 <head>
     <title>Welcome to GitHub(by) Express</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css.css">
 </head>
 <body>
-<h1 style="text-align: center; background-color: rgba(245, 245, 220, .8);">Welcome to GitHub(by) Express!!!</h1>
-<p style="text-align: center; border: 2px solid; color:black; background-color: rgba(245, 245, 220, .8)">Welcome to the newest social media platform to get to know other coders and start new bonds and relationships.</p>
-<p style="text-align: center; border: 2px solid; color:black; background-color: rgba(245, 245, 220, .8)">Please input your login information. If you do not have an account, please create simply a new account.</p>
+<!--d-flex align-items-center justify-content-center-->
+<section class="vh-100">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                                    <div class = "container-flex d-flex align-items-center justify-content-center">
+                                        <div class="row">
+                                                <div class="col" style="background: rgba(245,245,280,0.6)">
+                                                    <h1>Welcome to GitHub(by) Express!!!</h1><br>
+                                                    <p style="font-size: 20px">Welcome to the newest social media platform to get to know other coders and start new bonds and relationships.</p><br>
+                                                    <p style="font-size: 20px">Please login with GitHub.</p><br>
+                                                    <div style="text-align: center;"><a href="/github"><button class="btn" id = "githubLog">Log In With GitHub</button></a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
 
-<a href="/github"><button id = "githubLog">Log In With GitHub</button></a>
 
+
+<!--<div class = "container-fluid d-flex align-items-center justify-content-center">-->
+<!--    <div class="row">-->
+<!--        <div class="col" id = "big>-->
+<!--        <div class="col" id="img" style="margin: 20px">-->
+<!--            <img src="/background.png">-->
+<!--        </div>-->
+<!--        <div class="col" id = ">-->
+<!--            <h1>Welcome to GitHub(by) Express!!!</h1><br>-->
+<!--            <p>Welcome to the newest social media platform to get to know other coders and start new bonds and relationships.</p><br>-->
+<!--            <p>Please input your login information. If you do not have an account, please create simply a new account.</p><br>-->
+<!--            <a href="/github"><button id = "githubLog">Log In With GitHub</button></a>-->
+<!--        </div>-->
+<!--        <div class="col"></div>-->
+<!--    </div>-->
+<!--</div>-->
 <script src="/login.js"></script>
 </body>
 </html>
