@@ -96,9 +96,12 @@ app.get('/recipedata', async (req, res) => {
             ingredients: 'ingredients',
             title: 'title',
             direction: 'directions',
+            direction: 'directions',
             directions: 'directions',
             instruction: 'directions',
             instructions: 'directions',
+            description: 'directions',
+            details: 'directions',
             people: 'numPeople',
             numpeople: 'numPeople',
             peoplenum: 'numPeople',
@@ -143,7 +146,7 @@ app.get('/recipedata', async (req, res) => {
     } else {
         //Send all recipes
         let allData = await Recipe.find({});
-        console.log(allData);
+        //console.log(allData);
         res.json(allData).end();
     }
 });
