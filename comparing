@@ -1,0 +1,35 @@
+    <div class="table">
+        <table class="table container text-white">
+            <thead>
+            <tr>
+                <th>Note</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Creat Time</th>
+                <th></th>
+            </tr>
+            </thead>
+
+    <p><%= msg %></p>
+
+    <% body.forEach(function(plan){ %>
+            <tbody>
+            <tr>
+                <div class="col">
+        <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
+       <form method="POST" action="/app/delete_plan">
+
+                        <td><%= plan.Note %></td>
+                        <td><%= moment(plan.Start_Time) %></td>
+                        <td><%= moment(plan.End_Time) %></td>
+                        <td><%= moment(plan.Submit_Time).fromNow() %></td>
+                        <td><input type="submit" value="Delete" class="btn btn-danger"/></td>
+           <input type="hidden" type = 'text' name = '_id' value="<%= plan._id %>"></input>
+       </form>
+            </div>
+            </tr>
+            </tbody>
+    <% }) %>
+
+        </table>
+    </div>
