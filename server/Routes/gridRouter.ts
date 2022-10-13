@@ -67,8 +67,6 @@ router.get("/cell", (req: Request, res: Response) => {
   });
 });
 
-// jasdklfsdfsdf
-
 async function updateCell(cellData: ICell) {
   const updatedCell = await Cell.findOneAndUpdate(
     { index: cellData.index },

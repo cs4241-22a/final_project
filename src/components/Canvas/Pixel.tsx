@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 

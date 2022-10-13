@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Pixel } from "./Pixel";
-import { Box } from "@mui/system";
 import { ICell } from "../../../server/DB_Schema/cellSchema.js";
 
 export type GridProps = {
@@ -19,7 +18,7 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
       const response: Response = await fetch("/grid");
       const res = await response.json();
 
-      setBoard(res.grid);
+      setBoard(res.grid.sort());
       rerender(!render);
     })();
   }, []);
@@ -29,7 +28,6 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
       {render
         ? null
         : board!.map((e: any, i: number) => {
-            console.log(e!.emoji);
             return (
               <Pixel
                 key={i}

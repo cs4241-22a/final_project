@@ -4,6 +4,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 export function Header() {
   async function logout() {
     await fetch("/logout");
+    window.location.reload();
   }
 
   return (
