@@ -8,9 +8,9 @@
             <p class="fs-5 mb-4 text-muted">Play various games to test your reaction time, accuracy, click speed, and aim training! You can compete against friends and check your rankings on the leaderboard page!</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <%if (user) {%>
-                    <button type="button" class="btn btn-outline-info btn-lg px-4">Leaderboard</button>
+                    <a href="/leaderboard" class="btn btn-outline-info btn-lg px-4">Leaderboard</a>
                 <%} else {%>
-                    <button type="button" class="btn btn-outline-info btn-lg px-4"><span class="fa fa-github"></span> Github Login</button>
+                    <a href="/login/federated/github" class="btn btn-outline-info btn-lg px-4"><span class="fa fa-github"></span> Github Login</a>
                 <% } %>
             </div>
         </div>
