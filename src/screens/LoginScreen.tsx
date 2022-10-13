@@ -4,7 +4,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 export function LoginScreen() {
   function authenticate() {
-    window.open(`http://localhost:${3000}/login/auth/github`, "_self");
+    window.open(`http://${window.location.host}/login/auth/github`, "_self");
   }
 
   return (
