@@ -7,12 +7,28 @@ class SearchAndSort extends React.Component {
       this.state = { sortBy: '' };
     }
 
+    capitalize(string){
+        if(string && string.length >= 1){
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        } else {
+            return string;
+        }
+    }
+
     sortBy(criterion) {
-        console.log(criterion);
-        this.setState(state => { //Store the current sorting criterion (not technically necessary, but might be in the future)
-            return { sortBy: criterion };
-        });
-        //TODO: Set the state of the table by sorting all the recipes by the specified criterion
+        const url = new URL(location.href);
+        url.searchParams.set('sort', criterion);
+        location.assign(url.search);
+    }
+
+    search() {
+        var search = document.getElementById('search-bar').value;
+        const url = new URL(location.href);
+        url.searchParams.set('search', search);
+        if(search == ''){
+            url.searchParams.delete('search');
+        }
+        location.assign(url.search || '?');
     }
 
     render() {
@@ -21,20 +37,20 @@ class SearchAndSort extends React.Component {
                 <Row>
                     <Col>
                         <InputGroup>
-                            <FormControl placeholder="Search" aria-label="Search" />
-                            <Button variant="outline-secondary" id="search-button">Search</Button>
+                            <FormControl placeholder="Search" aria-label="Search" id="search-bar" onKeyPress={(e)=>{if(e.key == 'Enter'){this.search();}}} />
+                            <Button variant="outline-secondary" id="search-button" onClick={()=>{this.search();}}>Search</Button>
                         </InputGroup>
                     </Col>
                     <Col>
                         <Container>
                             <Dropdown>
                             <Dropdown.Toggle variant="secondary" id="sort-by-dropdown">
-                                Sort By: TODO
+                                Sort By: {this.capitalize(new URL(location.href).searchParams.get('sort'))||'Recent'}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item>No Sort</Dropdown.Item>
                                 <Dropdown.Item onClick={()=>{this.sortBy('recent')}}>Recent</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{this.sortBy('rating')}}>Rating</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{this.sortBy('preptime')}}>Prep. Time</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{this.sortBy('servings')}}>Servings</Dropdown.Item>
                                 <Dropdown.Item onClick={()=>{this.sortBy('alphabetical')}}>Alphabetical</Dropdown.Item>
                             </Dropdown.Menu>
                             </Dropdown>

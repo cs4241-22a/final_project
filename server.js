@@ -74,8 +74,78 @@ const User = mongoose.model('User', userSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 app.get('/recipedata', async (req, res) => {
-    let allData = await Recipe.find({}); // later refine this, only send recipes written by the user
-    res.json(allData).end();
+    //Parse the search query, if any
+    var search = (req.query.search||'').toLowerCase(); //Convert to lowercase to disable matching character cases
+    if(req.query.search != 'null' && search.length > 0){
+        console.log('Search request received: '+search);
+        search = search.replaceAll('\'', '\"'); //Replace all single quotes with double quotes
+        if((search.match(/"/g) || []).length % 2 == 1){ //If there are an odd number of quotes, append one at the end so that the regex works properly
+            search = search+'\"';
+        }
+        var searchTokens = search.split(/ +(?=(?:(?:[^"]*"){2})*[^"]*$)/g); //From https://stackoverflow.com/questions/25663683/javascript-split-by-spaces-but-not-those-in-quotes
+        console.log('Identified search tokens: '+searchTokens);
+        var specialSearch = {
+            user: 'username',
+            username: 'username',
+            name: 'username',
+            author: 'username',
+            prep: 'prepTime',
+            time: 'prepTime',
+            preptime: 'prepTime',
+            ingredient: 'ingredients',
+            ingredients: 'ingredients',
+            title: 'title',
+            direction: 'directions',
+            directions: 'directions',
+            instruction: 'directions',
+            instructions: 'directions',
+            people: 'numPeople',
+            numpeople: 'numPeople',
+            peoplenum: 'numPeople',
+            numberofpeople: 'numPeople',
+            numberpeople: 'numPeople',
+            peoplenumber: 'numPeople',
+            servings: 'numPeople',
+            serving: 'numPeople',
+            serves: 'numPeople',
+            serve: 'numPeople',
+        };
+        var searchTerms = searchTokens.map(token => { //Parse the tokens to evaluate key:value pairs and remove quotes
+            var key = Object.keys(specialSearch).find(keyword => {
+                return token.indexOf(keyword+':') == 0; //This will ignore key:value pairs in quotes-- this is a feature, not a bug!
+            });
+            if(key === undefined){ //Normal keywords default to searching the title, so you can search for "peas" instead of "title:peas"
+                return {
+                    key: 'title',
+                    value: (token.charAt(0) == '\"') ? token.replaceAll('\"','') : token.split(':').pop().replaceAll('\"','') //Ignore everything before a colon if the token isn't quoted, since it's an invalid special search keyword; can be worked around by using 'title:"key:value"' or even 'title:key:value' if you really want to search for a colon
+                };
+            }
+            return {
+                key: specialSearch[key], //Convert from search token, eg. 'author', to database field, eg. 'username'
+                value: token.split(key+':')[1].replaceAll('\"','')
+            };
+        });
+        console.log('Converted search tokens:');
+        console.log(searchTerms);
+        //At this point, the search terms should always be in the form {key:[valid database field], value:[field value]}
+        searchTerms = searchTerms.map(token => {
+            var key = token.key;
+            var value = token.value;
+            var ret = {};
+            ret[key] = (key == 'title' || key == 'directions' || key == 'ingredients' || key == 'username') ? {$regex: value, $options: "$i"} :
+                       (key == 'prepTime' || key == 'numPeople') ? (+value || 0) : value;
+            return ret;
+        });
+        console.log('Final search terms:');
+        console.log(searchTerms);
+        let allData = await Recipe.find({ $and: searchTerms });
+        res.json(allData).end();
+    } else {
+        //Send all recipes
+        let allData = await Recipe.find({});
+        console.log(allData);
+        res.json(allData).end();
+    }
 });
 
 app.get('/userdata', async (req, res) => {

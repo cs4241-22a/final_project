@@ -85,7 +85,7 @@ class ViewRecipe extends React.Component {
                     </Form.Group>
                     <Row className="mb-3">
                         <Button variant="primary" onClick={back}>
-                            Back
+                            Back to All Recipes
                         </Button>
                     </Row>
                 </div>

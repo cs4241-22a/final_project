@@ -5,73 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from './header';
 import SearchAndSort from './searchAndSort';
-
-class Table extends React.Component {
-
-    getUser = async () => {
-        let the_user = undefined;
-        const user = await fetch('/getUser', {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                 the_user = data.result;
-            })
-        return the_user;
-    }
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Container>
-                <Row xs={1} md={4}>
-                    {
-                        this.props.items.map((item, index) => (
-                            <Card style={{ width: '18rem', padding: '10px', margin: '15px' }}>
-                                <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>
-                                        {<ul>
-                                            <li><b>Prep Time: {item.prepTime} minutes</b></li>
-                                            <li><b>Serves: {item.numPeople}</b></li>
-                                        </ul>}
-                                        <p>{item.directions}</p>
-                                    </Card.Text>
-                                    <Button variant="primary" onClick={ () => this.viewOrEdit(item.username, item.title) }>
-                                        View Full Recipe
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        ))
-                    }
-                </Row>
-            </Container>
-        );
-    }
-
-    viewOrEdit = async function(user, title) {
-        // if the recipe user is the same as the session user send to the edit page
-        // otherwise send to the view recipe page
-        const sessionuser = await this.getUser();
-        const recipeuser = user;
-        const params = new URLSearchParams({ title: title });
-        if(sessionuser == recipeuser) {
-            // send to edit
-            window.location.replace(window.location.href + "editrecipe?" + params.toString() );
-        } else {
-            // send to view
-            window.location.replace(window.location.href + "viewrecipe?" + params.toString() );
-        }
-    }
-}
+import Table from './table';
 
 class App extends React.Component {
     getUser = async () => {
@@ -80,13 +14,28 @@ class App extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.state.user = data.result; });
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            this.state.user = data.result;
+        });
         return user;
+    }
+
+    sortRecipes(recipes){
+        var sort = (new URL(location.href).searchParams.get('sort') || '').toLowerCase();
+        switch(sort){
+            case 'recent':
+                return recipes; //Assume sorted by most recent already due to the mongodb find() function
+            case 'preptime':
+                return recipes.sort((recipe1, recipe2)=>( +recipe1.prepTime - +recipe2.prepTime ));
+            case 'servings':
+                return recipes.sort((recipe1, recipe2)=>( +recipe1.numPeople - +recipe2.numPeople ));
+            case 'alphabetical':
+                return recipes.sort((recipe1, recipe2)=>( recipe1.title.localeCompare(recipe2.title) ));
+            default:
+                return recipes; //No sorting, but should be the same as recent
+        }
     }
 
     constructor(props) {
@@ -98,7 +47,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/recipedata', {
+        fetch('/recipedata?' + new URLSearchParams({
+            search: new URL(location.href).searchParams.get('search')
+        }), {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -107,7 +58,7 @@ class App extends React.Component {
         .then(response => response.json())
         .then(res => {
             console.log(res);
-            this.setState({ ...this.state, recipes: [...this.state.recipes, ...res] });
+            this.setState({ ...this.state, recipes: this.sortRecipes([...this.state.recipes, ...res]) });
         });
     }
 
