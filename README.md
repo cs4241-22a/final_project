@@ -2,7 +2,7 @@
 
 (1/2) I created web application called "Publify" which is a web platform where you can create account and share your stories/knowledge/achievements and anything else that you want. The navigation is pretty straightforward - you can read posts even without logging in, but in case if you want to share your own post or write comments you would have to either log in or register a new account. When you published your post you can edit it anytime. For any story you can add image called preview, that will be seen by everyone on the home page. 
 
-Link: https://publify-frontend.vercel.app/
+Link: https://publify-final-4l8xytzqf-justforfun29.vercel.app/
 
 Link to front-end repo: https://github.com/JustForFun29/publify-frontend
 
