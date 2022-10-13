@@ -17,14 +17,22 @@
     <title>Your Friends</title>
 </head>
 
-<h2>friend requests Pending</h2>
+<% i = 0 %>
 <% friend_pending.forEach(friend => { %>
+    <% if (i === 0 ) { %>
+        <h2>friend requests Pending</h2>
+        <% i = i+1 %>
+    <% } %>
     <li><%= friend[0] %></li>
     <li style="display: none"><%= friend[1] %></li>
 <% }) %>
 
-<h2>friend requests From</h2>
+<% j = 0 %>
 <% friend_req.forEach(req => { %>
+    <% if (j === 0 ) { %>
+        <h2>friend requests Pending</h2>
+        <% j = i+1 %>
+    <% } %>
     <div class="row m-auto">
     <li><%= req[0] %></li>
     <form method="POST" action="/friends/accept_friend_request">

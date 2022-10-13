@@ -19,7 +19,6 @@ wss.on("connection", (ws) => {
     let username = jsdata.username;
     let Time = jsdata.Time;
     let txt = jsdata.txt;
-    console.log(ID, Time,txt)
     let json = { ID: ID, Time: Time, txt: txt, username: username };
     let msg = JSON.stringify(json);
     ws.send(msg);

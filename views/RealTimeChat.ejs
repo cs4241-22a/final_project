@@ -26,14 +26,15 @@
   <h1>
     <div class="row col-auto ml-1">
     Welcome to chat room:
-    <p type="hidden" id="UserID" style="display: none"><%= ID %></p>
+    <p id="UserID" style="display: none"><%= ID %></p>
     <p id="username" class="col-md-1"><%= username %></p>
     </div>
   </h1>
+  <p>Your ID is: <%= ID %></p>
 
   <div class="font-weight-light border-top border-white m-3"></div>
 
-  <div id="message"></div>
+  <div id="message" style="display:felx;align-items: center; text-align: left; background-color:black;"></div>
   <input type="text" id="send_text" placeholder="Please input msg you want to send"> </input>
     <button id="send_button" class="text-danger btn btn-dark">Send</button>
 </div>
@@ -78,7 +79,7 @@
     let username = body.username
     //Please add code BELOW to update the formats! Data contains 4 fields, txt: acutal data sent, ID: user's ID, username: username (use this to
     //displace the username! ID is 16 digit hash, used to add friends)
-    msg.innerText = `${username} says       ${txt}            at ${Time}`;
+    msg.innerText = `${username}: ${txt} @ ${Time}`;
     MsgDiv.appendChild(msg);
   });
 
