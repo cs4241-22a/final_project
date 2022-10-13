@@ -424,7 +424,7 @@ app.post('/submit', (req, res) => {
             console.log(newLog);
             client.db("Final").collection("profiles").updateOne(
                 {user: req.session.user},
-                { $set:{ firstName: newLog.firstName, lastName: newLog.address, age: newLog.age, hobbies: newLog.hobbies, firstProject: newLog.firstProject, currentProject: newLog.currentProject, status: newLog.status, youngest: newLog.youngest, oldest: newLog.oldest, distance: newLog.distance}})
+                { $set:{ firstName: newLog.firstName, lastName: newLog.lastName, address: newLog.address, age: newLog.age, hobbies: newLog.hobbies, firstProject: newLog.firstProject, currentProject: newLog.currentProject, status: newLog.status, youngest: newLog.youngest, oldest: newLog.oldest, distance: newLog.distance}})
                 .then( result => res.redirect("/profile.html") )
 
 
