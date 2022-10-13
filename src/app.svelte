@@ -1,7 +1,6 @@
 <!--
     TODO: 
     - actually get this functioning lmao
-    REMOVE ALL OLD COD
 
 	NOTE: containers and divs will be wonky for the time being
 -->
@@ -10,32 +9,51 @@
 	import Form from "./form.svelte";
 	import Carousel from "./carousel.svelte";
 	import Footer from "./footer.svelte";
-	//ALL PREViOUS CODE
-	export let name;
+	import Card from "./card.svelte";
 
-	let count = 0;
+	var cyberChef ={
+            title: 'CyberChef', 
+            desc: 'CyberChef is a simple, intuitive web app for carrying out all manner of \"cyber\" operations within a web browser.',
+            link: 'https://gchq.github.io/CyberChef/',
+            tag: 'cybersecurity'
+        };
+        
+        const sqlZoo ={
+            title: 'SQLZoo', 
+            desc: 'Wiki-based interactive tutorials to learn SQL.',
+            link: 'https://sqlzoo.net/wiki/SQL_Tutorial',
+            tag: 'fullstack'
+        };
+        
+        const discreteMath ={
+            title: 'DiscreteMath.org', 
+            desc: 'An open content source to learn discrete math. ',
+            link: 'https://discretemath.org/',
+            tag: 'theory'
+        };
 
-	const proffessionArr = [
-		{			
-			'name': 'Daniel',
-			'prof': 'Developer'
-		},
-		{			
-			'name': 'Curry',
-			'prof': 'Sunbather'
-		}
-	]
-
-	function handleClick() {
-		count += 1;
-	}	
+        const hciBibs ={
+            title: 'HCI Bib', 
+            desc: 'A webpage of useful HCI resources (albeit a bit outdated). ',
+            link: 'http://hcibib.org/',
+            tag: 'fullstack'
+        };
+        
+        const cyberAwareness ={
+            title: 'Cyber Awareness Challenge', 
+            desc: 'Training used by Department of Defense workers to be aware of common cyber security threats.',
+            link: 'https://public.cyber.mil/training/cyber-awareness-challenge/',
+            tag: 'cybersecurity'
+        };
+        
+        const teachYourself ={
+            title: 'Teach Yourself CS', 
+            desc: 'Massive guide to learn lots of underlying knowlegdge of Computer Science.',
+            link: 'https://teachyourselfcs.com/',
+            tag: 'theory'
+        };
+	
 </script>
-
-<style>
-	h1 {
-		color: purple;
-	}
-</style>
 
 <svelte:head>
 	<meta charset="utf-8">
@@ -62,12 +80,20 @@
 	</div>
 </section>
 <br>
-<!--empty until i can figure out how to make a single card element-->
+<!--Columns of cards and the form-->
 <div class="container" id="home_cards">
 	<div class="columns is-vcentered is desktop">
 		<div class="column" id="latest_cards">
+			<h1 class="title is-2 has-text-centered">Latest</h1>
+			<Card {...cyberChef}/>
+			<Card {...sqlZoo}/>
+			<Card {...discreteMath}/>
 		</div>
 		<div class="column" id="top_cards">
+			<h1 class="title is-2 has-text-centered">Top</h1>
+			<Card {...hciBibs} />
+			<Card {...cyberAwareness} />
+			<Card {...teachYourself} />
 		</div>
 		<div class="column has-background-primary" id="submit_resource">
 			<Form /> <!--triple check, will probably double column-->
@@ -77,20 +103,3 @@
 <br>
 <br>
 <Footer /> <!--triple check-->
-
-<!--ALL PREVIOUS CODE-->
-<h1>Hello {name}!</h1>
-
-<button on:click={handleClick}>
-	Clicked {count} {count === 1 ? 'time' : 'times'}
-</button>
-
-{#if count > 3} 
-<h2>We are getting there</h2>
-{/if}
-
-<ul>
-	{#each proffessionArr as prof}
-		<li>{prof.name} ({prof.prof})</li>
-	{/each}
-</ul>

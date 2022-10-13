@@ -27,7 +27,7 @@
 </div>
 
 <script>
-    bulmaCarousel.attach('#opening-slideshow', {
+    bulmaCarousel.attach('#opening_slideshow', {
         slidesToScroll: 1,
         slidesToShow: 1,
         autoplay: true
