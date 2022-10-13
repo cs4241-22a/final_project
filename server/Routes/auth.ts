@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      callbackURL: "http://127.0.0.1:3000/login/auth/github/callback",
+      callbackURL: "http://157.230.2.81:3000/login/auth/github/callback",
     },
     function (accessToken: any, refreshToken: any, profile: any, cb: Function) {
       User.findOne({ github_id: profile.id }, (err: any, user: IUser) => {

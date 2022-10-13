@@ -38,7 +38,9 @@ async function populateArray() {
       }
     }
   }).clone(); //cloning makes the query repeatable
-  grid.sort();
+  grid.sort(function (a: ICell, b: ICell) {
+    return a.index - b.index;
+  });
 }
 
 router.post("/update", async (req: Request, res: Response) => {
@@ -47,7 +49,7 @@ router.post("/update", async (req: Request, res: Response) => {
 
     if (req.user !== undefined) {
       console.log(typeof grid[data.index]);
-      grid[data.index].index = data.index;
+      // grid[data.index].index = data.index;
       grid[data.index].emoji = data.emoji;
       grid[data.index].timeStamp = new Date(Date.now());
       grid[data.index].user = req.user.toString();
