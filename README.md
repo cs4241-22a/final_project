@@ -59,9 +59,9 @@ For the schedule, I drew inspiration from my high school's somewhat complex yet 
 
 In terms of my body of work on the assignment, most of my choices boil down to the fact that I am doing this project individualy. Although I tried to make my product as complex and unique as possible, constraints that naturally arise from not having partners forced me to simplify several aspects of my project.
 
-Technoligies used:
--MongoDB
--Express
+Technoligies used: //
+-MongoDB //
+-Express // 
 -HTML/CSS/JS
 *svelte/react to sharpen UI elements would be something I would have looked into if I had an extra day or two*
 
