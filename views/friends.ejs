@@ -13,7 +13,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../public/style.css">
-
     <title>Your Friends</title>
 </head>
 
@@ -36,7 +35,7 @@
     <div class="row m-auto">
     <li><%= req[0] %></li>
     <form method="POST" action="/friends/accept_friend_request">
-        <input type='hidden' value="<%= req[1] %>" name="friend_id"></input>
+        <input type='hidden' value="<%= req[1] %>" name="friend_id"/>
         <input type="submit" value="Accept" class="btn btn-sm btn-success ml-4">
     </form>
     </div>
@@ -53,7 +52,7 @@
         <div class="font-weight-light border-top border-white m-3 row"></div>
 
 <form method = 'POST' action = '/friends/add_friend' >
-    FriendID: <input type = 'text' name = 'friend_id' required class=""></input>
+    FriendID: <input type='text' name='friend_id' required class=""/>
     <input type="submit" value="Add friend" class="btn btn-primary btn-sm ml-3"/>
 </form>
     </div>
@@ -73,8 +72,8 @@
                 <div class="col">
                     <td><%= friend[0] %></td>
     <form method='GET' action = '/friendplan/<%= friend[1] %>'>
-        <input type="hidden" value="<%= friend[1] %>" name='friend_id'></input>
-        <td><input type="submit" value="See Plan"/></td>
+        <input type="hidden" value="<%= friend[1] %>" name='friend_id'/>
+        <td><input type="submit" value="View Plan" class="btn btn-sm btn-warning text-center text-dark"/></td>
     </form>
                 </div>
             </tr>
