@@ -31,7 +31,7 @@ const attemptLogin = function () {
             }
         }).then(response => {
             if (!response.ok) {
-                console.log(response);
+                //console.log(response);
                 throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {

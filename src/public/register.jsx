@@ -28,7 +28,7 @@ const verifyInfo = function() {
           "password": pw
         };
         const data = JSON.stringify(json);
-        console.log(data)
+        //console.log(data)
 
         fetch("/register", {
             method: "POST",
@@ -38,7 +38,7 @@ const verifyInfo = function() {
             }
         }).then (response => {
             if (!response.ok) {
-                console.log(response)
+                //console.log(response)
               throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {

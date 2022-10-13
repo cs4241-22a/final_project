@@ -58,9 +58,8 @@ const recipeSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+        username: {
+            type: String,
             required: true
         },
     },
@@ -77,13 +76,13 @@ app.get('/recipedata', async (req, res) => {
     //Parse the search query, if any
     var search = (req.query.search||'').toLowerCase(); //Convert to lowercase to disable matching character cases
     if(req.query.search != 'null' && search.length > 0){
-        console.log('Search request received: '+search);
+        //console.log('Search request received: '+search);
         search = search.replaceAll('\'', '\"'); //Replace all single quotes with double quotes
         if((search.match(/"/g) || []).length % 2 == 1){ //If there are an odd number of quotes, append one at the end so that the regex works properly
             search = search+'\"';
         }
         var searchTokens = search.split(/ +(?=(?:(?:[^"]*"){2})*[^"]*$)/g); //From https://stackoverflow.com/questions/25663683/javascript-split-by-spaces-but-not-those-in-quotes
-        console.log('Identified search tokens: '+searchTokens);
+        //console.log('Identified search tokens: '+searchTokens);
         var specialSearch = {
             user: 'username',
             username: 'username',
@@ -128,25 +127,27 @@ app.get('/recipedata', async (req, res) => {
                 value: token.split(key+':')[1].replaceAll('\"','')
             };
         });
-        console.log('Converted search tokens:');
-        console.log(searchTerms);
+        //console.log('Converted search tokens:');
+        //console.log(searchTerms);
         //At this point, the search terms should always be in the form {key:[valid database field], value:[field value]}
         searchTerms = searchTerms.map(token => {
             var key = token.key;
             var value = token.value;
             var ret = {};
-            ret[key] = (key == 'title' || key == 'directions' || key == 'ingredients' || key == 'username') ? {$regex: value, $options: "$i"} :
-                       (key == 'prepTime' || key == 'numPeople') ? (+value || 0) : value;
+            ret[key] = (key == 'title' || key == 'directions' || key == 'ingredients') ? {$regex: value, $options: "$i"} : //Partial matches are okay
+                       (key == 'prepTime') ? {$lte: (+value || 0)} : //Prep time is a maximum
+                       (key == 'numPeople') ? {$gte: (+value || 0)} : //Servings is a minimum
+                       (key == 'username') ? value : //Full matches only for usernames
+                       value; //Default
             return ret;
         });
-        console.log('Final search terms:');
-        console.log(searchTerms);
+        //console.log('Final search terms:');
+        //console.log(searchTerms);
         let allData = await Recipe.find({ $and: searchTerms });
         res.json(allData).end();
     } else {
         //Send all recipes
         let allData = await Recipe.find({});
-        //console.log(allData);
         res.json(allData).end();
     }
 });
@@ -261,6 +262,10 @@ app.post('/add', express.json(), async (req, res) => {
         res.redirect('/');
     } else {
         data.username = req.session.username;
+        //Set default prep time and servings if they aren't specified
+        if(!data.prepTime && data.prepTime !== 0){data.prepTime = 10;}
+        if(!data.numPeople && data.numPeople !== 0){data.numPeople = 1;}
+        //Insert recipe if one with the same name doesn't already exist
         const recipes = await Recipe.find({ title: data.title }).exec();
         if (recipes.length === 0) {
             Recipe.collection.insertOne(data)
@@ -281,7 +286,10 @@ app.post('/view', express.json(), async (req, res) => {
 });
 
 app.patch('/update', express.json(), async (req, res) => {
-    await Recipe.findOneAndUpdate({ title: req.body.title, username: req.session.username }, {
+    //Set default prep time and servings if they aren't specified
+    if(!req.body.prepTime && req.body.prepTime !== 0){req.body.prepTime = 10;}
+    if(!req.body.numPeople && req.body.numPeople !== 0){req.body.numPeople = 1;}
+    await Recipe.findOneAndUpdate({ title: req.body.title, username: req.session.username }, { //Only modify the recipe if the username also matches
         ingredients: req.body.ingredients, prepTime: req.body.prepTime,
         numPeople: req.body.numPeople, directions: req.body.directions
     });

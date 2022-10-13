@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -57,7 +56,7 @@ class App extends React.Component {
         })
         .then(response => response.json())
         .then(res => {
-            console.log(res);
+            //console.log(res);
             this.setState({ ...this.state, recipes: this.sortRecipes([...this.state.recipes, ...res]) });
         });
     }

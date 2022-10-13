@@ -4,7 +4,11 @@ import { Button, Container, InputGroup, FormControl, Row, Col, Dropdown } from "
 class SearchAndSort extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { sortBy: '' };
+    }
+
+    componentDidMount(){
+        //Don't make this persistent with React, just set it once on load
+        document.getElementById('search-bar').value = new URL(location.href).searchParams.get('search')||'';
     }
 
     capitalize(string){
@@ -37,7 +41,7 @@ class SearchAndSort extends React.Component {
                 <Row>
                     <Col>
                         <InputGroup>
-                            <FormControl placeholder="Search" aria-label="Search" id="search-bar" onKeyPress={(e)=>{if(e.key == 'Enter'){this.search();}}} />
+                            <FormControl placeholder="Search" aria-label="Search" id="search-bar" onClick={(e)=>e.target.select()} onKeyPress={(e)=>{if(e.key == 'Enter'){this.search();}}} />
                             <Button variant="outline-secondary" id="search-button" onClick={()=>{this.search();}}>Search</Button>
                         </InputGroup>
                     </Col>

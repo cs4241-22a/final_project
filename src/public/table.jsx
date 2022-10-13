@@ -25,8 +25,10 @@ class Table extends React.Component {
     }
 
     render() {
+        var noResults = this.props.items.length == 0 ? (<span>No matching recipes found.</span>) : '';
         return (
             <Container>
+                { noResults }
                 <Row xs={1} md={4}>
                     {
                         this.props.items.map((item, index) => (
