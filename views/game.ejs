@@ -7,25 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/styles/game.css">
+    <link rel="stylesheet" href="/styles/login.css">
 </head>
 
 <body>
     <header>
-        <p class="welcome">Welcome Player</p>
-        <p class="highscore">Your High Score: 0</p>
-        <a href="/leaderboard">leaderboard</a>
+        
+        <p class="hometext"><span class="welcome">Welcome Player</span><a class= "leaderboard"href="/home"> Home </a><br><span class="highscore">Your High Score: 0</span>  <a class= "leaderboard"href="/leaderboard"> Leaderboard </a><br><span class="highscore score"></span></p>
+        
+        
     </header>
-    <div class="container">
-        <button class="btnStart">Start Game</button>
-        <h1 class="score"></h1>
+    <div class="container_game">
 
+        <div class="startgamestatus">
+        <button class="btnStart">Start Game</button>
+        <span class="status"></span>
+        </div>
         <main class="gameContainer">
             <div class="backgroundContainer"></div>
             <button class="target" data-target="1"></button>
             <button class="target" data-target="2"></button>
             <button class="target" data-target="3"></button>
         </main>
-        <h1 class="status"></h1>
+       
     </div>
 
 

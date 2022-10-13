@@ -12,7 +12,7 @@ const highscoreMsg = document.querySelector(".highscore")
 const clickhandler = (e, config) => {
     if (e.target !== this) {
         score = Math.round((score - config.scorePenalty) * 100) / 100
-        scoreText.innerHTML = "Score: " + score.toString()
+        scoreText.innerHTML = "Current Game Score: " + score.toString()
     }
 }
 const deactivateTargets = () => {
@@ -35,7 +35,7 @@ const deactivateTargets = () => {
 
 const startGame = (config) => {
     score = 0
-    scoreText.innerHTML = "Score: " + score.toString()
+    scoreText.innerHTML = "Current Game Score: " + score.toString()
     gameActive = true
     activateTargets(config)
     gameCountDown(config)
@@ -45,7 +45,7 @@ const startGame = (config) => {
 const endGame = (config) => {
     gameActive = false
     deactivateTargets(config)
-    scoreText.innerHTML = "Score: " + score.toString()
+    scoreText.innerHTML = "Current Game Score: " + score.toString()
     btnStart.classList.remove('hide')
 
     backgroundContainer.classList.add('hide')
@@ -98,7 +98,7 @@ const gameCountDown = (config) => {
             endGame(config)
         }
         if (count > 0) {
-            statusText.innerHTML = count.toString() + "s remaining!";
+            statusText.innerHTML = count.toString() + "s remaining! click the dots as fast as you can!";
         }
         count--
     }, 1000)
@@ -159,7 +159,7 @@ const init = () => {
     document.querySelectorAll('.target').forEach(item => {
         item.addEventListener('click', () => {
             score = Math.round((score + 1) * 100) / 100
-            scoreText.innerHTML = "Score: " + score.toString()
+            scoreText.innerHTML = "Current Game Score: " + score.toString()
             item.classList.add('hide')
             setTimeout(() => {
                 if (gameActive) {
