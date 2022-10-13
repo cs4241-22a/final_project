@@ -72,7 +72,7 @@
             topText.innerText = "New High Score!"
         }
         else {
-            topPercNum = Math.round(((allScore.length - highIndex) / allScore.length) * 100)
+            topPercNum = 100 - Math.round(((allScore.length - highIndex) / allScore.length) * 100)
             topText.innerText = `You Scored Top ${topPercNum}%`;
         }
 
@@ -119,7 +119,7 @@
                             type: "line",
                             mode: "vertical",
                             scaleID: "x-axis-0",
-                            value: 5*((100-topPercNum)/100)-0.1,
+                            value: 5*((topPercNum)/100)-0.1,
                             borderWidth: 5,
                             borderColor: "red",
                             label: {
