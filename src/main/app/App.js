@@ -106,7 +106,7 @@ export default class App
         })
     }
 
-    readClimbsCSV() {
+    _readClimbsCSV() {
         d3.csv('./climbsAtMainGymCRG.csv', function (data) {
             const gradeValue = data.Grade.toUpperCase(),
                 colorValue = data.Color,
