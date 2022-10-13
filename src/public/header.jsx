@@ -1,20 +1,20 @@
 import React from "react";
-import { Button, Container, Form, Navbar, Nav } from "react-bootstrap";
+import { Button, Container, Navbar, Nav } from "react-bootstrap";
 
 const buttonsRight = (props) => {
     if (props.accountButtons === true) {
         if (props.loggedIn === true) {
             return (
                 <Nav className="justify-content-end">
-                    <Button href="logout" variant="outline-primary">Log out</Button>
+                    <Button href="logout" variant="outline-light">Log out</Button>
                 </Nav>
             )
         }
 
         else return (
             <Nav className="justify-content-end">
-                <Button href="login" variant="outline-primary">Log in</Button>
-                <Button href="register" variant="primary">Sign up</Button>
+                <Button href="login" className="me-1" variant="outline-light">Log in</Button>
+                <Button href="register" variant="outline-primary">Sign up</Button>
             </Nav>
         )
     }
@@ -29,7 +29,7 @@ class Header extends React.Component {
 
     render() {
         return (
-            <Navbar bg="light">
+            <Navbar bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="/">Recipes</Navbar.Brand>
                 { buttonsRight(this.props) }

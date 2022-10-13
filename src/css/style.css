@@ -4,7 +4,7 @@
 }
 
 .blue-bg {
-    background-color: var(--bs-primary, #0d6efd)
+    background: linear-gradient(#b6e7f1,  #878be3) fixed;
 }
 
 .center {
@@ -24,5 +24,5 @@
     max-width: 480px;
     background-color: white;
 
-    padding: 60px 40px;
+    padding: 50px 40px 60px;
 }

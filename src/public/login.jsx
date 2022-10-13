@@ -58,6 +58,7 @@ class Login extends React.Component {
             <div>
                 <Header accountButtons={false} />
                 <div className="center account-form d-grid gap-2">
+                    <h1 class="mb-3">Log in</h1>
                     <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Username" autoComplete="off" />

@@ -76,7 +76,7 @@ class ViewRecipe extends React.Component {
                     </Row>
 
                     <Form.Group className="mb-3" controlId="ingredients">
-                        <Form.Label>Ingredients (Comma Seperated)</Form.Label>
+                        <Form.Label>Ingredients (Comma Separated)</Form.Label>
                         <Form.Control as="textarea" rows={2} defaultValue={this.state.recipe.ingredients} disabled={true} />
                     </Form.Group>
 

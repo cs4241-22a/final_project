@@ -19,7 +19,7 @@ const verifyInfo = function() {
 
     const confirmPw = document.getElementById("confirmpassword").value;
     if(pw !== confirmPw) {
-        document.getElementById("message").innerHTML = "**Passwords do not match";  
+        document.getElementById("message").innerHTML = "**Passwords do not match.";  
        return false;
     } else {
         // all good, try to make account
@@ -63,19 +63,20 @@ class Register extends React.Component {
             <div>
                 <Header accountButtons={false} />
                 <div className="center account-form d-grid gap-2">
+                    <h1 class="mb-3">Register</h1>
                     <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Username" />
+                        <Form.Control type="text" placeholder="Username" autoComplete="off" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Password" autoComplete="off" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="confirmpassword">
                         <Form.Label>Confirm password</Form.Label>
-                        <Form.Control type="password" placeholder="Confirm password" />
+                        <Form.Control type="password" placeholder="Confirm password" autoComplete="off" />
                     </Form.Group>
 
                     <Button variant="primary" onClick= { verifyInfo }>
@@ -83,7 +84,7 @@ class Register extends React.Component {
                     </Button>
 
                     <p id="message">&nbsp;</p>
-                    <p class="center-text">If you have an account, <a href="login">log in</a></p>
+                    <p class="center-text">If you already have an account, <a href="login">log in</a></p>
                 </div>
             </div>
             

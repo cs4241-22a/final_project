@@ -72,8 +72,8 @@ class AddRecipe extends React.Component {
                     </Row>
 
                     <Form.Group className="mb-3" controlId="ingredients">
-                        <Form.Label>Ingredients (Comma Seperated)</Form.Label>
-                        <Form.Control as="textarea" placeholder="Ingredients (Comma Seperated)" rows={2} autoComplete="off" />
+                        <Form.Label>Ingredients (Comma Separated)</Form.Label>
+                        <Form.Control as="textarea" placeholder="Ingredients (Comma Separated)" rows={2} autoComplete="off" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="directions">

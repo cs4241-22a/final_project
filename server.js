@@ -120,7 +120,7 @@ app.post('/register', (req, res) => {
                     })
             } else {
                 req.session.login = false;
-                res.end(JSON.stringify("Username already in use. Please select a different one."));
+                res.end(JSON.stringify("**Username already in use. Please select a different one."));
             }
         })
 });

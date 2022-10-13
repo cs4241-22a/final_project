@@ -74,7 +74,6 @@ class Table extends React.Component {
 }
 
 class App extends React.Component {
-
     getUser = async () => {
         const user = await fetch('/getUser', {
             method: "GET",
