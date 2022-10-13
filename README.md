@@ -1,8 +1,8 @@
-#Final Project#
+# Final Project #
 
 Group Members: Megan Letendre, Tobias Mack, Joe Dobbelear, Kseniia Romanova, and Dillon McCarthy
 
-##Project Description##
+## Project Description ##
 
 As outlined in our proposal, creating group grocery lists can be a challenge when wanting to include input from every member of a household. Go Grocery hopes to solve some of these challenges by allowing users to create a group grocery list by making a group account. To use the application, users must login to their group account. From there, they are able to add items to their list and categorize them based on common grocery store sections (i.e., bakery, produce, etc.). 
 
@@ -10,7 +10,7 @@ When a user goes grocery shopping, they are able to see an organized and compreh
 
 Project Link: https://dmccarthy-final-project.herokuapp.com/ 
 
-##Additional Instructions##
+## Additional Instructions ##
 
 Login to the application using the following credentials:
 Username: abc@gmail.com
@@ -22,7 +22,7 @@ Add item by entering item name and item type and pressing ‘Add to List’ butt
 Delete item by pressing X button next to it.
 Change cart code by entering a different code and pressing ‘Change Cart’.
 
-##Technologies Used##
+## Technologies Used ##
 
 - [Visual Studio Code](https://code.visualstudio.com/): Used by all group members for code editing.
 - [Github](https://github.com/): Used for code collaboration and assigning aspects of the project to different group members:
@@ -36,7 +36,7 @@ Change cart code by entering a different code and pressing ‘Change Cart’.
 - [Jest](https://jestjs.io/): Used for testing our React application.
 - [Heroku](https://www.heroku.com/): Used as the host of our web application.
 
-##Challenges##
+## Challenges ## 
 
 - Challenge #1: Completing a design process in a short period of time.
 We wanted to ensure that the design of our application had a good user experience and also wanted to align our project up with the goals of our team members. Completing the design process for this application was difficult as we had such a short period of time to complete it. We had to decide what aspects were really important, what aspects could be sped through/shortened, and what aspects could be skipped all together. A lot of time had to be spent on this and the development of designs and analysis of user feedback had to be completed in a very short period of time to ensure ample time for development. The resources and hints from the W3C to make the site accessible and the CRAP principles were implemented in the design as well. A link to the results of our user testing can be found here: https://docs.google.com/spreadsheets/d/1Nv7-e54FCDSGOckiHn3bFO3UxN-GXC7TsganlLqk0Zs/edit?usp=sharing 
@@ -52,18 +52,18 @@ The web application uses cookies to verify user sign-in sessions. To keep login 
 - Challenge #4: Password Hashing
 So that passwords are not stored in plaintext, we use bcrypt to hash passwords. When a password is submitted on user creation, it’s turned into an unreadable string. When a user tries to login, we ask bcrypt if the password is correct and respond accordingly. Our database does not have any readable passwords.
 
-##Member Contributions##
+## Member Contributions ##
 
 [Megan Letendre](https://github.com/meganletendre7): I worked very heavily on design aspects of this project. I completed a very shortened version of the user experience design process for the application. I am very interested in and have good experience in UI/UX design so I wanted to gain more experience and felt this was one of the greatest strengths I brought to the team. I completed some research/developed the application concept, selected a color scheme, developed the Figma mockups and user/application flows, user testing (both pre and post development), and analysis of the feedback. On top of this, in terms of design, I ensured that our application was accessible according to the resources and hints from the W3C as well as the CRAP principles. In terms of development, I worked to develop the login page. 
 
 [Tobias Mack](https://github.com/tobias-mack): At the beginning of the project I created the MongoDb cluster. After that I worked on a form validation for the signup page. I created regular expressions that test the input and added a feedback mechanism to the user. After the application was done I wrote Gatling load tests in Scala to check the performance of the application. For the tests I generated a random dataset with java, since we want to use dynamic data so that all users don't play the same and we end up with a behavior completely different from the live system (caching, JIT...).
 
-[Joe Dobbelear](https://github.com/r2pen2): I contributed a lot to both the front-end and back-end of this project. First, I created a React project, an Express server, made the Express server host the React build files, and pushed that to a repository for the rest of the team to work on. On the front-end, I created the react components used in the Homepage (TopBar, Sections, Section-Deploy-Buttons). This involved pulling cart data from the database, allowing the user to change their current cart, displaying a user’s home cart, creating the inputs for new food name and new food category, the add food button, showing/hiding lists in categories, and all associated CSS. On the back-end, I wrote the GET and POST routes (GET /cart-data, GET /home-cart, POST /add-item, POST /remove-item, POST /login, POST /logout, POST /register, and POST /create-cart), wrote the code that handles user sign-in/out with cookies, made all of these routes validate that a user has a valid session cookie, the DB models for carts and users, and the code to add a cart/user to the database. Also for sign-in, I made the server hash passwords with bcrypt so that we aren’t storing plaintext passphrases in our database. Finally, I implemented a message on the login page that tells the user if their email or password is incorrect and put a login button in the TopBar that removes a session cookie from the server’s memory.
+[Joe Dobbelear](https://github.com/r2pen2): I contributed a lot to both the front-end and back-end of this project. First, I created a React project, an Express server, made the Express server host the React build files, and pushed that to a repository for the rest of the team to work on. On the front-end, I created the react components used in the Homepage (TopBar, Sections, Section-Deploy-Buttons). This involved pulling cart data from the database, allowing the user to change their current cart, displaying a user’s home cart, creating the inputs for new food name and new food category, the add food button, showing/hiding lists in categories, and all associated CSS. On the back-end, I wrote the GET and POST routes (GET /cart-data, GET /home-cart, POST /add-item, POST /remove-item, POST /login, POST /logout, POST /register, and POST /create-cart), wrote the code that handles user sign-in/out with cookies, made all of these routes validate that a user has a valid session cookie, the DB models for carts and users, and the code to add a cart/user to the database. Also for sign-in, I made the server hash passwords with bcrypt so that we aren’t storing plaintext passphrases in our database. Finally, I implemented a message on the login page that tells the user if their email or password is incorrect and put a login button in the TopBar that removes a session cookie from the server’s memory. 
 
 [Kseniia Romanova](https://github.com/kr0man0va): This project was a big learning curve for me since I didn’t use React in my previous assignments. I did a lot of research on how to connect passport.js to our application, however, we ended up not using it. I also made a Sign Up page and made sure that both Sign Up and Log In look like the mock-ups; this included working with .jsx and .css files. In addition, I connected the MongoDB database to our application. Since MongoDB is more flexible (no schema required), I used the MongoDB node.js driver.
 
 [Dillon McCarthy](https://github.com/dmccarthy11): For this project I worked on the application scripting to implement communication between the application and the server on the home page. This included collaborative work with the server and ensuring the proper json objects were passed back and forth with fetch calls. Additionally, I attempted to carry out user authentication using passport.js for the application. With no prior experience and a significant time spent struggling with the authentication middleware, the group decided to use cookies to login. I also uploaded and hosted the web application on Heroku.
 Project Video
 
-##Video##
+## Video ##
 Link to Project Video: https://drive.google.com/file/d/1IawhBmWE7PqX01mxGeZDEomHiSIEgla_/view?usp=sharing 
