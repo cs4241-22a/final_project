@@ -417,8 +417,22 @@ app.post('/submit', (req, res) => {
     newLog.user = req.session.user;
     newLog.pic = req.session.pic;
     console.log(collection);
-    client.db("Final").collection("profiles").insertOne(req.body).then(result => {
-        res.redirect("/profile.html");
+
+    client.db("Final").collection("profiles").find({user: req.session.user}).toArray(function (err, result) {
+        if (err) throw err;
+        if (result.length > 0) {
+            console.log(newLog);
+            client.db("Final").collection("profiles").updateOne(
+                {user: req.session.user},
+                { $set:{ firstName: newLog.firstName, lastName: newLog.lastName, address: newLog.address, age: newLog.age, hobbies: newLog.hobbies, firstProject: newLog.firstProject, currentProject: newLog.currentProject, status: newLog.status, youngest: newLog.youngest, oldest: newLog.oldest, distance: newLog.distance}})
+                .then( result => res.redirect("/profile.html") )
+
+
+        } else {
+            client.db("Final").collection("profiles").insertOne(req.body).then(result => {
+                res.redirect("/profile.html");
+            })
+        }
     })
 })
 
@@ -439,6 +453,10 @@ app.post('/viewProfile', (req, res) => {
 app.get('/getViewingProfile', (req, res) => {
     console.log(viewing);
     res.json(viewing);
+})
+
+app.get('/hasProfile', (req, res) => {
+    (client.db("Final").collection("profiles").find({user: req.session.user}).toArray()).then(result => res.json(result));
 })
 
 const { MongoClient, ServerApiVersion } = require('mongodb');

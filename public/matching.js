@@ -19,6 +19,7 @@ window.onload = async function() {
         .then(text => {
             user = text;
             console.log(user);
+            document.getElementById("loggedIn").innerHTML = "Logged in as: " + user;
         })
     await fetch('/getprofile', {
         method: 'GET',
@@ -99,6 +100,14 @@ window.onload = async function() {
                 }
             })
         })
+}
+
+function openNav() {
+    document.getElementById("sideNavBar").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("sideNavBar").style.width = "0px";
 }
 
 function viewProfile(match) {

@@ -12,6 +12,8 @@ window.onload = function () {
             console.log(text);
             const img = new Image();
             img.src = text;
+            img.style.width = "250px";
+            img.style.height = "auto";
             document.getElementById("profilePic").lastElementChild;
             document.getElementById("profilePic").appendChild(img);
         })
@@ -38,8 +40,14 @@ window.onload = function () {
                 if (item.user === user) {
 
                     let profileList = document.createElement("ul");
+                    profileList.style.listStyle = "none";
+                    profileList.style.fontSize = "larger";
                     let fPList = document.createElement("ul");
+                    fPList.style.listStyle="none"
+                    fPList.style.fontSize = "larger";
                     let cPList = document.createElement("ul");
+                    cPList.style.listStyle="none"
+                    cPList.style.fontSize = "larger";
 
                     const fName = document.createElement("li");
                     const fullName = "Name: " + item.firstName + " " + item.lastName;
@@ -87,12 +95,12 @@ window.onload = function () {
                     profileList.appendChild(distanceItem);
 
                     const firstProjectItem = document.createElement("li");
-                    const firstProjectDesc = "Name of First Project: " + item.firstProject;
+                    const firstProjectDesc = "First Project: " + item.firstProject;
                     firstProjectItem.innerHTML = firstProjectDesc;
                     fPList.appendChild(firstProjectItem);
 
                     const currentProjectItem = document.createElement("li");
-                    const currentProject = "Name of Current Project: " + item.currentProject;
+                    const currentProject = "Current Project: " + item.currentProject;
                     currentProjectItem.innerHTML = currentProject;
                     cPList.appendChild(currentProjectItem);
 
