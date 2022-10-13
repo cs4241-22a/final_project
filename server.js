@@ -159,9 +159,9 @@ app.get('/userdata', async (req, res) => {
 app.post('/login', (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-    User.find({ $and: [{ password: { $exists: true } }, { username: user }] })
+    User.find({ $and: [{ username: { $exists: true }, password: { $exists: true } }, { username: user }] })
         .then(result => {
-            if (password === result[0].password) { //only one user/password combo should exist for each user
+            if (result.length != 0 && password === result[0].password) { //only one user/password combo should exist for each user
                 req.session.login = true;
                 req.session.username = req.body.username;
                 res.redirect('/');
