@@ -12,6 +12,8 @@ window.onload = function () {
             console.log(text);
             const img = new Image();
             img.src = text;
+            img.style.width = "250px";
+            img.style.height = "auto";
             document.getElementById("profilePic").lastElementChild;
             document.getElementById("profilePic").appendChild(img);
         })
