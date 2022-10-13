@@ -1,7 +1,8 @@
 # Reaction Tests
 # By Sean McMillan, Liliana Foucault, Jin Ryoul Kim, and Jacob Van Steyn
 
-Heroku: (link)
+Site Link (Heroku): https://reactiontests.herokuapp.com/
+
 Overview video: (link)
 
 # Introduction
