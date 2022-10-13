@@ -7,10 +7,12 @@ class App extends React.Component {
     this.state = {
       loggedin: true,
       currUser: "",
+      userRespNum: -1,
       posts: [],
       displayMakePost: false,
       displayMakeResponse: [],
-      displayViewResponses: []
+      displayViewResponses: [],
+      tempRespData: []
     };
     this.loginStatus();
     this.load();
@@ -26,6 +28,18 @@ class App extends React.Component {
       this.setState({posts: json});
     });
   }
+  numResponses(username) {
+    fetch("/userInfo", {
+      method: "post",
+      "no-cors": true,
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({user: username})
+    }).then((response) => response.json()).then((json) => {
+      if (json[0] !== void 0) {
+        this.setState({userRespNum: json[0].responses.length});
+      }
+    });
+  }
   loginStatus() {
     fetch("/loginStatus", {
       method: "get",
@@ -33,6 +47,7 @@ class App extends React.Component {
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
       this.setState({loggedin: json.login, currUser: json.user});
+      this.numResponses(json.user);
     });
   }
   makePost(e) {
@@ -73,9 +88,11 @@ class App extends React.Component {
         this.setState({displayMakeResponse: arr});
       }
     }, "Respond"), /* @__PURE__ */ React.createElement("input", {
+      id: "viewrespbtn",
       type: "button",
       value: this.state.displayViewResponses[i] === true ? "Hide Responses" : "View Responses",
       onClick: (e) => {
+        this.load();
         let arr = this.state.displayViewResponses;
         if (arr[i] === true) {
           arr[i] = false;
@@ -83,6 +100,23 @@ class App extends React.Component {
         } else {
           arr[i] = true;
           this.setState({displayViewResponses: arr});
+        }
+        if (this.state.posts[i].responses !== void 0) {
+          let repdataArr = this.state.tempRespData;
+          repdataArr[i] = [];
+          this.setState({tempRespData: repdataArr});
+          for (let j = 0; j < this.state.posts[i].responses.length; j++) {
+            fetch("/collDoc", {
+              method: "post",
+              "no-cors": true,
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({collName: "responses", _id: this.state.posts[i].responses[j]})
+            }).then((result) => result.json()).then((json) => {
+              let dataArr = this.state.tempRespData;
+              dataArr[i].push(json[0]);
+              this.setState({tempRespData: dataArr});
+            });
+          }
         }
       }
     }), this.showViewResponses(i), this.showMakeResponse(i));
@@ -110,7 +144,6 @@ class App extends React.Component {
     let arr = this.state.displayMakeResponse;
     arr[i] = false;
     this.setState({displayMakeResponse: arr});
-    this.load();
   }
   showMakeResponse(i) {
     if (this.state.displayMakeResponse[i]) {
@@ -145,12 +178,18 @@ class App extends React.Component {
     }
   }
   showViewResponses(i) {
-    if (this.state.displayViewResponses[i]) {
-      return /* @__PURE__ */ React.createElement("ul", null, this.state.posts[i].responses.map((entry) => {
-        if (entry !== null && Object.keys(entry).length !== 0)
-          return /* @__PURE__ */ React.createElement("li", null, entry);
+    if (this.state.displayViewResponses[i] && this.state.tempRespData[i] !== void 0 && this.state.tempRespData[i].length > 0) {
+      const jsx = /* @__PURE__ */ React.createElement("ul", null, this.state.tempRespData[i].map((entry, j) => {
+        if (entry !== null && Object.keys(entry).length !== 0) {
+          console.log(this.state.tempRespData);
+          return this.showResponseData(i, j);
+        }
       }));
+      return jsx;
     }
+  }
+  showResponseData(i, j) {
+    return /* @__PURE__ */ React.createElement("li", null, "Song: ", this.state.tempRespData[i][j].song, "Artist: ", this.state.tempRespData[i][j].artist, "Comment: ", this.state.tempRespData[i][j].comment);
   }
   render() {
     if (this.state.loggedin == false) {
@@ -159,7 +198,10 @@ class App extends React.Component {
         to: "/login"
       });
     } else {
-      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser), /* @__PURE__ */ React.createElement("div", {
+      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser, " Responses Made: ", this.state.userRespNum), /* @__PURE__ */ React.createElement("button", {
+        type: "button",
+        onClick: () => window.location.reload()
+      }, "Refresh"), /* @__PURE__ */ React.createElement("div", {
         id: "displayPosts"
       }, /* @__PURE__ */ React.createElement("button", {
         type: "button",
