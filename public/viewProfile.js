@@ -1,6 +1,18 @@
 let user = null;
 window.onload = function () {
 
+        fetch('/getUser', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'}
+        })
+            .then(response => (response.text()))
+            .then(text => {
+                    user = text;
+                    console.log(user);
+                    document.getElementById("loggedIn").innerHTML = "Logged in as: " + user;
+            })
+        console.log(user);
+
     fetch('/getViewingProfile', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
