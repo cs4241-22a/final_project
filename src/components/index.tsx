@@ -1,3 +1,3 @@
-export * from "./header/Header";
-export * from "./sidebar/Sidebar";
+export * from "./Header/Header";
+export * from "./Sidebar/Sidebar";
 export * from "./Canvas/Canvas";

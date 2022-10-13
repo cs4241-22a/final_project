@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { Emoji } from "emoji-picker-react";
 
@@ -10,7 +10,6 @@ const container = {
 
 export type PixelProps = {
   initEmoji: string;
-  initUser: string;
   size: number;
   setActiveElement: Function;
   index: number;
@@ -18,7 +17,6 @@ export type PixelProps = {
 
 export function Pixel({
   initEmoji,
-  initUser,
   size,
   setActiveElement,
   index,
@@ -38,6 +36,10 @@ export function Pixel({
       onClick={update}
       sx={container}
       id={`${index}`}
-    ></Box>
+    >
+      {initEmoji === " " ? null : (
+        <Emoji unified={initEmoji} size={0.8 * size} />
+      )}
+    </Box>
   );
 }

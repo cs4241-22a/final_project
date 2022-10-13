@@ -1,78 +1,108 @@
-import express from "express";
-import Cells, {ICell} from './DB_Schema/cellSchema';
-import Users, { IUser } from './DB_Schema/userSchema.js';
-import mongoose, { Collection } from "mongoose";
+import express, { Request, Response } from "express";
+import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import {WebSocketServer} from "ws";
+import passport from "passport";
+import session from "express-session";
 import http from "http";
 import EventEmitter from "events";
-import {CellOperation} from "./serverDataTypes";
+import cors from "cors";
+import { router as authRouter, checkAuthentication } from "./Routes/auth.js";
+import { WebSocketServer } from "ws";
+import Cell, { ICell } from "./DB_Schema/cellSchema.js";
+import { router as gridRouter } from "./Routes/gridRouter.js";
 
-// load .env file
-dotenv.config();
-const defaultPort = '3000';
+/* ------------- CONSTANTS AND INITIALIZATIONS ------------- */
+
+dotenv.config({ path: ".env" });
+
+const PORT = "3000";
+const app = express();
+
+app.use(cors());
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+const listenPort = process.env.PORT || PORT;
+
+/* ------------- ENVIRONMENT CONFIGURATION ------------- */
+
+mongoose.connect(process.env.MONGODB_URI!).then(() => {
+  console.log("Connected!");
+});
+
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    name: "session",
+    secret: "catSuperSecret",
+    cookie: {
+      secure: false,
+      maxAge: 3 * 60 * 60 * 1000,
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+/* ------------- WEB SOCKET CONFIGURATION ------------- */
+
+const serverEvents = new EventEmitter();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server: server });
+
+wss.on("connection", (ws) => {
+  console.log("New Client connected");
+
+  ws.on("message", (message) => {
+    const cell = JSON.parse(message.toString()) as ICell;
+
+    // todo sync here
+  });
+
+  ws.on("close", (event) => {
+    console.log(`Client ${ws} disconnected`);
+  });
+});
+
+//fsdf
+
+/* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
+
+app.use("/", express.static("build"));
+
+app.use("/login", authRouter);
+app.use("/logout", (req: Request, res: Response, next) => {
+  req.logOut(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("back");
+  });
+});
+
+app.use("/canvas", (req, res) => {
+  res.redirect("/");
+});
+app.use("/authenticated", checkAuthentication);
+app.use("/grid", gridRouter);
+
+server.listen(listenPort, () => {
+  console.log(`Listening on port ${listenPort}`);
+});
+
+/* ------------- MISCELLANEOUS CODE ------------- */
 
 // Current Canvas
 const canvasSize = 50;
-const canvas = <ICell[]>Array.from({length: canvasSize*canvasSize})
-	.fill(<ICell>{user: undefined, timeStamp: new Date(), emoji: ''});
-
-// Pixel updated event
-const serverEvents = new EventEmitter();
-
-// Setup static express server
-const app = express();
-const server = http.createServer(app);
-const wss = new WebSocketServer({server: server});
-
-app.use(express.static('build'));
-
-wss.on('connection', (ws) => {
-	console.log("New Client connected");
-
-	ws.on('message', (message) => {
-		const operation = <CellOperation>JSON.parse(message.toString());
-
-		console.log(`Got message:`);
-		console.log(operation);
-
-		canvas[operation.index] = operation.newCell;
-
-		console.log(canvas);
-	});
-
-	ws.on('close', event => {
-		console.log(`Client ${ws} disconnected`);
-	});
-});
-
-const listenPort = process.env.PORT || defaultPort;
-server.listen("3000", () => console.log(`Listening on port ${listenPort}`));
-
-
-//Setup mongoDB connection
-// mongoose.connect("mongodb+srv://"+process.env.MONGODB_USER+":"+process.env.MONGODB_PASS+"@r-place-cluster.9odz6aw.mongodb.net/?retryWrites=true&w=majority")
-// const connection = mongoose.connection
-//
-// const user1 = new Users({
-//     user: "michael",
-//     timeOfLastEdit: Date.now()
-// })
-// user1.save()
-// console.log('running')
-//
-// connection.once('open', async ()=>{
-//     console.log("DB Connected")
-//
-//     await Users.find({}, (error: any, docs: IUser[])=>{
-//         for(const user in docs){
-//             console.log(user)
-//         }
-//
-//     })
-// })
-//
-// app.on('listening', async ()=>{
-//     console.log("listening")
-//
-// })
+const canvas = Array.from({ length: canvasSize * canvasSize }).fill({
+  user: "",
+  timeStamp: new Date(),
+  emoji: "",
+}) as ICell[];
