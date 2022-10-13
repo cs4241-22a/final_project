@@ -73,27 +73,23 @@ wss.on("connection", (ws) => {
 
 /* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
 
+app.use("/", express.static("build"));
+
 app.use("/login", authRouter);
+app.use("/logout", (req: Request, res: Response, next) => {
+  req.logOut(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("back");
+  });
+});
+
 app.use("/canvas", (req, res) => {
   res.redirect("/");
 });
 app.use("/authenticated", checkAuthentication);
 app.use("/grid", gridRouter);
-
-// app.use("/logout", (req: Request, res: Response, next) => {
-//   req.logOut(function (err) {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.redirect("/login");
-//   });
-// });
-
-// app.use("/updateCell", gridRouter);
-// app.use("/cell", gridRouter);
-// app.use("/grid", gridRouter);
-
-app.use("/", express.static("build"));
 
 server.listen(listenPort, () => {
   console.log(`Listening on port ${listenPort}`);

@@ -29,7 +29,7 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
       {render
         ? null
         : board!.map((e: any, i: number) => {
-            console.log("kaldsjff;lkadsjk;lfasdjk;fl");
+            console.log(e!.emoji);
             return (
               <Pixel
                 key={i}

@@ -63,6 +63,7 @@ const checkAuthentication = (req: Request, res: Response, next: Function) => {
   if (req.isAuthenticated()) {
     res.send({ authenticated: true });
   } else {
+    console.log("here");
     res.send({ authenticated: false });
   }
 };
