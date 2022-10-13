@@ -13,5 +13,8 @@ We used ejs for the pages and components, and Boostrap for styling. Additional s
 # Team Responsibilities
 The majority of work was divided into client-server communication/set up, minigames, leaderboard, and login authentication. Sean worked on the leaderboard, personal scores, and client-server communication. Liliana worked on the frontend minigames, styling, and website accessibility. JR worked on the minigames, score graphs, backend... Jacob worked on the backend, login authentication, overall site styling (bootstrap & css), accuracy game, mongodb/mongoose, & Express.
 
+# Challenges
+There were two major challenges for this project. The first was having the UI look nice while also being accessible. We had to make some tough decisions when it came to the lighthouse test because while the test disliked some of our styling choices, we thought they looked nice. The other challenge was with chart.js. This was a new package to all of us and connecting it with the database became very challenging.
+
 # Achievements 
 As with previous assignments, we ensure Lighthouse scores of 100 in 3 categories with accessibility scoring a 97. We added a screenshot of the test called Lighthouse_test.png. Pages are easy to access given both header and footer links and descriptions. Our website has multiple fun minigames to test a user's abilities but also compare to an average score. We also added graphics using ChartJS to make the leaderboard and average scores per game more visually interesting.
