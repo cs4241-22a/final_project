@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = { 
       loggedin: true, 
       currUser:"", 
+      userRespNum: -1,
       posts: [],
       displayMakePost: false,
       displayMakeResponse: [],
@@ -31,7 +32,22 @@ class App extends React.Component {
     .then( json => {
       console.log(json);
         this.setState({ posts:json }) 
+    });
+  }
+
+  numResponses(username) {
+    fetch( '/userInfo', { 
+      method:'post', 
+      'no-cors': true, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({user: username}) 
     })
+    .then( response => response.json() )
+    .then( json => {
+      if(json[0] !== undefined) {
+        this.setState({ userRespNum: json[0].responses.length })
+      } 
+    });
   }
 
   loginStatus() {
@@ -43,6 +59,7 @@ class App extends React.Component {
     .then( response => response.json() )
     .then( json => {
       this.setState({ loggedin: json.login, currUser: json.user }) 
+      this.numResponses(json.user);
     })
   }
 
@@ -140,9 +157,6 @@ class App extends React.Component {
       });
     })
 
-    document.getElementById("viewrespbtn").click();
-    document.getElementById("viewrespbtn").click();
-
     let arr = this.state.displayMakeResponse;
     arr[i] = false;
     this.setState({displayMakeResponse: arr})
@@ -184,7 +198,6 @@ class App extends React.Component {
     }
   }
   showResponseData(i, j) {
-    debugger;
     return (
       <li>
         Song: {this.state.tempRespData[i][j].song}
@@ -203,8 +216,9 @@ class App extends React.Component {
       return (
         <>
         <h1>
-            Hello {this.state.currUser}
+            Hello {this.state.currUser} Responses Made: {this.state.userRespNum} 
         </h1>
+        <button type="button" onClick={() => window.location.reload()}>Refresh Everything</button>
         <div id="displayPosts">
           <button type="button" onClick={() => this.setState({displayMakePost: true})}>Make Post</button>
           {this.showMakePost()}

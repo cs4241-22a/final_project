@@ -27,7 +27,7 @@ function Login(props) {
       method: "post",
       "no-cors": true,
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({user, pass})
+      body: JSON.stringify({user, pass, responses: []})
     }).then((response) => response.json()).then((json) => {
       console.log(json.result);
       if (json.result !== "") {

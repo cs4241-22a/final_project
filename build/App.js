@@ -7,6 +7,7 @@ class App extends React.Component {
     this.state = {
       loggedin: true,
       currUser: "",
+      userRespNum: -1,
       posts: [],
       displayMakePost: false,
       displayMakeResponse: [],
@@ -27,6 +28,18 @@ class App extends React.Component {
       this.setState({posts: json});
     });
   }
+  numResponses(username) {
+    fetch("/userInfo", {
+      method: "post",
+      "no-cors": true,
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({user: username})
+    }).then((response) => response.json()).then((json) => {
+      if (json[0] !== void 0) {
+        this.setState({userRespNum: json[0].responses.length});
+      }
+    });
+  }
   loginStatus() {
     fetch("/loginStatus", {
       method: "get",
@@ -34,6 +47,7 @@ class App extends React.Component {
       headers: {"Content-Type": "application/json"}
     }).then((response) => response.json()).then((json) => {
       this.setState({loggedin: json.login, currUser: json.user});
+      this.numResponses(json.user);
     });
   }
   makePost(e) {
@@ -127,8 +141,6 @@ class App extends React.Component {
         body: JSON.stringify({_id: this.state.posts[i]._id, responseid: json.insertedId})
       });
     });
-    document.getElementById("viewrespbtn").click();
-    document.getElementById("viewrespbtn").click();
     let arr = this.state.displayMakeResponse;
     arr[i] = false;
     this.setState({displayMakeResponse: arr});
@@ -177,7 +189,6 @@ class App extends React.Component {
     }
   }
   showResponseData(i, j) {
-    debugger;
     return /* @__PURE__ */ React.createElement("li", null, "Song: ", this.state.tempRespData[i][j].song, "Artist: ", this.state.tempRespData[i][j].artist, "Comment: ", this.state.tempRespData[i][j].comment);
   }
   render() {
@@ -187,7 +198,10 @@ class App extends React.Component {
         to: "/login"
       });
     } else {
-      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser), /* @__PURE__ */ React.createElement("div", {
+      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser, " Responses Made: ", this.state.userRespNum), /* @__PURE__ */ React.createElement("button", {
+        type: "button",
+        onClick: () => window.location.reload()
+      }, "Refresh"), /* @__PURE__ */ React.createElement("div", {
         id: "displayPosts"
       }, /* @__PURE__ */ React.createElement("button", {
         type: "button",

@@ -102,6 +102,12 @@ app.get('/loginStatus', (req,res) => {
   res.json({login: loggedIn, user: currUser});
 })
 
+app.post('/userInfo', (req,res) => {
+  console.log(JSON.stringify(req.body))
+  db.collection("user").find({user: req.body.user}).toArray()
+  .then(result => res.json(result))
+})
+
 // Sends json array of all documents in the collection specified by req.body.name
 app.post('/collDocs', (req,res) => {
   db.collection(req.body.name).find({ }).toArray()

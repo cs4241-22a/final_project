@@ -32,7 +32,7 @@ function Login(props) {
             method: 'post',
             'no-cors': true,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({user: user, pass: pass})
+            body: JSON.stringify({user: user, pass: pass, responses: []})
         })
         .then(response => response.json())
         .then(json => {
