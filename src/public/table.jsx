@@ -60,10 +60,10 @@ class Table extends React.Component {
         const params = new URLSearchParams({ title: title });
         if(sessionuser == recipeuser) {
             // send to edit
-            window.location.replace(window.location.href.split(/[?#]/)[0] + "editrecipe?" + params.toString() );
+            window.location.href = window.location.href.split(/[?#]/)[0] + "editrecipe?" + params.toString();
         } else {
             // send to view
-            window.location.replace(window.location.href.split(/[?#]/)[0] + "viewrecipe?" + params.toString() );
+            window.location.href = window.location.href.split(/[?#]/)[0] + "viewrecipe?" + params.toString();
         }
     }
 };
