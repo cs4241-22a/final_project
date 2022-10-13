@@ -7,22 +7,33 @@ window.onload = function () {
     const startBtn = document.getElementById("startBtn");
     startBtn.addEventListener('click', function () {
         startBtn.disabled = true;
-        setTimeout(function() {playGame()}, 1100)
+        playGame()
     })
 
     function playGame() {
         // delay between 0 and 2 sec
-        let randDelay = Math.random() * 2000
+        let randDelay = Math.random() * 4000
+        gameWindow.addEventListener('click', () => {failed = true; failGame();})
         gameWindow.style.backgroundColor = 'red'
         activeStatus.innerText = "Wait..."
+        let failed = false
+        
         setTimeout(function () {
-            gameWindow.addEventListener('click', endGame)
-            gameWindow.style.backgroundColor = 'lightgreen'      // doesnt work?
-            activeStatus.innerText = "CLICK ME!"
-            startTs = Date.now()
-            
+            if (!failed) {
+                gameWindow.addEventListener('click', endGame)
+                gameWindow.style.backgroundColor = 'lightgreen'      // doesnt work?
+                activeStatus.innerText = "CLICK ME!"
+                startTs = Date.now()
+            }
         },
         randDelay)
+    }
+    
+    function failGame(){
+        gameWindow.removeEventListener('click', failGame)
+        startBtn.disabled = false
+        gameWindow.style.backgroundColor = "lightslategrey"
+        activeStatus.innerText = `Too Fast! Wait for Green!`
     }
 
     function endGame () {
