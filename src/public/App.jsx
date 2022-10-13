@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from './header';
+import SearchAndSort from './searchAndSort';
 
 class Table extends React.Component {
 
@@ -114,6 +115,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Header accountButtons={true} loggedIn={this.state.user != false} />
+                <SearchAndSort />
                 <body id='basic'>
                     <Table items={this.state.recipes} />
                 </body>
