@@ -61,8 +61,8 @@ In terms of my body of work on the assignment, most of my choices boil down to t
 
 Technoligies used: \
 -MongoDB \
--Express \
--HTML/CSS/JS
+-Express\
+-HTML/CSS/JS\
 *svelte/react to sharpen UI elements would be something I would have looked into if I had an extra day or two*
 
 One challenge involved handling the interplay between the dropdown menus and the server. Every time a user selects a new class, the server must fetch and/or alter the necessary fields inside of mongoDB. That, in tandem with conventional server-client interactions made for a lot of work. Another challenge was producing the visual representation of the schedule. The realization of the convuluted seven block, five class scheme added some algorithmic flair to my code that I'm fairly proud of. 
