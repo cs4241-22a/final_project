@@ -8,6 +8,7 @@ const Login = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     props.getUser()
+    props.funcNav(false);
     if (props.user.name) {
       navigate('/home');
     }

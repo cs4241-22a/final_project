@@ -14,6 +14,7 @@ import Login from "./pages/login"
 
 function App() {
   const [user, setUser] = useState({});
+  const [showNav, setShowNav] = useState(true);
 
   function getUser() {
     fetch("/username", {
@@ -27,15 +28,19 @@ function App() {
 
   return (
     <Router>
-      <Navbar getUser={getUser} user={user}/>
+      {   showNav &&
+          <nav>
+            <Navbar getUser={getUser} user={user}/>
+          </nav>
+      }   
       <Routes>
-        <Route exact path='/' element={<Login getUser={getUser} user={user}/> } />
-        <Route path='/home' element={<Home getUser={getUser} user={user}/>} />
+        <Route exact path='/' element={<Login funcNav={setShowNav} getUser={getUser} user={user}/> } />
+        <Route path='/home' element={<Home funcNav={setShowNav} getUser={getUser} user={user}/>} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/shop' element={<Shop getUser={getUser} user={user}/>} />
         <Route path='/listings' element={<Listings getUser={getUser} user={user}/>} />
         <Route path='/goal' element={<Goal />} />
-        <Route path='/login' element={<Login getUser={getUser} user={user}/>} />
+        <Route path='/login' element={<Login funcNav={setShowNav} getUser={getUser} user={user}/>} />
         <Route path='/logout' element={<Logout getUser={getUser} user={user}/>} />
       </Routes>
     </Router>
