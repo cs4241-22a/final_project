@@ -71,6 +71,8 @@
                 <select onchange="changeLevel(this.selectedIndex);">
                   <option>Level 1</option>
                   <option>Level 2</option>
+                  <option>Level 3</option>
+                  <option>Level 4</option>
                 </select>
               </div>
               <div class="select">
@@ -82,24 +84,26 @@
               <h2 class="is-size-5 has-text-centered mb-3">Leaderboard</h2>
               <button class="button is-info is-light" type="button" onclick="updateTable()">Refresh Scores</button>
             </div>
-            <table
-              style="width: 100%;"
-              id="scoreList"
-              class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Fewest Moves</th>
-                  <th>Fastest Time</th>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>-1</td>
-                  <td>NA</td>
-                </tr>
-              </thead>
-            </table>
+            <div id="tableScroll" style="overflow: auto;">
+              <table
+                style="width: 100%;"
+                id="scoreList"
+                class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Fewest Moves</th>
+                    <th>Fastest Time</th>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>-1</td>
+                    <td>NA</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -293,6 +297,10 @@
         model = new Model(level1);
       } else if (index == 1) {
         model = new Model(level2);
+      } else if (index == 2) {
+        model = new Model(level3)
+      } else if (index == 3) {
+        model = new Model(level4)
       }
       model.level = index + 1;
       let newModel = reset(model);
