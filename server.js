@@ -13,7 +13,6 @@ const path = require("path");
 const RealTimeChatRoute = require('./routes/RealTimeChat-route');
 const app = express();
 
-
 app.set("view engine", "ejs");
 
 app.use(express.json());
@@ -39,7 +38,7 @@ app.use("/auth", AuthRoute);
 app.use("/app", AppRoute);
 app.use('/friends', FriendsRoute);
 app.use('/friendplan', FriendPlanRoute);
-app.use('/rtchat', RealTimeChatRoute)
+app.use('/rtchat', RealTimeChatRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

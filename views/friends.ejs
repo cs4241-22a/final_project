@@ -41,14 +41,15 @@
     </div>
 <% }) %>
 
+<h6>your ID: <%= myID %></h6>
+
+
 <body class="p-3 mb-2 bg-dark text-white" style="font-family: fantasy;">
 
 <div class="container">
     <div class="position-relative text-center" style="font-family: fantasy; margin-top: 15em">
-        <h5>WELCOME, <%= myName %></h5>
-        <h5>your ID: <%= myID %></h5>
-
-    <h1>Your Connections Here</h1>
+        <h1>WELCOME, <%= myName %></h1>
+    <h3>Your Connections Here</h3>
         <div class="font-weight-light border-top border-white m-3 row"></div>
 
 <form method = 'POST' action = '/friends/add_friend' >
