@@ -5,6 +5,7 @@ import passport from "passport";
 import session from "express-session";
 import http from "http";
 import EventEmitter from "events";
+import cors from "cors";
 import { router as authRouter, checkAuthentication } from "./Routes/auth.js";
 import { router as gridRouter } from "./Routes/gridRouter.js";
 import { WebSocketServer } from "ws";
@@ -17,6 +18,13 @@ dotenv.config({ path: ".env" });
 
 const PORT = "3000";
 const app = express();
+
+app.use(cors());
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 const listenPort = process.env.PORT || PORT;
 
 /* ------------- ENVIRONMENT CONFIGURATION ------------- */
@@ -40,6 +48,9 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 /* ------------- WEB SOCKET CONFIGURATION ------------- */
 
@@ -68,7 +79,8 @@ wss.on("connection", (ws) => {
 
 /* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
 
-app.use("/login", checkAuthentication, authRouter);
+app.use("/login", authRouter);
+app.use("/authenticated", checkAuthentication);
 // app.use("/logout", (req: Request, res: Response, next) => {
 //   req.logOut(function (err) {
 //     if (err) {

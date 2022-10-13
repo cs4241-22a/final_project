@@ -1,11 +1,19 @@
 import express, { Request, Response } from "express";
 import passport from "passport";
 import * as dotenv from "dotenv";
+import cors from "cors";
 import { Strategy as GithubStrategy } from "passport-github2";
 import User, { IUser } from "../DB_Schema/userSchema.js";
+import fetch from "node-fetch";
 
 dotenv.config({ path: ".env" });
 const router = express.Router();
+
+router.use(cors());
+router.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 passport.serializeUser((user: any, cb: Function) => {
   cb(null, user.github_id);
@@ -20,7 +28,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      callbackURL: "/auth/github/callback",
+      callbackURL: "http://127.0.0.1:3000/login/auth/github/callback",
     },
     function (accessToken: any, refreshToken: any, profile: any, cb: Function) {
       User.findOne({ github_id: profile.id }, (err: any, user: IUser) => {
@@ -45,7 +53,6 @@ passport.use(
 );
 
 router.get("/auth/github", passport.authenticate("github"));
-
 router.get(
   "/auth/github/callback",
   passport.authenticate("github", {
@@ -63,8 +70,9 @@ router.use("/", express.static("build"));
 const checkAuthentication = (req: Request, res: Response, next: Function) => {
   if (req.isAuthenticated()) {
     res.send({ authenticated: true });
+  } else {
+    res.send({ authenticated: false });
   }
-  res.send({ authenticated: false });
 };
 
 export { router, checkAuthentication };

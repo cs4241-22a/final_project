@@ -28,31 +28,22 @@ export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
   // Initialize websocket connection
   initSocket();
 
-  // function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-  //   console.log("here");
-  //   if (activeElement !== undefined) {
-  //     const idx = parseInt(activeElement.id);
-
-  //     grid.current[idx] = activeEmoji;
-  //     const newCell: ICell = {
-  //       user: "",
-  //       emoji: activeEmoji,
-  //       timeStamp: new Date(),
-  //     };
-  //     const operation: CellOperation = { index: idx, newCell: newCell };
-  //     socket.send(JSON.stringify(operation));
-
-  //     activeElement.innerHTML = `<img src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${activeEmoji}.png" alt="grinning" class="__EmojiPicker__ epr-emoji-img" loading="eager" style="font-size: 12.8px; height: 12.8px; width: 12.8px;">`;
-  //   }
-  // }
-
   function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    (async () => {
-      const response = await fetch("/help", {
-        method: "GET",
-      });
-      console.log(response);
-    })();
+    console.log("here");
+    if (activeElement !== undefined) {
+      const idx = parseInt(activeElement.id);
+
+      grid.current[idx] = activeEmoji;
+      const newCell: ICell = {
+        user: "",
+        emoji: activeEmoji,
+        timeStamp: new Date(),
+      };
+      const operation: CellOperation = { index: idx, newCell: newCell };
+      socket.send(JSON.stringify(operation));
+
+      activeElement.innerHTML = `<img src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${activeEmoji}.png" alt="grinning" class="__EmojiPicker__ epr-emoji-img" loading="eager" style="font-size: 12.8px; height: 12.8px; width: 12.8px;">`;
+    }
   }
 
   useEffect(() => {}, []);

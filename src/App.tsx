@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
@@ -12,13 +12,12 @@ import { CanvasScreen, LoginScreen } from "./screens";
 import { lightTheme } from "./themes/light";
 import { darkTheme } from "./themes/dark";
 
-let authenticated = false;
-
 export type AuthenticationWrapperProps = {
   authenticated: boolean;
 };
 
 function AuthenticationWrapper({ authenticated }: AuthenticationWrapperProps) {
+  console.log(authenticated);
   return authenticated ? (
     <Navigate to="/canvas" replace />
   ) : (
@@ -27,6 +26,9 @@ function AuthenticationWrapper({ authenticated }: AuthenticationWrapperProps) {
 }
 
 export default function App() {
+  const [render, rerender] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -39,23 +41,29 @@ export default function App() {
       const response = await fetch("/authenticated");
       const json = await response.json();
 
-      console.log(json.authenticated);
+      console.log(json);
+
+      setAuthenticated(json.authenticated);
+      console.log(authenticated);
+      rerender(!render);
     })();
   }, []);
 
   return (
     <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Routes>
-          <Route
-            path="/"
-            element={<AuthenticationWrapper authenticated={authenticated} />}
-          />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/canvas" element={<CanvasScreen />} />
-        </Routes>
-      </ThemeProvider>
+      {render ? null : (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route
+              path="/"
+              element={<AuthenticationWrapper authenticated={authenticated} />}
+            />
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/canvas" element={<CanvasScreen />} />
+          </Routes>
+        </ThemeProvider>
+      )}
     </Router>
   );
 }
