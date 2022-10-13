@@ -1,3 +1,4 @@
+/*
 import App from './app.svelte';
 
 const app = new App({
@@ -10,3 +11,5 @@ const app = new App({
 window.app = app;
 
 export default app;
+*/
+console.log('toenail');
