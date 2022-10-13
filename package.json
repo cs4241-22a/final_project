@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "The final project for Webware in A term 2022 at WPI",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm dist/bundle.js",
@@ -23,9 +26,10 @@
     "bootstrap": "^5.2.2",
     "cookie-session": "^2.0.0",
     "dotenv": "^16.0.3",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.5",
+    "npm": "^8.19.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
