@@ -1,7 +1,8 @@
 <div id="results" style="display: none">
     <div>
-        <b id="topPercent"></b>
-        <canvas id="myChart"></canvas>
+        <h2 id="topPercent" class="display-5 fw-bold text-light">
+            </h1>
+            <canvas id="myChart"></canvas>
     </div>
     <div class="chart-container" style="position: relative; height:50vh; width:80vw">
         <canvas id="allScores"></canvas>
@@ -27,12 +28,12 @@
         console.log("Updating data")
         var data = null
         data = (typeof e.detail.data !== "undefined") ? e.detail.data : getData(game);
-        myScore =  (typeof e.detail.data !== "undefined") ? e.detail.myScore : getData(game);
+        myScore = (typeof e.detail.data !== "undefined") ? e.detail.myScore : getData(game);
         console.log("Got data for game: %s\nuser: %s\n\tdata: %s", game, user, data)
 
-        //TODO: Use data to create graphs & result text
-        getTopPercent(data, myScore)
-        // setupGraphs();
+        document.getElementById('results').style.display = null;
+
+        setupGraphs(data, myScore);
 
         results.style.display = "block"
     }
@@ -52,7 +53,8 @@
         return res
     }
 
-    function getTopPercent(allScore, myScore) {
+
+    function setupGraphs(allScore, myScore) {
         let topScore = true;
         let highIndex = 0;
 
@@ -66,60 +68,70 @@
 
         topText = document.getElementById('topPercent');
 
-        if (topScore){
+        if (topScore) {
             topText.innerText = "New High Score!"
         }
-        else{
-            topPercNum = (highIndex-allScore.length)/allScore.length
+        else {
+            topPercNum = Math.round(((allScore.length - highIndex) / allScore.length) * 100)
             topText.innerText = `You Scored Top ${topPercNum}%`;
         }
 
-    }
-
-    function setupGraphs(allData) {
         // find intv, devide by 10
-        const intv = allData[allData.length] - allData[0];
-        
+        // const intv = allData[allData.length] - allData[0];
+        graphLabel = []
+        graphData = [0, 0, 0, 0, 0]
+        for (let i = 0; i < 4; i++) {
+            let intvMulti = i * Math.trunc(allScore.length / 10);
+            graphLabel.push(allScore[intvMulti]);
+        }
+        graphLabel.push(allScore[allScore.length - 1]);
 
-
-        var originalLineDraw = Chart.controllers.line.prototype.draw;
-        Chart.helpers.extend(Chart.controllers.line.prototype, {
-            draw: function () {
-                originalLineDraw.apply(this, arguments);
-
-                var chart = this.chart;
-                var ctx = chart.chart.ctx;
-
-                var index = chart.config.data.lineAtIndex;
-                if (index) {
-                    var xaxis = chart.scales['x-axis-0'];
-                    var yaxis = chart.scales['y-axis-0'];
-
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.moveTo(xaxis.getPixelForValue(undefined, index), yaxis.top);
-                    ctx.strokeStyle = '#ff0000';
-                    ctx.lineTo(xaxis.getPixelForValue(undefined, index), yaxis.bottom);
-                    ctx.stroke();
-                    ctx.restore();
+        console.log(graphLabel);
+        for (const scoreElem in allScore) {
+            for (let labelElem = 1; labelElem < graphLabel.length; labelElem++) {
+                if (scoreElem <= graphLabel[labelElem]) {
+                    graphData[labelElem - 1] += 1;
+                    break;
                 }
             }
-        });
+        }
+        console.log(graphData);
 
-        var config = {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: graphLabel,
                 datasets: [{
-                    label: "My First dataset",
-                    data: [65, 0, 80, 81, 56, 85, 40],
-                    fill: false
-                }],
-                lineAtIndex: 2
+                    data: graphData,
+                    label: "Everyone",
+                    borderColor: "#3e95cd",
+                    backgroundColor: "#7bb6dd",
+                    fill: true,
+                }
+                ]
+            },
+            options: {
+                annotation: {
+                    annotations: [
+                        {
+                            drawTime: "afterDatasetsDraw",
+                            type: "line",
+                            mode: "vertical",
+                            scaleID: "x-axis-0",
+                            value: 5*((100-topPercNum)/100)-0.1,
+                            borderWidth: 5,
+                            borderColor: "red",
+                            label: {
+                                content: "ME",
+                                enabled: true,
+                                position: "top"
+                            }
+                        }
+                    ]
+                },
             }
-        };
 
-        var ctx = document.getElementById("myChart").getContext("2d");
-        new Chart(ctx, config);
+        });
     }
 </script>

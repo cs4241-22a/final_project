@@ -73,7 +73,5 @@ a {
 }
 .randBtn {
   position: relative;
-  top: 1;
-  left: 1;
   /*visibility: hidden;*/
 }

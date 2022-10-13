@@ -56,10 +56,11 @@ window.onload = function() {
                 body: JSON.stringify(result)
             }).then(async function( response ) {
                 var data = await response.json()
-                console.log( data )
-                console.log("response ^")
-
-                window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
+                let dataScore = data.map(gameRes => gameRes.score);
+    
+                console.log(dataScore);
+                
+                window.dispatchEvent(new CustomEvent("updateData", {detail: {data: dataScore, myScore : result.score}}))
             })
             
             clicks = []

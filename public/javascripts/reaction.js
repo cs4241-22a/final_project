@@ -2,31 +2,19 @@ window.onload = function () {
     let startTs = null
 
     const gameWindow = document.getElementById('gameWindow')
-    const statusText = document.getElementById('statusText')
     const activeStatus = document.getElementById('activeStatus')
 
     const startBtn = document.getElementById("startBtn");
     startBtn.addEventListener('click', function () {
         startBtn.disabled = true;
-        statusText.innerText = "Starting in 3...";
-        setTimeout(function() {countdown(2)}, 1100)
+        setTimeout(function() {playGame()}, 1100)
     })
-
-    function countdown(i){
-        if (i !== 0){
-            statusText.innerText = (i == 2) ? "Starting in 3... 2..." : (i == 1) ? "Starting in 3... 2... 1..." : "NAAA"
-            i -= 1
-            setTimeout(function() {countdown(i)}, 1100)
-        }
-        else{
-            statusText.innerText = "Click when the area is green."
-            playGame()
-        } 
-    }
 
     function playGame() {
         // delay between 0 and 2 sec
         let randDelay = Math.random() * 2000
+        gameWindow.style.backgroundColor = 'red'
+        activeStatus.innerText = "Wait..."
         setTimeout(function () {
             gameWindow.addEventListener('click', endGame)
             gameWindow.style.backgroundColor = 'lightgreen'      // doesnt work?
@@ -35,7 +23,6 @@ window.onload = function () {
             
         },
         randDelay)
-
     }
 
     function endGame () {
@@ -44,8 +31,7 @@ window.onload = function () {
         gameWindow.removeEventListener('click', endGame)
 
         startBtn.disabled = false
-        activeStatus.innerText = ''
-        statusText.innerText = `Reaction time: ${score} sec`
+        activeStatus.innerText = `Reaction time: ${score} sec`
 
         var result = {
             owner_id: user,
@@ -60,11 +46,11 @@ window.onload = function () {
             body: JSON.stringify(result)
         }).then(async function( response ) {
             var data = await response.json()
-            console.log( data )
-            console.log("response ^")
+            let dataScore = data.map(gameRes => gameRes.score);
 
-            window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
-        })
-    }
+            console.log(dataScore);
+            
+            window.dispatchEvent(new CustomEvent("updateData", {detail: {data: dataScore, myScore : result.score}}))
+        })    }
     
 }
