@@ -98,6 +98,7 @@ router.get("/", async (req, res) => {
   friend_requests = place[1];
   friend_pending = place[2];
   res.render("friends", {
+    myName: req.user.username,
     myID: _id,
     friend_list: friends,
     friend_req: friend_requests,
