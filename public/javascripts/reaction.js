@@ -12,7 +12,7 @@ window.onload = function () {
 
     function playGame() {
         // delay between 0 and 2 sec
-        let randDelay = Math.random() * 4000
+        let randDelay = (Math.random() * 3000) + 1500
         gameWindow.addEventListener('click', () => {failed = true; failGame();})
         gameWindow.style.backgroundColor = 'red'
         activeStatus.innerText = "Wait..."
