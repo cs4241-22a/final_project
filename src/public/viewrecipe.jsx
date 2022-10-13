@@ -21,27 +21,27 @@ class ViewRecipe extends React.Component {
 
     load() {
         //parse the recipe from the URL
-        const urlString = window.location.href
-        let url = new URL(urlString)
+        const urlString = window.location.href;
+        let url = new URL(urlString);
         let query = {
             title: url.searchParams.get("title")
-        }
+        };
         //get that recipe from the DB
-        fetch( '/view', {
-            method:'POST',
+        fetch('/view', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify( query )
-
+            body: JSON.stringify(query)
         })
             .then(response => response.json())
             .then(data => {
                 let the_username = "unknown"
-                if(data.username != undefined) {
+                if (data.username != undefined) {
                     the_username = data.username
                 }
-                this.setState( {recipe: {
+                this.setState({
+                    recipe: {
                         title: data.title,
                         ingredients: data.ingredients,
                         directions: data.directions,
@@ -49,9 +49,8 @@ class ViewRecipe extends React.Component {
                         numPeople: data.numPeople,
                         username: the_username
                     }
-                })
-
-            })
+                });
+            });
     }
 
     render() {
@@ -85,23 +84,22 @@ class ViewRecipe extends React.Component {
                         <Form.Control as="textarea" rows={5} defaultValue={this.state.recipe.directions} disabled={true} />
                     </Form.Group>
                     <Row className="mb-3">
-                        <Button variant="primary" onClick={ back }>
+                        <Button variant="primary" onClick={back}>
                             Back
                         </Button>
                     </Row>
                 </div>
             </div>
-
         );
     }
 }
 
 function back() {
-    fetch( '/home', {
-        method:'GET',
+    fetch('/home', {
+        method: 'GET',
     })
-        .then(response => window.location.replace(response.url))
+        .then(response => window.location.replace(response.url));
 }
 
 var mountNode = document.getElementById("page");
-ReactDOM.render(<ViewRecipe />, mountNode)
+ReactDOM.render(<ViewRecipe />, mountNode);

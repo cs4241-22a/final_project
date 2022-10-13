@@ -8,7 +8,7 @@ import Header from './header';
 class Table extends React.Component {
 
     getUser = async () => {
-        let the_user = undefined
+        let the_user = undefined;
         const user = await fetch('/getUser', {
             method: "GET",
             headers: {
@@ -16,12 +16,12 @@ class Table extends React.Component {
             },
         })
             .then(response => {
-                return response.json()
+                return response.json();
             })
             .then(data => {
-                 the_user = data.result
+                 the_user = data.result;
             })
-        return the_user
+        return the_user;
     }
 
     constructor(props) {
@@ -39,7 +39,7 @@ class Table extends React.Component {
                                     <Card.Title>{item.title}</Card.Title>
                                     <Card.Text>
                                         {<ul>
-                                            <li><b>Prep Time: {item.prepTime}</b></li>
+                                            <li><b>Prep Time: {item.prepTime} minutes</b></li>
                                             <li><b>Serves: {item.numPeople}</b></li>
                                         </ul>}
                                         <p>{item.directions}</p>
@@ -57,19 +57,18 @@ class Table extends React.Component {
     }
 
     viewOrEdit = async function(user, title) {
-        //if the recipe user is the same as the session user send to the edit page
-        //otherwise send to the view recipe page
-        const sessionuser = await this.getUser()
-        const recipeuser = user
+        // if the recipe user is the same as the session user send to the edit page
+        // otherwise send to the view recipe page
+        const sessionuser = await this.getUser();
+        const recipeuser = user;
         const params = new URLSearchParams({ title: title });
         if(sessionuser == recipeuser) {
-            //send to edit
-            window.location.replace(window.location.href + "editrecipe?" + params.toString() )
+            // send to edit
+            window.location.replace(window.location.href + "editrecipe?" + params.toString() );
         } else {
-            //send to view
-            window.location.replace(window.location.href + "viewrecipe?" + params.toString() )
+            // send to view
+            window.location.replace(window.location.href + "viewrecipe?" + params.toString() );
         }
-
     }
 }
 
@@ -82,10 +81,10 @@ class App extends React.Component {
             },
         })
             .then(response => {
-                return response.json()
+                return response.json();
             })
             .then(data => {
-                this.state.user = data.result; })
+                this.state.user = data.result; });
         return user;
     }
 
@@ -95,8 +94,6 @@ class App extends React.Component {
             recipes: [],
             user: this.getUser()
         };
-        console.log("State:");
-        console.log(this.state);
     }
 
     componentDidMount() {
@@ -110,8 +107,6 @@ class App extends React.Component {
         .then(res => {
             console.log(res);
             this.setState({ ...this.state, recipes: [...this.state.recipes, ...res] });
-            console.log("Current state");
-            console.log(this.state);
         });
     }
 

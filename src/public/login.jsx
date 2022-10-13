@@ -3,25 +3,23 @@ import ReactDOM from "react-dom";
 import { Button, Form } from "react-bootstrap";
 import Header from './header';
 
-const attemptLogin = function() {  
+const attemptLogin = function () {
     const username = document.getElementById("username").value;
-    if(username === "") {
-        document.getElementById("message").innerHTML = "**Fill the username please!";  
-        return false;  
+    if (username === "") {
+        document.getElementById("message").innerHTML = "**Fill the username please!";
+        return false;
     }
 
-    const pw = document.getElementById("password").value;  
-    //check empty password field  
-    if(pw === "") {  
-       document.getElementById("message").innerHTML = "**Fill the password please!";  
-       return false;  
-    }  
-
-    else {
+    const pw = document.getElementById("password").value;
+    //check empty password field
+    if (pw === "") {
+        document.getElementById("message").innerHTML = "**Fill the password please!";
+        return false;
+    } else {
         // all good, try to log in
-        const json = { 
-          "username": username, 
-          "password": pw
+        const json = {
+            "username": username,
+            "password": pw
         };
         const data = JSON.stringify(json);
 
@@ -29,12 +27,12 @@ const attemptLogin = function() {
             method: "POST",
             body: data,
             headers: {
-            "Content-Type": "application/json"
+                "Content-Type": "application/json"
             }
-        }).then (response => {
+        }).then(response => {
             if (!response.ok) {
-                console.log(response)
-              throw new Error(`HTTP error, status = ${response.status}`);
+                console.log(response);
+                throw new Error(`HTTP error, status = ${response.status}`);
             }
             else if (!response.redirected) {
                 return response.json();
@@ -69,7 +67,7 @@ class Login extends React.Component {
                         <Form.Control type="password" placeholder="Password" autoComplete="off" />
                     </Form.Group>
 
-                    <Button variant="primary" onClick= { attemptLogin }>
+                    <Button variant="primary" onClick={attemptLogin}>
                         Log In
                     </Button>
 
@@ -77,7 +75,6 @@ class Login extends React.Component {
                     <p class="center-text">Not a member? <a href="register">Sign up</a></p>
                 </div>
             </div>
-            
         );
     }
 }

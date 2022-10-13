@@ -74,7 +74,6 @@ const User = mongoose.model('User', userSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 app.get('/recipedata', async (req, res) => {
-    console.log("Retrieving recipe data");
     let allData = await Recipe.find({}); // later refine this, only send recipes written by the user
     res.json(allData).end();
 });
@@ -95,7 +94,7 @@ app.post('/login', (req, res) => {
                 res.redirect('/');
             } else {
                 req.session.login = false;
-                res.end(JSON.stringify("Username or password incorrect. Please try again."))
+                res.end(JSON.stringify("Username or password incorrect. Please try again."));
             }
         });
 });
@@ -130,7 +129,7 @@ app.get('/index', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/build/pages/index.html')
+    res.sendFile(__dirname + '/build/pages/index.html');
 });
 
 app.get('/login', (req, res) => {
@@ -159,9 +158,12 @@ app.get('/home', (req, res) => {
 
 
 app.get("/getUser", (req, res) => {
-    if (req.session.login && req.session.username != null) { res.send({ "result": req.session.username }); }
-    else res.send({ "result": false });
-})
+    if (req.session.login && req.session.username != null) {
+        res.send({ "result": req.session.username });
+    } else {
+        res.send({ "result": false })
+    };
+});
 
 // middleware for authentication; should only affect the data modification routes
 app.use((req, res, next) => {
@@ -176,7 +178,7 @@ app.get('/logout', (req, res) => {
     req.session.login = false;
     req.session.username = false;
     res.redirect('/');
-})
+});
 
 // recipe db interaction
 
@@ -186,10 +188,8 @@ app.post('/add', express.json(), async (req, res) => {
         res.redirect('/');
     } else {
         data.username = req.session.username;
-        //make sure this recipe user/title combo does not already exist
-        const recipes = await Recipe.find( { title: data.title } ).exec()
-        if(recipes.length === 0) {
-            //add recipe
+        const recipes = await Recipe.find({ title: data.title }).exec();
+        if (recipes.length === 0) {
             Recipe.collection.insertOne(data)
                 .then(function () {
                     res.redirect('/');
@@ -203,21 +203,21 @@ app.post('/add', express.json(), async (req, res) => {
 //used by the view/edit page to get the full data for a recipe
 app.post('/view', express.json(), async (req, res) => {
     const title = req.body.title;
-    const recipes = await Recipe.find({ title: title })
-    res.json(recipes[0]).end()
+    const recipes = await Recipe.find({ title: title });
+    res.json(recipes[0]).end();
 });
 
 app.patch('/update', express.json(), async (req, res) => {
-    await Recipe.findOneAndUpdate({ title: req.body.title, username: req.session.username }, { ingredients: req.body.ingredients, prepTime: req.body.prepTime,
-        numPeople: req.body.numPeople, directions: req.body.directions })
-
-    res.redirect('/')
+    await Recipe.findOneAndUpdate({ title: req.body.title, username: req.session.username }, {
+        ingredients: req.body.ingredients, prepTime: req.body.prepTime,
+        numPeople: req.body.numPeople, directions: req.body.directions
+    });
+    res.redirect('/');
 });
 
 app.post('/delete', express.json(), async (req, res) => {
-    await Recipe.deleteOne({ title: req.body.title, username: req.session.username })
-
-    res.redirect('/')
+    await Recipe.deleteOne({ title: req.body.title, username: req.session.username });
+    res.redirect('/');
 });
 
 app.listen(3000);

@@ -27,7 +27,7 @@ class Table extends React.Component {
       md: 4
     }, this.props.items.map((item, index) => /* @__PURE__ */ React.createElement(Card, {
       style: {width: "18rem", padding: "10px", margin: "15px"}
-    }, /* @__PURE__ */ React.createElement(Card.Body, null, /* @__PURE__ */ React.createElement(Card.Title, null, item.title), /* @__PURE__ */ React.createElement(Card.Text, null, /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("b", null, "Prep Time: ", item.prepTime)), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("b", null, "Serves: ", item.numPeople))), /* @__PURE__ */ React.createElement("p", null, item.directions)), /* @__PURE__ */ React.createElement(Button, {
+    }, /* @__PURE__ */ React.createElement(Card.Body, null, /* @__PURE__ */ React.createElement(Card.Title, null, item.title), /* @__PURE__ */ React.createElement(Card.Text, null, /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("b", null, "Prep Time: ", item.prepTime, " minutes")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("b", null, "Serves: ", item.numPeople))), /* @__PURE__ */ React.createElement("p", null, item.directions)), /* @__PURE__ */ React.createElement(Button, {
       variant: "primary",
       onClick: () => this.viewOrEdit(item.username, item.title)
     }, "View Full Recipe"))))));
@@ -63,8 +63,6 @@ class App extends React.Component {
       recipes: [],
       user: this.getUser()
     };
-    console.log("State:");
-    console.log(this.state);
   }
   componentDidMount() {
     fetch("/recipedata", {
@@ -75,8 +73,6 @@ class App extends React.Component {
     }).then((response) => response.json()).then((res) => {
       console.log(res);
       this.setState({...this.state, recipes: [...this.state.recipes, ...res]});
-      console.log("Current state");
-      console.log(this.state);
     });
   }
   render() {

@@ -6,6 +6,7 @@ const buttonsRight = (props) => {
         if (props.loggedIn === true) {
             return (
                 <Nav className="justify-content-end">
+                    <Button href="addrecipe" className="me-1" variant="outline-primary">Add Your Own Recipe</Button>
                     <Button href="logout" variant="outline-light">Log out</Button>
                 </Nav>
             )

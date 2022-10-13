@@ -7,7 +7,7 @@ function back() {
     fetch( '/home', {
         method:'GET',
     })
-        .then(response => window.location.replace(response.url))
+        .then(response => window.location.replace(response.url));
 }
 
 const addARecipe = function() {
@@ -18,14 +18,14 @@ const addARecipe = function() {
         directions: document.getElementById('directions'),
         prepTime: document.getElementById('preptime'),
         numPeople: document.getElementById('numpeople')
-    }
+    };
 
     //parse the ingredients into an array
-    let ingArr = inputs.ingredients.value.split(',')
+    let ingArr = inputs.ingredients.value.split(',');
     //remove leading and trailing spaces from each ingredient
-    let finalArr = []
+    let finalArr = [];
     for(let i = 0; i < ingArr.length; i++) {
-        finalArr.push(ingArr[i].trim())
+        finalArr.push(ingArr[i].trim());
     }
 
     const body = {
@@ -34,7 +34,7 @@ const addARecipe = function() {
         directions: inputs.directions.value,
         prepTime: inputs.prepTime.value,
         numPeople: inputs.numPeople.value
-    }
+    };
 
     fetch( '/add', {
         method:'POST',
@@ -43,9 +43,9 @@ const addARecipe = function() {
         },
         body: JSON.stringify( body )
     })
-        .then(response => window.location.replace(response.url))
+        .then(response => window.location.replace(response.url));
 
-    return false
+    return false;
 }
 
 class AddRecipe extends React.Component {
@@ -61,7 +61,7 @@ class AddRecipe extends React.Component {
                     </Form.Group>
                     <Row className="mb-3">
                         <Form.Group as={Col} className="mb-3" controlId="preptime">
-                            <Form.Label>Prep Time</Form.Label>
+                            <Form.Label>Prep Time (minutes)</Form.Label>
                             <Form.Control type="text" placeholder="Prep Time" autoComplete="off" />
                         </Form.Group>
 
@@ -90,7 +90,6 @@ class AddRecipe extends React.Component {
                     </Row>
                 </div>
             </div>
-
         );
     }
 }

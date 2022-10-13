@@ -87,7 +87,6 @@ class Register extends React.Component {
                     <p class="center-text">If you already have an account, <a href="login">log in</a></p>
                 </div>
             </div>
-            
         );
     }
 }
