@@ -149,7 +149,27 @@ app.post('/updatePostNewResponse', (req, res) => {
       {_id: ObjectId(req.body._id)},
       {$push: {responses: req.body.responseid}}
     )
-    .then(result => res.json(result))
+    .then(result => res.json(result));
+
+ 
+  db.collection('user').find({ }).toArray()
+  .then(result => {
+    let userFound = false;
+    let userID;
+    for(let login of result) {
+      //console.log("user: ", result);
+      if(login.user === currUser) {
+        userFound = true;
+        userID= login._id;
+      }
+    }
+    
+    db.collection("user")
+    .updateOne(
+      {_id: userID},
+      {$push: {responses: req.body.responseid}}
+    )
+  })
 })
 app.post('/updateResp', (req,res) => {
   db.collection("responses")
