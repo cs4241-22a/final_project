@@ -3,6 +3,12 @@ import ReactDOM from "react-dom";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import Header from './header';
 
+function back() {
+    fetch( '/home', {
+        method:'GET',
+    })
+        .then(response => window.location.replace(response.url))
+}
 
 const addARecipe = function() {
 
@@ -50,7 +56,8 @@ class AddRecipe extends React.Component {
                 <div className="center">
                     <Form.Group className="mb-3" controlId="title">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" placeholder="title" autoComplete="off" />
+                        <Form.Control type="text" placeholder="Choose a unique title (duplicate recipes will not be added)"
+                                      autoComplete="off" />
                     </Form.Group>
                     <Row className="mb-3">
                         <Form.Group as={Col} className="mb-3" controlId="preptime">
@@ -65,7 +72,7 @@ class AddRecipe extends React.Component {
                     </Row>
 
                     <Form.Group className="mb-3" controlId="ingredients">
-                        <Form.Label>Ingredients</Form.Label>
+                        <Form.Label>Ingredients (Comma Seperated)</Form.Label>
                         <Form.Control as="textarea" placeholder="Ingredients (Comma Seperated)" rows={2} autoComplete="off" />
                     </Form.Group>
 
@@ -73,10 +80,14 @@ class AddRecipe extends React.Component {
                         <Form.Label>Directions</Form.Label>
                         <Form.Control as="textarea" placeholder="Directions" rows={5} autoComplete="off" />
                     </Form.Group>
-
-                    <Button variant="primary" onClick= { addARecipe }>
-                        Add Recipe
-                    </Button>
+                    <Row className="mb-3">
+                        <Button as={Col} variant="primary" onClick={ back }>
+                            Back
+                        </Button>
+                        <Button as={Col} variant="primary" onClick= { addARecipe }>
+                            Add Recipe
+                        </Button>
+                    </Row>
                 </div>
             </div>
 

@@ -145,6 +145,19 @@ app.get('/addrecipe', (req, res) => {
     res.sendFile(__dirname + '/build/pages/addrecipe.html');
 });
 
+app.get('/editrecipe', (req, res) => {
+    res.sendFile(__dirname + '/build/pages/editrecipe.html');
+});
+
+app.get('/viewrecipe', (req, res) => {
+    res.sendFile(__dirname + '/build/pages/viewrecipe.html');
+});
+
+app.get('/home', (req, res) => {
+    res.redirect('/');
+});
+
+
 app.get("/getUser", (req, res) => {
     if (req.session.login && req.session.username != null) { res.send({ "result": req.session.username }); }
     else res.send({ "result": false });
@@ -167,64 +180,44 @@ app.get('/logout', (req, res) => {
 
 // recipe db interaction
 
-// takes a username (assumed to be unique) and returns the MongoDB id associated with it
-const getIdFromUsername = async (usernameToFind) => {
-    const user = await User.findOne({ username: usernameToFind });
-    return user.id;
-};
-
-const getRecipesFromUsername = async (usernameToFind) => {
-    const userId = await getIdFromUsername(usernameToFind);
-    const docs = await Recipe.find({ user: userId }, "_id title ingredients directions numPeople prepTime image");
-    return docs;
-};
-
 app.post('/add', express.json(), async (req, res) => {
     const data = req.body;
     if (req.session.username == null) {
         res.redirect('/');
     } else {
         data.username = req.session.username;
-        Recipe.collection.insertOne(data)
-            .then(function () {
-                res.redirect('/');
-            });
+        //make sure this recipe user/title combo does not already exist
+        const recipes = await Recipe.find( { title: data.title } ).exec()
+        if(recipes.length === 0) {
+            //add recipe
+            Recipe.collection.insertOne(data)
+                .then(function () {
+                    res.redirect('/');
+                });
+        } else {
+            res.redirect('/');
+        }
     }
 });
 
-//app.post('/update', express.json(), (req, res) => {
-//    recipecollection.find({ name: { $exists: true } }).toArray()
-//        .then(result => res.json(result));
-//})
+//used by the view/edit page to get the full data for a recipe
+app.post('/view', express.json(), async (req, res) => {
+    const title = req.body.title;
+    const recipes = await Recipe.find({ title: title })
+    res.json(recipes[0]).end()
+});
 
 app.patch('/update', express.json(), async (req, res) => {
-    const userId = await getIdFromUsername(req.session.username);
-    let doc = await Recipe.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, ingredients: req.body.ingredients, prepTime: req.body.prepTime, numPeople: req.body.numPeople, image: req.body.image });
-    const data = await getRecipesFromUsername(req.session.username);
-    if (data.length == 0) {
-        res.end();
-    } else {
-        res.json(data).end();
-    }
+    await Recipe.findOneAndUpdate({ title: req.body.title, username: req.session.username }, { ingredients: req.body.ingredients, prepTime: req.body.prepTime,
+        numPeople: req.body.numPeople, directions: req.body.directions })
+
+    res.redirect('/')
 });
 
-// TODO: add the fields we will use to update route
-// app.post('/modify', express.json(), (req, res) => {
-//     const data = req.body;
-//     const user = req.session.username;
-
-//     recipecollection.updateOne({ $and: [{ name: name }, { username: user }] }, { $set: { name: data.name } })
-//         .then(result => res.json(result));
-// });
-
 app.post('/delete', express.json(), async (req, res) => {
-    const userId = await getIdFromUsername(req.session.username);
-    Recipe.deleteOne({ title: req.body.title, user: userId }).then(() => { // assumes unique recipe title
-        console.log("Successfully deleted");
-    }).catch((error) => {
-        console.log(error); // Failure
-    });
-    res.json(await getRecipesFromUsername(req.session.username)).end();
+    await Recipe.deleteOne({ title: req.body.title, username: req.session.username })
+
+    res.redirect('/')
 });
 
 app.listen(3000);
