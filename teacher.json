@@ -1,0 +1,32 @@
+[
+
+
+    {
+        "name": "Joeseph Lentino",
+        "email": "jlentino@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "name": "Colby King",
+        "email": "crey@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "name": "Beth Schiller",
+        "email": "bschiller@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "name": "Ronald Mandavi",
+        "email": "rsmandavi@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    }
+]

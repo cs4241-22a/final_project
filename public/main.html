@@ -1,0 +1,271 @@
+<html lang="en">
+  <head>
+    <title>CS4241 Final Project MainPage</title>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" class="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/base-min.css">
+  </head>
+  <body class="container">
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="/">My Portal</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="/pasteschedule" class="pure-menu-link">View Schedule</a></li>
+                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Home</a></li>
+                <li class="pure-menu-item"><a href="/userupdate" class="pure-menu-link">Update Profile</a></li>
+                <li class="pure-menu-item"><a href="/signout" class="pure-menu-link">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+    <p></p>
+    <p></p>
+    <h1>Math Department</h1>
+    <h1>Educator Portal</h1>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+           Select classes to teach for the upcoming school year: <b id="uEmail"></b>
+          <table>
+            <tr>
+              <td>
+                <img class="myimg" src="mathsymbols.jpeg" alt="a car">
+              </td>
+            </tr>
+          </table>
+      </div>
+      <div class="pure-u-1-2">
+        <form>
+          <div>
+            <ul id="outT" class="pure-menu-list"></ul>
+          </div>
+        </form>
+      </div>
+     </div>
+
+  <script>
+  // global things
+  // filled by showuser() call
+  var classes = [];
+  var blocks = [];
+  var userData = {};
+
+  // render user data
+  function renderData(data){
+    userData = data
+    var em = document.getElementById("uEmail")
+    em.innerHTML=data.email
+    var mt = document.getElementById("outT")
+    while(mt.firstChild){
+      mt.removeChild(mt.lastChild)
+    }
+    console.log(blocks.length)
+    for(f = 0; f<blocks.length; f++){
+      var element = document.createElement("li")
+      var dd = document.createElement("select")
+      dd.setAttribute("id",blocks[f].name)      
+      dd.setAttribute("class","pure-select")
+      dd.setAttribute("name",blocks[f].name)
+      for(c = 0; c<blocks[f].classes.length; c++){
+        var opt = document.createElement("option")
+        opt.setAttribute("value",blocks[f].classes[c])
+        if(blocks[f].name in data.sched){
+          opt.selected = true;
+        }
+        opt.innerHTML = getClassName(blocks[f].classes[c],classes)
+        dd.appendChild(opt)
+      }
+      //const theYear = new Date().getFullYear()
+      //console.log(theYear)
+      element.innerHTML = "Block  " + blocks[f].name + "   "
+      dd.addEventListener("change", myselect)
+      element.appendChild(dd)
+      mt.appendChild(element)
+    }
+  }
+  
+  // event handelr for menu select actions
+  const myselect = function( e ) {
+    // prevent default form action from being carried out
+    e.preventDefault()
+    // getting data from the event target:
+    // select ID - will give us block
+    // selected item will give us 'selected' value on select option
+    var blockC = e.target.getAttribute("id")
+    var index = e.target.options["selectedIndex"]
+    var classC = e.target.options[index].value
+    // construct update json to be sent to the server
+    var jsonUpdate = {'updates': {}}
+    jsonUpdate['updates']['bl'] = blockC;
+    jsonUpdate['updates']['cl'] = classC;
+    console.log("in myselect ...")
+    //console.log(blockC)
+    //console.log(classC)
+    //console.log(userData)
+    // construct jason update to the server ... 
+    // we operate colasses[] and blocks[] on user record
+    // select has id based on block name
+    // and value is a class name
+    // we check user data first to confirm we do not have this pair 
+    // in class/blocks array and if do call error pop-up to tell user it is wrong
+    // else 
+    // our update to the server is
+    // { BLOCK: CLASS}
+    // server needs to update user's record
+    // by adding index 
+    // 
+    // collect id and value
+    // check if we have these on record
+    // show what update are going to send
+    console.log(jsonUpdate)
+    console.log("sending updates")
+    // send update and get user data back
+    body = JSON.stringify( jsonUpdate )
+    fetch( '/classSelection', {
+      method:'POST',
+      body 
+    })
+    .then( function( response ) {
+      // do something with the reponse 
+      return response.json();
+    })
+    .then(function(userData){
+      renderData(userData)
+    })
+    return false;
+  }
+
+  // left here from the car case ... is kept for reference
+
+// gets classes json object
+async function getClasses(){
+  const response = await fetch('/classesfetch', {
+                method: 'GET'
+            });
+            const cl = await response.json();
+            return cl;
+}
+// gets blocks json object
+async function getBlocks(){
+  const response = await fetch('/blocksfetch', {
+                method: 'GET'
+            });
+            const bl = await response.json();
+            return bl;
+}
+// gets class name by vlass code
+function getClassName(code,classes){
+  for(i = 0; i<classes.length;i++){
+    if( classes[i].code === code){
+      return classes[i].name
+    }
+  }
+  return ""
+}
+// not used
+function classByBlock(cl,block,dt){
+  var ret = false;
+  console.log(dt)
+  for(i=0;i<dt.classes.length;i++){
+    if(dt.classes[i] === cl){
+      if(dt.blocks[i] === block){
+        return true;
+      }
+    }
+  }
+  return ret;
+}
+// show user data
+async function showuser() {
+    console.log("showuser ...")
+    // get classes and blocks from the server
+    classes = await getClasses();
+    blocks = await getBlocks();
+    // show them on the console
+    console.log(classes)
+    console.log(blocks)
+    // get user data from the server
+    fetch( '/showuser', {
+      method:'GET'
+    })
+    .then( function( response ) {
+      // do something with the reponse 
+      return response.json();
+    })
+    .then(function(data){
+      // call function below
+      appendData(data)
+    })
+    //console.log(data)
+    function appendData(data){
+      userData = data
+      // insert user's email on the page
+      var em = document.getElementById("uEmail")
+      em.innerHTML=data.email
+      // find outT tag on the page
+      // this tag will be replaced by components below
+      var mt = document.getElementById("outT")
+      // clean up older version of <li>... from the page
+      while(mt.firstChild){
+        mt.removeChild(mt.lastChild)
+      }
+      // loop over blocks
+      for(f = 0; f<blocks.length; f++){
+        // create li element for each block
+        var element = document.createElement("li")
+        // create select element to be placed into <li>
+        var dd = document.createElement("select")
+        // set blok name as is
+        dd.setAttribute("id",blocks[f].name)      
+        dd.setAttribute("class","pure-select")
+        // add name (if form is used to proecess post in the future)
+        dd.setAttribute("name",blocks[f].name)
+        // loop over classes allocated for each blocj by admin staff
+        // populate <options> for select object
+        for(c = 0; c<blocks[f].classes.length; c++){
+          var opt = document.createElement("option")
+          opt.setAttribute("value",blocks[f].classes[c])
+          // handle 'selected' case for each class
+          // sched: { A: 'MC6', B: 'MC10', C: 'MC14', G: 'MC7', D: 'MC5', F: 'MC9' }
+          if(blocks[f].name in data.sched){
+            if(blocks[f].classes[c] === data.sched[blocks[f].name]){
+              console.log("hit")
+              // flip case to 'selected'
+              opt.selected = true;
+            }
+          }
+          // appeend value to show on the page
+          opt.innerHTML = getClassName(blocks[f].classes[c],classes)
+          // add option to select object
+          dd.appendChild(opt)
+        }
+        //const theYear = new Date().getFullYear()
+        //console.log(theYear)
+        // put it all and attache to outer object
+        element.innerHTML = "Block  " + blocks[f].name + "   "
+        dd.addEventListener("change", myselect)
+        element.appendChild(dd)
+        mt.appendChild(element)
+      }
+    }
+    return false
+  }
+
+  window.onload = function() {
+    // show user data
+    showuser()
+    // add event handeler for 'submit' button. Not needed
+    bilbos = document.getElementsByClassName("pure-button")
+    for(var i = 0; i<bilbos.length; i++){
+      //console.log(bilbos[i])
+      bilbos[i].addEventListener("click",submit)
+      var id = bilbos[i].id
+      //console.log(id)
+    }  
+  }
+  </script>
+  </body>
+</html>

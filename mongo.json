@@ -1,0 +1,161 @@
+[
+
+     {
+        "type": "teacher",
+        "name": "Joeseph Lentino",
+        "email": "jlentino@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "type": "teacher",
+        "name": "Colby King",
+        "email": "crey@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "type": "teacher",
+        "name": "Beth Schiller",
+        "email": "bschiller@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+    {
+        "type": "teacher",
+        "name": "Ronald Mandavi",
+        "email": "rsmandavi@k12.ma.us",
+        "password": "changeMe",
+        "classes": [],
+        "blocks": []
+    },
+   
+   
+   
+   
+   
+    {
+        "type": "class",
+        "code": "MC1",
+        "name": "H. Calculus",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC2",
+        "name": "AP Calculus AB",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC3",
+        "name": "AP Calculus BC",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC4",
+        "name": "Calculus",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC5",
+        "name": "Functions and Operations",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC6",
+        "name": "Geometry",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC7",
+        "name": "H. Geometry",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC8",
+        "name": "H. Algebra 2",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC9",
+        "name": "Algebra 2",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC10",
+        "name": "Statistics",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC11",
+        "name": "H. Statistics",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC12",
+        "name": "AP Statistics",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC13",
+        "name": "Pre-Calculus",
+        "blocks": []
+    },
+    {
+        "type": "class",
+        "code": "MC14",
+        "name": "H. Pre-Calculus",
+        "blocks": []
+    },
+    
+    {
+        "type": "block",
+        "name": "A",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "B",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "C",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "D",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "E",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "F",
+        "classes": []
+    },
+    {
+        "type": "block",
+        "name": "G",
+        "classes": []
+    }
+
+]

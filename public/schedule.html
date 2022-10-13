@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Final Project VisualAid</title>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" class="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stuff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/base-min.css">
+
+  </head>
+  <body class="container">
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="/">High School: My Portal</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">View Schedule</li>
+                <li class="pure-menu-item pure-menu-selected"><a href="" class="pure-menu-link">Home</a></li>
+                <li class="pure-menu-item"><a href="/userupdate" class="pure-menu-link">Update Profile</a></li>
+                <li class="pure-menu-item"><a href="/signout" class="pure-menu-link">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+    <p></p>
+    <p></p>
+    <div class="pure-g">
+        <div class="pure-u-1-2">
+            <p style="font-size: 45px">Your schedule for the year: </p> <b id="uemail"></b>
+        </div>
+        <div class="pure-u-1-2">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <table>
+                <tr>
+                  <td>
+                    <img class="myimg" src="mathsymbols.jpeg" alt="a car">
+                  </td>
+                </tr>
+              </table>
+        </div>
+    </div>
+    <p></p>
+
+   
+   
+    <b style="color:black; font-size:20px">Color Key:</b>
+    <div class="pure-g" style="color:white; padding-top:20px; outline: 5px; text-align:center; width:80%;">
+        <div class="pure-u-1-8" style="background-color:blue; outline:7px; outline-color: whitesmoke;">
+          A
+          <p></p>
+        </div>
+        <div class="pure-u-1-8" style="background-color:red">
+         B
+      </div>
+  
+      <div class="pure-u-1-8" style="background-color:violet">
+        C
+    </div>
+  
+    <div class="pure-u-1-8" style="background-color:rgb(1, 72, 8)">
+     D
+  </div>
+  <div class="pure-u-1-8" style="background-color:orange">
+   E
+  </div>
+  <div class="pure-u-1-8" style="background-color:rgb(54, 2, 2)">
+    F
+  </div>
+  <div class="pure-u-1-8" style="background-color: rgb(166, 165, 185)">
+    G
+  </div>
+  <div class="pure-u-1-8" style="background-color: orangered">
+    refer to other HS resources for bell times
+  </div>
+  </div>
+  <p></p>
+  
+      
+      <table class="pure-table" style="width:90%;">
+        <thead style="background-color:white">
+          <tr>
+            <th>
+                Day 1
+            </th>
+            <th>
+              Day 2
+            </th>
+            <th>
+              Day 3
+            </th>
+            <th>
+              Day 4
+            </th>
+            <th>
+              Day 5
+            </th>
+            <th>
+              Day 6
+            </th>
+            <th>
+              Day 7
+            </th>
+          </tr>
+        </thead>
+        <tbody id="theTarget" style="color:white; outline-color: blue; font-size:25px">
+        </tbody>
+      </table>
+      <script>
+
+        var colorCodes = [];
+        colorCodes[1] = "blue"
+        colorCodes[2] = "red"
+        colorCodes[3] = "violet"
+        colorCodes[4] = "rgb(1, 72, 8)"
+        colorCodes[5] = "orange"
+        colorCodes[6] = "rgb(54, 2, 2)"
+        colorCodes[0] = "rgb(166, 165, 185)"
+
+        var blockIndicator = []
+        blockIndicator[1] = "A"
+        blockIndicator[2] = "B"
+        blockIndicator[3] = "C"
+        blockIndicator[4] = "D"
+        blockIndicator[5] = "E"
+        blockIndicator[6] = "F"
+        blockIndicator[0] = "G"
+
+        var rows = 5
+        var columns = 7
+
+        var classes = [];
+        async function getClasses(){
+            const response = await fetch('/classesfetch', {
+                method: 'GET'
+            });
+            const cl = await response.json();
+            return cl;
+        }
+
+        function getClassName(code,classes){
+            for(i = 0; i<classes.length;i++){
+                if( classes[i].code === code){
+                    return classes[i].name
+                }
+            }
+            return ""
+        }
+
+        //have to create a server path that loads this page when you click view schedule in the main
+        //menu
+        async function renderSchedule(){
+            classes = await getClasses()
+            fetch( '/showuser', {
+                method:'GET'
+            })
+            .then( function( response ) {
+                        // do something with the reponse 
+                return response.json();
+            })
+            .then(function(data){
+                // call function below
+                appendData(data)
+            })
+
+            function appendData(data){
+                userData = data
+                var tableCount = 1
+                // var mail = document.getElementById("uemail")
+                //  mail.innerHTML = data.email
+                var grids = document.getElementById("theTarget")
+                while(grids.firstChild){
+                    console.log("Debug while loop")
+                    grids.removeChild(grids.lastChild)
+                }
+                console.log("post while loop")
+                for(var i = 0; i<rows; i++){
+                    var aRow = document.createElement("tr")
+                    console.log("inside for loop")
+                    console.log(i)
+                    iVar = i + 1
+                    // console.log("what is love of the i but a gentle embrace of a warm winter blanket " + i)
+                    for(var j=iVar; j<(rows*columns +1 );j=j+rows){
+                        console.log("what is i? " + iVar)
+                        // modvolvio = j % 7
+                        console.log("the variable for j:  " + j)
+                        var entry = document.createElement("td")
+                        var cssString = "background-color: "+ colorCodes[j%7] + "; text-align: center;"
+                        console.log(j%7 + " what will be printed here?")
+                        console.log("the new variable for j:  " + j)
+                        //modulo 0 is block 7!!!!!
+                        console.log(i)
+                        entry.setAttribute("style", cssString)
+                        if(blockIndicator[j % columns] in data.sched){
+                            //print the name of the class
+                            var className = getClassName(data.sched[blockIndicator[j%7]], classes)
+                            console.log("The class" + className)
+                            entry.innerHTML = className
+                        } else{
+                            entry.innerHTML = blockIndicator[j%7]
+                        }
+                        //data.sched[blockIndicator[j%7].name]
+                        aRow.appendChild(entry)
+                    }
+                    console.log("the i   " + i)
+                    grids.appendChild(aRow)
+                    console.log("what have we here!" + i +"   " + iVar)
+                }
+                        //construction of schedule begins here
+            }
+            return false
+        }
+
+        window.onload = function(){
+            console.log("start printing schedule")
+        renderSchedule()
+        }
+
+
+
+
+      </script>  
+  </body>
+</html>
