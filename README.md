@@ -1,49 +1,59 @@
-# Final Project
-*Due October 13th (final day of the term)*
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+### 1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+#### Link: https://final-project-gompeis-gambit.glitch.me
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+The main gameplay loop consists of two features:
+#### Combat:
+  - 1-4 randomly generated enemies (stats, type, etc.), with difficulty scaling based on how many encounters the player has completed. 
+  - choose which enemy to attack, and is then attacked by all the remaining enemies. 
+  - Upon defeating enemies the player is rewarded with gold which can be spent to upgrade their stats.
 
-### Deliverables
+#### Shop: 
+  - choice of 3 items
+    - a max health upgrade
+    - damage upgrade
+    - a healing upgrade
+  - stats and cost of these items are randomly generated, scaling based on how many encounters the player has completed.
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+All player stats are stored in the database, so users can leave mid-run and return without losing progress.
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
+  As a group we decided to make a website with a text rpg coded into it. With the text RPG we looked at some test rpgs to see look at what makes it and how to create ours based off them. After brainstorming we figured out the basics of what we wanted and what we hoped to get finished if we had time. We decided we wanted a game that had enemies that would be spawned randomly and would give gold for the player to upgrade stats in the shop.
+  After the time was up we created most of what we wanted when we were brainstorming. We left out the bosses we wanted to add and non combat choices that would either help you or kill you. But because of that we were able to finish our game with what really mattered with a functioning game with random enmies that scale and a player thats stats increase by buying items from the store. We also have the game tied to accounts to make it easy on people with the ability to choose what character they want to use(it only affects visual not gameplay) with buttons that let the player choose.
 
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+### 2. Any additional instructions that might be needed to fully use your project (login information etc.)
 
-There are no other scheduled checkpoints for your project. 
+Sample email to login:
+email: joemama@gmail.com 
+password : 123
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+(Can type in random email and password, and it will create an account)
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
+### 3. An outline of the technologies you used and how you used them.
 
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
+- MongoDB - storing user login and player stats
+- Bcrypt - encrypting passwords
+- Body-parser - parsing json
+- cookie parser - parsing cookies
+- dotenv - storing environment variables
+- express - backend server
+- express session - managing/storing sessions
+- mongoose - creating MongoDB schemas
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
+### 4. What challenges you faced in completing the project.
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+- Writing asynchronous requests and having the UI update correctly based on responses from the backend server
+- Using closures to dynamically generate buttons to create a turn-based game that relies on user-input. 
+- Storing user session via cookies and player stats in the database
 
-## FAQs
+### 5. What each group member was responsible for designing / developing.
+Brainstorming - all
 
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+- Caleb - setup database, backend routes, combat and shop front-end logic, procedural enemy generation back-end logic
+- Joe - worked on the basics of the shop function with get item, and gave helping tips to others on their parts, recodrding and brief description
+- Kaley - front end html and css (game screen)
+- Kate - front end html and css (login and character select)
+
+### 6. A link to your project video.
+#### Link: https://www.youtube.com/watch?v=3PgQ-U3BUfA

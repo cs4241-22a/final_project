@@ -1,0 +1,39 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-content: center;
+  align-items: center;
+  width: 50%;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: lighter;
+  font-family: 'Press Start 2P', cursive;
+}
+
+
+button {
+  margin-top: 100px;
+  width: 50%;
+}
+
+input {
+  width: 50%;
+}
+/* #email-input-box, #password-input-box{
+  text-align: center;
+} */
+
+#email, #password {
+  font-family: 'Press Start 2P', cursive;
+}
+
