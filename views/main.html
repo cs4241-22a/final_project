@@ -318,7 +318,7 @@
             if (parseInt(response.Level,10) == parseInt(sortLevel,10)){
               let i = 0;
               if (sortType == "Moves"){
-                for (i = table.rows.length-1; i > 1; i--) {
+                for (i = table.rows.length-1; i > 0; i--) {
                   if (
                     parseFloat(response.Moves) >
                     parseFloat(table.rows.item(i).cells.item(1).innerHTML)
@@ -328,7 +328,7 @@
                   }
                 }
               } else {
-                for (i = table.rows.length-1; i > 1; i--) {
+                for (i = table.rows.length-1; i > 0; i--) {
                   if (
                     parseFloat(response.Time) >
                     parseFloat(table.rows.item(i).cells.item(2).innerHTML)
