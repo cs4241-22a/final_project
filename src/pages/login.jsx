@@ -7,8 +7,8 @@ import { Button } from 'semantic-ui-react'
 const Login = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
+    props.funcNav(false)
     props.getUser()
-    props.funcNav(false);
     if (props.user.name) {
       navigate('/home');
     }
