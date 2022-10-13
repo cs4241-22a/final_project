@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PushBox</title>
+    <meta charset="utf-8" user-scalable="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <meta name="description" content="A Game for CS4241 by Mark Renzi, Jordan Wecler, and Cather Zhang.">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
+  </head>
+  <nav class="navbar is-fixed-top has-background-warning-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        <img src="./assets/PushBox.png" width="28" height="28">
+      </a>
+      
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item js-modal-trigger" data-target="instructions">
+          Instructions
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item js-modal-trigger" data-target="authors">
+              Authors
+            </a>
+            <a class="navbar-item" href="https://github.com/Cather-Zhang/final_project" target="_blank" rel="noopener noreferrer">
+              Documentation
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-danger" onclick="window.location.href='https://pushbox.glitch.me/logout';">
+              <strong>Log Out</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <body class="hero has-background-warning-light is-fullheight py-2 has-navbar-fixed-top">
+    <main class="container is-fluid has-background-warning-light">
+      <div class="container has-background-warning box" style="margin-top:50px;">
+        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center mb-3 box is-flex-shrink-5">
+          <h1 class="is-size-4">Welcome to PushBox!</h1>
+        </div>
+        <div class = "columns">
+          <div id="root" class="column"></div> <!-- THIS ROOT IS REPLACED WITH OUR CANVAS -->
+          <div class="column box mt-5 mb-3 mx-3">
+            <div class="is-flex is-justify-content-space-evenly is-align-content-center mb-3">
+              <div class="select">
+                <select onchange="changeLevel(this.selectedIndex);">
+                  <option>Level 1</option>
+                  <option>Level 2</option>
+                  <option>Level 3</option>
+                  <option>Level 4</option>
+                </select>
+              </div>
+              <div class="select">
+                <select onchange="changeSort(this.selectedIndex);">
+                  <option>Moves</option>
+                  <option>Time</option>
+                </select>
+              </div>
+              <h2 class="is-size-5 has-text-centered mb-3">Leaderboard</h2>
+              <button class="button is-info is-light" type="button" onclick="updateTable()">Refresh Scores</button>
+            </div>
+            <div id="tableScroll" style="overflow: auto;">
+              <table
+                style="width: 100%;"
+                id="scoreList"
+                class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Fewest Moves</th>
+                    <th>Fastest Time</th>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>-1</td>
+                    <td>NA</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <div id="authors" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <p class="is-size-3"><b>Authors:</b></p>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Mark Renzi</p><span class="buttons"><a class="button is-link is-light" href="https://github.com/Mark-Renzi" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/mark-renzi-137932213/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Jordan Wecler</p> <span class="buttons"><a class="button is-link is-light" href="https://github.com/jrwecler" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/jordan-wecler-0524b11b4/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+          <div class="is-flex is-flex-direction-row is-align-content-center is-justify-content-start">
+            <p class="my-3 mx-5">Cather Zhang</p> <span class="buttons"><a class="button is-link is-light" href="https://github.com/Cather-Zhang" target="_blank" rel="noopener noreferrer"><b>Github</b></a><a class="button is-link" href="https://www.linkedin.com/in/cather-zhang/" target="_blank" rel="noopener noreferrer"><b>LinkedIn</b></a></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    
+    <div id="instructions" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <p class="is-size-3"><b>Instructions:</b></p>
+          <p class="my-3 mx-5">You can use the arrow keys or the on-screen buttons to move the character.
+          The goal is to push each pair of matching colored blocks together to remove them from the board. <br>You may not push more than one block at a time,
+            and the goal is to clear the board in as few moves as possible.</p> 
+          <aside>Press 'Submit' after finishing a level to submit your score to the leaderboard. Submit better scores to update your standing, only your best times and move counts will be stored.</aside>
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    
+    
+  </body>
+  <script>
+    const add = function (e) {
+      // prevent default form action from being carried out
+      // e.preventDefault();
+      
+      let json = {
+          Name: "PHOLDER",
+          Moves: model.numMoves,
+          Time: timePassed,
+          Level: model.level,
+          User: 0,
+        },
+        body = JSON.stringify(json);
+
+      if (model.victory == true) {
+        fetch("/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(json),
+        }).then((responseJson) => {
+          updateTable();
+        });
+      }
+      return false;
+    };
+  
+    function startTimer() {
+      beginTime = new Date().getTime();
+      let timerTracker = setInterval(function () {
+        timePassed = (new Date().getTime() - beginTime) / 1000;
+
+        //after game finished
+        if (model.victory) {
+          clearInterval(timerTracker);
+        }
+      }, 1);
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      updateTable();
+      
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+      
+      // Functions to open and close a modal
+      function openModal($el) {
+        $el.classList.add('is-active');
+      }
+
+      function closeModal($el) {
+        $el.classList.remove('is-active');
+      }
+
+      function closeAllModals() {
+        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+          closeModal($modal);
+        });
+      }
+
+      // Add a click event on buttons to open a specific modal
+      (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+        const modal = $trigger.dataset.target;
+        const $target = document.getElementById(modal);
+
+        $trigger.addEventListener('click', () => {
+          openModal($target);
+        });
+      });
+
+      // Add a click event on various child elements to close the parent modal
+      (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
+          closeModal($target);
+        });
+      });
+
+      // Add a keyboard event to close all modals
+      document.addEventListener('keydown', (event) => {
+        const e = event || window.event;
+
+        if (e.keyCode === 27) { // Escape key
+          closeAllModals();
+        } else {
+          let newModel;
+          if (!model.victory){
+            switch (event.keyCode) { //arrow keys
+              case 38:
+                newModel = move(model, Up);
+                e.preventDefault();
+                break;
+              case 39:
+                newModel = move(model, Right);
+                e.preventDefault();
+                break;
+              case 37:
+                newModel = move(model, Left);
+                e.preventDefault();
+                break;
+              case 40:
+                newModel = move(model, Down);
+                e.preventDefault();
+                break;
+              default:
+                newModel = model;
+                break;
+
+            }
+            setModel(newModel);
+          }
+          
+        }
+      });
+    });
+    
+    const instBtn = document.getElementById("instBtn");
+    
+    function changeSort(index){
+      if (index == 0){
+        sortType = "Moves"
+      } else {
+        sortType = "Times"
+      }
+      updateTable();
+    }
+    
+    function changeLevel(index){ //Changing levels is only tested for leaderboard, TODO: ensure model.level change is correct and setmodel call is correct when more levels are added
+      sortLevel = index + 1;
+      if (index == 0){
+        model = new Model(level1);
+      } else if (index == 1) {
+        model = new Model(level2);
+      } else if (index == 2) {
+        model = new Model(level3)
+      } else if (index == 3) {
+        model = new Model(level4)
+      }
+      model.level = index + 1;
+      let newModel = reset(model);
+      setModel(newModel);
+      updateTable();
+    }
+    
+    var firstMove = true;
+    var timePassed = 0;
+    var sortType = "Moves";
+    var sortLevel = 1;
+
+    function updateTable() {
+      let table = document.getElementById("scoreList");
+      table.innerHTML =
+        "<thead><tr><th>Name</th><th>Fewest Moves</th><th>Fastest Time</th></tr></thead>";
+      fetch("/getScores", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then(function (json) {
+          for (let response of json) {
+            if (parseInt(response.Level,10) == parseInt(sortLevel,10)){
+              let i = 0;
+              if (sortType == "Moves"){
+                for (i = table.rows.length-1; i > 0; i--) {
+                  if (
+                    parseFloat(response.Moves) >
+                    parseFloat(table.rows.item(i).cells.item(1).innerHTML)
+                  ) {
+                    //this ensures the leaderboard is sorted by lowest moves
+                    break;
+                  }
+                }
+              } else {
+                for (i = table.rows.length-1; i > 0; i--) {
+                  if (
+                    parseFloat(response.Time) >
+                    parseFloat(table.rows.item(i).cells.item(2).innerHTML)
+                  ) {
+                    //this ensures the leaderboard is sorted by lowest times
+                    break;
+                  }
+                }
+              }
+
+              let row = table.insertRow(i+1);
+              let Name = row.insertCell(0);
+              let FMoves = row.insertCell(1);
+              let FTime = row.insertCell(2);
+
+              row.cells[0].innerHTML = response.Name;
+              row.cells[1].innerHTML = response.Moves;
+              row.cells[2].innerHTML = response.Time.toFixed(3) + "s";
+            }
+              
+
+
+          }
+        });
+    }
+    
+  </script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> FOR DEVELOPMENT ONLY-->
+  <script type="text/javascript" src="../model/Puzzle.js"></script>
+  <script type="text/javascript" src="../Layout.js"></script>
+  <script type="text/javascript" src="../controller/Controller.js"></script>
+  <script type="text/javascript" src="../boundary/Boundary.js"></script>
+  <script type="text/javascript" src="../model/Model.js"></script>
+  <!-- <script type="text/babel" src="../App.jsx"></script>
+  <script type="text/babel" src="../index.jsx"></script> FOR DEVELOPMENT ONLY-->
+  <script type="text/javascript" src="../lib/App.js"></script>
+  <script type="text/javascript" src="../lib/index.js"></script>
+  
+  <!--<script src="../public/scripts.js"></script>-->
+</html>
