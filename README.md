@@ -3,8 +3,7 @@
 *Jacob Chlebowski - jachlebowski@wpi.edu, Miles Gregg - mgregg@wpi.edu, Zaq Humphrey - zihumphrey@wpi.edu*
 
 Heroku --> https://blog-poster-final-project.herokuapp.com/ <br>
-YouTube--> link
-
+Video  --> https://www.youtube.com/watch?v=T0xMWM5yNy4
 
 <img src="https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" data-canonical-src="(https://github.com/MilesGregg/final_project/blob/main/login.png?raw=true" height="400" width="600"/>
 
