@@ -71,7 +71,7 @@ reactionBtnPersonal.addEventListener('click', function () {
             
             userCell.innerHTML = "Date";
             userCell.style = "scope=\"col\"; font-weight=bold";
-            scoreCell.innerHTML = "Average Time";
+            scoreCell.innerHTML =  "Time";
             scoreCell.style = "scope=\"col\"; font-weight=bold";
 
             for(let i = 0; i < response.length; i++)
