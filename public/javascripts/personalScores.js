@@ -174,3 +174,5 @@ aimBtnPersonal.addEventListener('click', function () {
     })
 }
 })
+
+reactionBtnPersonal.click()

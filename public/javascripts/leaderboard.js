@@ -235,4 +235,6 @@ window.onload = function() {
             })
     })
     })
+
+    reactionBtn.click()
 }
