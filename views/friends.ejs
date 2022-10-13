@@ -20,17 +20,18 @@
 <h2>friend requests Pending</h2>
 <% friend_pending.forEach(friend => { %>
     <li><%= friend[0] %></li>
-
-    <li><%= friend[1] %></li>
+    <li style="display: none"><%= friend[1] %></li>
 <% }) %>
 
 <h2>friend requests From</h2>
 <% friend_req.forEach(req => { %>
+    <div class="row m-auto">
     <li><%= req[0] %></li>
     <form method="POST" action="/friends/accept_friend_request">
         <input type='hidden' value="<%= req[1] %>" name="friend_id"></input>
-        <input type="submit" value="Accept">
+        <input type="submit" value="Accept" class="btn btn-sm btn-success ml-4">
     </form>
+    </div>
 <% }) %>
 
 <body class="p-3 mb-2 bg-dark text-white" style="font-family: fantasy;">
