@@ -1,10 +1,10 @@
 import * as mongoose from "mongoose";
 
 export interface ICell {
-  index?: number;
-  emoji: String;
-  timeStamp: Date;
-  user: String;
+  index: number;
+  emoji: string;
+  timeStamp?: Date;
+  user?: string;
 }
 
 const Cell = new mongoose.Schema({

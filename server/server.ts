@@ -7,10 +7,9 @@ import http from "http";
 import EventEmitter from "events";
 import cors from "cors";
 import { router as authRouter, checkAuthentication } from "./Routes/auth.js";
-import { router as gridRouter } from "./Routes/gridRouter.js";
 import { WebSocketServer } from "ws";
-import { ICell } from "./DB_Schema/cellSchema.js";
-import { CellOperation } from "./serverDataTypes";
+import Cell, { ICell } from "./DB_Schema/cellSchema.js";
+import { router as gridRouter } from "./Routes/gridRouter.js";
 
 /* ------------- CONSTANTS AND INITIALIZATIONS ------------- */
 
@@ -62,14 +61,9 @@ wss.on("connection", (ws) => {
   console.log("New Client connected");
 
   ws.on("message", (message) => {
-    const operation = JSON.parse(message.toString()) as CellOperation;
+    const cell = JSON.parse(message.toString()) as ICell;
 
-    console.log(`Got message:`);
-    console.log(operation);
-
-    canvas[operation.index] = operation.newCell;
-
-    console.log(canvas);
+    // todo sync here
   });
 
   ws.on("close", (event) => {
@@ -80,7 +74,12 @@ wss.on("connection", (ws) => {
 /* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
 
 app.use("/login", authRouter);
+app.use("/canvas", (req, res) => {
+  res.redirect("/");
+});
 app.use("/authenticated", checkAuthentication);
+app.use("/grid", gridRouter);
+
 // app.use("/logout", (req: Request, res: Response, next) => {
 //   req.logOut(function (err) {
 //     if (err) {
@@ -96,7 +95,7 @@ app.use("/authenticated", checkAuthentication);
 
 app.use("/", express.static("build"));
 
-app.listen(listenPort, () => {
+server.listen(listenPort, () => {
   console.log(`Listening on port ${listenPort}`);
 });
 

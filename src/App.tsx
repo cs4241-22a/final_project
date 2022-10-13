@@ -41,10 +41,7 @@ export default function App() {
       const response = await fetch("/authenticated");
       const json = await response.json();
 
-      console.log(json);
-
       setAuthenticated(json.authenticated);
-      console.log(authenticated);
       rerender(!render);
     })();
   }, []);

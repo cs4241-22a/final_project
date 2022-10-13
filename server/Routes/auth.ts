@@ -1,25 +1,17 @@
 import express, { Request, Response } from "express";
 import passport from "passport";
 import * as dotenv from "dotenv";
-import cors from "cors";
 import { Strategy as GithubStrategy } from "passport-github2";
 import User, { IUser } from "../DB_Schema/userSchema.js";
-import fetch from "node-fetch";
 
 dotenv.config({ path: ".env" });
 const router = express.Router();
-
-router.use(cors());
-router.all("/*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 passport.serializeUser((user: any, cb: Function) => {
   cb(null, user.github_id);
 });
 
-passport.deserializeUser((id: IUser, cb) => {
+passport.deserializeUser((id: string, cb) => {
   cb(null, id);
 });
 
@@ -35,12 +27,13 @@ passport.use(
         if (err) {
           return cb(err);
         }
+
         if (user) {
           return cb(null, user);
         } else {
           const newUser = new User();
+
           newUser.github_id = profile.id;
-          newUser.username = profile.username;
           newUser.picture = "https://github.com/" + profile.username + ".png";
 
           newUser.save((err) => {
@@ -64,7 +57,6 @@ router.get(
   }
 );
 
-// TODO: update to correct view
 router.use("/", express.static("build"));
 
 const checkAuthentication = (req: Request, res: Response, next: Function) => {

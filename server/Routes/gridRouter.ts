@@ -1,20 +1,20 @@
-import express, { Request, Response, Router } from "express";
+import express, { Request, Response } from "express";
 import Cell, { ICell } from "../DB_Schema/cellSchema.js";
 
 //Server scoped arrays
 const GRID_SIZE = 50 * 50;
 const grid = Array<ICell>(GRID_SIZE);
 
-/**
- * Handles the routing for cell updates and requests
- */
+/* ------------- CONFIGURATION ------------- */
+
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   if (grid[0] === undefined) {
-    populateArray();
+    await populateArray();
   }
-  res.send("hello");
+  res.type("application/json");
+  res.send({ grid: grid });
 });
 
 async function populateArray() {
@@ -38,16 +38,25 @@ async function populateArray() {
       }
     }
   }).clone(); //cloning makes the query repeatable
+  grid.sort();
 }
 
-router.post("/updateCell", (req: Request, res: Response) => {
+router.post("/update", async (req: Request, res: Response) => {
+  await populateArray();
+
   req.on("data", (data) => {
     data = JSON.parse(data);
-    grid[data.index].emoji = data.emoji;
-    grid[data.index].timeStamp = new Date(Date.now());
-    grid[data.index].user = "";
-    updateCell(new Cell({ ...grid[data.index] }));
+
+    if (req.user !== undefined) {
+      console.log(typeof grid[data.index]);
+      grid[data.index].index = data.index;
+      grid[data.index].emoji = data.emoji;
+      grid[data.index].timeStamp = new Date(Date.now());
+      grid[data.index].user = req.user.toString();
+      updateCell(grid[data.index]);
+    }
   });
+  res.sendStatus(200);
 });
 
 router.get("/cell", (req: Request, res: Response) => {
@@ -58,6 +67,8 @@ router.get("/cell", (req: Request, res: Response) => {
   });
 });
 
+// jasdklfsdfsdf
+
 async function updateCell(cellData: ICell) {
   const updatedCell = await Cell.findOneAndUpdate(
     { index: cellData.index },
@@ -65,6 +76,10 @@ async function updateCell(cellData: ICell) {
       emoji: cellData.emoji,
       user: cellData.user,
       timestamp: cellData.timeStamp,
+    },
+    {
+      new: true,
+      upsert: true,
     }
   );
   console.log(updatedCell);

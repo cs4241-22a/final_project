@@ -8,8 +8,6 @@ import {
 import { ActiveEmoji } from "./ActiveEmoji";
 import { GridMemo } from "./Grid";
 import socket, { initSocket } from "../../util/SocketConnection";
-import { ICell } from "../../../server/DB_Schema/cellSchema";
-import { CellOperation } from "../../../server/serverDataTypes";
 
 export type CanvasProps = {
   canvasSize?: number;
@@ -19,34 +17,37 @@ export type CanvasProps = {
 let prevActiveElement: HTMLElement | undefined = undefined;
 let zoom: Function | undefined = undefined;
 
+initSocket();
+
 export function Canvas({ size, canvasSize = 800 }: CanvasProps) {
   const [activeEmoji, setActiveEmoji] = useState("1f600");
   const [activeElement, setActiveElement] = useState<HTMLElement>();
 
   const grid = useRef([...Array(size * size)].map(() => ""));
 
-  // Initialize websocket connection
-  initSocket();
-
-  function updateEmoji(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    console.log("here");
+  async function updateEmoji(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
     if (activeElement !== undefined) {
       const idx = parseInt(activeElement.id);
-
       grid.current[idx] = activeEmoji;
-      const newCell: ICell = {
-        user: "",
-        emoji: activeEmoji,
-        timeStamp: new Date(),
-      };
-      const operation: CellOperation = { index: idx, newCell: newCell };
-      socket.send(JSON.stringify(operation));
 
+      const cell = JSON.stringify({
+        index: idx,
+        emoji: activeEmoji,
+      });
+
+      socket.send(cell);
+
+      activeElement.innerHTML = "";
       activeElement.innerHTML = `<img src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${activeEmoji}.png" alt="grinning" class="__EmojiPicker__ epr-emoji-img" loading="eager" style="font-size: 12.8px; height: 12.8px; width: 12.8px;">`;
+
+      await fetch("/grid/update", {
+        method: "POST",
+        body: cell,
+      });
     }
   }
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (prevActiveElement === undefined) {
