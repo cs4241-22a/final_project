@@ -13,4 +13,4 @@ Authors:
 3. The game GUI was in react app. The login info, and scoreboard data was stored in MongoDB. 
 4. The challenge of this project was 
 5. Cather was responsible for making the game with react app.
-6. Video link: 
+6. [Presentation video](https://www.youtube.com/watch?v=VZ5HhVQbso8)
