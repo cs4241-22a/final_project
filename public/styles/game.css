@@ -35,6 +35,10 @@
     z-index: 2;
     border:none;
 }
+.target:hover {
+    background-color: #00FF41;
+    cursor:default;
+}
 
 .hide {
     visibility: hidden;
@@ -44,7 +48,6 @@
     background: black;
     font-size: 37px;
     display: inline;
-    
 }
 .status {
     width: 70%;

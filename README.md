@@ -1,4 +1,4 @@
-## Reaction Time Game 
+## Reaction Time Game
 
 1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
 2. Any additional instructions that might be needed to fully use your project (login information etc.)
@@ -8,4 +8,3 @@
 6. A link to your project video.
 
 Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-

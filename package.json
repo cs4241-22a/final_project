@@ -20,7 +20,6 @@
   "homepage": "https://github.com/gabestuf/final_project#readme",
   "dependencies": {
     "argon2": "^0.29.1",
-    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
