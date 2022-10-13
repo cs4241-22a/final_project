@@ -33,6 +33,10 @@ ResultsSchema.statics.getResultsForUserId = function(user_id) {
     return this.find({owner_id: user_id})
 }
 
+ResultsSchema.statics.getSpecificGameResultsForUserId = function(user_id, game_type) {
+    return this.find({owner_id: user_id, game_type: game_type})
+}
+
 ResultsSchema.statics.getRankforScore = function(game, score) {
     var numGreaterThan = this.distinct({game_type: game, score: { $gt: score}}).count();
     return null;
