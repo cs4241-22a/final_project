@@ -28,8 +28,8 @@ const Navbar = (props) => {
           <NavLink to='/listings'>
             My Listings
           </NavLink>
-          <NavLink to='/messages'>
-            My Messages
+          <NavLink to='/contact'>
+            Contact Us
           </NavLink>
         </NavMenu>
         {props.user.name ?

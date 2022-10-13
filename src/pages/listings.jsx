@@ -166,18 +166,18 @@ return (
 		padding: '2%'
 	}}
 	>
-	<h1>Viewing Your Current Listings</h1>
-	<button
+	<h1 style={{color: '#ad2b37', padding: '1rem', fontWeight: 'bold'}}>Your Current Listings</h1>
+	<button style={{margin: '1rem'}}
       className="btn btn-secondary"
       onClick={() => toggleAddPopup(product)}
     >
       Add Product
     </button>
-	<div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
-	  <Row m={1} md={3} className="g-4">
+	<div class="d-flex" >
+	  <Row m={1} md={4} className="g-4">
       {products.map(product => 
       <Col>
-		<Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
+		<Card style={{ maxWidth: '20rem', minHeight: '10rem' }} onClick = {() => togglePopup(product)}>
 			<Row>
 				<Col>
 					<Card.Img variant="top" src={product.img} />
@@ -208,24 +208,24 @@ return (
       content={<>
         <form onSubmit={onSubmit}>
       <div className="form-group">
-	  <input className="form-control" type="file" accept=".png,.jpg" id="pic" onChange ={previewFile} /><br />
+	  <input className="form-control" type="file" accept=".png,.jpg" id="pic" onChange ={previewFile} required/><br />
         <label htmlFor="name">Product Name</label>
         <input 
         className="form-control" 
-        id="name" />
+        id="name" required/>
       </div>
       <div className="form-group">
         <label htmlFor="category">Category</label>
         <input
           className="form-control"
-          id="category"
+          id="category" required
         />
       </div>
       <div className="form-group">
         <label htmlFor="description">Description</label>
         <input
           className="form-control"
-          id="description"
+          id="description" required
         />
       </div>
       <div className="form-group">
@@ -233,11 +233,11 @@ return (
         <input
           className="form-control"
           id="price"
-          type="number"
+          type="number" required
         />
       </div>
       <div className="form-group">
-        <button className="form-control btn btn-primary" type="submit">
+        <button className="form-control btn btn-primary" style={{margin: '1rem'}} type="submit">
           Add Product
         </button>
       </div>
@@ -253,8 +253,8 @@ return (
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
-		<button className="form-control btn btn-primary" variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
-		<button className="form-control btn btn-primary" variant="primary" id="del" onClick={deleteProduct}>Del</button>
+		<button style={{marginBottom: '1rem'}} className="form-control btn btn-secondary" variant="primary" id="edit" onClick={(e)=>toggleEditPopup(product)}>Edit</button>
+		<button className="form-control btn btn-secondary" variant="primary" id="del" onClick={deleteProduct}>Delete</button>
 	  </>}
       handleClose={togglePopup}
     />}

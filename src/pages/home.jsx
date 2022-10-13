@@ -24,8 +24,10 @@ const Home = (props) => {
         backgroundSize: 'cover'
       }}
     >
-      <span><h1 style={{backgroundColor: '#AC2B37'}}>Welcome {props.user.name} to GoataShop</h1></span>
-      <span><h2 style={{backgroundColor: '#AC2B37'}}>For when you really GoataShop</h2></span>
+      <div style={{backgroundColor: 'white', borderRadius: '1rem', maxWidth: 'fit-content', maxHeight: 'fit-content', padding: '2rem'}}>
+        <h1 style={{color: '#ad2b37', padding: '1rem', fontWeight: 'bold'}}>Welcome {props.user.name} to GoataShop</h1>
+        <h2 style={{padding: '1rem'}}>For when you really GoataShop</h2>
+      </div>
     </div>
   );
 };

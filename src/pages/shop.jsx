@@ -55,26 +55,27 @@ function togglePopup(product) {
         padding: '2%'
       }}
     >
-      <h1>The GoataShop</h1>
-      <div class="d-flex" style={{overflowY: 'scroll', overflowX: 'scroll'}}>
+      <h1 style={{color: '#ad2b37', padding: '1rem', fontWeight: 'bold'}}>The GoataShop</h1>
+      <div class="d-flex">
 
-      <Row m={1} md={3} className="g-4">
+      <Row m={1} md={4} className="g-4">
       {products.map(product => 
      
       <Col>
-      <Card style={{ width: '18rem' }} onClick = {() => togglePopup(product)}>
+      <Card style={{ maxWidth: '20rem', minHeight: '10rem' }} onClick = {() => togglePopup(product)}>
         <Row>
           <Col>
-      <Card.Img variant="top" src={product.img} />
-      </Col>
+            <Card.Img variant="top" src={product.img} />
+          </Col>
       <Col>
-      <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Text>
-        {product.description}
-        </Card.Text>
-        <Button variant="primary">Contact</Button>
-      </Card.Body>
+      <Col>
+        <Card.Body>
+            <Card.Title>{product.name}</Card.Title>
+            <Card.Text>
+            ${product.price}
+            </Card.Text>
+        </Card.Body>
+      </Col>
       </Col>
       </Row>
     </Card>
@@ -89,7 +90,7 @@ function togglePopup(product) {
         <h1>{product.name}</h1>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
-        <Mailto email={product.email} subject="GoataShop" body="Hi">
+        <Mailto email={product.email} subject="[GoataShop]">
         Email me if interested!
       </Mailto>
       </>}
