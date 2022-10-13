@@ -38,7 +38,7 @@ class Table extends React.Component {
                                             <li><b>Prep Time: {item.prepTime} minutes</b></li>
                                             <li><b>Serves: {item.numPeople}</b></li>
                                         </ul>}
-                                        <p>{item.directions}</p>
+                                        <p class="directions">{item.directions}</p>
                                     </Card.Text>
                                     <Button variant="primary" onClick={ () => this.viewOrEdit(item.username, item.title) }>
                                         View Full Recipe

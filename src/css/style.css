@@ -26,3 +26,27 @@
 
     padding: 50px 40px 60px;
 }
+
+
+
+/* Text fadeout modified from https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css */
+
+.directions {
+    position:relative;
+    /*max-*/height: 9.5em;
+    overflow:hidden;
+}
+
+.directions:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, 
+                      rgba(255,255,255, 0), 
+                      rgba(255,255,255, 1) 90%);
+    width: 100%;
+    height: 6em;
+  }
