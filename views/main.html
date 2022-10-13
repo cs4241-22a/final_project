@@ -84,25 +84,26 @@
               <h2 class="is-size-5 has-text-centered mb-3">Leaderboard</h2>
               <button class="button is-info is-light" type="button" onclick="updateTable()">Refresh Scores</button>
             </div>
-            <di>
-            <table
-              style="width: 100%;"
-              id="scoreList"
-              class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Fewest Moves</th>
-                  <th>Fastest Time</th>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>-1</td>
-                  <td>NA</td>
-                </tr>
-              </thead>
-            </table>
+            <div id="tableScroll" style="overflow: scroll;">
+              <table
+                style="width: 100%;"
+                id="scoreList"
+                class="table is-bordered is-striped is-narrow is-hoverable has-background-warning-light mb-1"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Fewest Moves</th>
+                    <th>Fastest Time</th>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>-1</td>
+                    <td>NA</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
       </div>
