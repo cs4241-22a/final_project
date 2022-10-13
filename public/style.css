@@ -8,3 +8,7 @@ body{
     background: url("../public/Assets/sending.jpg") no-repeat;
     border-style: none;
 }
+
+button{
+    position: fixed;
+}
