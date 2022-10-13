@@ -18,6 +18,7 @@ function Grid({ grid, size, activeEmoji, setActiveElement }: GridProps) {
       const response: Response = await fetch("/grid");
       const res = await response.json();
 
+      console.log("here");
       setBoard(
         res.grid.sort(function (a: ICell, b: ICell) {
           return a.index - b.index;

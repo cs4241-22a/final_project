@@ -71,13 +71,14 @@ wss.on("connection", (ws) => {
   });
 });
 
+//fsdf
+
 /* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
 
 app.use("/", express.static("build"));
 
 app.use("/login", authRouter);
 app.use("/logout", (req: Request, res: Response, next) => {
-  console.log("jere");
   req.logOut(function (err) {
     if (err) {
       return next(err);

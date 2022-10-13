@@ -25,7 +25,7 @@ async function populateArray() {
       for (var i = docs.length; i < GRID_SIZE; i++) {
         grid[i] = new Cell({ index: i });
       }
-      //overwrite the grid collection in the DB with the server representation
+      //overwrite the grid collection in the DB with the server representationf
       Cell.deleteMany({});
       Cell.insertMany(grid).then(() => {
         console.log("a ton of new entries in the DB");
@@ -42,8 +42,6 @@ async function populateArray() {
 }
 
 router.post("/update", async (req: Request, res: Response) => {
-  await populateArray();
-
   req.on("data", (data) => {
     data = JSON.parse(data);
 
