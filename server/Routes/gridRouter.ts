@@ -2,8 +2,8 @@ import express, { Request, Response, Router } from "express";
 import Cell, { ICell } from "../DB_Schema/cellSchema.js";
 
 //Server scoped arrays
-const GRIDSIZE = 50 * 50;
-const grid = Array<ICell>(GRIDSIZE);
+const GRID_SIZE = 50 * 50;
+const grid = Array<ICell>(GRID_SIZE);
 
 /**
  * Handles the routing for cell updates and requests
@@ -20,9 +20,9 @@ router.get("/", (req: Request, res: Response) => {
 async function populateArray() {
   await Cell.find({}, (error: any, docs: ICell[]) => {
     //if there are not the right number of cells in the DB
-    if (docs.length < GRIDSIZE) {
+    if (docs.length < GRID_SIZE) {
       //add the missing cells to the server array
-      for (var i = docs.length; i < GRIDSIZE; i++) {
+      for (var i = docs.length; i < GRID_SIZE; i++) {
         grid[i] = new Cell({ index: i });
       }
       //overwrite the grid collection in the DB with the server representation

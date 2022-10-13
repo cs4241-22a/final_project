@@ -66,6 +66,28 @@ wss.on("connection", (ws) => {
   });
 });
 
+/* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
+
+app.use("/login", checkAuthentication, authRouter);
+// app.use("/logout", (req: Request, res: Response, next) => {
+//   req.logOut(function (err) {
+//     if (err) {
+//       return next(err);
+//     }
+//     res.redirect("/login");
+//   });
+// });
+
+// app.use("/updateCell", gridRouter);
+// app.use("/cell", gridRouter);
+// app.use("/grid", gridRouter);
+
+app.use("/", express.static("build"));
+
+app.listen(listenPort, () => {
+  console.log(`Listening on port ${listenPort}`);
+});
+
 /* ------------- MISCELLANEOUS CODE ------------- */
 
 // Current Canvas
@@ -75,31 +97,3 @@ const canvas = Array.from({ length: canvasSize * canvasSize }).fill({
   timeStamp: new Date(),
   emoji: "",
 }) as ICell[];
-
-/* ------------- EXPRESS ROUTING AND REDIRECT CONFIGURATION ------------- */
-
-app.use(express.static("build"));
-
-app.use("/login", authRouter);
-app.use("/logout", (req: Request, res: Response, next) => {
-  req.logOut(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/login");
-  });
-});
-
-app.use("/updateCell", gridRouter);
-app.use("/cell", gridRouter);
-app.use("/grid", gridRouter);
-
-app.use(["/", "/load"], checkAuthentication, async (req, res) => {
-  res.redirect("/grid");
-  // const data = await Users.findOne({ github_id: req.session.user?.github_id });
-  // res.send(data?.timeOfLastEdit)
-});
-
-app.listen(listenPort, () => {
-  console.log(`Listening on port ${listenPort}`);
-});

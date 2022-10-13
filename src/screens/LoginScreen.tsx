@@ -20,20 +20,6 @@ export function LoginScreen() {
         sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
         autoComplete="off"
       >
-        <TextField
-          required
-          id="filled-required"
-          label="Required"
-          defaultValue="Username"
-          variant="filled"
-        />
-        <TextField
-          id="filled-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="filled"
-        />
         {/* if user puts incorrect password. Maybe username */}
         {/* <TextField
           error
@@ -46,9 +32,6 @@ export function LoginScreen() {
 
         <Stack spacing={2} direction="column">
           <Button id="githubbttn" variant="contained" endIcon={<GitHubIcon />}>
-            Login
-          </Button>
-          <Button id="redditbuttn" variant="contained" endIcon={<RedditIcon />}>
             Login
           </Button>
         </Stack>

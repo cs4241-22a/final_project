@@ -1,29 +1,29 @@
 import express, { Request, Response } from "express";
 import passport from "passport";
-import {Strategy as GithubStrategy} from "passport-github2";
-import  User, {IUser } from "../DB_Schema/userSchema.js";
 import * as dotenv from "dotenv";
+import { Strategy as GithubStrategy } from "passport-github2";
+import User, { IUser } from "../DB_Schema/userSchema.js";
+
 dotenv.config({ path: ".env" });
 const router = express.Router();
 
-passport.serializeUser((user:any, cb:Function) => {
+passport.serializeUser((user: any, cb: Function) => {
   cb(null, user.github_id);
 });
 
-passport.deserializeUser((id:IUser, cb) => {
+passport.deserializeUser((id: IUser, cb) => {
   cb(null, id);
 });
 
-console.log(process.env.GITHUB_CLIENT_SECRET)
 passport.use(
   new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      callbackURL: "/auth/github/callback"
+      callbackURL: "/auth/github/callback",
     },
-    function (accessToken:any, refreshToken:any, profile:any, cb:Function) {
-      User.findOne({ github_id: profile.id }, (err:any, user:IUser) => {
+    function (accessToken: any, refreshToken: any, profile: any, cb: Function) {
+      User.findOne({ github_id: profile.id }, (err: any, user: IUser) => {
         if (err) {
           return cb(err);
         }
@@ -33,7 +33,7 @@ passport.use(
           const newUser = new User();
           newUser.github_id = profile.id;
           newUser.username = profile.username;
-          newUser.picture = "https://github.com/"+profile.username+".png"
+          newUser.picture = "https://github.com/" + profile.username + ".png";
 
           newUser.save((err) => {
             return err ? cb(err) : cb(null, newUser);
@@ -60,11 +60,11 @@ router.get(
 // TODO: update to correct view
 router.use("/", express.static("build"));
 
-const checkAuthentication = (req: Request, res:Response, next:Function) => {
+const checkAuthentication = (req: Request, res: Response, next: Function) => {
   if (req.isAuthenticated()) {
-    return next();
+    res.send({ authenticated: true });
   }
-  res.redirect("/login");
+  res.send({ authenticated: false });
 };
 
-export {router, checkAuthentication };
+export { router, checkAuthentication };
