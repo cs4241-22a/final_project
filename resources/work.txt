@@ -5,6 +5,8 @@ Chayanne
 - changing html to svelte
 - find img
 
+BIG: hosting the site
+
 Hailey
 - make webpack
 - explore fetch and json for svelte
