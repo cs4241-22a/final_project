@@ -1,0 +1,16 @@
+- looking into svelte X
+
+- send Chayanne documentation on svelte and front-end & - have a template on combining json and svelte
+
+This video shows start to end svelte production in 12 mins
+https://www.youtube.com/watch?v=dbnQozbN-qs&ab_channel=DanielPersson
+This further breaks down sveltes front end use
+https://enlear.academy/5-reasons-why-you-should-use-svelte-for-front-end-development-in-2021-c9e84db4f55c
+
+
+Different Svelte File
+https://svelte.dev/tutorial/declaring-props
+
+
+svelte and multiple pages routing
+https://codechips.me/svelte-routing-with-page-js-part-1/
