@@ -170,15 +170,15 @@ app.post("/add", (req, res) => {
     let toMongo = req.body;
     toMongo.Name = _USERNAME;
     toMongo.User = _USERID;
-    collection.findOne({User: _USERID}).then(function(doc){
+    collection.findOne({User: _USERID, Level:toMongo.Level}).then(function(doc){
       if (doc != null) {
         if (parseInt(doc.Moves, 10) > parseInt(toMongo.Moves, 10)) {
-          collection.updateOne({User:_USERID}, { $set: {Moves:toMongo.Moves}});
+          collection.updateOne({User:_USERID, Level:toMongo.Level}, { $set: {Moves:toMongo.Moves}});
         }
         if (parseFloat(doc.Time) > parseFloat(toMongo.Time)) {
-          collection.updateOne({User:_USERID}, { $set: {Time:toMongo.Time}});
+          collection.updateOne({User:_USERID, Level:toMongo.Level}, { $set: {Time:toMongo.Time}});
         }
-        collection.updateOne({User:_USERID}, { $set: {Name:toMongo.Name}}).then((result) => res.json(result));
+        collection.updateOne({User:_USERID, Level:toMongo.Level}, { $set: {Name:toMongo.Name}}).then((result) => res.json(result));
       } else {
         collection.insertOne(toMongo).then((result) => res.json(result));
       }

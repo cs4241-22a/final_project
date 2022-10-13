@@ -148,10 +148,7 @@
     const add = function (e) {
       // prevent default form action from being carried out
       // e.preventDefault();
-
-      const input = document.querySelector("#yourname"),
-        //clicks = document.querySelector("#clicks"),
-        CPS = document.querySelector("#result");
+      
       let json = {
           Name: "PHOLDER",
           Moves: model.numMoves,
@@ -291,8 +288,13 @@
     }
     
     function changeLevel(index){ //Changing levels is only tested for leaderboard, TODO: ensure model.level change is correct and setmodel call is correct when more levels are added
-      model.level = index + 1;
       sortLevel = index + 1;
+      if (index == 0){
+        model = new Model(level1);
+      } else if (index == 1) {
+        model = new Model(level2);
+      }
+      model.level = index + 1;
       let newModel = reset(model);
       setModel(newModel);
       updateTable();
