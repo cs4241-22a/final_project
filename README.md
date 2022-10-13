@@ -3,7 +3,7 @@
 
 Site Link (Heroku): https://reactiontests.herokuapp.com/
 
-Overview video: (link)
+Overview video: (link): https://youtu.be/gmtfIiOumqo
 
 # Introduction
 Our website has a collection of 4 different timed tests for a user to take. One example is the Accuracy Test, where 5 buttons are shown in random places on the game screen. The user is timed by how long it takes to click all 5 buttons with no mis-click time penalty. There is leaderboard page that displays the top scores for each minigame on the website which only include logged-in user names. If the user is logged in, then underneath the leaderboard they can view all of their past scores. A user can login using a GitHub account, or play without being logged in. Users not logged in can still play and view the leaderboard.
