@@ -2,7 +2,9 @@ const express = require('express');
 const util = require('util');
 global.TextEncoder = util.TextEncoder;
 global.TextDecoder = util.TextDecoder;
+// activate express
 const app = express();
+// main rewuired modules
 const http = require( 'http' ),
       fs   = require( 'fs' ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
@@ -10,19 +12,23 @@ const http = require( 'http' ),
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000;
-const serveStatic = require('serve-static');
-const bodyParser = require('body-parser');
-const cookie = require( 'cookie-session' );
-const k1 = "kdjkjdakask";
-const k2 = "dsjfjsfrifw";
+// proecess .env file
 require('dotenv').config()
-
+// add static serving components
+const serveStatic = require('serve-static');
+// body parser needs for json
+const bodyParser = require('body-parser');
+// session handler
+const cookie = require( 'cookie-session' );
+// mongodb driver
 const { MongoClient, ServerApiVersion } = require('mongodb');
+// construct mongo related vars
 const muri = "mongodb+srv://"+process.env.MONGO_USER+":"+ process.env.MONGO_PASSWORD+"@a3cluster.oip0htf.mongodb.net/?retryWrites=true&w=majority";
 const mClient = new MongoClient(muri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
 let collection = null
+// show what we got
 console.log(muri)
+// connect to mongodb
 mClient.connect()
   .then( () => {
     console.log(muri)
@@ -41,7 +47,7 @@ mClient.connect()
     console.log("here")
     //collection.find({ }).toArray().then( result => res.json( result ) )
   }
-
+// not needed
 var appdata = {};
 // add url encoding
 app.use( express.urlencoded({ extended:true }) )
@@ -75,138 +81,29 @@ app.use( function( req,res,next) {
   }
 })
 // update profile goes after cookie validation
+// userupdate GET route (to serve initial html page)
 app.get('/userupdate',(request,response,next) => sendUpdatePage( request, response, next ));
+// userupdate POST route
 app.post('/userupdate',(request,response,next) => handlePostUpdate( request, response, next ));
+// sends user data (per session object) as json to the client
+app.get('/pasteschedule',(request,response,next) => sendSchedule( request, response, next ));
 app.get('/userfetch',(request,response,next) => handleGetUserUpdate( request, response, next ));
+// sends classes to the client
+app.get('/classesfetch',(request,response,next) => handleGetClasses( request, response, next ));
+// sends blocks to the client
+app.get('/blocksfetch',(request,response,next) => handleGetBlocks( request, response, next ));
 // signput comes after cookie validation
 app.get('/signout',(request,response,next) => handleSignOut( request, response, next ));
+// deal with json data
 app.use(bodyParser.json({type: 'text/plain'}));
+// handle /submit (not needed yet)
 app.post('/submit',(request,response) => handlePostJ( request, response ));
+// shows user data
 app.get('/showuser',(request,response) => handleGetJ( request, response ));
+// updates class selection calls
+app.post('/classSelection',(request,response) => userClassesUpdate( request, response ));
 
-
-/*
- * 
- */
-
-const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
-
-  if( request.url === '/'  || request.url === "/?" ) {
-    sendFile( response, 'public/index.html' )
-  }else{
-    sendFile( response, filename )
-  }
-}
-
-
-const handlePost = function( request, response ) {
-  let dataString = ''
-
-  request.on( 'data', function( data ) {
-      dataString += data 
-  })
-
-  request.on( 'end', function() {
-    // ... do something with the data here!!!
-    var inD =  JSON.parse( dataString );
-    console.log("getting args ...");
-    console.log(inD)
-    if(inD.action === "add"){
-      nC = {model: inD.model, year: inD.year, mileage: inD.mileage}
-      appdata.push(nC)
-    }
-    console.log(appdata)
-    if(inD.action === "delete"){
-      const trashBin = appdata.splice(inD.index, 1)
-    }
-    theYear = new Date().getFullYear()
-    for(k = 0; k<appdata.length; k++){
-      appdata[k].milesPerYear = parseInt(appdata[k].mileage / (theYear - appdata[k].year))
-    }
-    console.log(appdata)
-    var rb = JSON.stringify(appdata)
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-    response.end(rb)
-  })
-}
-
-async function handlePostJ( request, response ) {
-  var inD =  request.body;
-  console.log("handlePostJ geting args ... ")
-  console.log(inD)
-  var email = request.session.email;
-  console.log(email)
-  // do we have user
-  var user = await getUser(email);
-  if(user !== null){
-    if( inD.action === "add" ){
-      // create new car
-      var nC = {model: inD.model, year: inD.year, mileage: inD.mileage}
-      // add car to cars array of user
-      user['cars'].push(nC)
-    }
-    console.log(user)
-    if(inD.action === "delete"){
-      const trashBin = user['cars'].splice(inD.index, 1)
-    }
-    // copy of the user
-    userCopy = user;
-    theYear = new Date().getFullYear()
-    for(k = 0; k<userCopy.cars.length; k++){
-      userCopy['cars'][k].milesPerYear = parseInt(userCopy['cars'][k].mileage / (theYear - userCopy['cars'][k].year))
-    }
-    console.log(user)
-    // update user record
-    await updateCarData(user)
-    // send json data to the client
-    var rb = JSON.stringify(userCopy['cars'])
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-    response.end(rb)
-  }
-}
-
-
-async function handlePostJa( request, response ) {
-  var inD =  request.body;
-  console.log("handlePostJ geting args ... ")
-  console.log(inD)
-  var email = request.session.email;
-  console.log(email)
-  // do we have user
-  
-  var user = await getUser(email);
-  if(user !== null){
-    if( inD.action === "add" ){
-      // create new car
-      var nC = {model: inD.model, year: inD.year, mileage: inD.mileage}
-      // add car to cars array of user
-      user['cars'].push(nC)
-    }
-    console.log(user)
-    if(inD.action === "delete"){
-      const trashBin = user['cars'].splice(inD.index, 1)
-    }
-    // copy of the user
-    userCopy = user;
-    theYear = new Date().getFullYear()
-    for(k = 0; k<userCopy.cars.length; k++){
-      userCopy['cars'][k].milesPerYear = parseInt(userCopy['cars'][k].mileage / (theYear - userCopy['cars'][k].year))
-    }
-    console.log(user)
-    // update user record
-    await updateCarData(user)
-    // send json data to the client
-    var rb = JSON.stringify(userCopy['cars'])
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-    response.end(rb)
-  }
-}
-
-
-
-
-
+// /submit handler
 
 // handeles post login call
 async function handlePostL( request, response ) {
@@ -222,8 +119,12 @@ async function handlePostL( request, response ) {
       if( user.password === request.body.password ){
         // we are good
         // set cookie
+        console.log("login is good")
         request.session.login = true;
         request.session.email = request.body.email;
+        console.log(request.session)
+        console.log("sending redirect");
+        //response.sendFile( __dirname +"/" + dir + 'main.html' );
         response.redirect( 'main.html' )
       } 
     } 
@@ -231,8 +132,7 @@ async function handlePostL( request, response ) {
   // ask user again
   response.sendFile( __dirname +"/" + dir + '/login.html' );
 }
-
-
+// signs out user - cleans session object
 const handleSignOut = function( request, response, next ) {
   console.log("in signout ... ");
   console.log( request.session );
@@ -245,6 +145,7 @@ const handleSignOut = function( request, response, next ) {
     next();
   }
 }
+// sends signup.html if you are not logged in
 const handleSignUp = function( request, response, next ) {
   if( request.body.login === true ){
     next();
@@ -253,6 +154,7 @@ const handleSignUp = function( request, response, next ) {
   }
 }
 
+// updates user name or password, or both
 async function handlePostSignUp( request, response, next ) {
   console.log("in handlePostSignUp");
   console.log( request.body );
@@ -296,20 +198,57 @@ async function handlePostSignUp( request, response, next ) {
     response.sendFile( __dirname +"/" + dir + '/signup.html' );
   }
 }
-
+// sends updated user data
 async function handleGetUserUpdate( request, response, next ) {
   console.log("in userupdate  ... ");
-  console.log("testing")
   console.log( request.session );
   if( request.session.login === true ){
     // construct Json file to push to the user for rendering
     var email = request.session.email;
-    console.log("ahhhhhh")
     var user = await getUser(email)
     if( user !== null ){
       // I have my my e-mail
       console.log(user)
       var rb = JSON.stringify(user)
+      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.end(rb)
+    }
+  } else {
+    // clean up session
+    next();
+  }
+}
+// returns classes json
+async function handleGetClasses( request, response, next ) {
+  console.log("handleGetClasses: ... ");
+  console.log( request.session );
+  if( request.session.login === true ){
+    // construct Json file to push to the user for rendering
+    var classes = await getClasses()
+    if( classes !== null ){
+      // I have my my e-mail
+      console.log(classes)
+      var rb = JSON.stringify(classes)
+      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.end(rb)
+    }
+  } else {
+    // clean up session
+    next();
+  }
+}
+
+// returns block json
+async function handleGetBlocks( request, response, next ) {
+  console.log("handleGetBlocks: ... ");
+  console.log( request.session );
+  if( request.session.login === true ){
+    // construct Json file to push to the user for rendering
+    var blocks = await getBlocks()
+    if( blocks !== null ){
+      // I have my my e-mail
+      console.log(blocks)
+      var rb = JSON.stringify(blocks)
       response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
       response.end(rb)
     }
@@ -329,6 +268,14 @@ const sendUpdatePage = function( request, response, next ) {
     next();
   }
 }
+
+const sendSchedule = function(request, response,next){
+  console.log("About to send the schedule")
+  console.log(request.session)
+  if(request.session.login === true){
+    response.sendFile(__dirname + "/" + dir + '/schedule.html')
+  }
+}
 // returns user record (if exists) or null
 async function getUser(email){
   var ret = null;
@@ -345,44 +292,58 @@ async function getUser(email){
   }
   return ret;
 }
-
-async function getBlock(letter){
+// returns all classes data from mongodb
+async function getClasses(){
   var ret = null;
   if( collection !== null){
-
-    console.log("getBlock: have, block: "+email)
-    ret = await collection.findOne(
-      {$and:[
-        {'type': 'block'},
-        {'name': letter}
-      ]}
-    )
-    console.log("getBlock return: ",ret);
+    console.log("getClasses:")
+    ret = await collection.find(
+      {'type': 'class'}
+    ).toArray()
+    console.log("getClasses returns: ",ret);
   }
   return ret;
 }
-
-async function getClass(ident){
+async function getClass(code){
   var ret = null;
   if( collection !== null){
-
-    console.log("getClass: have, class: "+email)
+    console.log("getClass: calss code: "+code)
     ret = await collection.findOne(
       {$and:[
         {'type': 'class'},
-        {'code': ident}
+        {'code': code}
       ]}
     )
-    console.log("getUser return: ",ret);
+    console.log("getClass returns: ",ret);
+  }
+  return ret.toArray();
+}
+// returns all blocks data from mongodb
+async function getBlocks(){
+  var ret = null;
+  if( collection !== null){
+    console.log("getBlocks:")
+    ret = await collection.find(
+      {'type': 'block'}
+    ).toArray()
+    console.log("getBlocks return: ",ret);
   }
   return ret;
 }
-
-
-
-
-
-
+async function getBlock(name){
+  var ret = null;
+  if( collection !== null){
+    console.log("getBlock: block name: "+name)
+    ret = await collection.findOne(
+      {$and:[
+        {'type': 'block'},
+        {'name': name}
+      ]}
+    )
+    console.log("getBlock returns: ",ret);
+  }
+  return ret;
+}
 // json object for a user
 async function addUser(user){
   if( collection !== null){
@@ -424,14 +385,11 @@ async function updateUser(user){
     return false;
   }
 }
-// update car data for the user
-async function updateCarData(user){
+// updating 'shced' dictionajry for the user in mongodb
+async function updateClassesData(user){
   if( collection !== null){
-    console.log("updateUser: have collection: ");
-    console.log(user)
-   
     try {
-      await collection.updateOne({'_id': user._id},{ $set: {'cars': user.cars}});
+      await collection.updateOne({'_id': user._id},{ $set: {'sched': user.sched}});
       return true;
     } catch (e){    
       console.log(e);
@@ -484,8 +442,6 @@ async function handlePostUpdate( request, response, next ) {
   }
 }
 
-
-
 async function handleGetJ( request, response ) {
   console.log("handleGetJ geting args ... ")
   var email = request.session.email;
@@ -497,6 +453,46 @@ async function handleGetJ( request, response ) {
     var rb = JSON.stringify(user)
     response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
     response.end(rb)
+  }
+}
+// handeles user class/block selection
+async function userClassesUpdate( request, response, next ) {
+  console.log("in userClassUpdate");
+  console.log( request.body );
+
+  // perform actions on the collection object 
+  // check if we have such a user ...
+  if( 'email' in request.session ){
+    var email = request.session.email;
+    var aduser = false;
+    var user = await getUser(email);
+    var bl = request.body.updates.bl;
+    var cl = request.body.updates.cl;
+    //
+    if( user !== null ){
+      console.log("userClassUpdate: user Exists")
+    } else {
+      console.log("Can create a new user")
+      aduser = true;
+    }
+    if( user === null ){
+      // we have user ... 
+      console.log("userClassUpdate user does not exist");
+      response.sendFile( __dirname +"/" + dir + '/signup.html' );
+    } else {
+      // update user class data
+      // add these to user's record
+      if(! 'sched' in user){
+        user['sched'] = {}
+      }
+      user['sched'][bl] = cl;
+      console.log(user)
+      // send updates to user
+      await updateClassesData(user)
+      response.sendFile( __dirname +"/" + dir + '/main.html' );
+    }
+  } else {
+    response.sendFile( __dirname +"/" + dir + '/signup.html' );
   }
 }
 
