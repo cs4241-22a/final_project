@@ -10,7 +10,9 @@ const client = require("./config/mongodbSetup");
 const FriendsRoute = require('./routes/firends-route')
 const keys = require('./config/keys');
 const path = require("path");
+const RealTimeChatRoute = require('./routes/RealTimeChat-route');
 const app = express();
+
 
 app.set("view engine", "ejs");
 
@@ -25,12 +27,6 @@ app.use(session({
   }
 }));
 
-// app.use(
-//   cookieSession({
-//     keys: [keys.Cookie.key],
-//   })
-// );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -42,7 +38,8 @@ app.get('/', (req,res)=> {
 app.use("/auth", AuthRoute);
 app.use("/app", AppRoute);
 app.use('/friends', FriendsRoute);
-app.use('/friendplan', FriendPlanRoute)
+app.use('/friendplan', FriendPlanRoute);
+app.use('/rtchat', RealTimeChatRoute)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
