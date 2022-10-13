@@ -21,12 +21,15 @@ The README for your second pull request doesn’t need to be a formal report, bu
 
 ## Andrei Ignatiev
 alignatiev@wpi.edu
-Glitch link: 
+Glitch link:  https://glitch.com/~finalproject-alignatiev
 
 I created a webpage similar to the one from A3. In fact, website navigation logic, a lot of the express framework, and CSS style sheets all carry over from that assignment. Thematically, this project acts as a portal for teachers working at a hypothetical high school. An educator with established credentials can log on to the site and use a dropdown menu to select the classes they wish to teach for the upcoming school year. Other functionalities include, the ability to alter core account data like the name and password, and viewing a color-coded mock schedule based on selected classes. To keep things simple, I have confined the user-base to teachers within the math department. It is also assumed that the teachers have had accounts created for them at an earlier date. Therefore, graders will need the account of a teacher to access the site:
 
 email: crey@k12.ma.us (Mr. Colby King)
 password: changeMe
+
+email: jlentino@k12.ma.us
+password: bcRox1
 
 For the schedule, I drew inspiration from my high school's somewhat complex yet interesting class structure. At this high school, a student's, or in this case a teacher's, courseload consists of seven classes. Each class is assigned to a block (A through G). On any particular full day of school, students attend five of the seven classes in letter order, an example would be d-e-f-g-a. To construct the schedule for the following day, one needs to simply drop the final two blocks from the preceding day, shift the surviving blocks forward, and add the two blocks that were absent from the schedule into the front of the day, so b-c-d-e-f. A new 'day' is proclaimed until the rotation returns to the first five day ordering. Thus, there are seven unique 'days' of school, with Day 1 being the five-class order that begins with block A.  Finally, when constructing a schedule, please note that teachers are allowed to have two of the seven blocks off. These are referred to as 'prep blocks' by the webpage. 
 
