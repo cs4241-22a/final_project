@@ -33,10 +33,14 @@
   <p>Your ID is: <%= ID %></p>
 
   <div class="font-weight-light border-top border-white m-3"></div>
+</div>
 
-  <div id="message" style=""></div>
-  <input type="text" id="send_text" placeholder="Please input msg you want to send"> </input>
+<div class="row">
+  <div id="message" class="ml-4 col-5"></div>
+<div class="w-50 h-50" style="margin-top: 10em; margin-left:50%; position: fixed">
+<input type="text" id="send_text" placeholder="Please input msg you want to send" class="h-auto w-50">
     <button id="send_button" class="text-danger btn btn-dark">Send</button>
+</div>
 </div>
 </body>
 
@@ -69,6 +73,7 @@
     let msg = JSON.stringify(json)
     ws.send(msg);
   });
+
   ws.addEventListener("message", (e) => {
     let msg = document.createElement("p");
     console.log(e)

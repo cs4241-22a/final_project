@@ -10,6 +10,9 @@ router.get("/", (req, res) => {
 
 //Websocket Server
 const wss = new Websocket.Server({ port: 3001 });
+wss.broadcast = function(data) {
+  wss.clients.forEach(client => client.send(data));
+};
 wss.on("connection", (ws) => {
   console.log("client connected");
 
@@ -21,7 +24,7 @@ wss.on("connection", (ws) => {
     let txt = jsdata.txt;
     let json = { ID: ID, Time: Time, txt: txt, username: username };
     let msg = JSON.stringify(json);
-    ws.send(msg);
+    wss.broadcast(msg)
   });
 
   ws.on("close", () => {
