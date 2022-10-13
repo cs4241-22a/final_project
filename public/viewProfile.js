@@ -17,8 +17,14 @@ window.onload = function () {
             document.getElementById("profilePic").appendChild(img);
 
             let profileList = document.createElement("ul");
+                    profileList.style.listStyle = "none";
+                    profileList.style.fontSize = "larger";
             let fPList = document.createElement("ul");
+                    fPList.style.listStyle="none"
+                    fPList.style.fontSize = "larger";
             let cPList = document.createElement("ul");
+                    cPList.style.listStyle="none"
+                    cPList.style.fontSize = "larger";
 
             const fName = document.createElement("li");
             const fullName = "Name: " + response.firstName + " " + response.lastName;
