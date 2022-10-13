@@ -39,23 +39,17 @@ function togglePopup(product) {
 };
 
 function toggleEditPopup(product) {
-	console.log(product.name)
-	console.log("Open Edit Window")
 	setIsEdit(!isEdit);
 	setProduct(product);
   };
 
   function toggleAddPopup(product) {
-	console.log(product.name)
-	console.log("Open Add Window")
 	setIsAdd(!isAdd);
 	setProduct(product);
-	console.log(product)
   };
 
 
 const editProduct = (e) => {
-	console.log("Editing")
 	setIsOpen(!isOpen);
 	let obj = e.target
 
@@ -84,7 +78,6 @@ const editProduct = (e) => {
 		body,
 	  }).then(async (response) => {
 		let res = await response.json()
-		console.log(res)
 		setProduct(json)
 	  }).then(setIsEdit(!isEdit))
 };
@@ -95,8 +88,6 @@ function deleteProducts (products) {
 }
 
 const deleteProduct = (e) =>{
-	console.log("HELOOOOOOO")
-	console.log("Deleting")
 	setIsOpen(!isOpen)
 	fetch("/listing/" + product._id, {
 		method: "DELETE",
@@ -133,7 +124,6 @@ function previewFile() {
 
   const onSubmit = (event) => {
 	event.preventDefault(event);
-	console.log(event.target.name.value)
 	let obj = event.target;
 	
 	const json = {
@@ -145,7 +135,6 @@ function previewFile() {
 	};
 	let body = JSON.stringify(json);
 
-	console.log(body)
 	fetch("/addListing", {
 		method:"POST",
 		headers: { "Content-Type": "application/json" },
