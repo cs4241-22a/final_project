@@ -28,7 +28,7 @@ Correctly switching between pages was comlicated and routing in React required l
 ## Contributions
 What each group member was responsible for designing / developing.
 - Theo Coppola:
-- Marie Tessier:
+- Marie Tessier: Worked mainly on the server side of the code and mongoDB with Theo. I helped implement the database structure and the fetch/get requests and posts. I also helped on the front end css, finding and implementing a template by Creative Tim (https://www.creative-tim.com). Note: Griffin sent me some that he had coded css because he was having trouble with his computer so the Git commits do not fully represent his contribution. 
 - Griffin Atchue:
 - Jack McEvoy: 
 
