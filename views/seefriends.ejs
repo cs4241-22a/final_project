@@ -34,7 +34,6 @@
         <th>Start Time</th>
         <th>End Time</th>
         <th>Creat Time</th>
-        <th></th>
       </tr>
       </thead>
   <% body.forEach(function(plan){ %>
@@ -48,8 +47,6 @@
               <td><%= moment(plan.Start_Time) %></td>
               <td><%= moment(plan.End_Time) %></td>
               <td><%= moment(plan.Submit_Time).fromNow() %></td>
-              <td><input type="submit" value="Delete" class="btn btn-danger"/></td>
-              <input type="hidden" type = 'text' name = '_id' value="<%= plan._id %>"></input>
             </form>
           </div>
         </tr>
