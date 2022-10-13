@@ -70,7 +70,7 @@ export default class FilteredClimbsManager
                 return route.canTopRope
 
             case "leadtoprope":
-                return route.canLead && route.canTopRope
+                return route.canLead || route.canTopRope
 
             case "boulder":
                 return route.type == "boulder"
