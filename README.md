@@ -12,5 +12,5 @@ Authors:
 2. The player can log in with their GitHub account, and any instructions required to play are on the navigation bar at the top of the screen.
 3. The game GUI was created on HTML canvas using React. The login is through passport.js using the oauth2 github strategy, and scoreboard data is stored in MongoDB. The conversion from React JSX files to JS is done using Babel CLI.
 4. The biggest challenges of this project stemmed from converting our React App to regular JavaScript, as there was a learning curve to defining scripts in our package.JSON file that would run in the terminal inside of Glitch.
-5. Cather was responsible for making the game with react app. Mark was responsible for the MongoDB scoreboard implementation, Babel JSX to JS setup on Glitch, GitHub login, and UI using Bulma.
+5. Cather was responsible for making the game with react app. Mark was responsible for the MongoDB scoreboard implementation, Babel JSX to JS setup on Glitch, GitHub login, and UI using Bulma. Jordan was responsible for making new levels and implementing UI changes.
 6. [Presentation video](https://www.youtube.com/watch?v=VZ5HhVQbso8)
