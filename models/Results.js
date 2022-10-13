@@ -25,8 +25,16 @@ ResultsSchema.statics.getTopResultsForGame = function(game_type, n_scores) {
     return this.find({game_type: game_type}).sort({score: "desc"}).limit(n_scores)
 }
 
+ResultsSchema.statics.getTopResultsForTimeGame = function(game_type, n_scores) {
+    return this.find({game_type: game_type}).sort({score: "asc"}).limit(n_scores)
+}
+
 ResultsSchema.statics.getResultsForUserId = function(user_id) {
     return this.find({owner_id: user_id})
+}
+
+ResultsSchema.statics.getSpecificGameResultsForUserId = function(user_id, game_type) {
+    return this.find({owner_id: user_id, game_type: game_type})
 }
 
 ResultsSchema.statics.getRankforScore = function(game, score) {

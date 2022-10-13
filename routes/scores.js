@@ -43,7 +43,7 @@ router.get("/getCPSScores", function(req, res, next) {
 
 router.get("/GetReactionScores", function(req, res, next) {
     console.log("Getting scores for Reaction: %s", req.body)
-    Results.getTopResultsForGame("reaction", 10).exec(function(err, documents) {
+    Results.getTopResultsForTimeGame("reaction", 10).exec(function(err, documents) {
         console.log("Found scores: %s", documents)
         res.json(documents)
     })
@@ -51,7 +51,15 @@ router.get("/GetReactionScores", function(req, res, next) {
 
 router.get("/GetAccuracyScores", function(req, res, next) {
     console.log("Getting scores for Accuracy: %s", req.body)
-    Results.getTopResultsForGame("accuracy", 10).exec(function(err, documents) {
+    Results.getTopResultsForTimeGame("accuracy", 10).exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.get("/GetAimScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.getTopResultsForTimeGame("aimtraining", 10).exec(function(err, documents) {
         console.log("Found scores: %s", documents)
         res.json(documents)
     })
@@ -61,6 +69,38 @@ router.get("/GetUsers", function(req, res, next) {
     console.log("Getting Users: %s", req.body)
     Users.find({ }).exec(function(err, documents) {
         console.log("Found Users: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.post("/getPersonalCPSScores", function(req, res, next) {
+    console.log("Getting scores for CPS: %s", req.body)
+    Results.getSpecificGameResultsForUserId(req.body.owner_id, "cps").exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.post("/GetPersonalReactionScores", function(req, res, next) {
+    console.log("Getting scores for Reaction: %s", req.body)
+    Results.getSpecificGameResultsForUserId(req.body.owner_id, "reaction").exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.post("/GetPersonalAccuracyScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.getSpecificGameResultsForUserId(req.body.owner_id, "accuracy").exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
+        res.json(documents)
+    })
+})
+
+router.post("/GetPersonalAimScores", function(req, res, next) {
+    console.log("Getting scores for Accuracy: %s", req.body)
+    Results.getSpecificGameResultsForUserId(req.body.owner_id, "aimtraining").exec(function(err, documents) {
+        console.log("Found scores: %s", documents)
         res.json(documents)
     })
 })
