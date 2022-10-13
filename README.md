@@ -1,10 +1,12 @@
-## Reaction Time Game
+## Reaction Time Game, Heroku:
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
+## Aidan Mulcahey, Gabriel Camacho, Jonathan Palmieri
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+1. Reactime Time Game with a Login Page, Create an Account Page, and a Leaderboard Page. The goal of the game
+   is to click the green buttons that appear on the screen as fast as you can. The results will then be displayed on a
+   leaderboard.
+2. Instructions are to make a user, login, and then press Start Game
+3. Express, MongoDB, argon2, dotenv, ejs, jsonwebtoken, mongoose
+4. Challenges included programming the game
+5. Aidan Mulcahey - Login, Create an Account, Leaderboard Page, & Design, Gabriel Camacho - created game and set up routes for backend, Jonathan Palmieri - connected server to database
+6. Link to Video: https://www.youtube.com/watch?v=QydoE20bjdE
