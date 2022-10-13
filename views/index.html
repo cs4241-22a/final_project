@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Webworm!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Our Webware A22 final project.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/favicon.png?v=1665445410757">
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header>
+      <div class="row">
+        <div class="col-sm-auto">
+          
+        </div>
+        <div class="col-sm-2">
+          <img src="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/webworm_logo.png?v=1665075704390" alt="The text 'Webworm' written in one solid shape with a worm face at the end of the m"/>
+        </div>
+        <div class="col-sm-6">
+          <h1>
+            Teaches you Web Safety
+          </h1>          
+        </div>
+      </div>
+    </header>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="resources-tab" data-bs-toggle="tab" data-bs-target="#resources" type="button" role="tab" aria-controls="resources" aria-selected="false">Resources</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="q-tab" data-bs-toggle="tab" 
+                data-bs-target="#quiz" type="button" role="tab" 
+                aria-controls="quiz" aria-selected="false">Web Safety Quiz</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+        <br />
+        <div class="row">
+          <span class="col-sm-1"></span>
+          <div class="col-sm-3">
+            <img alt="Picture of the Webworm" src="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/Webworm.jpg?v=1665076180910" /><br />
+          </div>
+          <p class="col-sm-6">
+            Webworm Teaches You Web Safety is a tool to help people understand how to be safe
+            on the internet. On the resources page you will find informative graphics, and 
+            texts, and under the quiz tab you will find a brief quiz on the information. 
+            The intended users would be students or anyone seeking to improve their literacy
+            when it comes to piracy and phishing. When visiting the site, you can navigate 
+            between sections of content.
+          </p>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+            <br />
+          <div class="row">
+            <span class="col-sm-auto"></span>
+            <h2 class="col-sm-5">
+              Resources:
+            </h2>
+            <h2 class="col-sm-5">
+              Email Warning:
+            </h2>
+          </div>
+          <br />
+          <div class="row">
+            <span class="col-sm-auto"></span>
+            <div class="col-sm-5">
+              <h5>
+                Here is a list of helpful resources on web safety
+              </h5>
+              <ul>
+                <li><a href="https://public.cyber.mil/training/cyber-awareness-challenge/">
+                  U.S. Dept. of Defense Cyber Awareness Challenge
+                </a></li>
+                <li><a href="https://www.phishing.org/">
+                  Phishing.org
+                </a></li>
+                <li><a href="https://niccs.cisa.gov/">
+                  National Initiative for Cybersecurity Careers and Studies
+                </a></li>
+                <li><a href="http://www.crowbusters.com/cgi-bin/index.asp">
+                  Crow Busters: The Complete Resource for the Crow Hunter
+                </a></li>
+                <li><a href="https://beinternetawesome.withgoogle.com/en_us/">
+                  Be Internet Awesome - Help Kids Learn Internet Awareness with Google
+                  </a></li>
+              </ul>
+              <p></p>
+              <h5>
+                 Here is a list of websites that you should NOT visit
+              </h5>
+              <ul>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="badWebsite()">
+                  DownloadMoreRam.com
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="badWebsite()">
+                  PirateBay.org
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="badWebsite()">
+                  Facebook
+                </a></li>
+                <li><a href="https://pethelpful.com/wildlife/How-to-Make-Friends-with-Crows">
+                  How to Make Friends with Crows
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="badWebsite()">
+                  Free Youtube to MP3 Converter
+                </a></li>
+              </ul> 
+              <button onclick="swapImg()">
+                <img id="downloadImage" src="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/download.png?v=1665340165122" width="288" height="100" />
+              </button>
+            </div>
+            <div class="col-sm-5">
+              <p>
+                Here is an example of a phishing email below. If you look closely, you will notice many things that are off about it.
+              <p>
+              <img src="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/phishing.png?v=1665442955077" /><br />
+              </p>
+                Here is a list showing all of the red flags in this email that you should look out for:
+              </p>
+              <ol>
+                <li>The first red flag to look out for is whether you know the sender. Mrs. Mary Hampton is likely not someone you know, and thus, you should use caution.</li>
+                <li>The second red flag is that the email is from the domain "easterngraphics.com". This is suspicious, as if you have never heard of the domain before, you shouldn't trust the email.</li>
+                <li>The third red flag is that the email is from an external source. Many schools and businesses will add an [EXT] to the beginning of the subject line to denote this. Always use caution with external emails.</li>
+                <li>The fourth red flag is that they are sending you sensitive banking information in plaintext. No trustworthy source would do this.</li>
+                <li>The fifth red flag is that the domain uses HTTP as opposed to HTTPS. Any site that handles sensitive information, such as banking, will use HTTPS as it is encrypted.</li>
+                <li>The sixth red flag is that the link itself is very odd. It is trying to link you to the British Broadcasting Company on an email about sending money.</li>
+              </ol>
+              <p>
+                Additionally, it should be noted that throughout the email the grammar is not very good, and the email does not look official.
+              </p><p></p><p>
+                If you get an email like this, you should under no circumstances click the link. Even if you think the email is safe, you should always be careful when clicking links in emails. If they're linking to a service that you use, you should always log on how you normally do instead of clicking a link to log in.
+              </p>
+            </div>
+          </div>
+        <br />
+      </div>
+      <div class="tab-pane fade" id="quiz" role="tabpanel" aria-labelledby="quiz-tab">
+        <br />
+        <h2 class="text-center">
+          Take the web safety quiz!
+        </h2>
+        <br />
+        <div class="text-center">
+          <div class="question-container" id="question"></div>
+          <div class="option-container" id="option">
+              <button class="a option" onclick="" id="option1" ></button><br />
+              <button class="a option" id="option2" ></button><br />
+              <button class="a option" id="option3"></button><br />
+              <button class="a option" id="option4"></button>
+          </div>
+          <br />
+          <div class="navigation" id="navigation">
+              <button class="b checkans">Check answer</button>
+              <button class="b next">Next</button>
+            <!--<button class="b next"><a href="/quiz1-response-history">Or view your previous scores</a></button>-->
+          </div>
+          <div class="result" id="result">
+            
+          </div>
+          <br>
+          <h4>View your previous scores <a href="/quiz1-response-history">here!</a></h4>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+    </div>
+    <footer class="h-100"></footer>
+    <footer class="footer mt-auto py-3">Created for WPI CS4241 A22 by Natalie McClain, Owen Pfannenstiehl, Charlie Snow and Sophie Strano</footer>
+    <audio autoplay id="music" src="https://cdn.glitch.me/cc06d1e6-e84b-4106-8189-72f8c22560ea/music.mp3?v=1665447025064"></audio>
+    <audio id="dialup" src="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/dialup.mp3?v=1665447271434"></audio>
+  </body>
+</html>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<script>
+</script>

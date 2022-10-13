@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/cc06d1e6-e84b-4106-8189-72f8c22560ea/favicon.png?v=1665445410757">
+		<script src="../public/scripts.js"></script>
+		<title>CS4241 Assignment 2</title>
+		<meta charset="utf-8">
+	</head>
+	<body class="responseBody">	  
+		<h1> View your previous responses </h1>
+		
+		<div class="response-container">
+			<section class="quiz1Responses">
+				<ul id="quiz1Responses">
+					<em>loading responses (you may not have any yet)&hellip;</em>
+				</ul>
+			</section>
+		</div>
+		
+		<h2> Or go back to main page <a href= "/"> by clicking here </a> </h2>
+
+	</body>
+	<script> 
+		responseNum_ID_Table = []
+
+		function appendQ1Response(response, i) {
+			responseNum_ID_Table[i] = response['_id']
+			newListItem = document.createElement("div");
+			newListItem.setAttribute("id", "response"+i)
+			newListItem.innerText = "Quiz Response: " + i + ", Username: " + response['username'] + " , Score:" + response['score'];
+			document.getElementById("quiz1Responses").appendChild(newListItem);
+		}
+
+		const loadResponseData = function(e){
+		  fetch( '/get-quiz1-responses').then(response => response.json()) // parse the JSON from the server
+		  .then(docs => {
+			document.getElementById("quiz1Responses").firstElementChild.remove();
+			for (var i=0; i < docs.length; i++){
+				appendQ1Response(docs[i], i+1)
+			}
+			console.log(responseNum_ID_Table)
+		  });
+		}
+
+		window.onload = function() {
+			loadResponseData()
+		}
+	</script>
+</html>
