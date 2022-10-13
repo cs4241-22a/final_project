@@ -29,7 +29,6 @@ loginForm.addEventListener('submit', async e => {
     if (responseJSON.status == "SUCCESS") {
         localStorage.setItem('auth', JSON.stringify({ username: responseJSON.username, accessToken: responseJSON.accessToken }))
 
-        console.log("success")
         //TODO
         window.location = `/auth/game/${responseJSON.accessToken}`
     }

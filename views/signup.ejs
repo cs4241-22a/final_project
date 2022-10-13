@@ -8,33 +8,33 @@
     <title>Game</title>
 </head>
 <%- include('header') %>
-<main>
-    <h2>Please create an account:</h2>
+    <main>
+        <h2>Please create an account:</h2>
+
+        <body>
+
+            <form id="signupForm">
+                <div class="container">
+                    <label class="lbl">Username : </label>
+                    <input type="text" placeholder="Enter Username" name="username" id="signupUsername" required>
+                    <label class="lbl">Password : </label>
+                    <input type="password" placeholder="Enter Password" name="password" id="signupPassword" required>
+                    <label class="lbl">Confirm Password : </label>
+                    <input type="password" placeholder="Confirm Password" name="repassword" id="signupPasswordConfirm"
+                        required>
+                    <button type="submit">Signup</button>
+
+                    <BR><BR>
+                    <span> <a href="/login"> Login </a> </span>
+                </div>
+            </form>
+        </body>
+    </main>
 
     <body>
 
-        <form id="signupForm">
-            <div class="container">
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" id="signupUsername" required>
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" id="signupPassword" required>
-                <label>Confirm Password : </label>
-                <input type="password" placeholder="Confirm Password" name="repassword" id="signupPasswordConfirm"
-                    required>
-                <button type="submit">Signup</button>
-
-                <BR><BR>
-                <span> <a href="/login"> Login </a> </span>
-            </div>
-        </form>
+        <script src="/js/signup.js"></script>
+        <link rel="stylesheet" href="/styles/login.css">
     </body>
-</main>
-
-<body>
-
-    <script src="/js/signup.js"></script>
-    <link rel="stylesheet" href="/styles/login.css">
-</body>
 
 </html>

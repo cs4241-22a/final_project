@@ -8,24 +8,24 @@
   <title>Game</title>
 </head>
 <%- include('header') %>
-<main>
-  <h2>Please log in to your account:</h2>
+  <main>
+    <h2>Please log in:</h2>
+
+    <body>
+
+      <form>
+
+        <a class="hometext" href="/login"> Login </a>
+        <a class="hometext" href="/signup"> Sign Up </a>
+        <a class="hometext" href="/leaderboard"> Leaderboard </a>
+
+      </form>
+    </body>
+  </main>
 
   <body>
 
-    <form>
-
-      <span class="hometext"> <a href="/login"> Login </a> </span>
-      <span class="hometext"> <a href="/signup"> Sign Up </a> </span>
-      <span class="hometext"> <a href="/leaderboard"> Leaderboard </a> </span>
-
-    </form>
+    <link rel="stylesheet" href="/styles/login.css">
   </body>
-</main>
-
-<body>
-
-  <link rel="stylesheet" href="/styles/login.css">
-</body>
 
 </html>

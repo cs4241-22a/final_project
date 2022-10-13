@@ -9,6 +9,7 @@ const backgroundContainer = document.querySelector(".backgroundContainer")
 const scoreText = document.querySelector(".score")
 const welcomeMsg = document.querySelector(".welcome")
 const highscoreMsg = document.querySelector(".highscore")
+
 const clickhandler = (e, config) => {
     if (e.target !== this) {
         score = Math.round((score - config.scorePenalty) * 100) / 100
@@ -67,7 +68,7 @@ const updateHighscore = async (highScore) => {
 
         if (responseJSON.status == "SUCCESS") {
             highscoreMsg.innerHTML = "Your Highscore: " + highScore
-            statusText.innerHTML = `Congrats! New Highscore of ${highScore}`
+            statusText.innerHTML = `<p class="sp">Congrats! New Highscore of ${highScore}</p><p class="sp">You should play again</p>`
         } else {
             console.log(responseJSON)
         }
@@ -80,11 +81,11 @@ const startCountDown = (config) => {
     let count = 3
     let downloadTimer = setInterval(() => {
         if (count == 0) {
-            statusText.innerHTML = ""
+            statusText.innerHTML = '<p class="sp">Get Ready!</p><p class="sp">GO!</p>'
             startGame(config)
             clearInterval(downloadTimer)
         }
-        statusText.innerHTML = count.toString();
+        statusText.innerHTML = `<p class="sp">Get Ready!</p><p class="sp">${count.toString()}</p>`;
         count--
     }, 1000)
 }
@@ -93,12 +94,12 @@ const gameCountDown = (config) => {
     let count = config.gameTime
     let downloadTimer = setInterval(() => {
         if (count <= 0) {
-            statusText.innerHTML = "Game Over"
+            statusText.innerHTML = `<p class="sp">Game Over!</p><p class="sp">You Should Play Again!!</p>`;
             clearInterval(downloadTimer)
             endGame(config)
         }
         if (count > 0) {
-            statusText.innerHTML = count.toString() + "s remaining! click the dots as fast as you can!";
+            statusText.innerHTML = `<p class="sp">click the dots as fast as you can!"</p> <p class="sp">${count.toString()}s remaining!</p>`;
         }
         count--
     }, 1000)
@@ -106,8 +107,13 @@ const gameCountDown = (config) => {
 
 const placeTarget = (item) => {
     item.classList.remove('hide')
-    let x = Math.floor(Math.random() * 91)
-    let y = Math.floor(Math.random() * 90)
+    const targetDiameter = item.offsetWidth
+    const viewWidth = backgroundContainer.offsetWidth
+    const viewHeight = backgroundContainer.offsetHeight
+    const percentX = Math.round(targetDiameter / viewWidth * 100)
+    const percentY = Math.round(targetDiameter / viewHeight * 100) - 3
+    let x = Math.floor(Math.random() * (100 - percentX))
+    let y = Math.floor(Math.random() * (100 - percentY))
     item.style['top'] = `${x}%`
     item.style['left'] = `${y}%`
 }
@@ -169,6 +175,9 @@ const init = () => {
             }, config.timeBetweenTargets)
         })
     })
+
+    scoreText.innerHTML = "Current Game Score:"
+    statusText.innerHTML = `<p class="sp">AIM TRAINER!</p> <p class="sp">press start to begin</p>`;
 }
 
 init()

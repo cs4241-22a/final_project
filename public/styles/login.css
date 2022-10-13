@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(59, 59, 59);
+}
+
 button {   
     background-color: #00FF41;  
     width: 100%;  
@@ -7,9 +11,7 @@ button {
      border: none;   
      cursor: pointer;   
       }   
-form {   
-     border: 3px solid #f1f1f1;   
- }   
+
 input[type=text], input[type=password] {   
      width: 100%;   
      margin: 8px 0;  
@@ -34,18 +36,22 @@ button:hover {
  }   
  /* Header/Logo Title */
 .header {
-    height: 2%;
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background:  #00FF41;
     color: black;
     font-size: 20px;
+    padding: 0 2ch;
   }
-
-  .hometext {
+  h2 {
+    color:  #00FF41;
+  }
+  .hometext,
+  .header a {
     font-size: 30px;
     font-weight: bold;
      
-    width: 100%;   
     margin: 8px 0;  
     padding: 12px 20px;   
     display: inline-block;   
@@ -53,6 +59,13 @@ button:hover {
     background-color: black;
     box-sizing: border-box;  
     
+  }
+  .hometext {
+    width: 100%;
+  }
+  .hometext:hover {
+    box-shadow: 0 0 5px 5px #00FF41; 
+    cursor: pointer;
   }
 
   span , a {
@@ -89,6 +102,10 @@ button:hover {
   width: 80%;
   display: contents;
 }
+.header a:hover {
+  background-color: rgb(49, 49, 49);
+}
   
-
-  
+.lbl {
+  color: white;
+}

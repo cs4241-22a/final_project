@@ -10,26 +10,26 @@
 
 </head>
 <%- include('header') %>
-<main>
-    <h2>Please log in to your account:</h2>
+    <main>
+        <h2>Please log in to your account:</h2>
+
+        <body>
+
+            <form id="loginForm">
+                <div class="container">
+                    <label class="lbl">Username : </label>
+                    <input type="text" placeholder="Enter Username" name="username" id="loginUsername" required>
+                    <label class="lbl">Password : </label>
+                    <input type="password" placeholder="Enter Password" name="password" id="loginPassword" required>
+                    <button type="submit">Login</button>
+                    <br>
+                    <span> <a href="/signup"> Sign Up </a> </span>
+                </div>
+            </form>
+        </body>
+    </main>
 
     <body>
 
-        <form id="loginForm">
-            <div class="container">
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" id="loginUsername" required>
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" id="loginPassword" required>
-                <button type="submit">Login</button>
-                <br>
-                <span> <a href="/signup"> Sign Up </a> </span>
-            </div>
-        </form>
+        <script src="/js/login.js"></script>
     </body>
-</main>
-
-<body>
-
-    <script src="/js/login.js"></script>
-</body>

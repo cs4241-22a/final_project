@@ -72,7 +72,6 @@ leaderboardRouter.post('/submitScore', (req, res) => { //add auth eventually
                                     message: "Error=1"
                                 })
                             } else {
-                                console.log(updatedObject)
                                 res.json({
                                     status: "SUCCESS",
                                     message: "Edited highscore",
