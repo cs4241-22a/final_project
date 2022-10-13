@@ -20,7 +20,6 @@ export default class App
 
         this.mongoManger = new MongoManager()
 
-        this.gymMap = new GymMap()
         this.climbTypeUtils = new ClimbTypeUtils();
 
         //Load all of the routes in the database
@@ -28,6 +27,7 @@ export default class App
             this.routes = routes
             this.populateGradeFilter()
             this.filteredClimbManager = new FilteredClimbsManager()
+            this.gymMap = new GymMap()
             //List of filtered climbs
             
             
@@ -69,7 +69,7 @@ export default class App
       */
     populateGradeFilter() {
         //filers list of routes to list of grades and sorts them
-        let routeGrades = [...new Set(this.routes.map(climb => climb.grade))].sort()
+        let routeGrades = [...new Set(this.routes.sort((climb1, climb2) => climb1.gradeVal > climb2.gradeVal).map(climb => climb.grade))]
         
         //Adds every unique grade to the option panel
         const gradesFilter = document.getElementById('grades');

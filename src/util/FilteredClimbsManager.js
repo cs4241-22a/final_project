@@ -24,6 +24,23 @@ export default class FilteredClimbsManager
     }
 
     /**
+     * Gets the climbs in a section
+     *         this._id = _id;
+        this.grade = grade;
+        this.color = color;
+        this.section = section;
+        this.type = type;
+        this.canLead = canLead;
+        this.canTopRope = canTopRope;
+     */
+    getClimbsInSection(section)
+    {
+        return this.app.routes.filter(route => route.section == section).sort((climb1, climb2) => {
+            return climb1.gradeVal > climb2.gradeVal
+        })
+    }
+
+    /**
      * Get's the unique sections of the filtered climbs
      * @returns a sorted list of sections
      */

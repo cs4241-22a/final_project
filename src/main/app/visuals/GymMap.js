@@ -1,10 +1,12 @@
 import * as d3 from 'd3'
+import App from '../App'
 
 export default class GymMap
 {
     constructor(parentDivID)
     {
         //Selecting the parent div
+        this.app = new App()
         this.svgContainer = d3.select(document.getElementById(parentDivID))
         this.d3 = d3
         this._loadSvg()
@@ -17,14 +19,39 @@ export default class GymMap
     {
         //clearing all child elements
         this.svgContainer.selectAll("*").remove()
-
+        this.data = null;
         //load svg data
         d3.svg("./gym_map.svg")
         .then(data => {
+            this.data = data
             d3.select("#gymMap").node().append(data.documentElement)
         }).then(() => {
             d3.select("#gymMap").style("background", "#E0E0E0")
-        })
+        }).then(() => {
+            let toolTip = d3.select("body").append("div")
+                .attr("class", "tooltip")				
+                .style("opacity", 0);
+
+            for(let section = 1; section <= this._TOTAL_SECTIONS; section++)
+            {
+                d3.select("#gymMap").select(`#section${section}`).on("mouseover", (d) => {
+                     //console.log(d)
+                     toolTip.transition(200).style("opacity", .9)
+                     let climbsHTML = ""
+                     this.app.filteredClimbManager.getClimbsInSection(section).forEach(climb => {
+                        climbsHTML += `${climb.grade}, ${climb.color} </br>`
+                     })
+
+                     toolTip.html(climbsHTML).style("left", d.layerX + "px").style("top", (d.layerY-28) + "px")
+                })
+                .on("mouseout", (d) => {
+                    toolTip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                })
+            }
+
+        }) 
     }
 
     /**
