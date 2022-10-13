@@ -5,20 +5,23 @@
         <h1 class="display-5 fw-bold text-light">Leaderboards</h1>
         <div class="col-lg-auto mx-auto vh-80">
             <p class="lead mb-4 text-muted">Click on the leaderboard button you wish to view</p>
+            <button id="reactionBoardBtn" class="btn btn-success mb-4">Reaction</button>
             <button id="cpsBoardBtn" class="btn btn-success mb-4">Clicks Per Second</button>
             <button id="accuracyBoardBtn" class="btn btn-success mb-4">Accuracy</button>
-            <button id="reactionBoardBtn" class="btn btn-success mb-4">Reaction</button>
+            <button id="aimBoardBtn" class="btn btn-success mb-4">Aim Test</button>
             <p id="statusText" class="text-muted"> </p>
         </div>
     </div>
-    <div id="boardwindow" class="shadow p-3 m-5 bg-secondary rounded mx-auto" style="min-height: 10vw; width: 60vw">
-        <div class="col-lg-auto mx-auto vh-80">
-            <table id="leaderboard-table" style="border:1px solid black;margin-left:auto;margin-right:auto;">
-                <tr>
-                </tr>
-            </table>
-        </div>
-    </div>
+    
+    <table id="leaderboard-table" class="table table-hover table-dark">
+        <tr>
+        </tr>
+    </table>
+
+    <% if (user) { %>
+    <%- include('personalScores') -%>
+    <% } %>
+    
 </div>
 <script src="/javascripts/leaderboard.js"></script>
 <%- include('footer') -%>

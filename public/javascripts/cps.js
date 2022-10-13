@@ -46,8 +46,9 @@ window.onload = function() {
     }
     
     function endGame(){
+        numClicks = Math.round(numClicks/10)
         timer.innerText = ""
-        statusText.innerText = `You performed ${numClicks} in 10 seconds!`
+        statusText.innerText = `You got ${numClicks} clicks per second!`
         clickWindow.style.backgroundColor = "lightslategrey"
         clickWindow.removeEventListener('click', handleClick)
         
@@ -63,11 +64,8 @@ window.onload = function() {
             body: JSON.stringify(result)
         }).then(async function( response ) {
             var data = await response.json()
-            let dataScore = data.map(gameRes => gameRes.score);
-
-            console.log(dataScore);
             
-            window.dispatchEvent(new CustomEvent("updateData", {detail: {data: dataScore, myScore : result.score}}))
+            window.dispatchEvent(new CustomEvent("updateData", {detail: {data: data}}))
         })
         
         startBtn.disabled = false
