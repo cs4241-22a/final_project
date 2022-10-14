@@ -3,7 +3,7 @@ https://recipe-page-final-project.glitch.me/
 
 https://youtu.be/UTyCIOlQeNs
 
-The goal of this application is to allow users to view recipes posted by other users, as well as publish their own recipes. All recipes are viewable in the feed/homepage, and you can search for keywords in the title as well as filter by author, key words in the description or ingredient list, prep time, and servings. In order to edit or add new recipes, you must register or login--once logged in, you will be able to edit and delete your own recipes but not the recipes of others'.
+The goal of this application is to allow users to view recipes posted by other users, as well as publish their own recipes. All recipes are viewable in the feed/homepage, where they can be sorted by recency, prep time, servings, and alphabet order. You can search for keywords in the title as well as filter by author, key words in the description or ingredient list, prep time, and servings (for example: `eggs ingredient:milk servings:3`); quotes allow search terms with spaces, and any number of terms can be used at once. Recipes can be viewed by any user, but in order to edit existing recipes or add new ones, you must register or login. Once logged in, you will be able to edit and delete your own recipes, but not the recipes of others. Recipe search and viewing URLs update to represent the page's state and can be shared with others.
 
 The first four recipes are under `username: patrick` and `password: 123`.
 
@@ -17,4 +17,7 @@ Technical challenges encountered during the project include:
 - along with the React class components, we also made use of lifecycle methods, including componentDidMount, instead of just trying to fetch data in the last line of the constructor. This is a better, more React-y way of doing things, but it did require us to read through the docs and fully understand the component lifecycle.
 
 Group member responsibilities:
-- May: Majority of header (including which buttons to render if a user is logged in or not), login and registration page + backend
+- May: Majority of header (including which buttons to render if a user is logged in or not), login and registration page+backend
+- Gabriel: Searching and sorting, bugtesting and bugfixing across the whole application, visual planning for the different pages, error handling and recovery
+- Patrick: Created add recipe, view recipe, and edit recipe pages. Created clientside routes for adding, modifying, deleting, and viewing recipes and modified those routes on the server side. Set up MongoDB authentication and environment variables.
+- Grace: TODO

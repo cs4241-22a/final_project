@@ -50,7 +50,6 @@ class App extends React.Component {
         "Content-Type": "application/json"
       }
     }).then((response) => response.json()).then((res) => {
-      console.log(res);
       this.setState({...this.state, recipes: this.sortRecipes([...this.state.recipes, ...res])});
     });
   }
