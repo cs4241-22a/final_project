@@ -1,49 +1,32 @@
-# Final Project
-*Due before the start of class, October 13th (final day of the term)*
+# When3Meet
+[https://when3meet.glitch.me](https://when3meet.glitch.me)
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+Our project is aimed at improving upon When2Meet's usability. 
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+With this site a user can create an account, add their availability, create private and public events, and join events. From their account page
+users can set their availability, access events they own or have joined, and create new events. Users click and drag to change their availability.
+From an event page, the user can view the combined availability of all users in the event, as well as join and leave events. If the user is the event organizer, they can schedule
+an event from the event page and the event will automatically be removed from all the users participating in the event.
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+We aimed to fix some of the frustrations that we had with When2Meet. Our website allows for a cross site account so the user no longer has to input their
+availability repeatedly on different when2meet forms. Additionally, when an event is scheduled, it is removed from the user's availability so that the availability changes in other events
+that user is participating in across the site. We also wanted all the events that a user was participating in to be reachable from one place instead of having to go back
+through emails or Slack messages to find their groups' availability.
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+Feel free to use Username: admin Password: admin to explore the site. Click the calendar on the account page to change the availability, checkout the events and owned events on the 
+account and try to schedule a meeting.
 
-### Deliverables
+We used an Express server, Node.js, and MongoDB on the back end to provide the API and persistent memory.
+The front end uses React and Bootstrap to drive the user interface. 
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+Initially, we found it difficult to start because there were a lot of different components that interacted in multiple ways. 
+We also found it difficult to serve the React pages. Initially we tried to use vite, but found it conflicted with Express.
+We eventually moved to only using Express for simplicity. It was also difficult when we were all working on the website at the same time
+since things would constantly be changing andc riat was hard to tell if you or someone else broke it5. What each group member was responsible for designing / developing.
+  - Abby - leave event button, account page HTML, event data debugging, CSS formatting
+  - Cole - page routing, event data debugging, create event form and privacy toggle, conditional page rendering 
+  - Nick - Express backend, setting up backend API fulfillment, DB integration
+  - Ted - Calendar implementation, user interaction, express request development, react development, styling 
+  - Yasmine - login page implementation, logout event button, event data debugging, schedule event form
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
-
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
-
-There are no other scheduled checkpoints for your project. 
-
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
-
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
-
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+[https://youtu.be/N_Y6w3jQszU](https://youtu.be/N_Y6w3jQszU)
