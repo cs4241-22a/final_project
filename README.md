@@ -17,4 +17,5 @@ Technical challenges encountered during the project include:
 - along with the React class components, we also made use of lifecycle methods, including componentDidMount, instead of just trying to fetch data in the last line of the constructor. This is a better, more React-y way of doing things, but it did require us to read through the docs and fully understand the component lifecycle.
 
 Group member responsibilities:
-- May: Majority of header (including which buttons to render if a user is logged in or not), login and registration page + backend
+- Patrick: created add recipe, view recipe, and delete recipe pages. Created clientside routes for adding, modifying, and deleting  recipes and modified those routes on the server side. Set up MongoDB authentication and environment variables.
+- May: created majority of header (including which buttons to render if a user is logged in or not), login and registration page + backend
