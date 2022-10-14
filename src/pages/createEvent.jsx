@@ -1,10 +1,8 @@
-// Import the Invitees List component
-import Invitees from "./invitees.jsx";
-import Calendar from "./components/Calendar";
 import React, { useEffect, useState } from "react";
+import Calendar from "../components/Calendar";
 
 export default function CreateEvent() {
-  const arr = Array(335)
+  const arr = Array(336)
     .fill()
     .map(() => 0);
   const alphas = arr;
@@ -13,8 +11,8 @@ export default function CreateEvent() {
   const color2 = [255, 0, 0];
   const color3 = [246, 76, 24];
 
-  const [firstTime, setFirstTime] = useState("0");
-  const [lastTime, setLastTime] = useState("0");
+  const [firstTime, setFirstTime] = useState(0);
+  const [lastTime, setLastTime] = useState(0);
   const [eventName, setEventName] = useState("Event Name");
 
   const [isPrivate, setIsPrivate] = useState(false);
@@ -27,7 +25,7 @@ export default function CreateEvent() {
     `;
   } else {
     renderedPrivacy = `
-    <label for="invitedList">Who's Invited?</label> 
+    <label htmlFor="invitedList">Who's Invited?</label> 
     <br /> 
     <textarea id="invitedList" name="invitedList" rows="2" cols="20" required></textarea>
     <br />
@@ -49,10 +47,58 @@ export default function CreateEvent() {
     setIsPrivate(!isPrivate);
   }
 
-  //   function submitEvent(e){
-  //     e.preventDefault();
+  const createSubmit = (createEvent) => {
+    createEvent.preventDefault();
+    const eventForm = document.querySelector("form");
+    const route = eventForm.elements.eName.value + "/joinEvent";
 
-  //   }
+    if (!/^[\w_-]+$/.test(eventForm.elements.eName.value)) {
+      alert("Event name must be alphanumeric with no spaces");
+      return;
+    }
+
+    if (
+      !eventForm.elements.firstTime.value ||
+      !eventForm.elements.lastTime.value
+    ) {
+      alert("Must enter valid time (HH:MM:AM/PM)");
+      return;
+    }
+
+    fetch("/handleSubmitEvent", {
+      method: "post",
+      body: JSON.stringify({
+        eventname: eventForm.elements.eName.value,
+        startTime: eventForm.elements.firstTime.value,
+        endTime: eventForm.elements.lastTime.value,
+        visibility: eventForm.elements.privacy.checked,
+        invitees:
+          eventForm.elements.privacy.checked === false
+            ? undefined
+            : eventForm.elements.invitedList.value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      "no-cors": true,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        if (!json.error) {
+          if (json.joined === true) {
+            // go to display event page
+            window.location.href = "/event/" + eventForm.elements.eName.value;
+          } else {
+            alert("Event does not exist, please try to recreate it.");
+            eventForm.reset();
+          }
+        } else {
+          alert("Event name already exists, please try another.");
+        }
+      });
+  };
 
   return (
     <div className="dispEvent">
@@ -60,8 +106,8 @@ export default function CreateEvent() {
         <h2>Create a New Event</h2>
         <form>
           <fieldset>
-            <div class="form-group">
-              <label for="eName">Event Name</label>
+            <div className="form-group">
+              <label htmlFor="eName">Event Name:</label>
               <input
                 type="text"
                 id="eName"
@@ -71,8 +117,8 @@ export default function CreateEvent() {
               />
             </div>
 
-            <div class="form-group">
-              <label for="firstTime">Earliest Possible Time:</label>
+            <div className="form-group">
+              <label htmlFor="firstTime">Earliest Possible Time:</label>
               <input
                 type="time"
                 step="3600"
@@ -83,8 +129,8 @@ export default function CreateEvent() {
               />
             </div>
 
-            <div class="form-group">
-              <label for="lastTime">Latest Possible Time:</label>
+            <div className="form-group">
+              <label htmlFor="lastTime">Latest Possible Time:</label>
               <input
                 type="time"
                 step="3600"
@@ -95,10 +141,10 @@ export default function CreateEvent() {
               />
             </div>
 
-            <div class="form-group">
-              <label for="privacy">Event Privacy:</label>
+            <div className="form-group">
+              <label htmlFor="privacy">Event Privacy:</label>
               <br />
-              <label class="switch">
+              <label className="switch">
                 <input
                   type="checkbox"
                   id="privacy"
@@ -106,38 +152,41 @@ export default function CreateEvent() {
                   checked={isPrivate}
                   onChange={flipPrivacy.bind(this)}
                 />
-                <span class="slider round"></span>
+                <span className="slider round"></span>
               </label>
 
               <div dangerouslySetInnerHTML={{ __html: renderedPrivacy }} />
             </div>
-            <button type="reset" class="btn btn-outline-secondary">
+            <button type="reset" className="btn btn-outline-secondary">
               Clear
             </button>
             <button
               type="submit"
-              class="btn btn-outline-primary"
+              className="btn btn-outline-primary"
               id="submitBtn"
+              onClick={createSubmit}
             >
               Submit
             </button>
+            <br />
           </fieldset>
         </form>
       </div>
 
       <div className="cal">
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <h1>{eventName}</h1>
-          <Calendar
-            startDay={0}
-            endDay={6}
-            startTime={firstTime}
-            endTime={lastTime}
-            color={color3}
-            alphas={alphas}
-            readonly={true}
-          />
         </div>
+        <Calendar
+          startDay={0}
+          endDay={6}
+          startTime={firstTime}
+          endTime={lastTime}
+          color={color3}
+          alphas={alphas}
+          readonly={true}
+          lockedSlots={alphas}
+        />
       </div>
     </div>
   );

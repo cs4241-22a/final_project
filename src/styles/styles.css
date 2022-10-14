@@ -12,9 +12,18 @@ html {
 
 /* adjust typography defaults */
 body {
-  margin: 1rem;
+  margin: 3rem;
   font-family: sans-serif;
   line-height: 1.5;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+  color: white;
+}
+
+.nav-link {
+  color: white;
 }
 
 /* images and videos max out at full width */
@@ -23,7 +32,6 @@ video {
   height: auto;
   max-width: 100%;
 }
-
 
 .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
@@ -35,6 +43,10 @@ video {
 
 td {
   padding: 0;  
+}
+
+.form-group {
+  margin: 1rem;
 }
 
 div.timeCol {
@@ -56,10 +68,11 @@ p.time {
 div.calendar {
   display: inline-block;
   vertical-align: top;
+  width: 100%;
 }
 
 p.cal-day {
-  width: 100px;
+  width: 8vw;
   text-align: center;
   padding: 0px;
   margin: 0px;
@@ -72,7 +85,7 @@ div.timeslot {
   border-left-width: 1px;
   border-top-width: 1px;
   color: gray;
-  width: 100px;
+  width: 100%;
   height: 1em;
   text-align: center;
   overflow: hidden;
@@ -88,23 +101,29 @@ div.timeslot.tophalf {
   border-bottom-width: 0px;
 }
 
+.logout {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
 .dispEvent {
   height: 100vh;
-  width: 100vw;
+  width: auto;
   display: grid;
   grid-template: 1fr 5fr 1fr;
   gap: 10px;
-  grid-template-areas:
-    "content cal"
- ;
+  grid-template-areas: "content cal";
 }
 
 .content {
   grid-area: content;
+  padding: 10px;
 }
 
 .cal {
   grid-area: cal;
+  padding: 10px;
 }
 
 .switch {

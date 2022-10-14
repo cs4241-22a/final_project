@@ -7,8 +7,8 @@
   },
   "restart": {
     "include": [
-      "^\\.env$",
-      "^backend/"
+      "^backend/",
+      "\\.js$"
     ],
     "exclude": [
       "src/" 
