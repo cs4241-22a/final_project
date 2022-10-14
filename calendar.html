@@ -1,0 +1,80 @@
+<!-- calendar view of tasks/events -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta
+      name="description"
+      content="Calendar view for tasks"
+    />
+    <title>Calendar View</title>
+
+    <link rel="stylesheet" href="cal.css">
+    
+<!--     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script> 
+        $(function(){
+            $('#addNewEvent').load("newEvent.html");
+        });
+    </script> -->
+  </head>
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        <div id="monthDisplay"></div>
+        <div>
+          <button id="backButton">Back</button>
+          <button id="nextButton">Next</button>
+           <button id="listView">List view</button>
+        </div>
+      </div>
+
+      <div id="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+      </div>
+
+      <div id="calendar"></div>
+    </div>
+
+    <!-- Date window     -->
+    <div id="newEventModal">
+      <h2>Create a New Event:</h2>
+     
+      <div id="addNewEvent">
+      </div>
+      
+      
+      
+<!--       <div class="container"> -->
+      <h2>
+          Current events starting or ending on this day:
+      </h2>
+      <div id="dateEventList">
+        
+      </div>
+<!--       </div> -->
+      <button id="cancelButton">Close</button>
+    </div>
+    <div id="deleteEventModal">
+      <h2>Event</h2>
+
+      <p id="eventText"></p>
+
+      <button id="deleteButton">Delete</button>
+      <button id="closeButton">Close</button>
+    </div>
+
+    <div id="modalBackDrop"></div>
+    
+    <script type="module" src="cal.js"></script>
+    <script type="module" src="client.js"></script>
+  </body>
+</html>
