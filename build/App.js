@@ -189,7 +189,7 @@ class App extends React.Component {
     }
   }
   showResponseData(i, j) {
-    return /* @__PURE__ */ React.createElement("li", null, "Song: ", this.state.tempRespData[i][j].song, "Artist: ", this.state.tempRespData[i][j].artist, "Comment: ", this.state.tempRespData[i][j].comment);
+    return /* @__PURE__ */ React.createElement("li", null, "Song: ", this.state.tempRespData[i][j].song, " Artist: ", this.state.tempRespData[i][j].artist, " Comment: ", this.state.tempRespData[i][j].comment);
   }
   render() {
     if (this.state.loggedin == false) {
