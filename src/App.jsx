@@ -200,9 +200,7 @@ class App extends React.Component {
   showResponseData(i, j) {
     return (
       <li>
-        Song: {this.state.tempRespData[i][j].song}
-        Artist: {this.state.tempRespData[i][j].artist}
-        Comment: {this.state.tempRespData[i][j].comment}
+        Song: {this.state.tempRespData[i][j].song}&emsp;Artist: {this.state.tempRespData[i][j].artist}&emsp;Comment: {this.state.tempRespData[i][j].comment}
       </li>
     )
   }

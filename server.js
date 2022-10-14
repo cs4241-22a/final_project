@@ -47,7 +47,6 @@ app.post('/loggingIn', (req,res) => {
   db.collection('user').find({ }).toArray()
     .then(result => {
       let userLogin = false;
-      console.log(req.body);
       
       for(let login of result) {
         if(login.user === req.body.user && login.pass === req.body.pass) {
@@ -59,11 +58,9 @@ app.post('/loggingIn', (req,res) => {
         req.session.login = true;
         loggedIn = true;
         currUser = req.body.user;
-        console.log("login successful!");
       }else{
         req.session.login = false;
         loggedIn = false;
-        console.log("Incorrect Login.");
       }
       res.json({login: loggedIn});
     })
@@ -71,11 +68,9 @@ app.post('/loggingIn', (req,res) => {
  
 });
 app.post('/register', (req,res) => {
-  console.log(JSON.stringify(req.body));
   db.collection('user').find({ }).toArray()
     .then(result => {
       let userFound = false;
-      console.log(req.body);
       for(let login of result) {
         if(login.user === req.body.user) {
           userFound = true;
@@ -103,7 +98,6 @@ app.get('/loginStatus', (req,res) => {
 })
 
 app.post('/userInfo', (req,res) => {
-  console.log(JSON.stringify(req.body))
   db.collection("user").find({user: req.body.user}).toArray()
   .then(result => res.json(result))
 })
@@ -149,7 +143,6 @@ app.post('/updatePost', (req,res) => {
     .then(result => res.json(result))
 })
 app.post('/updatePostNewResponse', (req, res) => {
-  console.log(JSON.stringify(req.body.responseid))
   db.collection("posts")
     .updateOne(
       {_id: ObjectId(req.body._id)},
@@ -163,7 +156,6 @@ app.post('/updatePostNewResponse', (req, res) => {
     let userFound = false;
     let userID;
     for(let login of result) {
-      //console.log("user: ", result);
       if(login.user === currUser) {
         userFound = true;
         userID= login._id;
