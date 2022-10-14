@@ -22,4 +22,4 @@ Group member responsibilities:
 - May: Majority of header (including which buttons to render if a user is logged in or not), login and registration page+backend
 - Gabriel: Searching and sorting, bugtesting and bugfixing across the whole application, visual planning for the different pages, error handling and recovery
 - Patrick: Created add recipe, view recipe, and edit recipe pages. Created clientside routes for adding, modifying, deleting, and viewing recipes and modified those routes on the server side. Set up MongoDB authentication and environment variables.
-- Grace: TODO
+- Grace: Wrote the Mongoose schemas, implemented add, edit, & delete recipe server routes in Express/Mongoose. Created the landing page in React, styled it with React Bootstrap, and wrote the fetch requests to populate it with the recipe data. Also wrote the recipes in the database & wrote Mongoose queries to populate the database with mock data for testing.
