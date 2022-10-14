@@ -214,7 +214,7 @@ class App extends React.Component {
       return (
         <>
         <h1>
-            Hello {this.state.currUser} Responses Made: {this.state.userRespNum} 
+            Hello {this.state.currUser}&emsp;&emsp;&emsp;Total Responses Made: {this.state.userRespNum} 
         </h1>
         <button type="button" onClick={() => window.location.reload()}>Refresh Everything</button>
         <div id="displayPosts">

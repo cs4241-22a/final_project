@@ -198,7 +198,7 @@ class App extends React.Component {
         to: "/login"
       });
     } else {
-      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser, " Responses Made: ", this.state.userRespNum), /* @__PURE__ */ React.createElement("button", {
+      return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser, "  Responses Made: ", this.state.userRespNum), /* @__PURE__ */ React.createElement("button", {
         type: "button",
         onClick: () => window.location.reload()
       }, "Refresh Everything"), /* @__PURE__ */ React.createElement("div", {
