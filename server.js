@@ -13,8 +13,8 @@ const connectEnsureLogin = require('connect-ensure-login')
 const favicon = require('serve-favicon')
 const path = require('path')
 const ChessGenerator = require('chess-creator')
-
-const inDev = true
+const https = require("https");
+const fs = require("fs");
 
 const engines = [
   {
@@ -24,11 +24,7 @@ const engines = [
   {
     name: 'Komodo',
     exec: './engines/komodo',
-  },
-  {
-    name: 'LeelaChessZero',
-    exec: './engines/leela/lc0',
-  },
+  }
 ]
 
 //Database Configuration
@@ -53,13 +49,21 @@ mongoose.connect(process.env.db_url)
 
 //Server Configuration
 const app = express()
+const sslOptions = {
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/webware.craftsteamg.com/fullchain.pem"
+  ),
+  key: fs.readFileSync(
+    "/etc/letsencrypt/live/webware.craftsteamg.com/privkey.pem"
+  ),
+};
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(
   expressSession({
     secret: process.env.SESSION_SECRET,
     cookie: {
-      secure: false,
+      secure: true,
     },
     resave: false,
     saveUninitialized: false,
@@ -267,4 +271,4 @@ app.use(connectEnsureLogin.ensureLoggedIn(), express.static('build'))
 app.use(express.static('public'))
 //Server Startup
 console.log(`Starting Server on Port ${process.env.port}`)
-app.listen(process.env.port)
+https.createServer(sslOptions, app).listen(process.env.port)
