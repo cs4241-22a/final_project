@@ -10,6 +10,7 @@ import {
   ToggleButton,
   FloatingLabel,
 } from 'react-bootstrap'
+import Cookies from 'js-cookie'
 
 function map(input, low, high, newLow, newHigh) {
   return newLow + ((newHigh - newLow) / (high - low)) * (input - low)
@@ -60,7 +61,9 @@ const Home = (props) => {
     <>
       <Container className="mainContainer" style={{maxWidth: "500px"}}>
         <Row className="square border border-dark border-3">
-          <h1 className="text-center">start your game</h1>
+          <h1 className="text-center">
+            start your game, {Cookies.get("username")}
+          </h1>
         </Row>
         <Row><br/></Row>
         <Row>

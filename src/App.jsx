@@ -1,16 +1,27 @@
 import { Chess } from 'chessops/chess'
 import { parseFen } from 'chessops/fen'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Board, { playComputerMove } from './Board'
 import NavBar from './components/Navbar/NavBar'
+import './css/style.css'
+import GameViewer from './GameViewer'
 import About from './pages/About'
 import GameHistory from './pages/GameHistory'
 import Home from './pages/Home'
 import Stats from './pages/Stats'
-import GameViewer from './GameViewer'
-import './css/style.css'
+
+async function getStats() {
+  const response = await fetch('/userstats?', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  const json = await response.json()
+  console.log(json)
+  return json
+}
 
 export default function App(props) {
   const [game, setGame] = useState(
@@ -23,20 +34,27 @@ export default function App(props) {
   const [turn, setTurn] = useState(game.turn)
   const [history, setHistory] = useState([])
   const [engine, setEngine] = useState('StockFish')
-  const [level, setLevel] = useState(10)
+  const [level, setLevel] = useState(1)
   const [playAs, setPlayAs] = useState('white')
   const [gameRunning, setGameRunning] = useState(false)
   const [gameOver, setGameOver] = useState(false)
 
   function beginGame() {
-    setGame(Chess.default())
+    setGame(
+      Chess.fromSetup(
+        parseFen(
+          'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+        ).unwrap()
+      ).unwrap()
+    )
     setHistory([])
     setTurn('white')
     setGameRunning(true)
     setGameOver(false)
     if (playAs === 'black') {
-      playComputerMove(game, engine, 1000, level).then((chess) => {
-        setGame(chess)
+      playComputerMove(game, engine, 1000, level).then((res) => {
+        console.log(res)
+        setGame(res[0])
       })
     }
   }

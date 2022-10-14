@@ -12,7 +12,7 @@ export async function playComputerMove(chess, engine, movetime, level) {
   const move = await getBestMove(fen, engine, movetime, level)
   const san = makeSan(chess, move)
   chess.play(move)
-  return chess, san
+  return [chess, san]
 }
 
 function getPosition(index, color) {
@@ -27,7 +27,7 @@ function getSquareFromChessNotation(pos) {
 
 async function getBestMove(pos, engine, movetime, level) {
   const response = await fetch(
-    'http://176.31.253.185:4000/bestmove?' +
+    '/bestmove?' +
       new URLSearchParams({
         position: pos,
         engine: engine,
@@ -152,14 +152,19 @@ export default function Board(props) {
   async function onMove(playerMove) {
     if (props.game.isEnd()) {
       props.setGameOver(true)
-      sendResult()
+      sendResult(false)
       return
     }
-    const san = await playComputerMove(props.game, props.engine, 1000, props.level)
+    const [chess, san] = await playComputerMove(
+      props.game,
+      props.engine,
+      1000,
+      props.level
+    )
     props.setHistory([...props.history, playerMove, san])
     if (props.game.isEnd()) {
       props.setGameOver(true)
-      sendResult()
+      sendResult(false)
       return
     }
     props.flipTurn()
@@ -229,37 +234,62 @@ export default function Board(props) {
   }
 
   function handleResign() {
-    props.setGameOver(true)
-    sendResult()
-    endGame()
+    if (!props.gameOver) {
+      props.setGameOver(true)
+      sendResult(true)
+      endGame()
+    }
   }
 
-  function sendResult() {
-    let result = 'draw'
-    if (props.game.outcome === 'white' && props.playAs === 'white') {
-      result = 'win'
-    } else if (props.game.outcome === 'black' && props.playAs === 'black') {
-      result = 'win'
+  function sendResult(didResign) {
+    let result = ''
+
+    if (props.game.outcome() === undefined) {
+      result = 'draw'
     } else {
+      if (props.game.outcome().winner === 'white' && props.playAs === 'white') {
+        result = 'win'
+      } else if (
+        props.game.outcome().winner === 'black' &&
+        props.playAs === 'black'
+      ) {
+        result = 'win'
+      } else if (
+        props.game.outcome().winner === 'black' &&
+        props.playAs === 'white'
+      ) {
+        result = 'loss'
+      } else if (
+        props.game.outcome().winner === 'white' &&
+        props.playAs === 'black'
+      ) {
+        result = 'loss'
+      } else {
+        result = 'draw'
+      }
+    }
+
+    if (didResign) {
       result = 'loss'
     }
 
-    fetch('http://176.31.253.185:4000/result', {
+    const body = {
+      engine: props.engine,
+      engineStrength: props.level,
+      colorPlayed: props.playAs,
+      game: props.history,
+      result: result,
+    }
+    console.log(body)
+    console.log(JSON.stringify(body))
+
+    fetch('/result', {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {
-        engine: props.engine,
-        engineStrength: props.level,
-        colorPlayed: props.playAs,
-        game: '1. e4 e5',
-        result: result,
-      },
+      body: JSON.stringify(body),
     })
-    //.then((response) => response.json())
-    //.then((json) => console.log(json))
   }
 
   function endGame() {
@@ -267,16 +297,20 @@ export default function Board(props) {
   }
 
   function getResultPicture() {
-    if (props.game.outcome === undefined) {
+    if (props.game.outcome() === undefined) {
       return drewImg
     }
-    if (props.game.outcome === 'white' && props.playAs === 'white') {
+    if (props.game.outcome().winner === 'white' && props.playAs === 'white') {
       return winImg
-    }
-    if (props.game.outcome === 'black' && props.playAs === 'black') {
+    } else if (props.game.outcome().winner === 'black' && props.playAs === 'black') {
       return winImg
+    } else if (props.game.outcome().winner === 'black' && props.playAs === 'white') {
+     return loseImg 
+    } else if (props.game.outcome().winner === 'white' && props.playAs === 'black') {
+      return loseImg
+    } else {
+      return drewImg
     }
-    return loseImg
   }
 
   return (
@@ -292,7 +326,8 @@ export default function Board(props) {
                       <Rect
                         x={entry.x}
                         y={entry.y}
-                        id={entry.id}r
+                        id={entry.id}
+                        r
                         width={entry.width}
                         height={entry.height}
                         fill={entry.fill}
@@ -416,7 +451,8 @@ export default function Board(props) {
                 </Layer>
                 {props.gameOver ? (
                   <Layer onClick={endGame}>
-                    <Rect opacity={0.6}
+                    <Rect
+                      opacity={0.6}
                       x={0}
                       y={0}
                       width={size}
@@ -434,25 +470,15 @@ export default function Board(props) {
                 ) : null}
               </Stage>
             </Row>
+
             <Row style={{ padding: '20px' }}>
-              <Col>
-                <Button
-                  variant="danger"
-                  onClick={handleResign}
-                  style={{ minWidth: '100%' }}
-                >
-                  resign
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  variant="secondary"
-                  onClick={() => {}}
-                  style={{ minWidth: '100%' }}
-                >
-                  undo last move
-                </Button>
-              </Col>
+              <Button
+                variant="danger"
+                onClick={handleResign}
+                style={{ minWidth: '100%' }}
+              >
+                resign
+              </Button>
             </Row>
           </>
         ) : (

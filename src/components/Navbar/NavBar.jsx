@@ -11,17 +11,12 @@ const NavBar = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              home
+              WebChess
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-{/*
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-*/}
               <LinkContainer to="/about">
                 <Nav.Link>about</Nav.Link>
               </LinkContainer>
@@ -31,6 +26,7 @@ const NavBar = () => {
               <LinkContainer to="/gamehistory">
                 <Nav.Link>game history</Nav.Link>
               </LinkContainer>
+                <Nav.Link href="/logout">logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
