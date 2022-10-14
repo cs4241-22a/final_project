@@ -33,4 +33,4 @@ What each group member was responsible for designing / developing.
 - Jack McEvoy: Worked on front end designing html pages and overall layout that were eventually left out and implemented spotify integration.
 
 ## Walkthrough
-{Video link or embed here}
+[Tutorial Video](https://github.com/tjcoppola234/Final_Project/blob/main/video3389648567.mp4)
