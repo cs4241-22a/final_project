@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../public/style.css">
+    <title>Your Friends</title>
+</head>
+
+<% i = 0 %>
+<% friend_pending.forEach(friend => { %>
+    <% if (i === 0 ) { %>
+        <h2>friend requests Pending</h2>
+        <% i = i+1 %>
+    <% } %>
+    <li><%= friend[0] %></li>
+    <li style="display: none"><%= friend[1] %></li>
+<% }) %>
+
+<% j = 0 %>
+<% friend_req.forEach(req => { %>
+    <% if (j === 0 ) { %>
+        <h2>friend requests Pending</h2>
+        <% j = i+1 %>
+    <% } %>
+    <div class="row m-auto">
+    <li><%= req[0] %></li>
+    <form method="POST" action="/friends/accept_friend_request">
+        <input type='hidden' value="<%= req[1] %>" name="friend_id"/>
+        <input type="submit" value="Accept" class="btn btn-sm btn-success ml-4">
+    </form>
+    </div>
+<% }) %>
+
+<h6>your ID: <%= myID %></h6>
+
+
+<body class="p-3 mb-2 bg-dark text-white" style="font-family: fantasy;">
+
+<div class="container">
+    <div class="position-relative text-center" style="font-family: fantasy; margin-top: 15em">
+        <h1>WELCOME, <%= myName %></h1>
+    <h3>Your Connections Here</h3>
+        <div class="font-weight-light border-top border-white m-3 row"></div>
+
+<form method = 'POST' action = '/friends/add_friend' >
+    FriendID: <input type='text' name='friend_id' required class=""/>
+    <input type="submit" value="Add friend" class="btn btn-primary btn-sm ml-3"/>
+</form>
+    </div>
+</div>
+
+<div class="table">
+    <table class="table container col-2 text-white mt-5">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th class="col-2"></th>
+        </tr>
+        </thead>
+<% friend_list.forEach(friend => { %>
+            <tbody>
+            <tr>
+                <div class="col">
+                    <td><%= friend[0] %></td>
+    <form method='GET' action = '/friendplan/<%= friend[1] %>'>
+        <input type="hidden" value="<%= friend[1] %>" name='friend_id'/>
+        <td><input type="submit" value="View Plan" class="btn btn-sm btn-warning text-center text-dark"/></td>
+    </form>
+                </div>
+            </tr>
+            </tbody>
+<% }) %>
+    </table>
+</div>
+</body>
