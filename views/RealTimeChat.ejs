@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
+
+  <title>Your Friends</title>
+</head>
+
+<div class="col-auto">
+<p id="timenow"></p></div>
+
+<!-- body GUI -->
+<body class="p-3 mb-2 bg-dark text-white" style="font-family: fantasy;">
+<div class="text text-center">
+  <h1>
+    <div class="row col-auto ml-1">
+    Welcome to chat room:
+    <p id="UserID" style="display: none"><%= ID %></p>
+    <p id="username" class="col-md-1"><%= username %></p>
+    </div>
+  </h1>
+  <p>Your ID is: <%= ID %></p>
+
+  <div class="font-weight-light border-top border-white m-3"></div>
+</div>
+
+<div class="row">
+  <div id="message" class="ml-4 col-5"></div>
+<div class="w-50 h-50" style="margin-top: 10em; margin-left:50%; position: fixed">
+<input type="text" id="send_text" placeholder="Please input msg you want to send" class="h-auto w-50">
+    <button id="send_button" class="text-danger btn btn-dark">Send</button>
+</div>
+</div>
+</body>
+
+<!-- function goes here-->
+<script>
+  const ws = new WebSocket("ws://localhost:3001");
+  const ID = document.querySelector("#UserID").innerHTML;
+  const MsgDiv = document.querySelector("#message");
+  const send_text = document.querySelector("#send_text");
+  const username = document.querySelector("#username").innerHTML;
+
+  const refresh = 1000;
+  const options = { hour: 'numeric', minute: 'numeric', second: 'numeric'};
+  const TimeNow = function () {
+    let Now = new Date();
+    Now = Now.toLocaleDateString("en-US", options)
+    document.querySelector("#timenow").innerHTML = Now;
+    RefreshTime();
+  };
+  const RefreshTime = function () {
+    setTimeout(TimeNow, refresh);
+  };
+
+  ws.addEventListener("open", () => {
+    console.log("WS is running");
+    TimeNow();
+    let Time = document.querySelector("#timenow").innerHTML;
+    let txt = "Hello, Just joined!"
+    let json = {ID: ID, Time: Time, txt: txt, username: username}
+    let msg = JSON.stringify(json)
+    ws.send(msg);
+  });
+
+  ws.addEventListener("message", (e) => {
+    let msg = document.createElement("p");
+    console.log(e)
+    let body = JSON.parse(e.data)
+    let ID = body.ID;
+    let Time = body.Time;
+    let txt = body.txt;
+    let username = body.username
+    //Please add code BELOW to update the formats! Data contains 4 fields, txt: acutal data sent, ID: user's ID, username: username (use this to
+    //displace the username! ID is 16 digit hash, used to add friends)
+    msg.innerText = `${username}: ${txt} @ ${Time}`;
+    MsgDiv.appendChild(msg);
+  });
+
+  const Send_message = function() {
+    let txt = send_text.value
+    let Time = document.querySelector("#timenow").innerHTML;
+    send_text.value = ''
+    let json = {ID: ID, Time: Time, txt: txt, username: username}
+    let msg = JSON.stringify(json)
+    ws.send(msg);
+  }
+  window.onload = function () {
+    const send_but = document.querySelector("#send_button");
+    send_but.onclick = Send_message;
+  }
+</script>

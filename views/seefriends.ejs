@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- heads here -->
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
+
+  <title>Your Friends</title>
+</head>
+
+<!-- body GUI here-->
+<body class="bg-dark text-white">
+<div class="container">
+  <div class="position-relative text-center" style="font-family: fantasy; margin-top: 15em">
+  <h1>Plan from friends <%= msg %></h1>
+  </div>
+
+<!-- plans go here -->
+  <div class="table">
+    <table class="table container text-white">
+      <thead>
+      <tr>
+        <th>Note</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Creat Time</th>
+      </tr>
+      </thead>
+  <% body.forEach(function(plan){ %>
+        <tbody>
+        <tr>
+          <div class="col">
+            <!-- <h3>plan: <%= plan.Note %>, time: <%= plan.Time %></h3> -->
+            <form method="POST" action="/app/delete_plan">
+
+              <td><%= plan.Note %></td>
+              <td><%= moment(plan.Start_Time) %></td>
+              <td><%= moment(plan.End_Time) %></td>
+              <td><%= moment(plan.Submit_Time).fromNow() %></td>
+            </form>
+          </div>
+        </tr>
+        </tbody>
+      <% }) %>
+    </table>
+</body>
+
+<!-- function here -->
+<script>
+  const refresh = 1000;
+  const ChangeEndTime = function () {
+    document.querySelector("#end_time").value =
+            document.querySelector("#start_time").value;
+    document.querySelector("#end_time").min =
+            document.querySelector("#start_time").value;
+  };
+  const TimeNow = function () {
+    let Now = new Date();
+    document.querySelector("#timenow").innerHTML = Now;
+    document.querySelector("#Submit_Time").value = Now;
+    RefreshTime();
+  };
+  const RefreshTime = function () {
+    setTimeout(TimeNow, refresh);
+  };
+
+  window.onload = function () {
+    TimeNow();
+
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+    now.setMilliseconds(null);
+    now.setSeconds(null);
+
+    document.querySelector("#start_time").value = now
+            .toISOString()
+            .slice(0, -1);
+    document.querySelector("#start_time").min = now.toISOString().slice(0, -1);
+    // document.querySelector('#start_time').step = 60 * 15;
+    document.querySelector("#end_time").value = now.toISOString().slice(0, -1);
+    document.querySelector("#end_time").min = now.toISOString().slice(0, -1);
+    // document.querySelector('#end_time').step = 60 * 15;
+  };
+</script>

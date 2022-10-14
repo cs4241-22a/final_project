@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- heads here -->
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
+
+  <title>Your Friends</title>
+</head>
+
+<!-- body GUI here -->
+<body class="container p-3 mb-2 bg-dark text-white center-block" style="font-family: fantasy; margin-top: 15em">
+
+<div class="position-relative text-center">
+  <h1>WELCOME TO OUR PLANNER</h1>
+  <div class="font-weight-light border-top border-white m-3">
+  <a class="p-5" href="http://localhost:3000/auth/github">GitHub login</a>
+  <a class="p-5" href="http://localhost:3000/auth/google">Google login</a>
+  </div>
+</div>
+
+<div class="center-block text-center m-4" style="border: white; border-style: double; border-width: 5px; ">
+  <form method="POST" action="/auth/local" class="m-3">
+    Enter Username:<br />
+    <input type="text" name="uname" placeholder="WPI_student" /><br />Enter
+    Password:<br /><input type="password" name="pw" placeholder="123456"/><br /><br />
+    <input class="btn btn-success pull-right"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+  <form method="POST" action="/auth/register">
+    Enter Username:<br /><input type="text" name="uname" placeholder="WPI_student"/><br />Enter
+    Password:<br /><input type="password" name="pw" placeholder="123456"/> <br /><br />
+    <input class="btn btn-info pull-right"
+      type="submit"
+      value="Register"
+    />
+  </form>
+</div>
+  <p><%= msg %></p>
+</body>
+

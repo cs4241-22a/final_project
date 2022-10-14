@@ -1,49 +1,46 @@
-# Final Project
-*Due October 13th (final day of the term)*
+# CS4241 Final Project - The Diary Group
+Yueting Zhu, Vanessa Wang, Enoch Zhao
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+Site Link: http://alexzyt.com
+Video Link: https://youtu.be/yk4dQ-oF_Fg
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+## Project Description
+Our group created a website called “The Diary Group” that lets prospective users log in with accounts created via our site, or through third party account authentication methods (GitHub,  Google etc).  The main purpose of the website is for users to create their day-to-day schedules via a timetable like design, while also allowing them to view schedules created by other users they have added as friends.
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+We also implemented a “chatting system” that ideally only allows logged in users to chat with each other inside of a chatroom. Users can exchange messages with each other that anyone with a logged in account on the website can see. Chat history at this moment remains persistent.
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
 
-### Deliverables
+## Operating Notices (points to look out for)
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+- Message exchanges happen via an input form with a submit button, submitted messages then appear above the input form with the corresponding member of origin
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
+## Technologies Used
 
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+- Express
+- Node.js
+- E.js
+- OAuth Implementation
+- MongoDB
+- DigitalOcean Front-end Hosting
+- Godaddy DNS
 
-There are no other scheduled checkpoints for your project. 
+## Challenges Faced
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+- Structure of friend system: Handling friend requests and sending friend requests to users
+- Real time chat: We learned and impletmented Websocket for building our real time chat page.
+- Keep track of time: In javascript, there is a build in Date object, and we convert the time to ISO format (standard format) before we store them into the database by using a library called "moment". Our website also tracks the time and display it in realtime on almost every page.
+- Data structure in MongoDB: we discussed and figured out a data structure that would be efficient to serve our webpage.
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
+## Group Members
 
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
+Yueting Zhu - Front-end JS, Back-end JS, configuration, and continual maintenance of MongoDB, DigitalOcean, and GoDaddy Domain
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
+Vanessa Wang - Front-end JS, initialisation and continual maintenance to Node.js, E.js, and Front-End HTML/CSS Elements
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+Enoch Zhao - Page designs, maintenance and adjustments to Front-End HTML/CSS Elements, Project Report, and Project Video
 
-## FAQs
+## Footnote
 
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+Thank you for taking the time to check out our project. We hope you found using our site to be somewhat interesting. We designed this website with functionality in mind, but also while trying out best to inplement features and functions learned throughout Assignments 1 to 4. While assignments 1 and 2 were mostly locally functioning websites with little to no server functionality, assignments 3 and 4 helped us the most in realising a lot of our goals, as we gained a lot of the necessary experience needed to make a server-to-multiclient experience through our social scheduling website. We would additionally like to clarify that we did need to do a lot of self-learning, especially with Node.js and CSS formatting.
+
+We believe our project deserves 100% not only because of the extensive amount of time we put in to accomplish our goals, but also because we were able to  successfully create a functioning schedule maker, in addition to the ability for other users to view those created schedules (provided they are friends with the schedule owner) and even chat about their schedules all through our website. This level of functionality was especially challenging to implement, especially from the back-end server perspective in terms of the information it relays to each user.
