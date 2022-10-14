@@ -1,49 +1,88 @@
-# Final Project
-*Due before the start of class, October 13th (final day of the term)*
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+# CS 4241 Final Project
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+## Links 
+- LINK TO VIDEO: https://youtu.be/KZjsq5b9ePE
+- LINK TO WEBSITE: https://cs4241-finalproject.glitch.me/
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+## Description 
+Our application is a scheduling tool which allows users to create tasks/events in both a list view and calendar view.
+Each task users create will have several fields associated with it such as a title, description, start date and end date.  
+Users will also be able to modify any of their preexisting tasks, as well as delete any tasks that they have already completed. 
 
-### Deliverables
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+Users can login into our app with their GitHub account via GitHub OAuth2 verification. 
+After being verified, users will see all of the events associated with their account (events related to other users will not be provided). 
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
 
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+## Technologies used 
 
-There are no other scheduled checkpoints for your project. 
+- Utilized **CSS** and **HTML** to create our calendar view, task view, and authentication page.
+- Utilized **Node JS** to create our server and send data from the client to the MongoDB database.
+- Utilized **Express** to manage our server and routes.
+- Utilized **MongoDB** to store every user's task data. 
+	- Data is separated using each user's username (GitHub username).
+- Implemented **GitHub Oauth Authorization** to allow users to create and log into their account.
+	- Utilized **Axios** client to make HTTP post requests to GitHub in order to receive the user's access token.
+	- Utilized **OctoKit** library and **core.js** plugin to obtain the GitHub user's username after they have logged in ( using the user's unique access token).
+- Utilized **uuid** package to create a random ID for each task.
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+- Utilized **dotenv** middleware library to load all your environment variables.
+- Utilized **body-parser** middleware to process data sent in an HTTP request body.
+- Utilized **Pico.css** middleware CSS Framework for styling our login pages.
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
 
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
+## Challenges that we faced while doing the project
+- Displaying events on the calendar and task views.
+	- Solution: Get event information from the server and use dynamic html elements to display each event, along with edit and remove options
+- Obtaining the GitHub username from GitHub Oauth Authorization
+	- Solution: Using the Oauth access token we receive after our post request is fulfilled and the OctoKit and core.js to obtain the GitHub user's username
+- Making sure that events are associated with the correct dates
+	- Solution: Use JavaScript Date objects to store information about start and end dates (specifically store valueOf() the Date to allow it to work consistently) 
+- Date and Time both had separate input fields in standard html forms
+  - Solution: Combine the date and time into a JavaScript Date object using valueAsNumber field
+- Database event array was populated with standard index values rather than tags
+  - Solution: Add each event as a JavaScript object with built in tags
+- Dynamically allocated html elements were not displaying the correct data
+  - Solution: Reconfigure the way information was stored on the client in a more easily modifiable manner
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+## How we implemented what we have learned in CS4241
+In this project, we put forth a lot of effort, and displayed many of the core concepts that were learned throughout the class.
+For example, in addition to setting up a webserver using express, we also implemented GitHub authorization using Oauth, allowing users to login from a third party application.
+We applied our knowledge of CSS frameworks and the 4 basic principles of design by implementing our chosen style, and modified the stylesheet to better format our calendar.
+The amount of data that is stored, retrieved, modified and displayed is much more than was required in any previous project, and the formatting for said data was much more complex.
+Additionally, we made use of different datatypes, such as dates and times that had not been explored in the class, taking the technical side of this project to the next level. 
+We also optimized our application achieve at least 94% on the `Performance`, `Best Practices`, `Accessibility`, and `SEO` tests (screenshots of the Lighthouse reports for each page is in the "CS 4241 Final Project Images").
 
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+## What each group member was responsible for designing /developing.
+### Everyone
+- setting up CSS and HTML for calendar
+- debugging the markup, client and server sides of the application
+### Caleb Talley
+- setting up GitHub Oauth authorization and receiving the GitHub name
+- setting up CSS framework, custom CSS and HTML for login pages
+- server logic for data
+- assignment 3 code used as base for the Task client logic
+  - add, delete buttons
+- wrote ReadMe file
+- optimized our application achieve at least 94% on the `Performance`, `Best Practices`, `Accessibility`, and `SEO` tests
+### Noah Goodman
+- setting up MongoDB database
+- server logic for data
+- client logic for events/tasks
+- CSS for calendar and list
+- retrofitting add and delete functions
+### Ryan Darcey
+- setting up CSS and HTML for Calendar
+- client logic for events/tasks
+  - adding / editing / removing events
+- checked website validation
+- optimized our application achieve at least 94% on the `Performance`, `Best Practices`, `Accessibility`, and `SEO` tests
+### Jake Matthews
+- server logic for events data
+- getting GitHub username from 
+- receiving the GitHub Name
+- client logic for events/tasks
+  - database formatting and interfacing
