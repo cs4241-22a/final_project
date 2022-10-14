@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+    <title>List View</title>
+     <meta charset="UTF-8"/>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      
+    />
+    <meta
+      name="description"
+      content="This is a user authenticated task manager application"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body >
+    <button id="calView">Calendar View</button>
+    <main class = "grid">
+    <section id="TaskActions">
+
+        <h1>List View</h1>
+        <section id = "addEvent">
+
+          <h2>Add an Event here</h2>
+          <p>Type in the box below and select the appropiate fields. (The page needs to be reloaded for new events or changes to evnts to show up)</p>
+
+          
+            <div id="addNewEvent">
+            </div>
+
+        <div id="dateEventList">
+          <h2>
+            Current events:
+          </h2>
+        </div>
+      </section>
+      </section>
+    </main>
+    <script type="module" src="client.js"></script>
+
+    <!-- when you use exprss.static on public, you dont need to write public in the client.js link-->
+  </body>
+</html>
