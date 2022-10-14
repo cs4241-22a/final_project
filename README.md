@@ -1,49 +1,19 @@
-# Final Project
-*Due before the start of class, October 13th (final day of the term)*
+#WebChess: https://webware.craftsteamg.com/
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+WebChess was created by Cooper Dean, Harrison Rubin, Zachary Sarrett and Henry Yoder.
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+1. WebChess is a chess website where a user can play chess against both StockFish and Komodo, two chess engines. Webchess allows the user to decide which bot they want to play against, what difficulty level they want the computer to be, and which color they want to play as. The user can look at the stats page to see their stats, including total games played, which engine they have played against most, their wins, draws and losses against each engine, and the average difficulty of each bot they play against.
+In the game history tab, the user can see every game they have previously played, and look through them move by move.
+2. In order to login, you must login through Github.
+3. We used React, React-Bootstrap, Express, Node, MongoDB, PGN parsers, and chess engines. We used React-Bootstrap for designing the interface and the website in general. We used PGN (Portable Game Notation) Parsers to parse through the chess moves. The chess engines we implemented were StockFish and Komodo.
+4. 
+We had trouble getting the stats page to sync up with the user's games.
+The game history was difficult to implement with the way we wrote the board.
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+5. 
+- Cooper: Cooper connected the endpoints to the server and client side, and did helped get the stats page synced and the game history page working.
+- Harry: Harry did the majority of the backend work, as well as a good chunk of the front end.
+- Zach: Zach worked on some of the client side logic, including the logic for getting a result/finishing a game (win, draw, loss), as well as writing the about page, and helping Cooper with the endpoints.
+- Henry: Henry did a lot of interface work on the front end, making the website look good.
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
-
-### Deliverables
-
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
-
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
-
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
-
-There are no other scheduled checkpoints for your project. 
-
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
-
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
-
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+6. Link to the video: https://www.youtube.com/watch?v=BY2wCf78UjA&ab_channel=henryyoder
