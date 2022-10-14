@@ -167,7 +167,7 @@ class App extends React.Component {
     if (this.state.displayMakeResponse[i]) {
       return (
         <form id="makeResponse">
-          <div>Paste a Spotify URL to embed a link to your song suggestion!</div>
+          <div>Paste a Spotify URL in the Song field to embed your song suggestion!</div>
           <label for="makeResponseSong">Song: </label>
           <input id="makeResponseSong" type="text" />
           <label for="makeResponseArtist">Artist: </label>
