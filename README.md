@@ -1,20 +1,25 @@
+<<<<<<< HEAD
 # Final Project
 *Due October 13th (final day of the term)*
+=======
+Final Project - Race Timer
+===
+>>>>>>> cabda61 (Initial commit.)
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+timer.axpdsp.org
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+# Background
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+I have created a timer that stores the best times of each user, and displays a
+leaderboard of the best times among all users. To ease the use of the timer, on
+a phone which has support for accelerometers (and a compatible web browser), the
+timer can be activated by detecting a tap on or near the phone using the
+accelerometer. This increases the accuracy of timing in tasks that are completed
+quickly and require both hands. In addition to showing the best times of users on the website 
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+# Login
 
+<<<<<<< HEAD
 ### Deliverables
 
 #### Form Team (due 9/25)
@@ -25,25 +30,49 @@ Teams must be in place by end of day on Sunday, September 25th. If you have not 
 #### Proposal (due 9/27) 
 Provide an outline of your project direction and the names of associated team members. 
 The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+=======
+The app will register a new user for any username it has not seen before upon
+first login, so you should be able to log in with any username. If there are any
+issues with the login system, there is an additional user specifically for
+testing with the username "username" and the password "password".
 
-There are no other scheduled checkpoints for your project. 
+# Demo
 
+The app is fairly simple to use on desktop systems, so no demo of desktop usage
+is given. A demo video of the accelerometer functionality is included in the git
+repository.
+
+# Technologies Used
+>>>>>>> cabda61 (Initial commit.)
+
+The application uses React for client-side rendering,
+MongoDB for data persistence, Express.js for the server API, and Grommet.io as a
+pre-built React component library. Furthermore, the application is deployed using Docker to a Docker Swarm environment, which functions similarly to Kubernetes. The application also makes use of newer Web Sensor APIs to access accelerometer data.
+
+<<<<<<< HEAD
 #### Turning in Your Project
 Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+=======
+# Challenges
+>>>>>>> cabda61 (Initial commit.)
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
+Given that I have a reasonable amount of experience in web development using
+ClojureScript and Fulcro, I focused less on producing the most intricate
+website, and more on exposing myself to as many new technologies as possible. I
+had no significant prior experience with any of the technologies in the stack
+used to create this application before taking this class. I expecially enjoyed
+working with the React Hooks API, as someone used to functional interfaces from
+ClojureScript.
 
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
+Furthermore, the usage of the accelerometer to precisely measure time presented
+a number of challenges. The app was calibrated to respond to the correct amount
+of force on a variety of surfaces mostly by trial and error. This calibration is
+important, as if I had tested the application exclusively on a firm surface,
+such as a concrete floor, the app would not respond correctly when used on a
+less firm surface, such as a small wooden table.
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
+Finally, ensuring that the app was responsive enough to process many
+accelerometer event updates per second presented a number of engineering
+challenges. If too few updates are processed due to blockage of the main thread,
+the application could fail to register a sharp tap, resulting in measurement
+inaccuracy.
