@@ -1,5 +1,5 @@
-import React, {createRef} from "./_snowpack/pkg/react.js";
-import "./global.css.proxy.js";
+import React from "./_snowpack/pkg/react.js";
+import "./blk-design-system-react.css.proxy.js";
 import {Navigate} from "./_snowpack/pkg/react-router-dom.js";
 class App extends React.Component {
   constructor(props) {
@@ -201,7 +201,7 @@ class App extends React.Component {
       return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Hello ", this.state.currUser, " Responses Made: ", this.state.userRespNum), /* @__PURE__ */ React.createElement("button", {
         type: "button",
         onClick: () => window.location.reload()
-      }, "Refresh"), /* @__PURE__ */ React.createElement("div", {
+      }, "Refresh Everything"), /* @__PURE__ */ React.createElement("div", {
         id: "displayPosts"
       }, /* @__PURE__ */ React.createElement("button", {
         type: "button",

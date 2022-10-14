@@ -46,14 +46,14 @@ function Login(props) {
     }
 
     return (
-    <form>
-        <h2>Log in</h2>
-        <label for="user">Username:</label>
+    <form id="loginForm">
+        <h2 class="loginText">Log in</h2>
+        <label id="loginFields" for="user">Username:</label>
         <input type="text" id="user" name="user" onChange={e => setUser(e.target.value)}/>
-        <label for="pass">Password: </label>
+        <label id="loginFields2" for="pass">Password: </label>
         <input type="password" id="pass" name="pass" onChange={e => setPass(e.target.value)}/>
-        <input type="submit" value="log in" onClick={e => logIn(e)}/>
-        <input type="submit" value="register" onClick={e => register(e)}/>
+        <input id="loginButtons" type="submit" value="log in" onClick={e => logIn(e)}/>
+        <input id="loginButtons2" type="submit" value="register" onClick={e => register(e)}/>
         <p>{loginStatus}</p>
     </form>
     );

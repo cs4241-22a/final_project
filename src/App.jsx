@@ -1,6 +1,6 @@
 
-import React, { createRef } from "react";
-import "./global.css";
+import React from "react";
+import "./blk-design-system-react.css";
 import { Navigate } from "react-router-dom";
 
 class App extends React.Component {
