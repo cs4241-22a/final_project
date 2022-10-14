@@ -1,5 +1,5 @@
 # Final Project
-{Link to project here}
+*Due October 13th (final day of the term)*
 
 This is a social music-based app where people can post about the kind of music they want to hear and others can respond with song suggestions. 
 
@@ -30,7 +30,7 @@ What each group member was responsible for designing / developing.
 - Theo Coppola: Set up the structure of the application (login page + main page) and routing between pages. Created the server and implemented fetch/get requests and the database strucure with Marie. Created the readme. Implemented all jsx files and created methods, state variables, and event handlers.
 - Marie Tessier: Worked mainly on the server side of the code and mongoDB with Theo. I helped implement the database structure and the fetch/get requests and posts. I also helped on the front end css, finding and implementing a template by Creative Tim (https://www.creative-tim.com). Note: Griffin sent me some that he had coded css because he was having trouble with his computer so the Git commits do not fully represent his contribution. 
 - Griffin Atchue: Worked on front end designing html pages that were eventually left out and implemented formatting through css with assistance due to technical issues.
-- Jack McEvoy: 
+- Jack McEvoy: Worked on front end designing html pages and overall layout that were eventually left out and implemented spotify integration
 
 ## Walkthrough
 {Video link or embed here}
