@@ -155,10 +155,12 @@ h6 {
 
 #loginButtons {
   grid-area: 4 / 2 / 5 / 3;
+  padding-bottom: 10%;
 }
 
 #loginButtons2 {
   grid-area: 4 / 3 / 5 / 4;
+  padding-bottom: 10%;
 }
 
 p {
