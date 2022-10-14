@@ -1,0 +1,29 @@
+
+
+.loginText{
+ color: #e8f4fa 
+}
+
+#backG{
+  background-color: #e8bcac;
+}
+.loginBtn{
+  background-color: rgba(36,123,163,255);
+}
+
+/* #flex{
+  display: flex;
+  flex-direction: column
+  
+} */
+
+.img-github{
+  max-width: 100%;
+  width: 600;
+  height: 600;
+}
+
+#submitGithub{
+  
+  background-color:;
+}
