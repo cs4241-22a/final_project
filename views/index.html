@@ -1,0 +1,123 @@
+<!-- login page -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <title>CS4241 Login</title>
+    <meta
+      
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+     
+    />
+      <meta charset="UTF-8"/>
+    <meta name="description" content="Github authorization page" />
+    <link rel="stylesheet" href="/login.css" >
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body id="backG">
+    <!-- <main class= "grid">  -->
+    <section id="GitHublogin">
+      <div  class="content unauthorized" style="display: block">
+        <div class="grid" id = "flex">
+          
+          <img
+            class="img-github"
+            src="https://cdn.glitch.global/157c2d9d-d277-4127-9e92-aeb59fd8cf4e/Github%20Black%20Logo.png?v=1665625394485"
+               
+              
+            alt="github logo image"            
+          />
+<!--                <img
+            class="img-github"
+            src="https://cdn.glitch.global/157c2d9d-d277-4127-9e92-aeb59fd8cf4e/github.png?v=1665624981388"
+               
+               
+            alt="github logo image"            
+          /> -->
+          
+          <!--         <img class="img-github" src="github.png" alt = "github logo image" /> -->
+          <article class = "loginBtn">
+            <h1 class = "loginText">
+              Login with your <a role="button" href="/auth"> 
+         
+              GitHub Account
+              </a>
+
+            </h1>
+          </article>
+        </div>
+      </div>
+
+      <!-- <div class="content authorized"> -->
+      <div class="content authorized" style="display: none">
+        <div class="grid">
+                    <img
+            class="img-github"
+            src="https://cdn.glitch.global/157c2d9d-d277-4127-9e92-aeb59fd8cf4e/Github%20Black%20Logo.png?v=1665625394485"
+               
+               
+            alt="github logo image"            
+          />
+<!--           <img class="img-github" src="github.png" /> -->
+          <article class = "loginBtn">
+            <h1 class = "loginText">You are now authorized!</h1>
+            <form id="loginGitHub" action="/loginGitHub" method="POST">
+<!--               <label class = "loginText" for="submitGithub"
+                >Click "next" to view Calendar </label>-->
+              
+              <input id="submitGithub" type="submit" value="View Calendar" />
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- find way to remove this when github user logs in -->
+    <!--   Old Basic Login markup   -->
+<!--     <section class="basicAuthorization" id="basic login" style="display: block">
+      <header><h2>You can use basic login credentials here</h2></header>
+      <form id="loginBasic" action="/loginBasic" method="POST">
+        <div class="grid">
+          <label for="username">
+            Username:
+            <input
+              id="username"
+              type="text"
+              name="username"
+              placeholder="username"
+            />
+          </label>
+          <label for="password">
+            Password:
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="password"
+            />
+          </label>
+          <label for="submitBasic">
+            Click here:
+            <input id="submitBasic" type="submit" value="Sign in" />
+
+          </label>
+        </div>
+      </form>
+    </section> -->
+    <!--   </main> -->
+    <script src="/login.js"></script>
+  </body>
+</html>
