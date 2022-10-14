@@ -2,7 +2,7 @@
 Yueting Zhu, Vanessa Wang, Enoch Zhao
 
 Site Link: http://alexzyt.com
-Video Link: TBD
+Video Link: https://youtu.be/yk4dQ-oF_Fg
 
 ## Project Description
 Our group created a website called “The Diary Group” that lets prospective users log in with accounts created via our site, or through third party account authentication methods (GitHub,  Google etc).  The main purpose of the website is for users to create their day-to-day schedules via a timetable like design, while also allowing them to view schedules created by other users they have added as friends.
