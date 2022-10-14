@@ -1,5 +1,5 @@
 # Final Project
-*Due October 13th (final day of the term)*
+{Link to project here}
 
 This is a social music-based app where people can post about the kind of music they want to hear and others can respond with song suggestions. 
 
