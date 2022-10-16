@@ -1,3 +1,8 @@
+<script>
+    import { writable } from 'svelte/store';
+    export const menu = writable(0);
+</script>
+
 <div class="container is-fixed-top is-fluid" id="navbar">
     <br>
     <h1 class="title has-text-centered">HOW TO SURVIVE CS@WPI</h1>
@@ -9,13 +14,13 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" id="full_stack_nav">
+                <a class="navbar-item" id="full_stack_nav" on:click|preventDefault={() => (menu = 1)}>
                     Full Stack/Design
                 </a>      
-                <a class="navbar-item" id="theory_nav">
+                <a class="navbar-item" id="theory_nav" on:click|preventDefault={() => (menu = 2)}>
                     Theory
                 </a>
-                <a class="navbar-item" id="cyber_nav">
+                <a class="navbar-item" id="cyber_nav" on:click|preventDefault={() => (menu = 3)}>
                     Cybersecurity
                 </a>
             </div>

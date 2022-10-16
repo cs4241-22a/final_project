@@ -6,52 +6,60 @@
 -->
 <script>
 	import Navbar from "./navbar.svelte";
-	import Form from "./form.svelte";
-	//import Carousel from "./carousel.svelte";
-	import Footer from "./footer.svelte";
-	import Card from "./card.svelte";
+	import menu from "./navbar.svelte"
 
-	var cyberChef ={
-            title: 'CyberChef', 
-            desc: 'CyberChef is a simple, intuitive web app for carrying out all manner of \"cyber\" operations within a web browser.',
-            link: 'https://gchq.github.io/CyberChef/',
-            tag: 'cybersecurity'
-        };
-        
-        const sqlZoo ={
-            title: 'SQLZoo', 
-            desc: 'Wiki-based interactive tutorials to learn SQL.',
-            link: 'https://sqlzoo.net/wiki/SQL_Tutorial',
-            tag: 'fullstack'
-        };
-        
-        const discreteMath ={
-            title: 'DiscreteMath.org', 
-            desc: 'An open content source to learn discrete math. ',
-            link: 'https://discretemath.org/',
-            tag: 'theory'
-        };
+	import Index from "./index.svelte";
+	import Fullstack from "./fullstack.svelte";
+	import Cybersecurity from "./cybersecurity.svelte";
+	import Theory from "./theory.svelte";
 
-        const hciBibs ={
-            title: 'HCI Bib', 
-            desc: 'A webpage of useful HCI resources (albeit a bit outdated). ',
-            link: 'http://hcibib.org/',
-            tag: 'fullstack'
-        };
+
+	// import Form from "./form.svelte";
+	// //import Carousel from "./carousel.svelte";
+	// import Footer from "./footer.svelte";
+	// import Card from "./card.svelte";
+
+	// var cyberChef ={
+    //         title: 'CyberChef', 
+    //         desc: 'CyberChef is a simple, intuitive web app for carrying out all manner of \"cyber\" operations within a web browser.',
+    //         link: 'https://gchq.github.io/CyberChef/',
+    //         tag: 'cybersecurity'
+    //     };
         
-        const cyberAwareness ={
-            title: 'Cyber Awareness Challenge', 
-            desc: 'Training used by Department of Defense workers to be aware of common cyber security threats.',
-            link: 'https://public.cyber.mil/training/cyber-awareness-challenge/',
-            tag: 'cybersecurity'
-        };
+    //     const sqlZoo ={
+    //         title: 'SQLZoo', 
+    //         desc: 'Wiki-based interactive tutorials to learn SQL.',
+    //         link: 'https://sqlzoo.net/wiki/SQL_Tutorial',
+    //         tag: 'fullstack'
+    //     };
         
-        const teachYourself ={
-            title: 'Teach Yourself CS', 
-            desc: 'Massive guide to learn lots of underlying knowlegdge of Computer Science.',
-            link: 'https://teachyourselfcs.com/',
-            tag: 'theory'
-        };
+    //     const discreteMath ={
+    //         title: 'DiscreteMath.org', 
+    //         desc: 'An open content source to learn discrete math. ',
+    //         link: 'https://discretemath.org/',
+    //         tag: 'theory'
+    //     };
+
+    //     const hciBibs ={
+    //         title: 'HCI Bib', 
+    //         desc: 'A webpage of useful HCI resources (albeit a bit outdated). ',
+    //         link: 'http://hcibib.org/',
+    //         tag: 'fullstack'
+    //     };
+        
+    //     const cyberAwareness ={
+    //         title: 'Cyber Awareness Challenge', 
+    //         desc: 'Training used by Department of Defense workers to be aware of common cyber security threats.',
+    //         link: 'https://public.cyber.mil/training/cyber-awareness-challenge/',
+    //         tag: 'cybersecurity'
+    //     };
+        
+    //     const teachYourself ={
+    //         title: 'Teach Yourself CS', 
+    //         desc: 'Massive guide to learn lots of underlying knowlegdge of Computer Science.',
+    //         link: 'https://teachyourselfcs.com/',
+    //         tag: 'theory'
+    //     };
 	
 </script>
 
@@ -64,13 +72,21 @@
 </svelte:head>
 
 <Navbar /> <!--triple check-->
-<br>
-<br>
+<Index /> 
+{#if menu === 1}
+<Fullstack />
+{:else if menu === 2}
+<Theory />
+{:else if menu === 2}
+<Cybersecurity />
+{/if}
+<!-- <br>
+<br> -->
 <!--<Carousel />--> <!--triple check-->
-<br>
-<br>
+<!-- <br>
+<br> -->
 <!--Hero content-->
-<section class="hero is-info" id="body_hero">
+<!-- <section class="hero is-info" id="body_hero">
 	<div class="hero-body has-text-centered">
 		<h3 class="title is-3 has-text-centered">About Us</h3>
 		<p>How to Survive CS@WPI is a set of resources for WPI students to enhance the courseload and work being done as a Computer Science Student.</p>
@@ -79,9 +95,9 @@
 		<p>If we are missing something, feel free to suggest your own resource below.</p>
 	</div>
 </section>
-<br>
+<br> -->
 <!--Columns of cards and the form-->
-<div class="container" id="home_cards">
+<!-- <div class="container" id="home_cards">
 	<div class="columns is-vcentered is desktop">
 		<div class="column" id="latest_cards">
 			<h1 class="title is-2 has-text-centered">Latest</h1>
@@ -96,10 +112,10 @@
 			<Card {...teachYourself} />
 		</div>
 		<div class="column has-background-primary" id="submit_resource">
-			<Form /> <!--triple check, will probably double column-->
-		</div>
+			<Form /> triple check, will probably double column-->
+		<!--</div>
 	</div>
 </div>
 <br>
 <br>
-<Footer /> <!--triple check-->
+<Footer /> triple check -->
