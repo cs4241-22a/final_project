@@ -7,7 +7,7 @@
 <script>
 	import Navbar from "./navbar.svelte";
 	import Form from "./form.svelte";
-	import Carousel from "./carousel.svelte";
+	//import Carousel from "./carousel.svelte";
 	import Footer from "./footer.svelte";
 	import Card from "./card.svelte";
 
@@ -66,7 +66,7 @@
 <Navbar /> <!--triple check-->
 <br>
 <br>
-<Carousel /> <!--triple check-->
+<!--<Carousel />--> <!--triple check-->
 <br>
 <br>
 <!--Hero content-->
