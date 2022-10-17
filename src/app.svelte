@@ -6,13 +6,12 @@
 -->
 <script>
 	import Navbar from "./navbar.svelte";
-	import menu from "./navbar.svelte"
+  import Router from "./routes.svelte"
 
 	import Index from "./index.svelte";
 	import Fullstack from "./fullstack.svelte";
 	import Cybersecurity from "./cybersecurity.svelte";
 	import Theory from "./theory.svelte";
-
 
 	// import Form from "./form.svelte";
 	// //import Carousel from "./carousel.svelte";
@@ -70,6 +69,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
 </svelte:head>
+
 
 <Navbar /> <!--triple check-->
 <Index /> 
