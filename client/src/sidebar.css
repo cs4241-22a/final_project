@@ -1,0 +1,108 @@
+body {
+  font-family: sans-serif;
+}
+
+#sidebarDiv {
+  width: 15%;
+  height: 100%;
+  min-height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #3f3f46;
+  justify-items: center;
+  align-items: center;
+}
+
+h2 {
+  color: #ffffff;
+}
+
+p {
+  color: #ffffff;
+}
+
+#headerImage {
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+}
+
+#headerText {
+  margin-left: 10px;
+  margin-top: 5px;
+  color: #ffffff;
+  font-size: x-large;
+}
+
+#header {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #059669;
+}
+
+#boardPlus {
+  height: 40px;
+  width: 40px;
+}
+
+#addBoardBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  text-align: center;
+}
+
+#gear {
+  height: 25px;
+  width: 25px;
+}
+
+#logoutBtn {
+  padding: 12px;
+  text-align: center;
+  margin-left: 15px;
+  position: absolute;
+  background-color: #059669;
+  border-radius: 10px;
+  bottom: 20px;
+  display: flex;
+  cursor: pointer;
+}
+
+.selected-board {
+  background-color: #059669;
+  border-radius: 10px;
+}
+
+.whiteNotes {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+}
+
+ul {
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 10px;
+  list-style: none;
+}
+
+.boardListElement {
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin: 15px;
+}
+
+.list-item {
+  padding: 5px;
+}

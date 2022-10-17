@@ -1,0 +1,145 @@
+/* Add CSS styles here! */
+html,
+body,
+#root {
+  margin: 0;
+  background: #1c1917;
+  font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+.home-wrapper {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-Header {
+  display: inline-flex;
+  justify-content: center;
+  margin-bottom: 3px;
+}
+
+.green-Note {
+  filter: invert(84%) sepia(63%) saturate(296%) hue-rotate(75deg)
+    brightness(96%) contrast(93%);
+}
+
+.blue-Note {
+  filter: invert(63%) sepia(63%) saturate(274%) hue-rotate(178deg)
+    brightness(96%) contrast(91%);
+}
+
+.purple-Note {
+  filter: invert(88%) sepia(14%) saturate(3946%) hue-rotate(238deg)
+    brightness(93%) contrast(98%);
+}
+
+.red-Note {
+  filter: invert(71%) sepia(22%) saturate(596%) hue-rotate(314deg)
+    brightness(92%) contrast(117%);
+}
+
+.yellow-Note {
+  filter: invert(100%) sepia(25%) saturate(5167%) hue-rotate(312deg)
+    brightness(114%) contrast(105%);
+}
+.sidebar-header-image {
+  position: absolute;
+
+  right: 10px;
+
+  height: 18px;
+}
+
+.note {
+  position: relative;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  min-height: 300px;
+  min-width: 300px;
+  max-height: 300px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  white-space: pre-wrap;
+}
+
+.note-header {
+  display: inline-flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.note-title {
+  background: transparent;
+  font-size: 16px;
+
+  outline: none;
+  border: 0 none;
+}
+.note-line {
+  width: 100%;
+  background-color: black;
+  height: 1px;
+  border: 0 none;
+}
+.note-content {
+  display: inline-flex;
+  flex-direction: column;
+  min-height: 80%;
+  max-height: 80%;
+}
+.note-text-area {
+  width: 100%;
+  height: 90%;
+  max-height: 90%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  overflow-y: auto;
+  background: transparent;
+  font-size: 18px;
+  resize: none;
+  outline: none;
+  border: 0 none;
+}
+
+.board {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.board-wrapper {
+  padding: 40px 20px 20px 40px;
+  width: 100%;
+  height: 100%;
+}
+.delete-btn {
+  height: 24px;
+  width: 24px;
+}
+
+.save-btn {
+  height: 24px;
+  width: 24px;
+}
+
+.AddNoteBar-container {
+  display: flex;
+  flex-direction: row;
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 20px;
+  left: 50%;
+  margin-left: -7.5%; /* Negative half of width. */
+  background-color: #1c1917;
+}

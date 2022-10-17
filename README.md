@@ -1,49 +1,65 @@
 # Final Project
-*Due October 13th (final day of the term)*
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+Shane Stevens (smstevens@wpi.edu), Reagan Brunelle (rmbrunelle2@wpi.edu), Siddhartha Pradhan (sppradhan@wpi.edu)
+Website link (Quick Notes): https://quick-notes.glitch.me/
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+## Description
+We created a sticky notes web app, taking inspiration from Microsoft's Sticky notes (https://apps.microsoft.com/store/detail/microsoft-sticky-notes/9NBLGGH4QGHW). Users are given the ability to create virtual sticky notes and organize them with the choice of 5 colors. These notes features a title and content section that users dynamically add,modify, and delete. Users can also create multiple boards aiding in the organization of their sticky notes. Each sticky note is saved to its board for feature use. Users have the option of creating a username and password or through authenticating with their github account.
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation. 
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+### Design
+- **Color Palette**: Utilized dark color palette generated from using color.adobe.com to add more flair to the website.
+- **Used the Inter from Google Fonts**: Used Inter as the font for the primary text in my site, using sans-serif as a backup.
+- **UI review and redesign**: Asked friends/users to test the UI and provide feedback. UI changes were made based on feedback.
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+### Technical
+- **Used multiple layouts**: Used various layouts such as flex and grid to align items
+- **Login**: Implement OAuth authentication via Github strategy as well as a custom login method that utilizes salts and hashes, which itegrates seamlessly using a Mongoose User model. 
+- **Used React**: Used React to create webpage, in which we created multiple components that made up the webpage
+- **Single Page webapp**: The page displays app data of server from launch, and updates it accordingly to user input (after getting response from server), all in a single page
 
-### Deliverables
+## Additional Instructions
+The Login and Register page are straight foreward. After registering, the user is redirected to login screen. There are 2 test accounts ready (user: "user1", pass: "test123") and (user: "user2", pass: "test123") From here we hope it is self explanatory, just in case let's walk through it.
+The bottom of the screen features 5 different color sticky note icons that when pressed will create a new note on the screen. The user must enter a title for the note and click the save icon for the note to be saved.  On the left side bar, the user can also click "add board" to create and switch to a new board.
 
-#### Form Team (due 9/25)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+## Technologies used
+### Frontend
+- React: To create an interactive UI
+- Tailwind: For styling and ease of development
+- snowpack: Build tool to create static pages from src
+- postcss: Automate tailwind builds (creates the css file to use in production/development)
+### Backend
+- node: To create server
+- express: To create server and for using middlewares, and ease of development for server
+- passport (including passport-github2): To authenticate and register users and to implement OAuth for github, used custom middleware/strategy for local login
+- express-session: To manage sessions for logged in users (users are still logged in after refreshing)
+- mongoDB: To manage any app data (Users, notes)
+- mongoose: To create schemas for Users and notes in MongoDB, and used to connect to MongoDB
+- dotenv: To load .env variables
 
-Teams must be in place by end of day on Sunday, September 25th. If you have not identified a team at this point, you will be assigned a team. You will be given some class time on Monday to work on your proposal, but please plan on reserving additional time outside of class as needed.
+## Challenges
+- We faced a lot of difficulty with setting up the initial project using React and Snowpack. We likely spent around 3 hours fixing all the configs and routes before we could even really start on the project. We ended up using create-snowpack-app which eased our troubles a little.
+- We also experienced difficulty when implementing the Login page with cookies. We ended up redoing our server in order to help fix some of the issues we had routing and saving the cookies.
+- The side bar was also surprisingly challenging. We initially used a react-burger-menu to have a slidng out sidebar but we ended up abandoning this because it was a css nightmare.
+- Dynamically sizing the notes was also somewhat of a challenge. We ended up making the note a flexbox  and using a react TextareaAutosize component to help autosize the note when they got too long
 
-#### Proposal (due 9/27) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraps should provide enough level of detail. Name the file proposal.md and submit a pull request by Tuesday, September 27th at 11:59 PM (end of day). Only one pull request is required per team.
+## Responsibilities
+ ### Reagan Brunelle
+ - UI Design
+ - Frontend React development: Sidebar and boards
+ - Lots of frontend troublshooting
+ - Certified CSS gurus
+ ### Shane Stevens
+ - UI Design and Mock ups
+ - Frontend React development: Notes and Add notes
+ - Lots of backend troubleshooting
+ - Certified CSS gurus
+ ### Siddhartha Pradhan
+ - Implemented backend logic (setting up endpoints, mongoDB, mongoose etc). Completed setup that is required for OAuth.
+ - Created Login and register page for frontend
+ - Frontend React development: Home, App, and ProtectComponent (Component wrapper to ensure user is logged in)
+ - Integrated the frontend with backend
 
-There are no other scheduled checkpoints for your project. 
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+## Video link
+ - [LINK HERE](https://drive.google.com/file/d/1TQntNjzdRehwDDR57ibnhaV1K5ki0vjo/view?usp=sharing)
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
-
-The README for your second pull request doesn’t need to be a formal report, but it should contain:
-
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
-
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
-
-## FAQs
-
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript.
