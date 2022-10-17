@@ -1,5 +1,5 @@
 <script>
-	import Navbar from "./navbar.svelte";;
+	//import Navbar from "./navbar.svelte";;
 	import Footer from "./footer.svelte";
 	import Card from "./card.svelte";
         
@@ -96,7 +96,7 @@
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
 </svelte:head>
 
-<navbar /> <!--triple check -->
+<!--<navbar /> <!--triple check -->
 <br>
 <br>
 <br>
@@ -114,20 +114,20 @@
         <div class="column" id="front_end_cards">
             <h1 class="title is-2 has-text-centered">Front End</h1>
 			<card {...material}/>
-			<card {...hcibibs}/>
-			<card {...webtools}/>
+			<card {...hciBibs}/>
+			<card {...webTools}/>
 		</div>
 		<div class="column" id="back_end_cards">
 			<h1 class="title is-2 has-text-centered">Back End</h1>
-			<card {...codeabbey} />
+			<card {...codeAbbey} />
 			<card {...runrb} />
-			<card {...sqlzoo}/>
+			<card {...sqlZoo}/>
 		</div>
 		<div class="column" id="full_stack_cards">
       <h1 class="title is-2 has-text-centered">Full Stack</h1>
-      <card {...reactlib} />
-			<card {...sveltetut} />
-			<card {...w3schools} />
+      <card {...reactLib} />
+			<card {...svelteTut} />
+			<card {...w3Schools} />
 		</div>
 	</div>
 </div>

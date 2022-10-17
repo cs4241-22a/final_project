@@ -1,7 +1,6 @@
 <script>
   import { menu } from "./stores.js"
-  import Router from "./Router.svelte"
-  import { Router, Route } from 'svelte-routing';
+  import Router from "./routes.svelte"
   
   function update(nav) {
     if(nav==1){

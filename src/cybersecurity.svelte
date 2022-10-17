@@ -1,5 +1,5 @@
 <script>
-	import Navbar from "./navbar.svelte";;
+	//import Navbar from "./navbar.svelte";;
 	import Footer from "./footer.svelte";
 	import Card from "./card.svelte";
         
@@ -54,7 +54,7 @@
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
 </svelte:head>
 
-<Navbar /> <!--triple check-->
+<!--<Navbar /> <!--triple check-->
 <br>
 <br>
 <br>

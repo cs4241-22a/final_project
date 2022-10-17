@@ -6,17 +6,12 @@
 -->
 <script>
 	import Navbar from "./navbar.svelte";
-	import menu from "./stores.js"
   import Router from "./routes.svelte"
 
 	import Index from "./index.svelte";
 	import Fullstack from "./fullstack.svelte";
 	import Cybersecurity from "./cybersecurity.svelte";
 	import Theory from "./theory.svelte";
-
-  let menuVal;
-
-	menu.subscribe(value => (menuVal = menu));
 
 	// import Form from "./form.svelte";
 	// //import Carousel from "./carousel.svelte";
