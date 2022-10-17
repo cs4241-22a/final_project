@@ -13,6 +13,9 @@
         menu.update(n => 0);
       }  
 	}
+    import { writable } from 'svelte/store';
+    export const menu = writable(0);
+
 </script>
 
 <div class="container is-fixed-top is-fluid" id="navbar">
@@ -34,8 +37,16 @@
                     Theory
                 </a>
                 <a class="navbar-item" id="cyber_nav" href = "https://cs4241-havanahail-sandysandysand.glitch.me/cybersecurity">
-                    Cybersecurity
+                <!---might be bad-->
+                <!--<a class="navbar-item" id="full_stack_nav" on:click|preventDefault={() => (menu = 1)}>
+                    Full Stack/Design
+                </a>      
+                <a class="navbar-item" id="theory_nav" on:click|preventDefault={() => (menu = 2)}>
+                    Theory
                 </a>
+                <a class="navbar-item" id="cyber_nav" on:click|preventDefault={() => (menu = 3)}>
+                    Cybersecurity
+                </a>-->
             </div>
           </router>
         </div>

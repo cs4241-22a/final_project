@@ -1,4 +1,5 @@
 <script>
+
 	//import Navbar from "./navbar.svelte";;
 	import Footer from "./footer.svelte";
 	import Card from "./card.svelte";
@@ -96,7 +97,8 @@
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
 </svelte:head>
 
-<!--<navbar /> <!--triple check -->
+
+<!-- <Navbar /> triple check -->
 <br>
 <br>
 <br>
@@ -113,6 +115,7 @@
     <div class="columns is-vcentered is desktop">
         <div class="column" id="front_end_cards">
             <h1 class="title is-2 has-text-centered">Front End</h1>
+
 			<card {...material}/>
 			<card {...hciBibs}/>
 			<card {...webTools}/>
@@ -133,4 +136,4 @@
 </div>
 <br>
 <br>
-<footer /> <!--triple check-->
+<Footer /> <!--triple check-->

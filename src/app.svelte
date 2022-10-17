@@ -70,15 +70,16 @@
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5766/5766858.png">
 </svelte:head>
 
-<navbar /> <!--triple check-->
-<index /> 
-<!-- {#if menuVal == 1}
-<fullstack />
-{:else if menuVal === 2}
-<theory />
-{:else if menuVal === 2}
-<cybersecurity />
-{/if} -->
+
+<Navbar /> <!--triple check-->
+<Index /> 
+{#if menu === 1}
+<Fullstack />
+{:else if menu === 2}
+<Theory />
+{:else if menu === 2}
+<Cybersecurity />
+{/if}
 <!-- <br>
 <br> -->
 <!--<Carousel />--> <!--triple check-->
