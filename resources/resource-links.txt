@@ -1,10 +1,10 @@
 ~~~~ FULLSTACK PAGE ~~~~
 ~~FRONT END~~
-Material.io 
+Material.io //
 Best practices for building Android Apps
 https://material.io/design
 
-HCI Bib
+HCI Bib //
 HCI resources (albeit a bit outdated)
 http://hcibib.org/
 
@@ -36,7 +36,7 @@ https://phptherightway.com/
 
 ~~FULL STACK~~
 Front-End Dev's Guide to Terminal (UNUSED)
-A user friendly guide to using Terminal commands
+A user friendly guide to using Terminal commands.
 https://www.joshwcomeau.com/javascript/terminal-for-js-devs/
 
 React Libraries
@@ -53,7 +53,7 @@ https://www.w3schools.com/
 
 
 ~~~~ THEORY PAGE ~~~~~
-Teach Yourself CS
+Teach Yourself CS //
 Massive guide to learn lots of underlying knowlegdge of Computer Science
 https://teachyourselfcs.com/
 
@@ -65,12 +65,12 @@ Theory of Computation
 MIT Opencourseware on their class, Theory of Computation, at both a graduate and undergraduate level.
 https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/
 
-DiscreteMath.org
+DiscreteMath.org //
 An open content source to learn discrete math. 
 https://discretemath.org/
 
 Discrete Mathematics, An Introduction
-An interactive ebook introducing discrete math to beginners
+An interactive ebook introducing discrete math to beginners.
 https://discrete.openmathbooks.org/dmoi3/
 
 VisualAlgo
@@ -79,7 +79,7 @@ https://visualgo.net/en
 
 ~~~~ CYBERSECURITY PAGE ~~~~
 
-CyberChef
+CyberChef //
 CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser.
 https://gchq.github.io/CyberChef/
 
@@ -87,7 +87,7 @@ The National Cyber League
 Join a community for immersive cyber challenges
 https://nationalcyberleague.org/
 
-Cyber Awareness Challenge
+Cyber Awareness Challenge //
 Training used by Department of Defense workers to be aware of common cyber security threats
 https://public.cyber.mil/training/cyber-awareness-challenge/
 
