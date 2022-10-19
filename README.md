@@ -1,4 +1,5 @@
-## Final Project Proposal: Raccoon-it 
+## Final Project: Raccoon-it 
+by Ananya Gopalan, Neha Kuchipudi, Jack Leserman, Jacquelyn Lopez, and Tia Mehta.
 
 Application Using Glitch: https://racoonit.glitch.me/
 
