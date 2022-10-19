@@ -1,41 +1,28 @@
 Final Project Proposal: Raccoon-it 
 
-For our final project, we will be creating a web app that allows users to generate raccoon memes with edit, comment, and rate functionalities. Our app provides users with a fun and entertaining outlet to interact with popular raccoon memes found across the internet currently. 
-Users will be able to upload an image, add a caption, download or share the meme in a social media platform. Users will be able to rate each other's memes using an upvote or downvote rating system. The cumulative average of all user’s ratings will be shown on the corresponding meme. The web app will sort memes based on rating average on the front page, with the highest rated memes being featured at the top of the front page of the social media platform. We will model some features of our app off of Reddit.
- We will use MongoDB to handle database management, hosting the images, user data, and ratings for each meme. When a user rates a meme, the score will be updated in the corresponding MongoDB document. Once the meme is posted to the social media platform, the order of the memes will be updated showing the highest rated items first. Express will be used to handle encryption and server/client communication. 
-We will use ReactJS to handle the front-end of our web app. React has the most online documentation and seems the best fit for our use cases. To design the user interface prior to development with ReactJS, we will create a prototype for our app in Figma. This will aid in improving the user flow and interface design of our app for a better user experience. After designing a prototype, we will develop the user interface using Bootstrap in combination with ReactJS. Based on research, Bootstrap components and classes seem very compatible with the ReactJS framework.
+Application: https://racoonit.glitch.me/
+Youtube Video: https://youtu.be/aPL3spn2Ngg
+
+## Description
+For our project, we made a reddit inspired raccoon meme page that allows users to generate raccoon memers with edit, comment, and rate functionalities. Our app provides users with a fun and entertaining outlet to interact with popular raccoon memes found across the internet currently. Users are able to create their own raccoon meme by uploading an image and adding a caption. Users are able to change the font size, type and location. Users can also rate memes using an upvote or downvote rating system, and the cumulative rating for that meme will be shown. Instead of using MongoDB for the database, we created our own. When users login to the site, their previous rating will be shown on the corresponding memes.
+
 The purpose of our web app is to rate and comment on raccoon memes created by users. Memes are an integral aspect of our global community, as it aids in the culture and communication exchange in our modern world. The point of the app is to bring a community of raccoon memes together. It is a safe space that engenders the creativity of its users. Memes bring together users of all genders, races and backgrounds, and unite us. Our website is an ethical platform that does not sell the souls of its users (cough cough, Facebook). Not only can our app be used by anyone (any time, any place) but it also updates in real-time. You can also edit and delete your raccoon memes as you see fit or just keep creating more!
 
-The technologies/libraries we will use to complete the project are the following:
-MongoDB
-ReactJS
-Bootstrap 
-Express middleware packages:
-Body-parser
-Passport
-Express-session
-Serve-favicon
-Timeout 
+## Login 
 
-![image](https://user-images.githubusercontent.com/30932390/192666884-a9a91d55-fa6c-44ef-9bb0-a64caf4c683c.png)
+Before using the application, users must already have an account made or make a new one. Once an account is made, users will not have to make a new account as their login information is stored in our database.
 
-Proposed Logo
--------------------------------------------------
-Endorsements:
+## Technologies Used
 
-“This website is EXACTLY what america needs in a time of deep division and turmoil”
--Barack Obama
+To create the application, we used 5 Express middleware packages: Body-Parser, Passport, Express-Session, Serve-favicon, and Timeout. Body-Parser was used to read JSON objects. Passport was used as an authentication tool to facilitate the login process and find the login info for users that already have accounts. Express-session was used to allow the server to keep track of the user’s state. Serve=favicon was used to give our site an icon when the user has the tab open, so they know which tab is our application. Timeout ensures that a response is sent to the client on a timeout event. 
 
-“Ethical social media is hard to find, this seems like a great idea!l”
--Oprah
+## Challenges
 
-“This competition will decimate my business.”
--M * rk  Z * ckerberg
+We faced challenges with storing the voting values even after the site had been refreshed, as well as marking the voting change for each image. We also struggled with changing small aspects of the UI design, such as centering text in a button. The raccoon memes also slowed our ability to focus and debug as we were too busy laughing at them. 
 
-**The story, all names, characters, and incidents portrayed in these quotes are fictitious. No identification with actual persons (living or deceased), places, buildings, and products is intended or should be inferred.
+## Responsibilities
 
-Works Cited
+Jackie and Ananya worked on implementing the downvote/upvote feature of the application. Jack implement the meme generator ability, and Neha did the UI for the site. Tia worked on whatever was needed and also wrote the ReadME.
 
-“‘MEMES: What they are and why they’re important”. University of Illinois Urbana-Champaign lol 
-
-“Comparing raccoon major histocompatibility complex diversity in native and introduced ranges: Evidence for the importance of functional immune diversity for adaptation and survival in novel environments”. National Institutes of Health 
+## Project Video
+(p.s. check out the assets sections for some fun raccoon memes made with our meme generator :)
