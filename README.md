@@ -1,4 +1,4 @@
-Final Project Proposal: Raccoon-it 
+## Final Project Proposal: Raccoon-it 
 
 Application Using Glitch: https://racoonit.glitch.me/
 
