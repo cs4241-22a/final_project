@@ -1,6 +1,7 @@
 Final Project Proposal: Raccoon-it 
 
 Application Using Glitch: https://racoonit.glitch.me/
+
 Youtube Video: https://youtu.be/aPL3spn2Ngg
 
 Code on Glitch: https://glitch.com/edit/#!/racoonit?path=views%2Fmeme_maker.html%3A1%3A0
