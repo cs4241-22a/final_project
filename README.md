@@ -1,7 +1,10 @@
 Final Project Proposal: Raccoon-it 
 
-Application: https://racoonit.glitch.me/
+Application Using Glitch: https://racoonit.glitch.me/
 Youtube Video: https://youtu.be/aPL3spn2Ngg
+
+Code on Glitch: https://glitch.com/edit/#!/racoonit?path=views%2Fmeme_maker.html%3A1%3A0
+( I am sharing the code on glitch because we forgot to pull request our final project on the last day of the term. Since we are on break, I forgot my laptop at home when I went on vacation and I've been using a non-cs person's laptop (lol) that doesn't have vsc.. or git... and I'm having trouble pushing code bc of how git was downloaded... so the easiest way I thought to show our code was just manually copying and pasting it in the repo... sorry.... that this happened. 
 
 ## Description
 For our project, we made a reddit inspired raccoon meme page that allows users to generate raccoon memers with edit, comment, and rate functionalities. Our app provides users with a fun and entertaining outlet to interact with popular raccoon memes found across the internet currently. Users are able to create their own raccoon meme by uploading an image and adding a caption. Users are able to change the font size, type and location. Users can also rate memes using an upvote or downvote rating system, and the cumulative rating for that meme will be shown. Instead of using MongoDB for the database, we created our own. When users login to the site, their previous rating will be shown on the corresponding memes.
