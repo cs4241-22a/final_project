@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Milligram stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital@1&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans:wght@300;400;500&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"
+    />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/chat-client.js" defer></script>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+      
+      
+      <!-- Full-width images with number and caption text -->
+      <div class="mySlides fade" style="display: flex; align-items: center;">
+        <div class="numbertext">1 / 3</div>
+        <img
+          src="https://sadanduseless.b-cdn.net/wp-content/uploads/2022/04/raccoon-memes4a.jpg"
+          style="width: 100%; height:100%"
+          class="center"
+        />
+        <div class="text">Meme #1: diva</div>
+        <div style="display: flex; align-items: center; margin-left:195px; margin-top:40px;">
+        <button class="upvoteBtn" id="cookie-clicker1">
+         	🡅            
+        </button>
+           <h1 id="cookie-counter1" style="margin-top:25px; padding-left:20px; padding-right:20px;"> 0 </h1>
+        <button  class="upvoteBtn" id="cookie-clicker1-down">
+          	🡇            
+        </button>
+      </div>
+      </div>
+      
+      
+      
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img
+          src="https://www.boredpanda.com/blog/wp-content/uploads/2022/04/raccoon-memes-instagram-624ae8545358a__700.jpg"
+           style="width: 100%; height:100%"
+          class="center"
+        />
+        <div class="text">Meme #2: a classic</div>
+        <div style="display: flex; align-items: center; margin-left:215px; margin-top:40px;">
+         <button class="upvoteBtn"  id="cookie-clicker2" onClick="onClick2()">
+          	🡅           
+        </button>
+        <h1 id="cookie-counter2" style="margin-top:25px; padding-left:20px; padding-right:20px;"> 0 </h1>
+        <button  class="upvoteBtn" id="cookie-clicker2-down">
+          	🡇               
+        </button>
+          </div>
+      </div>
+      
+      
+      
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+         <img
+          src="https://sadanduseless.b-cdn.net/wp-content/uploads/2022/04/raccoon-memes7.jpg"
+           style="width: 100%; height:100%"
+          class="center"
+        />
+        <div class="text">Meme #3: raccoon + trash = love</div>
+         <div style="display: flex; align-items: center; margin-left:215px; margin-top:40px;">
+         <button class="upvoteBtn" id="cookie-clicker3" onClick="onClick3()">
+         	🡅                 
+        </button>
+        <h1 id="cookie-counter3" style="margin-top:25px; padding-left:20px; padding-right:20px;"> 0 </h1>
+        <button  class="upvoteBtn" id="cookie-clicker3-down">
+          	🡇               
+        </button>
+        
+        </div>
+      </div>
+      
+      
+      
+      
+      
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    
+
+    <!-- The dots/circles -->
+    <div style="text-align: center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </head>
+
+      
+  
+  <br>
+
+  <body>
+    <header>
+    </header>
+    <main>
+    <h4 style="align-items:center">Want to Make Your Own Meme?</h4>
+        <a href="https://racoonit.glitch.me/meme_maker">  
+           <button class = "mm_button">Meme Generator</button>  
+        </a>
+    <br>
+    <br>
+     <h4 style="align-items:center">Rate the Racoon Meme</h4>
+      <h3>Enter your chat</h3>
+      <form>
+        <input
+          name="contents"
+          type="text"
+          maxlength="500"
+          placeholder="Chat"
+          aria-labelledby="button-chat"
+          style="width:230%"
+        />
+        <button type="submit" style="width:230%" id="button-chat">Send Chat</button>
+      </form>
+      <br>
+      <h3>Comments:</h3>
+      <table id="chat-contents">
+        <tr>
+          <th>Loading data...</th>
+        </tr>
+      </table>
+      
+       
+      
+      
+    </main>
+  </body>
+  
+  
+  
+  <script src="./script.js"></script>
+  
+  
+</html>
