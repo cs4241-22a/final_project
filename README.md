@@ -1,4 +1,4 @@
-## Reaction Time Game, Heroku:
+## Aim Trainer / Reaction Time Game, Heroku:
 
 https://aimtrainer-webware.herokuapp.com/
 
