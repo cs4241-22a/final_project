@@ -1,6 +1,6 @@
 ## Aim Trainer / Reaction Time Game, Heroku:
 
-https://aimtrainer-webware.herokuapp.com/
+(No longer working) https://aimtrainer-webware.herokuapp.com/
 
 ## Aidan Mulcahey, Gabriel Camacho, Jonathan Palmieri
 
