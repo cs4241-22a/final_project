@@ -9,7 +9,6 @@ const UserRouter = require('./api/User')
 const AuthRouter = require('./api/Auth')
 const LeaderboardRouter = require('./api/Leaderboard')
 
-// INIT
 
 // bodyParser
 const bodyParser = require('express').json;
