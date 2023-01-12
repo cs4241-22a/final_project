@@ -4,7 +4,7 @@
   "description": "*Due before the start of class, October 13th (final day of the term)*",
   "main": "s.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "dev": "nodemon server.js",
     "devStartAuth": "nodemon authServer.js"
   },
