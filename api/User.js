@@ -8,7 +8,6 @@ userRouter.use(express.json())
 
 // authorization
 const jwt = require('jsonwebtoken')
-const auth = require('./../middleware/Authorization')
 // Password handler
 const argon2 = require('argon2')
 //mongoDB User model

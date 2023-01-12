@@ -8,7 +8,6 @@ const connectDB = require('./config/dbConn')
 const UserRouter = require('./api/User')
 const AuthRouter = require('./api/Auth')
 const LeaderboardRouter = require('./api/Leaderboard')
-const auth = require('./middleware/Authorization')
 
 // INIT
 
